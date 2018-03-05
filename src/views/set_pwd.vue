@@ -42,7 +42,9 @@
         this.$go('register');
         return
       }
-      this.text = !this.$route.query.view ? '输入正确的图形验证码后，可点击"获取短信验证码"获取验证码' : `输入正确的图形验证码后，可点击“获取短信验证码” 系统将向${this.item.mobile}发送短信`;
+      this.text = !this.$route.query.view
+        ? '输入正确的图形验证码后，可点击"获取短信验证码"获取验证码'
+        : `输入正确的图形验证码后，可点击“获取短信验证码” 系统将向${this.item.mobile}发送短信`;
       this.changeImgCode();
     },
     components: {
