@@ -31,7 +31,7 @@ router.beforeEach((to, from, next) => {
   }
 
   // 设置title
-  document.title = to.meta.title || "发薪贷";
+  document.title = to.meta.title || "理财师";
   if (!!store.state.header.juid) {
     //如果有就直接到首页咯
     next();
