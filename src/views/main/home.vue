@@ -4,8 +4,8 @@
 		<div class="swiper-container swiper-container1">
 			<div class="swiper-wrapper swiper-wrapper1">
 				<div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner.png')" alt=""></div>
-				<div class="swiper-slide"><img :src="require('@/assets/main/home/banner.png')" alt=""></div>
-				<div class="swiper-slide"><img :src="require('@/assets/main/home/banner.png')" alt=""></div>
+				<div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner.png')" alt=""></div>
+				<div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner.png')" alt=""></div>
 			</div>
 			<!-- Add Pagination -->
 			<div class="swiper-pagination"></div>
@@ -118,16 +118,18 @@
 				<p class="recommendTitle">热销产品 <span>更多<img src="../../assets/main/home/nextIcon.png"/></span></p>
 			<!--热销产品-->
 			<div class="hotProductDiv">
-				<p> <img src="../../assets/main/home/no1.png"/> <span>中赢宝1101</span>     <span>购买</span></p>
-				<p>10%</p>
-				<p>历史年化收益率</p>
+				<p class="hotProductDivTitle"> <img src="../../assets/main/home/no1.png"/> <span>中赢宝1101</span>     <span>购买</span></p>
+				<p class="hotProductDivRate">10%</p>
+				<p class="hotProductDivWord">历史年化收益率</p>
 				<!--进度条-->
-				<div>
+				<div class="hotProductDivProgress">
+					<img style="display: none;" src="../../assets/main/home/redTipsImg.png"/>
+					<img style="display: none;" src="../../assets/main/home/tipsImg.png"/>
 					<p></p>
 					<p></p>
 					<p>起投 1000元</p>
 				</div>
-				<p>
+				<p class="hotProductDivMessage">
 					<span>累计销售 1000万</span>
 					<span>累计收益</span>
 					<span>锁定期限 28天</span>
@@ -604,4 +606,36 @@
 		overflow: hidden;
 		margin-top: 1rem;
 	}
+	.hotProductDiv{
+		padding: 0 0.43rem;
+		width: 6.24rem;
+		height: 4.1rem;
+	}
+	.hotProductDivTitle{
+		height: 0.64rem;
+		line-height: 0.64rem;
+	}
+	.hotProductDivTitle>img{
+		width: 0.9rem;
+		height: 0.32rem;
+	}
+	/*<div class="hotProductDiv">
+				<p class="hotProductDivTitle"> <img src="../../assets/main/home/no1.png"/> <span>中赢宝1101</span>     <span>购买</span></p>
+				<p class="hotProductDivRate">10%</p>
+				<p class="hotProductDivWord">历史年化收益率</p>
+				<!--进度条-->
+				<div class="hotProductDivProgress">
+					<img style="display: none;" src="../../assets/main/home/redTipsImg.png"/>
+					<img style="display: none;" src="../../assets/main/home/tipsImg.png"/>
+					<p></p>
+					<p></p>
+					<p>起投 1000元</p>
+				</div>
+				<p class="hotProductDivMessage">
+					<span>累计销售 1000万</span>
+					<span>累计收益</span>
+					<span>锁定期限 28天</span>
+				</p>
+				
+			</div>*/
 </style>
