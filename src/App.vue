@@ -8,8 +8,6 @@
 
 <script>
   import { transformRequest } from '@/until'
-  import { mapGetters } from 'vuex'
-  import {dev,test,_default} from '@/config'
   import Vue from 'vue'
   export default {
     name: 'app',
@@ -18,13 +16,6 @@
         isAppear: true
       }
     },
-    computed: {
-      ...mapGetters([
-        'header',
-        'user',
-        'cache'
-      ])
-    },
     created(){
       /**
        * 路由封装函数
@@ -32,19 +23,6 @@
        * @param params 参数
        */
       Vue.prototype.$go = (url, params, replace=false) => {
-        // 如果是活动页跳转活动页
-        if(url.includes('fxd-wxact')){
-          url = url.split('/webapp/')[0];
-          // 拼接头信息和手机号
-          url = `${url}${url.includes('?')?'&':'?'}${transformRequest(this.header)}&mobile_phone_=${this.user.mobile_phone_}`;
-          if(params){
-          // 拼接参数
-            url = `${url}&${transformRequest(params)}`;
-          }
-          location.href = url;
-          return
-        }
-        // 如果是外链直接跳转
         if(url.includes('http')||url.includes('https')){
           location.href = url;
           return
