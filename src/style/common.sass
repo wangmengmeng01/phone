@@ -1,0 +1,88 @@
+@import './reset.css'
+
+
+$color_main: rgb(50,153,209)          // 主色调
+$color_main-dis: rgba(50,153,209,.4)  // 主色调禁用
+$color_border: #CDCED3                // 边框色调
+$color_font: #181818                  // 字体主色调
+$color_font-red: #F84740              // 字体醒目红色
+$color_font-s: #8D8D94                // 小号字体色调
+
+
+
+/**功能公共部分样式**/
+// 颜色
+.color
+  &_main
+    color: $color_main
+    &-dis
+      color: $color_main-dis
+  &_border
+    color: $color_border
+  &_font
+    color: $color_font
+    &-red
+      color: $color_font-red
+    &-s
+      color: $color_font-s
+// 边框
+.border
+  &-b
+   border-bottom: 1px solid $color_border
+// 字体
+.f12
+  font-size: .12rem
+.f14
+  font-size: .14rem
+.f16
+  font-size: .16rem
+.f20
+  font-size: .2rem
+.f22
+  font-size: .22rem
+.f24
+  font-size: .24rem
+.f28
+  font-size: .28rem
+.f30
+  font-size: .3rem
+.f32
+  font-size: .32rem
+.f36
+  font-size: .36rem
+.f44
+  font-size: .44rem
+
+// 外边框通用样式
+.p4
+  padding: 0 .4rem
+  box-sizing: border-box
+
+//flex通用样式
+.flex
+  display: flex
+  align-items: center
+  justify-content: space-between
+  //居中
+  &-center
+    justify-content: center
+
+
+
+
+/**下面是组件公共部分样式**/
+
+//按钮
+.btn
+  width: 100%
+  outline: none
+  border: none
+  border-radius: .08rem
+  display: block
+  background: $color_main
+  font-size: .44rem
+  line-height: 1.1rem
+  text-align: center
+  color: #fff
+  &.dis
+    background: $color_main-dis

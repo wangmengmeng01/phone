@@ -1,0 +1,71 @@
+{
+  "version": "1.3",
+  "vconsole": false,
+  "state": {
+    "header": {
+      "token": "5.0.0"
+    }
+  },
+  "route": [
+    {
+      "path": "/",
+      "redirect": "/webapp"
+    },
+    {
+      "path": "login",
+      "title": "登录",
+      "filter": true
+    },
+    {
+      "path": "register",
+      "title": "注册",
+      "filter": true
+    },
+    {
+      "path": "forget_pwd",
+      "title": "忘记密码",
+      "filter": true
+    },
+    {
+      "path": "reg_bank",
+      "title": "开通银行存管账户",
+      "filter": true
+    },
+    {
+      "path": "webapp",
+      "component": "main",
+      "children": [
+        {
+          "path": "",
+          "redirect": "home"
+        },
+        {
+          "path": "home",
+          "title": "首页",
+          "filter": true
+        },
+        {
+          "path": "product",
+          "title": "产品"
+        },
+        {
+          "path": "wealth",
+          "title": "财富"
+        },
+        {
+          "path": "found",
+          "title": "发现"
+        },
+        {
+          "path": "mine",
+          "title": "我的"
+        }
+      ]
+    },
+    {
+      "path": "*",
+      "component": "notfound",
+      "title": "404"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+<template>
+  <div class="register p4">
+    <h2 class="text color-font">快速注册</h2>
+    <p class="text2 f28 color_font-s">录入手机号码将作为您的登录账号</p>
+    <div class="item flex phone border-b">
+      <span class="name f44 color_font">手机号</span>
+      <input type="number" placeholder="请输入手机号" class="f44">
+    </div>
+    <button class="btn">下一步</button>
+    <p class="gologin f32 color_main" @click="$go('login')">已有账号，去登录</p>
+    <foot-tip/>
+  </div>
+</template>
+
+<script>
+  import footTip from '@/components/foot-tip/foot-tip'
+  export default {
+    name: 'register',
+    data () {
+      return {
+      }
+    },
+    created() {
+    },
+    components: {
+      "foot-tip" : footTip
+    },
+    methods: {
+      submit(){
+      },
+    }
+  }
+</script>
+
+<style lang="sass" scoped>
+  .register
+    .item
+      span
+        flex: 1
+      input
+        flex: 1.5
+      margin-top: 1.4rem
+      padding-bottom: .3rem
+    .text
+      margin-top: 1rem
+      font-size: .6rem
+    .text2
+      margin-top: .26rem
+    .btn
+      margin-top: 1rem
+    .gologin
+      text-align: center
+      margin-top: .4rem
+</style>
