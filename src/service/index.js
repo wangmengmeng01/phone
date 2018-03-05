@@ -1,4 +1,7 @@
 import $http from './http'
+import config from '@/config'
+import { transformRequest } from '@/until'
+import store from '@/store/'
 import api from './api';
 export * from './main'
 
@@ -23,11 +26,12 @@ export const login = async (params)=>{
  * 注册
  */
 export const register = (params)=>{
+  params.token = store.state.token;
   return $http({
     method: 'post',
     api: api.register,
     params,
-  });
+  })
 }
 
 
@@ -35,60 +39,47 @@ export const register = (params)=>{
 /**
  * 发送短信
  */
-export const sendSMS = (url, params)=>{
+export const sendSMS = (params)=>{
+  params.token = store.state.token;
   return $http({
     method: 'post',
-    api: api.sendSMS + url,
-    options:{
-      filter_code: true
-    },
+    api: api.getSmsCode,
     params,
-  });
+  })
 }
 
 
 
 /**
- * 发送短信
+ * 获取token
  */
-export const sendSMSH5Api = (params)=>{
+export const getToken = ()=>{
   return $http({
     method: 'post',
-    api: api.sendSMSH5Api,
-    options:{
-      filter_code: true
-    },
-    params,
+    api: api.getToken,
   });
-}
-
-
+};
 
 
 /**
  * 获取图形验证码
  */
-export const getPicCodeApi = ( params)=>{
-  return $http({
-    method: 'get',
-    api: api.getPicCodeApi,
-    params,
-  }).then(r=>{
-    let url = '';
-    if(location.href.includes(require('@/config').pro.origin)){
-      url = require('@/config').pro.url
-    }else if(location.href.includes(require('@/config').uat.origin)){
-      url = require('@/config').uat.url
-    }else if(location.href.includes(require('@/config').test.origin)){
-      url = require('@/config').test.url
-    }else{
-      url = require('@/config').dev.url
-    }
-    return {
-      url:`${url}${r.pic_verify_url_}?id_=${r.id_}`,
-      id: r.id_
-    }
-  });
+export const getValidateImage = ()=>{
+  return new Promise((resolve)=>{
+    getToken().then(r=>{
+      const params = {
+        token: r.token,
+        timestamp: +new Date()
+      };
+      resolve(`${config.url}${api.getValidateImage}?${transformRequest(params)}`);
+      store.commit('SET_TOKEN', r.token);
+      $http({
+        method: 'get',
+        api: api.getValidateImage,
+        params
+      })
+    });
+  })
 };
 
 

@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import store from '@/store/'
-import axios from 'axios';
-import config from '@/config';
-import native from '@/native';
+import axios from 'axios'
+import config from '@/config'
+import native from '@/native'
 
 const self = Vue.prototype;  // vue的实例
 
@@ -19,20 +19,16 @@ class http{
     };
 
     obj.options = {...options,...obj.options}; // 取值
-
     let {method, api, params, ...option} = {...obj}; // 取值
 
     let {loading, filter_code, filter_msg} = option.options;// 取值
-
     loading && native.loading('show'); // 根据loading属性显示loading框
-
     this.method = method;  // 请求方式
     this.params = params;  // 请求参数
     this.filter_code = filter_code;
     this.filter_msg = filter_msg;
     this.loading = loading;
     this.url = `${config.url}${api}`; // 请求地址
-
     return this.$axios()
   }
 
@@ -42,10 +38,9 @@ class http{
    */
   $axios(){
     return new Promise((resole,reject)=> {
-      axios({
+      let _params = {
         method: this.method,
         url: this.url,
-        data: this.params,
         header: store.state.header,
         transformRequest: [function (data) {
           let ret = '';
@@ -54,10 +49,25 @@ class http{
           }
           return ret.slice(0,ret.length-1)
         }],
-      }).then(r => {
+        validateStatus: (status)=> {
+          this.loading && native.loading('hide');  // 隐藏loading
+          return status >= 200 && status < 300; // 默认的
+        },
+      }
+      this.params = Object.assign({},this.params,{'client': '3'})
+      this.method === 'post'
+        ?
+        Object.assign(_params, {
+          data: this.params,
+        })
+        :
+        Object.assign(_params,{
+          params: this.params,
+        });
+      axios(_params).then(r => {
         this.$resole(resole,reject,r.data)
-      }).catch(err => {
-        this.$reject(reject,err)
+      }).catch(() => {
+        this.$reject(reject,'系统错误')
       })
     })
   }
@@ -82,7 +92,7 @@ class http{
    * @param isfetch
    */
   $reject(reject,message){
-    self.$toask(message);
+    message && self.$toask(message);
     reject(message)
   }
 }

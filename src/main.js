@@ -9,7 +9,6 @@ import './router/guard'
 import './style/common.sass'
 import './components/toask'
 let config = require('./config.json');
-// import './directive/refresh'
 Vue.use(VueRouter);
 
 if(process.env.NODE_ENV !== 'production'){

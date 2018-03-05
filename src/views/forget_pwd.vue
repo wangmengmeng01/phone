@@ -1,75 +1,52 @@
 <template>
-  <div class="login p4" @keyup.enter="submit">
-    <img src="../assets/user/logo.png" class="logo">
+  <div class="forget_pwd p4">
+    <h2 class="text color-font">修改登录密码</h2>
+    <p class="text2 f28 color_font-s">请填写需要修改登录密码的手机号码</p>
     <div class="item flex phone border-b">
-      <span class="name f44 color-font">手机号</span>
-      <input type="number" placeholder="请输入手机号" class="f44" v-model="item.mobile">
+      <input type="number" placeholder="请输入手机号" class="f44" v-model="mobile">
     </div>
-    <div class="item flex password border-b">
-      <span class="name f44 color-font">密码</span>
-      <input type="password" placeholder="请输入登录密码" class="f44" v-model="item.password">
-    </div>
-    <button class="btn" @click="submit">登录</button>
-    <p class="link flex f32 color_font-s">
-      <span class="forgetpwd" @click="$go('forget_pwd')">忘记密码？</span>
-      <span class="reg" @click="$go('register')">快速注册</span>
-    </p>
-    <foot-tip/>
+    <button class="btn" @click="submit">下一步</button>
   </div>
 </template>
 
 <script>
-  import { login } from '@/service'
   import footTip from '@/components/foot-tip/foot-tip'
   export default {
-    name: 'login',
+    name: 'forget_pwd',
     data () {
       return {
-        item:{
-          mobile: '18202197847',
-          password: 'a123456',
-          client: '3'
-        }
+        mobile: ''
       }
-    },
-    created() {
-    },
-    components: {
-      "foot-tip" : footTip
     },
     methods: {
       submit(){
-        if(this.item.password){
-          let aes= require('@/lib/aes').aes;
-          this.item.password = aes(this.item.password)
+        if(!this.mobile) {
+          this.$toask('手机号不能为空!');
+          return
         }
-        login(this.item).then(res=>{
-          log(res)
-        })
+        this.$go('set_pwd',{mobile:this.mobile,view:'forget_pwd'});
       },
     }
   }
 </script>
 
 <style lang="sass" scoped>
-  .login
-    text-align: center
-    .logo
-      width: 1.48rem
-      margin: 1.2rem 0
+  .forget_pwd
     .item
-      text-align: left
       span
         flex: 1
       input
         flex: 1.5
+      margin-top: 1.4rem
       padding-bottom: .3rem
-    .phone
-      margin-bottom: .6rem
+    .text
+      margin-top: 1rem
+      font-size: .6rem
+    .text2
+      margin-top: .26rem
     .btn
       margin-top: 1rem
-      margin-bottom: .4rem
-    .link
-      .reg
-        color: #3299D1
+    .gologin
+      text-align: center
+      margin-top: .4rem
 </style>

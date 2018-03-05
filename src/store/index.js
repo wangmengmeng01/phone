@@ -26,42 +26,13 @@ export default new Vuex.Store({
       state.header = data
     },
     /**
-     * 设置消息数量
+     * 设置token
      * @param state
      * @param data
      * @constructor
      */
-    SET_MESSAGE(state, data) {
-      state.message = data;
-    },
-    /**
-     * 设置用户信息
-     * @param state
-     * @param data
-     * @constructor
-     */
-    SET_USER(state, data) {
-      !data.productId && (data.productId = 'P001007');
-      state.user = {...state.user, ...data};
-      localStorage.setItem('user',JSON.stringify(state.user));
-    },
-    /**
-     * 处理选择银行卡逻辑
-     * @param state
-     * @param data
-     * @constructor
-     */
-    DEAL_BANK(state, data) {
-      state.bank = {...state.bank, ...data};
-    },
-    /**
-     * 设置显示隐藏的类型
-     * @param state
-     * @param data
-     * @constructor
-     */
-    VISIBLE(state, data) {
-      state.visible[data] = !state.visible[data];
+    SET_TOKEN(state, data) {
+      state.token = data;
     },
     /**
      * 重置state
@@ -81,6 +52,9 @@ export default new Vuex.Store({
   actions: {  // 异步调用
     deal_header({ commit }, data) {
       commit('DEAL_HEADER', data)
+    },
+    set_token({ commit }, data) {
+      commit('SET_TOKEN', data)
     },
     set_message({ commit }, data) {
       commit('SET_MESSAGE', data)
