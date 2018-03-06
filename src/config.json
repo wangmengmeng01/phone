@@ -68,6 +68,20 @@
       ]
     },
     {
+      "path": "mine",
+      "component": "mine",
+      "children": [
+        {
+          "path": "",
+          "redirect": "index"
+        },
+        {
+          "path": "qrcode",
+          "title": "我的二维码"
+        }
+      ]
+    },
+    {
       "path": "static",
       "component": "static",
       "children": [
