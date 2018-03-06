@@ -61,6 +61,7 @@
 </script>
 <style lang="sass" scoped>
   .back
+    z-index: 100
     height: .88rem
     line-height: .88rem
     position: fixed

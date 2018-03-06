@@ -1,7 +1,7 @@
 <template>
   <div class="customer">
-    <div class="item" v-for="i in list" @click="$go('customer_detail',{id:i.id})">
-      <div class="t flex">
+    <div class="item" v-for="i in list" >
+      <div class="t flex" @click="$go('customer_detail',{id:i.id})">
         <div class="l flex">
           <img src="/" alt="">
           <div class="ll">
@@ -17,7 +17,7 @@
         <span class="color_main f24">查询</span>
       </div>
       <div class="b color_main f28 flex">
-        <span>赠送优惠</span>
+        <span @click="$go('send_discount',{id:i.id})">赠送优惠</span>
         <span>拨打电话</span>
       </div>
     </div>

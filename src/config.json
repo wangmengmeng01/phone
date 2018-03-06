@@ -110,6 +110,10 @@
         {
           "path": "customer_detail",
           "title": "已有客户详情"
+        },
+        {
+          "path": "send_discount",
+          "title": "赠送优惠"
         }
       ]
     },
