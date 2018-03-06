@@ -1,14 +1,14 @@
 <template>
  <div class="main">
-   <div class="tab">
-      <ul>
-        <li :key="index" v-for="(i,index) in list" :class="[act===index?'act':'']" @click="link(i,index)">
-          <img :src="require(`@/assets/main/index/${i.url}${act===index?'-act':''}.png`)" alt="">
-          <span>{{i.title}}</span>
-        </li>
-      </ul>
-   </div>
     <router-view></router-view>
+   <div class="tab">
+     <ul>
+       <li :key="index" v-for="(i,index) in list" :class="[act===index?'act':'']" @click="link(i,index)">
+         <img :src="require(`@/assets/main/index/${i.url}${act===index?'-act':''}.png`)" alt="">
+         <span>{{i.title}}</span>
+       </li>
+     </ul>
+   </div>
  </div>
 </template>
 
@@ -79,7 +79,6 @@ export default {
 
 <style lang="sass" scoped>
   .main
-    background: #f1f1f9
     padding-bottom: .98rem
     .tab
       box-shadow: -3px -2px 15px 0px #dbdcdc

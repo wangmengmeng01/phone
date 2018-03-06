@@ -109,5 +109,6 @@ p{
     -webkit-margin-after: 0em;
 }
 html,body,#app{
+  background: #f1f1f9;
   height: 100%;
 }

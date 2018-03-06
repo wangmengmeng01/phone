@@ -31,6 +31,8 @@
 
 <style lang="sass" scoped>
   .forget_pwd
+    height: 100%
+    background: #fff
     .item
       span
         flex: 1

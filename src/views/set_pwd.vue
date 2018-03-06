@@ -1,5 +1,5 @@
 <template>
-  <div class="register p4">
+  <div class="set_pwd p4">
     <h2 class="text color-font">设置登录密码</h2>
     <p class="text2 f28 color_font-s">{{text}}</p>
     <div class="imgcode item flex phone border-b">
@@ -22,7 +22,7 @@
   import { getValidateImage, sendSMS, register } from '@/service'
 
   export default {
-    name: 'register',
+    name: 'set_pwd',
     data () {
       return {
         text: '',
@@ -76,7 +76,9 @@
 </script>
 
 <style lang="sass" scoped>
-  .register
+  .set_pwd
+    height: 100%
+    background: #fff
     .item
       span
         flex: 1

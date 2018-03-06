@@ -77,10 +77,9 @@
   .customer_detail
     padding: .42rem
     height: 100%
-    background: #f1f1f9
     .head
-      padding: .4rem 0 .58rem
       background: #fff
+      padding: .4rem 0 .58rem
       .icon
         height: 1.48rem
         width: 1.48rem

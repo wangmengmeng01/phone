@@ -38,6 +38,7 @@
 <style lang="sass" scoped>
   .qrcode
     .head
+      background: #fff
       padding: .76rem .4rem .6rem
       align-items: flex-start
       .head_icon

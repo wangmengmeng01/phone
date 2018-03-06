@@ -17,17 +17,29 @@
       "filter": true,
       "back": {
         "title": false
+      },
+      "foot": {
+        "type": "main",
+        "style": "padding-bottom: 1rem"
       }
     },
     {
       "path": "register",
       "title": "注册",
-      "filter": true
+      "filter": true,
+      "foot": {
+        "type": "main",
+        "style": "padding-bottom: 1rem"
+      }
     },
     {
       "path": "set_pwd",
       "title": "注册",
-      "filter": true
+      "filter": true,
+      "foot": {
+        "type": "main",
+        "style": "padding-bottom: 1rem"
+      }
     },
     {
       "path": "forget_pwd",
@@ -36,12 +48,17 @@
       "back": {
         "showtip": true,
         "title": false
-      }
+      },
+      "foot": false
     },
     {
       "path": "reg_bank",
       "title": "开通银行存管账户",
-      "filter": true
+      "filter": true,
+      "foot": {
+        "type": "main",
+        "style": "padding-bottom: 1rem"
+      }
     },
     {
       "path": "webapp",
@@ -55,7 +72,8 @@
           "path": "home",
           "title": "首页",
           "filter": true,
-          "back": false
+          "back": false,
+          "foot": false
         },
         {
           "path": "product",
@@ -63,7 +81,8 @@
           "back": {
             "icon": false,
             "background": "main"
-          }
+          },
+          "foot": false
         },
         {
           "path": "wealth",

@@ -26,13 +26,11 @@
       <input type="text" placeholder="请输入短信验证码" class="f32 color_border">
       <span class="f28 color_main">获取短信验证码</span>
     </div>
-    <foot-tip class="tip" main="true"/>
     <button class="btn">下一步</button>
   </div>
 </template>
 
 <script>
-  import footTip from '@/components/foot-tip/foot-tip'
   export default {
     name: 'reg_bank',
     data () {
@@ -40,9 +38,6 @@
       }
     },
     created() {
-    },
-    components: {
-      "foot-tip" : footTip
     },
     methods: {
       submit(){

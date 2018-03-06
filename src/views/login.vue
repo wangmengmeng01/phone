@@ -14,14 +14,12 @@
       <span class="forgetpwd" @click="$go('forget_pwd')">忘记密码？</span>
       <span class="reg" @click="$go('register')">快速注册</span>
     </p>
-    <foot-tip main="true"/>
   </div>
 </template>
 
 <script>
   import { mapActions } from 'vuex'
   import { login } from '@/service'
-  import footTip from '@/components/foot-tip/foot-tip'
   export default {
     name: 'login',
     data () {
@@ -31,9 +29,6 @@
           password: 'a123456',
         }
       }
-    },
-    components: {
-      "foot-tip" : footTip
     },
     methods: {
       ...mapActions([
@@ -55,7 +50,9 @@
 
 <style lang="sass" scoped>
 .login
+  background: #fff
   text-align: center
+  height: 100%
   .logo
     width: 1.48rem
     margin: 1.2rem 0

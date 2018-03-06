@@ -8,23 +8,16 @@
     </div>
     <button class="btn" @click="submit">下一步</button>
     <p class="gologin f32 color_main" @click="$go('login')">已有账号，去登录</p>
-    <foot-tip main="true"/>
   </div>
 </template>
 
 <script>
-  import footTip from '@/components/foot-tip/foot-tip'
   export default {
     name: 'register',
     data () {
       return {
         mobile: ''
       }
-    },
-    created() {
-    },
-    components: {
-      "foot-tip" : footTip
     },
     methods: {
       submit(){
@@ -40,6 +33,8 @@
 
 <style lang="sass" scoped>
   .register
+    height: 100%
+    background: #fff
     .item
       span
         flex: 1

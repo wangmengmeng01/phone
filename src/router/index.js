@@ -51,7 +51,8 @@ const dealRoutes = (arr, child = false) => {
         }`);
 
       let title = t.title; // 标题
-      let back = typeof t.back === 'boolean' ? t.back : t.back || true; // 标题
+      let back = typeof t.back === 'boolean' ? t.back : t.back || true; // 顶部返回
+      let foot = typeof t.foot === 'boolean' ? t.foot : t.foot || true; // 底部风险提示
       let filter = !!t.filter; // 是否过滤
 
       if (t.path.includes("webapp")) {
@@ -70,7 +71,8 @@ const dealRoutes = (arr, child = false) => {
         meta: {
           title,
           filter,
-          back
+          back,
+          foot
         }
       };
       // 有子组件的做递归处理，并且删除父组件的name和meta属性
