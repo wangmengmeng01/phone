@@ -10,7 +10,6 @@
 </template>
 
 <script>
-  import footTip from '@/components/foot-tip/foot-tip'
   export default {
     name: 'forget_pwd',
     data () {

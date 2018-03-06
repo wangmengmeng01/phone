@@ -14,7 +14,7 @@
       <span class="forgetpwd" @click="$go('forget_pwd')">忘记密码？</span>
       <span class="reg" @click="$go('register')">快速注册</span>
     </p>
-    <foot-tip/>
+    <foot-tip main="'true'"/>
   </div>
 </template>
 
