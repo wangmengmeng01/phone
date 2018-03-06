@@ -895,7 +895,7 @@
 	
 	.hotActivityDivTitle {
 		float: left;
-		width: 6.26rem;
+		width: 5.86rem;
 		margin: 0.2rem 0.2rem 0.06rem;
 		height: 0.48rem;
 		line-height: 0.48rem;
