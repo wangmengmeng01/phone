@@ -54,7 +54,7 @@ class http{
           return status >= 200 && status < 300; // 默认的
         },
       }
-      this.params = Object.assign({},this.params,{'client': '3'})
+      this.params = Object.assign({},this.params,{'client': '2'})
       this.method === 'post'
         ?
         Object.assign(_params, {

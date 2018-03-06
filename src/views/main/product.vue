@@ -3,17 +3,47 @@
 		<p class="title">产品</p>
 		<!--产品列表-->
 		<!--月月赢-->
-		<div class="productDiv productDiv1">
+		<div v-for="(i,index) in productList" v-if="!i.bidList.length==0" class="productDiv productDiv1">
 			<div class="productDivTitle">
-				<span>月月赢</span>
-				<span>我有优惠</span>
+				<span>{{i.productName}}</span>
+				<span v-show="i.isCoupon==1">我有优惠</span>
 				<span>更多 <img src="../../assets/main/home/nextIcon.png" alt="" /></span>
 			</div>
 			<div class="productDivTitleTips">
 				<span class="tispImg">中高风险</span>
 				<span class="">按期派息到期还本</span>
 			</div>
-			<div class="productDivDetial bb">
+
+			<div v-for="j in i.bidList" class="productDivDetial bb">
+				<div class="pddTitle">
+					<span class="pddTitleBidName">{{j.bidName}}</span>
+					<p class="pddTitleTips">
+						<span v-show="j.brokerageRate">佣金{{j.brokerageRate}}%</span>
+						<span>{{j.periodLength}}{{j.periodUnit|Totime}}锁定</span>
+					</p>
+				</div>
+				<p class="productDivRate">{{j.annualizedRate | tofixed}}%</p>
+				<p class="productDivWrod">历史年化</p>
+				<div class="hotProductDivProgress">
+					<div class="tipsImg" :style="{left:j.amountScale*5+'rem'}" v-if="j.amountScale<=0.5">
+						<img src="../../assets/main/home/tipsImg.png" /><span>{{j.amountScale*100 | tofixed}}%</span>
+					</div>
+					<div class="redTipsImg" v-else>
+						<p><i>{{j.amountWait/10000|tofixed}}</i>万</p>
+						<p>剩余不到</p>
+					</div>
+					<p class="grayLine"></p>
+					<p class="proLine" :style="{width:j.amountScale*5+'rem'}"></p>
+					<p class="proTip"><i>{{j.countPeople}}</i>人参与</p>
+				</div>
+				<p class="hotProductDivMessage">
+					<span>累计销售 <i>1000万</i></span>
+					<span>累计收益 <i>102万</i></span>
+					<span class="hotProductDivTitleBtn">购买</span>
+				</p>
+			</div>
+
+			<!--<div class="productDivDetial">
 				<div class="pddTitle">
 					<span class="pddTitleBidName">月月赢-12M500G号</span>
 					<p class="pddTitleTips">
@@ -40,41 +70,13 @@
 					<span>累计收益 <i>102万</i></span>
 					<span class="hotProductDivTitleBtn">购买</span>
 				</p>
-			</div>
-			<div class="productDivDetial">
-				<div class="pddTitle">
-					<span class="pddTitleBidName">月月赢-12M500G号</span>
-					<p class="pddTitleTips">
-						<span>佣金1.5%</span>
-						<span>30天锁定</span>
-					</p>
-				</div>
-				<p class="productDivRate">10%</p>
-				<p class="productDivWrod">历史年化</p>
-				<div class="hotProductDivProgress">
-					<div class="tipsImg">
-						<img src="../../assets/main/home/tipsImg.png" /><span>48%</span>
-					</div>
-					<div class="redTipsImg">
-						<p><i>5</i>万</p>
-						<p>剩余不到</p>
-					</div>
-					<p class="grayLine"></p>
-					<p class="proLine"></p>
-					<p class="proTip"><i>120</i>人参与</p>
-				</div>
-				<p class="hotProductDivMessage">
-					<span>累计销售 <i>1000万</i></span>
-					<span>累计收益 <i>102万</i></span>
-					<span class="hotProductDivTitleBtn">购买</span>
-				</p>
-			</div>
+			</div>-->
 		</div>
 
 		<!--售罄状态-->
-		<div class="productDiv productDiv2">
+		<div v-else class="productDiv productDiv2">
 			<div class="productDivTitle">
-				<span>月月赢</span>
+				<span>{{i.productName}}</span>
 				<span style="display: none;">我有优惠</span>
 				<span style="color: #8D8D94;">更多 <img src="../../assets/main/home/nextIcon.png" alt="" /></span>
 			</div>
@@ -90,21 +92,33 @@
 
 			</div>
 		</div>
+
 		<!--风险提示-->
 		<p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>
 	</div>
 </template>
 
 <script>
+	import { productSearchBidsList } from '@/service'
 	export default {
 		name: 'product',
 		data() {
 			return {
-				
-				
+				item: {
+					productType: 2,
+					userToken: "",
+				},
+				productList: '',
 			}
 		},
-		created() {},
+		created() {
+			productSearchBidsList(this.item).then(res => {
+				//      		log(res);
+				this.productList = res.productList;
+				console.log(this.productList);
+			});
+
+		},
 		methods: {},
 		watch: {}
 	}
@@ -263,7 +277,7 @@
 	
 	.pddTitleTips {
 		float: left;
-		width: 3.0rem;
+		/*width: 3.0rem;*/
 		height: 0.32rem;
 		overflow: hidden;
 	}
@@ -334,11 +348,12 @@
 	
 	.tipsImg {
 		position: absolute;
-		bottom: 0.28rem;
+		bottom: 0.20rem;
 		left: 0.6rem;
 	}
 	
 	.tipsImg>img {
+		margin-left: -0.12rem;
 		width: 0.24rem;
 		height: 0.16rem;
 		background-size: 100% 100%;

@@ -4,6 +4,7 @@ import { transformRequest } from '@/until'
 import store from '@/store/'
 import api from './api';
 export * from './main'
+export * from './product'
 
 /**
  * 登录

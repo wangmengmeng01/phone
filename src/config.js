@@ -9,7 +9,7 @@ export const dev = {
 };
 
 export const test = {
-  url: 'https://192.168.7.110:8506/zw/api/',
+  url: 'http://192.168.7.110:8506/zw/api/',
 };
 
 export const uat = {
