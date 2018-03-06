@@ -46,6 +46,7 @@
         }
         login(this.item).then(res=>{
           this.deal_header(res)
+          this.$go('/webapp')
         })
       },
     }

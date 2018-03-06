@@ -8,11 +8,7 @@
         </li>
       </ul>
    </div>
-     <keep-alive>
-        <router-view v-if="!click_same_menu" :menu="same_menu"></router-view>
-     </keep-alive>
-    <router-view v-if="click_same_menu" :menu="same_menu"></router-view>
-    <!--<router-view :menu="same_menu"></router-view>-->
+    <router-view></router-view>
  </div>
 </template>
 
@@ -26,8 +22,6 @@ export default {
   data () {
     return {
       name: '',
-      same_menu: false,
-      click_same_menu: false,
       circle: false,
       act: 0,
       list:[{
@@ -64,9 +58,7 @@ export default {
   },
   methods: {
     link(i,index){
-      this.same_menu = this.act === index;
       if(this.act === index) return;
-      this.click_same_menu = this.act === index; // 点击相同的菜单才会刷新，否则是缓存
       this.$go(i.url);
       this.act = index;
     }
@@ -76,7 +68,7 @@ export default {
       for(let i=0,len=this.list.length;i<len;i++){
           let t = this.list[i];
         if(val.path.includes(t.url)){
-          this.click_same_menu = this.act = i;
+          this.act = i;
           break
         }
       }
@@ -88,9 +80,7 @@ export default {
 <style lang="sass" scoped>
   .main
     background: #f1f1f9
-    min-height: 100vh
-    height: 100%
-    padding-bottom: 1rem
+    padding-bottom: .98rem
     .tab
       box-shadow: -3px -2px 15px 0px #dbdcdc
       background: #fff

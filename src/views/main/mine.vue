@@ -1,20 +1,23 @@
 <template>
   <div class="mine">
-    <div class="head flex">
+    <div class="head flex" @click="$go('/webapp/mine/qrcode')">
       <img :src="item.icon" alt="" class="head_icon">
       <div class="msg">
         <h2 class="f44"><span>{{item.name}}</span><img src="" alt=""></h2>
         <p class="f24">{{item.complany}}</p>
         <p class="f24">手机号  {{item.phone}}</p>
       </div>
-      <img src="../../assets/main/mine/qrcode.png" alt="" class="qrcode_icon">
+      <span class="qrcode flex">
+        <img src="../../assets/main/mine/qrcode.png" alt="" class="qrcode_icon">
+        <img src="../../assets/common/arrow-transparent.png" alt="" class="arrow-transparent">
+      </span>
     </div>
     <ul class="item" v-for="i in menu">
-      <li v-for="j in i" class="flex" @click="$go(`/webapp/mine/${j.url}`)">
+      <li v-for="j in i" class="flex border-notend-b" @click="$go(`/webapp/mine/${j.url}`)">
         <img :src="require(`@/assets/main/mine/${j.icon}.png`)" alt="" class="icon">
         <span class="name f32">{{j.name}}</span>
         <span class="f28 color_font-s" v-if="!j.url">敬请期待</span>
-        <img src="../../assets/common/arrow.png" alt="" class="arrow">
+        <img src="../../assets/common/arrow-right.png" alt="" class="arrow">
       </li>
     </ul>
     <foot-tip/>
@@ -48,7 +51,7 @@
       }],[{
         icon: 'have',
         name: '已有客户',
-         url: ''
+         url: 'customer'
       },{
         icon: 'customer',
         name: '潜在客户',
@@ -109,6 +112,9 @@
           line-height: .34rem
       .qrcode_icon
         width: .72rem
+      .arrow-transparent
+        height: .4rem
+        padding-left: .4rem
     .item
       padding: 0 .4rem
       background: #fff

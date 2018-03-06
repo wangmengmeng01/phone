@@ -27,6 +27,8 @@ $color_font-s: #8D8D94                // 小号字体色调
       color: $color_font-s
 // 边框
 .border
+  &-notend-b:not(:last-child)
+    border-bottom: 1px solid $color_border
   &-b
    border-bottom: 1px solid $color_border
 // 字体
@@ -89,3 +91,28 @@ $color_font-s: #8D8D94                // 小号字体色调
   color: #fff
   &.dis
     background: $color_main-dis
+
+
+// 隐藏滚动条
+::-webkit-scrollbar
+  width: 0px
+  height: 1px
+::-webkit-scrollbar-thumb
+  border-radius: 5px
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2)
+  background: rgba(0, 0, 0, 0.2)
+
+
+//路由切换
+.router-slid-enter-active, .router-slid-leave-active
+  transition: all .2s
+.router-slid-enter, .router-slid-leave-active
+  transform: translate3d(2rem, 0, 0)
+  opacity: 0
+
+
+/**浅入浅出**/
+.fade-enter-active, .fade-leave-active
+  transition: opacity .2s
+.fade-enter, .fade-leave-active
+  opacity: 0

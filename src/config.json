@@ -14,7 +14,10 @@
     {
       "path": "login",
       "title": "登录",
-      "filter": true
+      "filter": true,
+      "back": {
+        "title": false
+      }
     },
     {
       "path": "register",
@@ -29,7 +32,11 @@
     {
       "path": "forget_pwd",
       "title": "修改登录密码",
-      "filter": true
+      "filter": true,
+      "back": {
+        "showtip": true,
+        "title": false
+      }
     },
     {
       "path": "reg_bank",
@@ -47,23 +54,40 @@
         {
           "path": "home",
           "title": "首页",
-          "filter": true
+          "filter": true,
+          "back": false
         },
         {
           "path": "product",
-          "title": "产品"
+          "title": "产品",
+          "back": {
+            "icon": false,
+            "background": "main"
+          }
         },
         {
           "path": "wealth",
-          "title": "财富"
+          "title": "财富",
+          "back": {
+            "icon": false,
+            "background": "main"
+          }
         },
         {
           "path": "found",
-          "title": "发现"
+          "title": "发现",
+          "back": {
+            "icon": false,
+            "background": "main"
+          }
         },
         {
           "path": "mine",
-          "title": "我的"
+          "title": "我的",
+          "back": {
+            "icon": false,
+            "background": "main"
+          }
         }
       ]
     },
@@ -78,6 +102,14 @@
         {
           "path": "qrcode",
           "title": "我的二维码"
+        },
+        {
+          "path": "customer",
+          "title": "已有客户"
+        },
+        {
+          "path": "customer_detail",
+          "title": "已有客户详情"
         }
       ]
     },
