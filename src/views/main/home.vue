@@ -111,33 +111,82 @@
 				<div class="recommendDivButton">投资</div>
 			</div>
 		</div>
-		
+
 		<!--热销产品-->
 		<div class="hotProduct">
-				<p class="recommendTip">畅销排行榜</p>
-				<p class="recommendTitle">热销产品 <span>更多<img src="../../assets/main/home/nextIcon.png"/></span></p>
+			<p class="recommendTip">畅销排行榜</p>
+			<p class="recommendTitle" style="margin-bottom: 0.26rem;">热销产品 <span>更多<img src="../../assets/main/home/nextIcon.png"/></span></p>
 			<!--热销产品-->
-			<div class="hotProductDiv">
-				<p class="hotProductDivTitle"> <img src="../../assets/main/home/no1.png"/> <span>中赢宝1101</span>     <span>购买</span></p>
+			<div class="hotProductDiv hotProductDiv0">
+				<p class="hotProductDivTitle"> <img src="../../assets/main/home/no1.png" /> <span class="hotProductDivTitleBidName">中赢宝1101</span> <span class="hotProductDivTitleBtn">购买</span></p>
 				<p class="hotProductDivRate">10%</p>
 				<p class="hotProductDivWord">历史年化收益率</p>
 				<!--进度条-->
 				<div class="hotProductDivProgress">
-					<img style="display: none;" src="../../assets/main/home/redTipsImg.png"/>
-					<img style="display: none;" src="../../assets/main/home/tipsImg.png"/>
-					<p></p>
-					<p></p>
-					<p>起投 1000元</p>
+					<img class="tipsImg" src="../../assets/main/home/tipsImg.png" />
+					<div class="redTipsImg">
+						<p><i>5</i>万</p>
+						<p>剩余不到</p>
+					</div>
+
+					<p class="grayLine"></p>
+					<p class="proLine"></p>
+					<p class="proTip">起投 <i>1000元</i></p>
 				</div>
 				<p class="hotProductDivMessage">
-					<span>累计销售 1000万</span>
-					<span>累计收益</span>
-					<span>锁定期限 28天</span>
+					<span>累计销售 <i>1000万</i></span>
+					<span>累计收益 <i>102万</i></span>
+					<span>锁定期限 <i>28天</i></span>
 				</p>
-				
+
 			</div>
-		
+			<div class="hotProductDiv">
+				<p class="hotProductDivTitle"> <img src="../../assets/main/home/no2.png" /> <span class="hotProductDivTitleBidName">中赢宝1101</span> <span class="hotProductDivTitleBtn">购买</span></p>
+				<p class="hotProductDivRate">10%</p>
+				<p class="hotProductDivWord">历史年化收益率</p>
+				<!--进度条-->
+				<div class="hotProductDivProgress">
+					<img class="tipsImg" src="../../assets/main/home/tipsImg.png" />
+					<div class="redTipsImg">
+						<p><i>5</i>万</p>
+						<p>剩余不到</p>
+					</div>
+
+					<p class="grayLine"></p>
+					<p class="proLine"></p>
+					<p class="proTip">起投 <i>1000元</i></p>
+				</div>
+				<p class="hotProductDivMessage">
+					<span>累计销售 <i>1000万</i></span>
+					<span>累计收益 <i>102万</i></span>
+					<span>锁定期限 <i>28天</i></span>
+				</p>
+			</div>
 		</div>
+
+		<!--热门活动-->
+		<div class="hotActivity">
+			<p class="recommendTip">全民参与的活动</p>
+			<p class="recommendTitle" style="margin-bottom: 0.38rem;">热门活动 <span>更多<img src="../../assets/main/home/nextIcon.png"/></span></p>
+
+			<!--活动-->
+			<div class="hotActivityDiv">
+				<img src="../../assets/main/home/activityImg.png" />
+				<p class="hotActivityDivTitle"> <span class="hotActivityDivTitleSpan">情人七夕加薪享不停...</span> <span class="hotProductDivTitleBtn">查看</span></p>
+				<p class="hotActivityDivTime">2017/07/07-2017/09/11</p>
+			</div>
+
+			<!--活动-->
+			<div class="hotActivityDiv">
+				<img src="../../assets/main/home/activityImg.png" />
+				<p class="hotActivityDivTitle"> <span class="hotActivityDivTitleSpan">情人七夕加薪享不停...</span> <span class="hotProductDivTitleBtn">查看</span></p>
+				<p class="hotActivityDivTime">2017/07/07-2017/09/11</p>
+			</div>
+
+		</div>
+
+		<!--风险提示-->
+		<p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>
 	</div>
 </template>
 
@@ -147,6 +196,9 @@
 		name: "home",
 		data() {
 			return {};
+		},
+		components: {
+
 		},
 		created() {},
 		mounted() {
@@ -194,6 +246,20 @@
 </script>
 
 <style scoped>
+	.RiskTips {
+		margin: 1.06rem 0 0.98rem;
+		height: 0.84rem;
+		text-align: center;
+		line-height: 0.24rem;
+		font-size: 0.24rem;
+		color: #B6B2B2;
+	}
+	
+	.RiskTips>i {
+		font-style: inherit;
+		margin: 0 0.2rem;
+	}
+	
 	.swiper-pagination-bullet {
 		width: 10px;
 		height: 10px;
@@ -480,7 +546,7 @@
 	}
 	
 	.recommendTitle {
-		margin: 0 0.4rem 0.36rem 0.36rem;
+		margin: 0 0.4rem 0 0.36rem;
 		width: 6.34rem;
 		height: 0.6rem;
 		line-height: 0.6rem;
@@ -496,6 +562,7 @@
 		color: #3299d1;
 		overflow: hidden;
 	}
+	
 	.recommendTitle span>img {
 		float: right;
 		margin: 0.12rem;
@@ -532,13 +599,14 @@
 		background-size: 100% 100%;
 	}
 	
-	.recommendDiv>img{
+	.recommendDiv>img {
 		float: right;
 		width: 1.02rem;
 		height: 1.02rem;
 		background-size: 100%;
 	}
-	.recommendDivTitle{
+	
+	.recommendDivTitle {
 		float: left;
 		margin: 0.20rem 0 0 0.42rem;
 		height: 0.66rem;
@@ -547,7 +615,8 @@
 		width: 2.0rem;
 		text-align: left;
 	}
-	.recommendDivRate{
+	
+	.recommendDivRate {
 		float: left;
 		margin-top: 0.12rem;
 		width: 6.3rem;
@@ -556,7 +625,8 @@
 		font-size: 1.0rem;
 		text-align: center;
 	}
-	.recommendDivWord{
+	
+	.recommendDivWord {
 		float: left;
 		width: 6.3rem;
 		margin-top: 0.04rem;
@@ -565,26 +635,30 @@
 		font-size: 0.24rem;
 		text-align: center;
 	}
-	.recommendDivBleft{
-		margin:0.26rem 0 0 0.42rem;
+	
+	.recommendDivBleft {
+		margin: 0.26rem 0 0 0.42rem;
 		float: left;
 		height: 0.8rem;
 		width: 3.5rem;
 		text-align: left;
 	}
-	.recommendDivBleft>p:nth-child(1){
+	
+	.recommendDivBleft>p:nth-child(1) {
 		height: 0.4rem;
 		line-height: 0.4rem;
 		font-size: 0.28rem;
 	}
-	.recommendDivBleft>p:nth-child(2){
+	
+	.recommendDivBleft>p:nth-child(2) {
 		margin-top: 0.05rem;
 		height: 0.34rem;
 		line-height: 0.34rem;
 		font-size: 0.24rem;
 	}
-	.recommendDivButton{
-		margin: 0.4rem  0.42rem 0 0;
+	
+	.recommendDivButton {
+		margin: 0.4rem 0.42rem 0 0;
 		float: right;
 		width: 1.32rem;
 		height: 0.52rem;
@@ -595,7 +669,8 @@
 		background-color: #F0F0F8;
 		border-radius: 0.28rem;
 	}
-	.hotProduct{
+	
+	.hotProduct {
 		margin: 0 auto;
 		padding: 0;
 		text-align: center;
@@ -606,36 +681,241 @@
 		overflow: hidden;
 		margin-top: 1rem;
 	}
-	.hotProductDiv{
-		padding: 0 0.43rem;
+	
+	.hotProductDiv {
+		margin: 0 0.43rem;
 		width: 6.24rem;
-		height: 4.1rem;
+		height: 3.56rem;
 	}
-	.hotProductDivTitle{
-		height: 0.64rem;
-		line-height: 0.64rem;
+	
+	.hotProductDiv0 {
+		box-sizing: border-box;
+		border-bottom: 4px solid #CDCED3;
 	}
-	.hotProductDivTitle>img{
+	
+	.hotProductDivTitle {
+		margin-top: 0.66rem;
+		height: 0.48rem;
+		line-height: 0.48rem;
+		overflow: hidden;
+	}
+	
+	.hotProductDivTitle>img {
+		float: left;
+		margin: 0.07rem 0;
 		width: 0.9rem;
 		height: 0.32rem;
 	}
-	/*<div class="hotProductDiv">
-				<p class="hotProductDivTitle"> <img src="../../assets/main/home/no1.png"/> <span>中赢宝1101</span>     <span>购买</span></p>
-				<p class="hotProductDivRate">10%</p>
-				<p class="hotProductDivWord">历史年化收益率</p>
-				<!--进度条-->
-				<div class="hotProductDivProgress">
-					<img style="display: none;" src="../../assets/main/home/redTipsImg.png"/>
-					<img style="display: none;" src="../../assets/main/home/tipsImg.png"/>
-					<p></p>
-					<p></p>
-					<p>起投 1000元</p>
-				</div>
-				<p class="hotProductDivMessage">
-					<span>累计销售 1000万</span>
-					<span>累计收益</span>
-					<span>锁定期限 28天</span>
-				</p>
-				
-			</div>*/
+	
+	.hotProductDivTitleBidName {
+		margin-left: 0.12rem;
+		font-size: 0.32rem;
+		line-height: 0.48rem;
+		color: #121212;
+		float: left;
+	}
+	
+	.hotProductDivTitleBtn {
+		float: right;
+		width: 1.16rem;
+		height: 0.48rem;
+		line-height: 0.48rem;
+		text-align: center;
+		background-color: #F0F0F8;
+		border-radius: 0.28rem;
+		color: #3299D1;
+		font-size: 0.24rem;
+	}
+	
+	.hotProductDivRate {
+		margin-top: 0.48rem;
+		height: 0.6rem;
+		line-height: 0.6rem;
+		font-size: 0.6rem;
+		color: #F84740;
+		text-align: left;
+	}
+	
+	.hotProductDivWord {
+		line-height: 0.28rem;
+		height: 0.28rem;
+		text-align: left;
+		font-size: 0.2rem;
+		color: #8D8D94;
+	}
+	
+	.hotProductDivProgress {
+		padding-top: 0.24rem;
+		height: 0.28rem;
+		position: relative;
+	}
+	
+	.grayLine {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 4.6rem;
+		height: 0.28rem;
+		background-color: #F0EAF0;
+	}
+	
+	.proLine {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		z-index: 2;
+		width: 2.8rem;
+		height: 0.28rem;
+		background: linear-gradient(to right, #8E9EAB, #EEF2F3);
+	}
+	
+	.redTipsImg {
+		position: absolute;
+		z-index: 3;
+		background: url(../../assets/main/home/redTipsImg.png) no-repeat 0 0;
+		width: 0.92rem;
+		height: 1.04rem;
+		background-size: 100% 100%;
+		bottom: 0.28rem;
+		left: 3.0rem;
+	}
+	
+	.redTipsImg>p:nth-child(1) {
+		margin-top: 0.14rem;
+		text-align: center;
+		font-size: 0.24rem;
+		color: #FFFFFF;
+	}
+	
+	.redTipsImg>p:nth-child(1) i {
+		font-style: inherit;
+		font-size: 0.36rem;
+	}
+	
+	.redTipsImg>p:nth-child(2) {
+		margin-top: 0.03rem;
+		font-size: 0.20rem;
+		text-align: center;
+		color: #FFFFFF;
+	}
+	
+	.tipsImg {
+		width: 0.24rem;
+		height: 0.16rem;
+		position: absolute;
+		left: 1.2rem;
+		bottom: 0.28rem;
+	}
+	
+	.proTip {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		width: 1.64rem;
+		height: 0.28rem;
+		text-align: right;
+		font-size: 0.24rem;
+		color: #8D8D94;
+	}
+	
+	.proTip>i {
+		font-style: inherit;
+		color: #000;
+	}
+	
+	.hotProductDivMessage {
+		margin-top: 0.4rem;
+		height: 0.24rem;
+		line-height: 0.24rem;
+		font-size: 0.24rem;
+		overflow: hidden;
+		color: #8D8D94;
+	}
+	
+	.hotProductDivMessage>span:nth-child(1) {
+		float: left;
+		width: 2.0rem;
+		text-align: left;
+	}
+	
+	.hotProductDivMessage>span:nth-child(2) {
+		float: left;
+		width: 2.24rem;
+		text-align: center;
+	}
+	
+	.hotProductDivMessage>span:nth-child(3) {
+		float: right;
+		width: 2.0rem;
+		text-align: right;
+	}
+	
+	.hotProductDivMessage>span:nth-child(1) i {
+		color: #000000;
+		font-style: inherit;
+	}
+	
+	.hotProductDivMessage>span:nth-child(2) i {
+		color: #F84740;
+		font-style: inherit;
+	}
+	
+	.hotProductDivMessage>span:nth-child(3) i {
+		color: #000000;
+		font-style: inherit;
+	}
+	
+	.hotActivity {
+		margin: 0 auto;
+		padding: 0;
+		text-align: center;
+		width: 7.1rem;
+		height: 11.60rem;
+		background-color: #fff;
+		border-radius: 0.2rem;
+		overflow: hidden;
+		margin-top: 1rem;
+	}
+	
+	.hotActivityDiv {
+		margin: 0.6rem 0.42rem 0;
+		height: 3.74rem;
+		width: 6.26rem;
+		overflow: hidden;
+		background: #FFFFFF;
+		box-shadow: 0px 2px 8px 1px rgba(219, 219, 219, 0.5);
+		border-radius: 0px 0px 20px 20px;
+	}
+	
+	.hotActivityDiv>img {
+		float: left;
+		width: 6.26rem;
+		height: 2.4rem;
+	}
+	
+	.hotActivityDivTitle {
+		float: left;
+		width: 6.26rem;
+		margin: 0.2rem 0.2rem 0.06rem;
+		height: 0.48rem;
+		line-height: 0.48rem;
+		overflow: hidden;
+	}
+	
+	.hotActivityDivTitleSpan {
+		float: left;
+		text-align: left;
+		font-size: 0.28rem;
+		text-align: left;
+		color: #181818;
+	}
+	
+	.hotActivityDivTime {
+		float: left;
+		margin-left: 0.2rem;
+		color: #3A3A3A;
+		text-align: left;
+		line-height: 0.2rem;
+		font-size: 0.2rem;
+	}
 </style>
