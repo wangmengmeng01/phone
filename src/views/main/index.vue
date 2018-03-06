@@ -90,6 +90,7 @@ export default {
     background: #f1f1f9
     min-height: 100vh
     height: 100%
+    padding-bottom: 1rem
     .tab
       box-shadow: -3px -2px 15px 0px #dbdcdc
       background: #fff
