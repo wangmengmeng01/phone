@@ -1,45 +1,62 @@
 <template>
 	<div>
 		<div class="head flex"> </div>
-		<div class="productDiv productDiv1">
-			<div class="productDivDetial">
+		<div v-for="(i,index) in productList" v-if="i.bidList.length" class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
+			<div v-for="(j,n) in i.bidList" class="productDivDetial " :class="[n<=i.bidList.length-2?'bb':'']">
 				<div class="pddTitle">
-					<span class="pddTitleBidName">月月赢-12M500G号</span>
+					<span class="pddTitleBidName">{{j.bidName}}</span>
 					<p class="pddTitleTips">
-						<span>佣金1.5%</span>
-						<span>30天锁定</span>
+						<span v-show="j.brokerageRate">佣金{{j.brokerageRate}}%</span>
+						<span>{{j.periodLength}}{{j.periodUnit|Totime}}锁定</span>
 					</p>
 				</div>
-				<p class="productDivRate">10%</p>
+				<p class="productDivRate">{{j.annualizedRate | tofixed}}%</p>
 				<p class="productDivWrod">历史年化</p>
 				<div class="hotProductDivProgress">
-					<div class="tipsImg">
-						<img src="../../assets/main/home/tipsImg.png" /><span>48%</span>
+					<div class="tipsImg" :style="{left:j.amountScale*5+'rem'}" v-if="j.amountScale<=0.5">
+						<img src="../../assets/main/home/tipsImg.png" /><span>{{j.amountScale*100 | tofixed}}%</span>
 					</div>
-					<div class="redTipsImg">
-						<p><i>5</i>万</p>
+					<div class="redTipsImg" v-else>
+						<p><i>{{j.amountWait/10000|tofixed}}</i>万</p>
 						<p>剩余不到</p>
 					</div>
 					<p class="grayLine"></p>
-					<p class="proLine"></p>
-					<p class="proTip"><i>120</i>人参与</p>
+					<p class="proLine" :style="{width:j.amountScale*5+'rem'}"></p>
+					<p class="proTip"><i>{{j.countPeople}}</i>人参与</p>
 				</div>
 				<p class="hotProductDivMessage">
-					<span>起投金额 <i>1000元</i></span>
-					<span>投资期限 <i>52</i>周</span>
-					<span class="hotProductDivTitleBtn">购买</span>
+					<span>起投金额 <i>{{j.investMinAmount}}元</i></span>
+					<span>投资期限 <i>{{j.periodLength}}</i>{{j.periodUnit|Totime}}</span>
+					<span class="hotProductDivTitleBtn" @click="$go('/webapp/prod/productDetail',{backTitle:'详情页面'})">购买</span>
 				</p>
 			</div>
 
 		</div>
+		<!--售罄状态-->
+		<div v-else class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
+			<div class="productDivTitle" @click="$go('/webapp/prod/productList',{productName:i.productName,productNo:i.productNo,productType:i.productType,backTitle:i.productName})">
+				<span>{{i.productName}}</span>
+				<span style="display: none;">我有优惠</span>
+				<span style="color: #8D8D94;">更多 <img src="../../assets/main/home/nextIcon.png" alt="" /></span>
+			</div>
+			<div class="productDivTitleTips">
+				<span class="tispImg1">中高风险</span>
+				<span class="">按期派息到期还本</span>
+			</div>
+			<div class="productDivOver">
+				<p>明天10:30</p>
+				<p>预计新标上架时间</p>
+				<img src="../../assets/main/prod/sq.png" />
 
-		<div class="productDiv productDiv2">
+			</div>
+		</div>
+		<!--<div v-else class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
 			<div class="productDivDetial">
 				<div class="pddTitle">
 					<span class="pddTitleBidName">月月赢-12M500G号</span>
 					<p class="pddTitleTips">
 						<span>佣金1.5%</span>
-						<span>30天锁定</span>
+						<span>3天锁定</span>
 					</p>
 				</div>
 				<p class="productDivRate">10%</p>
@@ -63,21 +80,34 @@
 				</p>
 			</div>
 
-		</div>
+		</div>-->
+
 	</div>
 </template>
 
 <script>
+	import { getProductBidsList } from '@/service'
 	export default {
 		name: 'productList',
 		data() {
-			return {}
+			return {
+				item: {
+					userToken: "",
+					productNo: this.$route.query.productNo,
+				},
+				productList: '',
+			}
 		},
 		created() {
-//			var dd=document.getElementsByClassName("flex");
-//			var ff=dd.getElementsByTagName("span");
-//			console.log(ff.innerHTML)
-			console.log(this.$route.query);
+
+			//			console.log(this.$route.query);
+
+			getProductBidsList(this.item).then(res => {
+				log(res);
+				this.productList = res.productList;
+				//				console.log(this.productList);
+			});
+
 		},
 		methods: {}
 	}
@@ -395,5 +425,42 @@
 	.bb {
 		border-bottom: 4px solid #CDCED3;
 		box-sizing: border-box;
+	}
+	
+	.productDivOver {
+		margin: 0.5rem 0.4rem 0.93rem;
+		width: 6.3rem;
+		height: 1.57rem;
+		overflow: hidden;
+		position: relative;
+	}
+	
+	.productDivOver>p:nth-child(1) {
+		float: left;
+		margin: 0.24rem 0 0.08rem;
+		width: 4.7rem;
+		height: 0.66rem;
+		line-height: 0.66rem;
+		font-size: 0.48rem;
+		color: #121212;
+		text-align: left;
+	}
+	
+	.productDivOver>p:nth-child(2) {
+		float: left;
+		width: 4.7rem;
+		line-height: 0.34rem;
+		font-size: 0.24rem;
+		color: #3F4040;
+		text-align: left;
+	}
+	
+	.productDivOver>img {
+		position: absolute;
+		right: 0;
+		top: 0.085rem;
+		width: 1.58rem;
+		height: 1.40rem;
+		background-size: 100% 100%;
 	}
 </style>

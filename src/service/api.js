@@ -12,5 +12,8 @@ export default {
 
   getValidateImage: 'user/getValidateImage', // 获取图片验证码
   
-	productSearchBidsList:'bid/searchBidsList',//产品列表页
+	productSearchBidsList:'bid/searchBidsList',//产品页
+	
+	getProductBidsList:'bid/getProductBidsList'//产品列表页
+	
 }

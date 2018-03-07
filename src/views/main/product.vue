@@ -4,10 +4,10 @@
 		<!--产品列表-->
 		<!--月月赢-->
 		<div v-for="(i,index) in productList" v-if="i.bidList.length" class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
-			<div class="productDivTitle">
+			<div class="productDivTitle" @click="$go('/webapp/prod/productList',{productName:i.productName,productNo:i.productNo,productType:i.productType,backTitle:i.productName})">
 				<span>{{i.productName}}</span>
 				<span v-show="i.isCoupon==1">我有优惠</span>
-				<span @click="$go('/webapp/prod/productList',{productName:i.productName,productNo:i.productNo,productType:i.productType,back})">更多 <img src="../../assets/main/home/nextIcon.png" alt="" /></span>
+				<span>更多 <img src="../../assets/main/home/nextIcon.png" alt="" /></span>
 			</div>
 			<div class="productDivTitleTips">
 				<span class="tispImg">中高风险</span>
@@ -75,7 +75,7 @@
 
 		<!--售罄状态-->
 		<div v-else class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
-			<div class="productDivTitle">
+			<div class="productDivTitle" @click="$go('/webapp/prod/productList',{productName:i.productName,productNo:i.productNo,productType:i.productType,backTitle:i.productName})">
 				<span>{{i.productName}}</span>
 				<span style="display: none;">我有优惠</span>
 				<span style="color: #8D8D94;">更多 <img src="../../assets/main/home/nextIcon.png" alt="" /></span>

@@ -148,7 +148,14 @@
       "children": [
         {
           "path": "productList",
-          "title": "成功"
+          "title": "产品列表页"
+        },
+        {
+          "path": "productDetail",
+          "title": "产品详情",
+          "back": {
+            "background": "main"
+          }
         }
       ]
     },
