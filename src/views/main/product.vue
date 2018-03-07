@@ -7,7 +7,7 @@
 			<div class="productDivTitle">
 				<span>{{i.productName}}</span>
 				<span v-show="i.isCoupon==1">我有优惠</span>
-				<span>更多 <img src="../../assets/main/home/nextIcon.png" alt="" /></span>
+				<span @click="$go('/webapp/prod/productList',{productName:i.productName,productNo:i.productNo,productType:i.productType,back})">更多 <img src="../../assets/main/home/nextIcon.png" alt="" /></span>
 			</div>
 			<div class="productDivTitleTips">
 				<span class="tispImg">中高风险</span>
