@@ -133,6 +133,10 @@
           "title": "已有客户详情"
         },
         {
+          "path": "customer_potential",
+          "title": "潜在客户"
+        },
+        {
           "path": "send_discount",
           "title": "赠送优惠"
         }

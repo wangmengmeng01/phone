@@ -5,7 +5,7 @@
       <img class="back-icon" v-else :src="require(`@/assets/common/arrow-left.png`)" alt="">
       <span v-if="back.showtip" class="tip">返回</span>
     </div>
-    <span v-if="back && back.title !== false">{{$route.meta.title}}</span>
+    <span v-if="back && back.title !== false">{{backTitle || $route.meta.title}}</span>
   </div>
 </template>
 
@@ -15,6 +15,10 @@
     computed:{
       back(){
         return this.$route.meta.back
+      },
+      backTitle(){
+        let backTitle = this.$route.query.backTitle;
+        return backTitle
       },
       islogin(){
         return this.$route.path.includes('login')
