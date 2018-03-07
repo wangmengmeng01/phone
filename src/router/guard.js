@@ -20,7 +20,7 @@ router.beforeEach((to, from, next) => {
       // 如果当前web版本大于存储的版本，重置
       store.commit("RESET");
     } else {
-      data.userToken && store.commit("DEAL_HEADER", data)
+      data.userToken && store.commit("SET_USER", data)
     }
   }
 
