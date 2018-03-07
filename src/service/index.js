@@ -5,6 +5,7 @@ import store from '@/store/'
 import api from './api';
 export * from './main'
 export * from './product'
+export * from './coupon'
 
 /**
  * 登录

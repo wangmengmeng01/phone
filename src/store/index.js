@@ -17,22 +17,13 @@ export default new Vuex.Store({
   getters,
   mutations: {  // 同步调用
     /**
-     * 处理头部信息
+     * 设置用户信息
      * @param state
      * @param data
      * @constructor
      */
-    DEAL_HEADER(state, data) {
-      state.header = data
-    },
-    /**
-     * 设置token
-     * @param state
-     * @param data
-     * @constructor
-     */
-    SET_TOKEN(state, data) {
-      state.token = data;
+    SET_USER(state, data) {
+      state.user = data;
     },
     /**
      * 重置state
@@ -50,15 +41,6 @@ export default new Vuex.Store({
     }
   },
   actions: {  // 异步调用
-    deal_header({ commit }, data) {
-      commit('DEAL_HEADER', data)
-    },
-    set_token({ commit }, data) {
-      commit('SET_TOKEN', data)
-    },
-    set_message({ commit }, data) {
-      commit('SET_MESSAGE', data)
-    },
     set_user({ commit }, data) {
       commit('SET_USER', data)
     },

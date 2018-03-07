@@ -25,14 +25,14 @@
     data () {
       return {
         item: {
-          mobile: '18202197847',
+          mobile: '',
           password: 'a123456',
         }
       }
     },
     methods: {
       ...mapActions([
-        'deal_header',
+        'set_user',
       ]),
       submit(){
         if(this.item.password){
@@ -40,7 +40,7 @@
           this.item.password = CryptoJS.aes(this.item.password);
         }
         login(this.item).then(res=>{
-          this.deal_header(res)
+          this.set_user(res);
           this.$go('/webapp')
         })
       },

@@ -9,7 +9,7 @@
       </div>
       <span class="qrcode flex">
         <img src="../../assets/main/mine/qrcode.png" alt="" class="qrcode_icon">
-        <img src="../../assets/common/arrow-transparent.png" alt="" class="arrow-transparent">
+        <img src="../../assets/common/arrow-transparent-right.png" alt="" class="arrow-transparent">
       </span>
     </div>
     <ul class="item" v-for="i in menu">
@@ -20,12 +20,10 @@
         <img src="../../assets/common/arrow-right.png" alt="" class="arrow">
       </li>
     </ul>
-    <foot-tip/>
   </div>
 </template>
 
 <script>
-  import footTip from '@/components/foot-tip/foot-tip'
   export default {
     name: 'mine',
     data() {
@@ -79,14 +77,11 @@
       }], [{
         icon: 'seting',
         name: '设置',
-         url: ''
+         url: 'seting'
       }]]
       }
     },
     created() {
-    },
-    components: {
-      "foot-tip" : footTip
     },
     methods: {
     },

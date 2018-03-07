@@ -2,9 +2,7 @@
   "version": "1.0",
   "vconsole": false,
   "state": {
-    "header": {
-      "token": ""
-    }
+    "user": {}
   },
   "route": [
     {
@@ -45,11 +43,11 @@
       "path": "forget_pwd",
       "title": "修改登录密码",
       "filter": true,
+      "foot": false,
       "back": {
-        "showtip": true,
+        "showTip": true,
         "title": false
-      },
-      "foot": false
+      }
     },
     {
       "path": "reg_bank",
@@ -122,23 +120,47 @@
         },
         {
           "path": "qrcode",
-          "title": "我的二维码"
+          "title": "我的二维码",
+          "foot": false
         },
         {
           "path": "customer",
-          "title": "已有客户"
+          "title": "已有客户",
+          "foot": false
         },
         {
           "path": "customer_detail",
-          "title": "已有客户详情"
+          "title": "已有客户详情",
+          "foot": false
         },
         {
           "path": "customer_potential",
-          "title": "潜在客户"
+          "title": "潜在客户",
+          "foot": false
         },
         {
           "path": "send_discount",
-          "title": "赠送优惠"
+          "title": "赠送优惠",
+          "foot": false
+        },
+        {
+          "path": "seting",
+          "title": "个人设置",
+          "foot": false
+        }
+      ]
+    },
+    {
+      "path": "coupon",
+      "component": "coupon",
+      "children": [
+        {
+          "path": "",
+          "redirect": "main"
+        },
+        {
+          "path": "main",
+          "title": "我的优惠券"
         }
       ]
     },

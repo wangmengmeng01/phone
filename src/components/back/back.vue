@@ -2,8 +2,9 @@
   <div class="back f36 flex p4" v-if="back !== false" :class="[back && back.background === 'main'?'main':'']">
     <div v-if="back && back.icon !== false" class="flex" @click="backFn">
       <img class="back-icon" v-if="islogin" :src="require(`@/assets/common/close.png`)" alt="">
-      <img class="back-icon" v-else :src="require(`@/assets/common/arrow-left.png`)" alt="">
-      <span v-if="back.showtip" class="tip">返回</span>
+      <img class="back-icon" v-else-if="back.background==='main'" :src="require(`@/assets/common/arrow-transparent-left.png`)" alt="">
+      <img class="back-icon" v-else="back.background" :src="require(`@/assets/common/arrow-left.png`)" alt="">
+      <span v-if="back.showTip" class="tip">返回</span>
     </div>
     <span v-if="back && back.title !== false">{{backTitle || $route.meta.title}}</span>
   </div>
@@ -18,6 +19,7 @@
       },
       backTitle(){
         let backTitle = this.$route.query.backTitle;
+        backTitle && (document.title=backTitle);
         return backTitle
       },
       islogin(){

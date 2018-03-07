@@ -37,6 +37,8 @@
 
 <style lang="sass" scoped>
   .qrcode
+    height: 100%
+    background: #fff
     .head
       background: #fff
       padding: .76rem .4rem .6rem
