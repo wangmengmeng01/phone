@@ -1,9 +1,9 @@
 <template>
 	<div class="product">
-		<p class="title">产品</p>
+		<!--<p class="title">产品</p>-->
 		<!--产品列表-->
 		<!--月月赢-->
-		<div v-for="(i,index) in productList" v-if="!i.bidList.length==0" class="productDiv productDiv1">
+		<div v-for="(i,index) in productList" v-if="i.bidList.length" class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
 			<div class="productDivTitle">
 				<span>{{i.productName}}</span>
 				<span v-show="i.isCoupon==1">我有优惠</span>
@@ -14,7 +14,7 @@
 				<span class="">按期派息到期还本</span>
 			</div>
 
-			<div v-for="j in i.bidList" class="productDivDetial bb">
+			<div v-for="(j,n) in i.bidList" class="productDivDetial " :class="[n<=i.bidList.length-2?'bb':'']">
 				<div class="pddTitle">
 					<span class="pddTitleBidName">{{j.bidName}}</span>
 					<p class="pddTitleTips">
@@ -74,7 +74,7 @@
 		</div>
 
 		<!--售罄状态-->
-		<div v-else class="productDiv productDiv2">
+		<div v-else class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
 			<div class="productDivTitle">
 				<span>{{i.productName}}</span>
 				<span style="display: none;">我有优惠</span>
@@ -85,7 +85,6 @@
 				<span class="">按期派息到期还本</span>
 			</div>
 			<div class="productDivOver">
-
 				<p>明天10:30</p>
 				<p>预计新标上架时间</p>
 				<img src="../../assets/main/prod/sq.png" />
@@ -94,7 +93,7 @@
 		</div>
 
 		<!--风险提示-->
-		<p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>
+		<!--<p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>-->
 	</div>
 </template>
 

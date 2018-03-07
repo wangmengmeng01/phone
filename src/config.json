@@ -82,7 +82,9 @@
             "icon": false,
             "background": "main"
           },
-          "foot": false
+          "foot":{
+          	"style":"margin-bottom:.98rem"
+          }
         },
         {
           "path": "wealth",
@@ -137,6 +139,16 @@
         {
           "path": "send_discount",
           "title": "赠送优惠"
+        }
+      ]
+    },
+        {
+      "path": "prod",
+      "component": "prod",
+      "children": [
+        {
+          "path": "productList",
+          "title": "成功"
         }
       ]
     },
