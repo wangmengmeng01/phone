@@ -56,7 +56,7 @@
       margin-top: .58rem
       padding-bottom: .3rem
     .text
-      margin-top: 1rem
+      padding-top: 1rem
       font-size: .6rem
     .text2
       margin-top: .26rem

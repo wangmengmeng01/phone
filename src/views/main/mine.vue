@@ -55,7 +55,7 @@
       },{
         icon: 'customer',
         name: '潜在客户',
-         url: ''
+         url: 'customer_potential'
       }],[{
         icon: 'advertisement',
         name: '广告卓信产品记录',

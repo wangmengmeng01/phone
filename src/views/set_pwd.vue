@@ -87,7 +87,7 @@
       margin-top: .6rem
       padding-bottom: .3rem
     .text
-      margin-top: 1rem
+      padding-top: 1rem
       font-size: .6rem
     .text2
       line-height: .4rem
