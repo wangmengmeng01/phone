@@ -24,3 +24,14 @@ export const getProductBidsList = async (params)=>{
   });
 }
 
+/**
+ * 产品列表页
+ */
+export const searchProductBidsDetail = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.searchProductBidsDetail,
+    params,
+  });
+}
+

@@ -76,6 +76,7 @@
         {
           "path": "product",
           "title": "产品",
+          "filter": true,
           "back": {
             "icon": false,
             "background": "main"

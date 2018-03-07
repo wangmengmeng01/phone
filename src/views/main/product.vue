@@ -14,7 +14,7 @@
 				<span class="">按期派息到期还本</span>
 			</div>
 
-			<div v-for="(j,n) in i.bidList" class="productDivDetial " :class="[n<=i.bidList.length-2?'bb':'']">
+			<div v-for="(j,n) in i.bidList" class="productDivDetial ">
 				<div class="pddTitle">
 					<span class="pddTitleBidName">{{j.bidName}}</span>
 					<p class="pddTitleTips">
@@ -36,7 +36,7 @@
 					<p class="proLine" :style="{width:j.amountScale*5+'rem'}"></p>
 					<p class="proTip"><i>{{j.countPeople}}</i>人参与</p>
 				</div>
-				<p class="hotProductDivMessage">
+				<p class="hotProductDivMessage" :class="[n<=i.bidList.length-2?'bb':'']">
 					<span>累计销售 <i>1000万</i></span>
 					<span>累计收益 <i>102万</i></span>
 					<span class="hotProductDivTitleBtn">购买</span>
@@ -413,7 +413,8 @@
 	
 	.hotProductDivMessage {
 		float: left;
-		margin: 0.28rem 0.4rem 0.44rem 0.4rem;
+		padding: 0.28rem 0 0.44rem ;
+		margin: 0 0.4rem;
 		height: 0.48rem;
 		width: 6.3rem;
 		line-height: 0.48rem;
@@ -458,7 +459,6 @@
 	
 	.bb {
 		border-bottom: 4px solid #CDCED3;
-		box-sizing: border-box;
 	}
 	
 	.productDivOver {
