@@ -18,7 +18,7 @@
       </div>
       <div class="b color_main f28 flex">
         <span @click="$go('send_discount',{id:i.id})">赠送优惠</span>
-        <span>拨打电话</span>
+        <a  class="color_main" :href="`tel:${i.phone}`">拨打电话</a>
       </div>
     </div>
   </div>
@@ -77,7 +77,8 @@
           line-height: .36rem
       .b
         margin-top: .46rem
-        span
+        span, a
+          text-decoration: none
           padding: .08rem .1rem
           border-radius: .08rem
           border: 1px solid rgb(50,153,209)

@@ -2,8 +2,8 @@
   <div class="customer_detail">
     <div class="head center">
       <img class="icon" src="/" alt="">
-      <h2 class="name f28 color-font">{{item.name}}</h2>
-      <p class="text f24 color-font-s">{{item.text}}</p>
+      <h2 class="name f28 color_font">{{item.name}}</h2>
+      <p class="text f24 color_font-s">{{item.text}}</p>
     </div>
     <div class="bg p4">
       <h2 class="title f32 color_font">客户投资背景</h2>

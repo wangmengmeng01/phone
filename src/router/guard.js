@@ -6,33 +6,27 @@ router.beforeEach((to, from, next) => {
   // 如果url上面有参数，判断是不是header的属性，是的话存到store中
   const query = Object.keys(to.query);
   if (query.length) {
-    query.includes("juid") && store.commit("DEAL_HEADER", to.query);
+    query.includes("userToken") && store.commit("SET_USER", to.query);
   }
 
-  const header = localStorage.getItem("header");
   const user = localStorage.getItem("user");
   const version = localStorage.getItem("version");
   const config = require("@/config.json"); // 获取json
 
-  if (header) {
+  if (user) {
     // 有的话取localStorage, 并且存到store中
-    const data = JSON.parse(header); // 存储的版本
-    if (parseFloat(data.version) < parseFloat(config.state.header.version)) {
-      // 如果当前API版本大于储存的版本，重置
-      store.commit("RESET");
-    } else if (!!version && parseFloat(version) < parseFloat(config.version)) {
+    const data = JSON.parse(user); // 存储的版本
+    if (!!version && parseFloat(version) < parseFloat(config.version)) {
       // 如果当前web版本大于存储的版本，重置
       store.commit("RESET");
     } else {
-      data.juid &&
-        store.commit("DEAL_HEADER", data) &&
-        store.commit("SET_USER", user);
+      data.userToken && store.commit("DEAL_HEADER", data)
     }
   }
 
   // 设置title
   document.title = to.meta.title || "理财师";
-  if (!!store.state.header.juid) {
+  if (!!store.state.user.userToken) {
     //如果有就直接到首页咯
     next();
   } else {
