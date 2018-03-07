@@ -7,7 +7,7 @@
 <script>
   export default {
 
-    name: 'level',
+    name: 'prod-index',
 
     data () {
       return {
@@ -17,5 +17,5 @@
   }
 </script>
 
-<style lang="css" scoped>
+<style lang="sass" scoped>
 </style>

@@ -79,7 +79,6 @@ export default {
 
 <style lang="sass" scoped>
   .main
-    padding-bottom: .98rem
     .tab
       box-shadow: -3px -2px 15px 0px #dbdcdc
       background: #fff
