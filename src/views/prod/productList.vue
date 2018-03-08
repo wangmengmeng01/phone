@@ -2,7 +2,7 @@
 	<div>
 		<div class="head flex"> </div>
 		<div v-for="(i,index) in productList" v-if="i.bidList.length" class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
-			<div v-for="(j,n) in i.bidList" class="productDivDetial " :class="[n<=i.bidList.length-2?'bb':'']">
+			<div v-for="(j,n) in i.bidList" class="productDivDetial ">
 				<div class="pddTitle">
 					<span class="pddTitleBidName">{{j.bidName}}</span>
 					<p class="pddTitleTips">
@@ -24,10 +24,10 @@
 					<p class="proLine" :style="{width:j.amountScale*5+'rem'}"></p>
 					<p class="proTip"><i>{{j.countPeople}}</i>人参与</p>
 				</div>
-				<p class="hotProductDivMessage">
+				<p class="hotProductDivMessage" :class="[n<=i.bidList.length-2?'bb':'']">
 					<span>起投金额 <i>{{j.investMinAmount}}元</i></span>
 					<span>投资期限 <i>{{j.periodLength}}</i>{{j.periodUnit|Totime}}</span>
-					<span class="hotProductDivTitleBtn" @click="$go('/webapp/prod/productDetail',{backTitle:'详情页面'})">购买</span>
+					<span class="hotProductDivTitleBtn" @click="$go('/webapp/prod/productDetail',{bidNo:j.bidNo,backTitle:j.bidName})">购买</span>
 				</p>
 			</div>
 
@@ -379,7 +379,8 @@
 	
 	.hotProductDivMessage {
 		float: left;
-		margin: 0.28rem 0.4rem 0.44rem 0.4rem;
+		padding: 0.28rem 0 0.44rem ;
+		margin: 0 0.4rem;
 		height: 0.48rem;
 		width: 6.3rem;
 		line-height: 0.48rem;
@@ -424,7 +425,6 @@
 	
 	.bb {
 		border-bottom: 4px solid #CDCED3;
-		box-sizing: border-box;
 	}
 	
 	.productDivOver {

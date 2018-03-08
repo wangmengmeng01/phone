@@ -16,6 +16,8 @@ export default {
 	
 	getProductBidsList:'bid/getProductBidsList',//产品列表页
 	
+	searchProductBidsDetail:'bid/searchProductBidsDetail',//产品详情页
+	
   showGiveCouponList: 'coupon/filter/showGiveCouponList', // 选择可送优惠(GET请求)
 
 
