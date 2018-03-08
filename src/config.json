@@ -160,7 +160,16 @@
         },
         {
           "path": "main",
-          "title": "我的优惠券"
+          "title": "我的优惠"
+        },
+        {
+          "path": "choose",
+          "title": "选择优惠"
+        },
+        {
+          "path": "choose_usable",
+          "title": "选择可送优惠",
+          "foot": false
         }
       ]
     },

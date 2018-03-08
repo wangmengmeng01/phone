@@ -18,19 +18,25 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapMutations } from 'vuex'
   import { login } from '@/service'
   export default {
     name: 'login',
     data () {
       return {
         item: {
-          mobile: '',
+          mobile: '18030003016',
           password: 'a123456',
         }
       }
     },
+    created() {
+      this.RESET();
+    },
     methods: {
+      ...mapMutations([
+        'RESET',
+      ]),
       ...mapActions([
         'set_user',
       ]),

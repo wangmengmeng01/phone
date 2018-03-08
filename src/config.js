@@ -4,7 +4,7 @@ export const _default = {
 };
 
 export const dev = {
-  url: 'http://192.168.7.110:5555/zw/api/',
+  url: 'http://192.168.7.110:8507/zw/api/',
   // url: 'http://192.168.10.52:5555/zw/api/',
 };
 

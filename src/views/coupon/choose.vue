@@ -1,11 +1,12 @@
 <template>
-  <div class="coupon_main">
+  <div class="coupon_choose">
     <ul class="nav flex f32">
       <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}({{i.size}})</li>
     </ul>
     <div class="coupon p4">
       <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list"/>
     </div>
+    <button class="btn">选取</button>
   </div>
 </template>
 
@@ -13,22 +14,18 @@
   import Coupon from '@/components/coupon/coupon'
   import { showGiveCouponList } from '@/service'
   export default {
-    name: 'coupon_main',
+    name: 'coupon_choose',
     data() {
       return {
         act: 0,
         nav: [{
-          name: '未使用',
+          name: '可用优惠',
           type: '1',
           size: 2
         },{
-          name: '已使用',
+          name: '不可用优惠',
           type: '2',
-          size: 2
-        },{
-          name: '过期未使用',
-          type: '3',
-          size: 2
+          size: 10
         }],
         res: {}
       }
@@ -59,10 +56,10 @@
 </script>
 
 <style lang="sass" scoped>
-  .coupon_main
-    padding: .2rem
+  .coupon_choose
     .nav
-      margin: .4rem 0
+      padding: .2rem
+      margin: .4rem .6rem
       li
         padding-bottom: .2rem
         &.act
@@ -70,10 +67,15 @@
         text-align: center
         flex: 1
     .coupon
+      margin: auto .2rem
       border-radius: .2rem
       padding-top: .6rem
       padding-bottom: .3rem
       background: #fff
       .coupon_list
         margin-bottom: .4rem
+    .btn
+      font-size: .36rem
+      margin-top: 1rem
+      border-radius: 0
 </style>

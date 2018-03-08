@@ -41,7 +41,6 @@ class http{
       let _params = {
         method: this.method,
         url: this.url,
-        header: store.state.header,
         transformRequest: [function (data) {
           let ret = '';
           for (let it in data) {
