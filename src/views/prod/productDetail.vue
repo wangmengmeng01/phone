@@ -101,6 +101,12 @@
 					<span>资金银行存管</span></p>
 			</div>
 		</div>
+
+		<!--立刻购买-->
+		<div class="productDetailBottom" @click="$go('/webapp/prod/buyBid',{bidNo:detail.bidNo,backTitle:'确认购买'})">
+			立刻购买
+		</div>
+
 	</div>
 </template>
 
@@ -593,5 +599,22 @@
 	
 	.pdcIntroduceImg2 {
 		margin: 0 0.32rem;
+	}
+	
+	.productDetailBottom {
+		margin: 0 auto;
+		padding: 0;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 7.5rem;
+		height: 1.1rem;
+		overflow: hidden;
+		line-height: 1.1rem;
+		font-size: 0.36rem;
+		text-align: center;
+		background-color: #3299D1;
+		color: #FFFFFF;
 	}
 </style>

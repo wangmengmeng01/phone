@@ -328,7 +328,7 @@
 		margin-left: 0.05rem;
 		color: #F84740;
 		line-height: 0.32rem;
-		font-size: 0.32rem;
+		font-size: 0.24rem;
 	}
 	
 	.redTipsImg {
