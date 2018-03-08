@@ -157,15 +157,18 @@
       "children": [
         {
           "path": "",
-          "redirect": "main"
+          "redirect": "main",
+          "foot": false
         },
         {
           "path": "main",
-          "title": "我的优惠"
+          "title": "我的优惠",
+          "foot": false
         },
         {
           "path": "choose",
-          "title": "选择优惠"
+          "title": "选择优惠",
+          "foot": false
         },
         {
           "path": "choose_usable",

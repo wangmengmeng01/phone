@@ -4,19 +4,22 @@
       <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}</li>
     </ul>
     <div class="coupon">
-      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true"/>
+      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true" @checkedCb="checkedCb"/>
+      <div v-if="!res.length" class="none f32 color_font">暂无可送优惠券</div>
     </div>
-    <button class="btn">选取</button>
+    <button class="btn" @click="submit">选取</button>
   </div>
 </template>
 
 <script>
   import Coupon from '@/components/coupon/coupon'
+  import { mapMutations } from 'vuex'
   import { showGiveCouponList } from '@/service'
   export default {
     name: 'coupon_choose_usable',
     data() {
       return {
+        backurl: this.$route.query.backurl,
         act: 0,
         nav: [{
           name: '加息券',
@@ -28,7 +31,8 @@
           name: '红包',
           type: '3',
         }],
-        res: {}
+        res: {},
+        couponlist: []
       }
     },
     components: {
@@ -38,20 +42,27 @@
       this.init(this.nav[0]);
     },
     methods: {
+      ...mapMutations([
+        'SET_COUPON',
+      ]),
       init(item){
         showGiveCouponList({couponType: item.type}).then(res=>{
           this.res = res.couponList
-//          this.res = [{"couponName":"加息券002","endDate":"2018.03.31","receiveNo":"ZZT_20180201","couponType":"1","couponNo":"JXQ_ZZT_20180201_02","profitRate":"0","maxAmount":"800","productName":"双季丰、双季丰、月满赢","productNo":"QY_YYB_2,QY_YYB_2,QY_YYB_4","startDate":"2018.02.01"},{"couponName":"加息券002","endDate":"2018.03.31","receiveNo":"ZZT_20180201","couponType":"2","couponNo":"JXQ_ZZT_20180201_02","profitRate":"0","maxAmount":"800","productName":"双季丰、双季丰、月满赢","productNo":"QY_YYB_2,QY_YYB_2,QY_YYB_4","startDate":"2018.02.01"},{"couponName":"加息券002","endDate":"2018.03.31","receiveNo":"ZZT_20180201","couponType":"3","couponNo":"JXQ_ZZT_20180201_02","profitRate":"0","maxAmount":"800","productName":"双季丰、双季丰、月满赢","productNo":"QY_YYB_2,QY_YYB_2,QY_YYB_4","startDate":"2018.02.01"},{"couponName":"加息券002","endDate":"2018.03.31","receiveNo":"ZZT_20180201","couponType":"1","couponNo":"JXQ_ZZT_20180201_02","profitRate":"0","maxAmount":"800","productName":"双季丰、双季丰、月满赢","productNo":"QY_YYB_2,QY_YYB_2,QY_YYB_4","startDate":"2018.02.01"},{"couponName":"加息券002","endDate":"2018.03.31","receiveNo":"ZZT_20180201","couponType":"2","couponNo":"JXQ_ZZT_20180201_02","profitRate":"0","maxAmount":"800","productName":"双季丰、双季丰、月满赢","productNo":"QY_YYB_2,QY_YYB_2,QY_YYB_4","startDate":"2018.02.01"}]
         }).catch(err=>{
           this.res = []
         })
       },
       choose(i,index){
+        if(this.act===index)return;
         this.act = index;
         this.init(i);
       },
-      checked(res){
-        log(res)
+      checkedCb(res){
+        this.couponlist.push(res)
+      },
+      submit(){
+        this.SET_COUPON(this.couponlist);
+        this.$go(this.backurl)
       }
     },
     watch: {
@@ -77,6 +88,11 @@
         text-align: center
         flex: 1
     .coupon
+      .none
+        height: 100vh
+        display: flex
+        align-items: center
+        justify-content: center
       padding-bottom: 1.1rem
       padding-left: 2.2rem
       flex: 1

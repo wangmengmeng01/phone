@@ -3,8 +3,9 @@
     <ul class="nav flex f32">
       <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}({{i.size}})</li>
     </ul>
-    <div class="coupon p4">
+    <div class="coupon p4" :class="[!res.length?'none':'']">
       <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list"/>
+      <div v-if="!res.length" class="nothing f32 color_font">暂无可送优惠券</div>
     </div>
   </div>
 </template>
@@ -37,15 +38,18 @@
       Coupon,
     },
     created() {
-      this.init();
+      this.init(this.nav[0]);
     },
     methods: {
-      init(){
-        showGiveCouponList({couponType: '1'}).then(res=>{
-          this.res = [{"couponName":"加息券002","endDate":"2018.03.31","receiveNo":"ZZT_20180201","couponType":"1","couponNo":"JXQ_ZZT_20180201_02","profitRate":"0","maxAmount":"800","productName":"双季丰、双季丰、月满赢","productNo":"QY_YYB_2,QY_YYB_2,QY_YYB_4","startDate":"2018.02.01"},{"couponName":"加息券002","endDate":"2018.03.31","receiveNo":"ZZT_20180201","couponType":"2","couponNo":"JXQ_ZZT_20180201_02","profitRate":"0","maxAmount":"800","productName":"双季丰、双季丰、月满赢","productNo":"QY_YYB_2,QY_YYB_2,QY_YYB_4","startDate":"2018.02.01"},{"couponName":"加息券002","endDate":"2018.03.31","receiveNo":"ZZT_20180201","couponType":"3","couponNo":"JXQ_ZZT_20180201_02","profitRate":"0","maxAmount":"800","productName":"双季丰、双季丰、月满赢","productNo":"QY_YYB_2,QY_YYB_2,QY_YYB_4","startDate":"2018.02.01"},{"couponName":"加息券002","endDate":"2018.03.31","receiveNo":"ZZT_20180201","couponType":"1","couponNo":"JXQ_ZZT_20180201_02","profitRate":"0","maxAmount":"800","productName":"双季丰、双季丰、月满赢","productNo":"QY_YYB_2,QY_YYB_2,QY_YYB_4","startDate":"2018.02.01"},{"couponName":"加息券002","endDate":"2018.03.31","receiveNo":"ZZT_20180201","couponType":"2","couponNo":"JXQ_ZZT_20180201_02","profitRate":"0","maxAmount":"800","productName":"双季丰、双季丰、月满赢","productNo":"QY_YYB_2,QY_YYB_2,QY_YYB_4","startDate":"2018.02.01"}]
+      init(item){
+        showGiveCouponList({couponType: item.type}).then(res=>{
+          this.res = res.couponList
+        }).catch(err=>{
+          this.res = []
         })
       },
       choose(i,index){
+        if(this.act===index)return;
         this.act = index;
         this.init(i);
       },
@@ -70,6 +74,15 @@
         text-align: center
         flex: 1
     .coupon
+      &.none
+        padding: 0
+        margin: 0
+        .nothing
+          background: #f1f1f9
+          height: 100vh
+          display: flex
+          align-items: center
+          justify-content: center
       border-radius: .2rem
       padding-top: .6rem
       padding-bottom: .3rem

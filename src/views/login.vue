@@ -1,5 +1,6 @@
 <template>
   <div class="login p4" @keyup.enter="submit">
+    <input type="file" value="123123">
     <img src="../assets/user/logo.png" class="logo">
     <div class="item flex phone border-b">
       <span class="name f44 color-font">手机号</span>
