@@ -18,6 +18,8 @@ export default {
 	
 	searchProductBidsDetail:'bid/searchProductBidsDetail',//产品详情页
 	
+	doConfirmBuyPage:'product/filter/doConfirmBuyPage',//确认购买页
+	
   showGiveCouponList: 'coupon/filter/showGiveCouponList', // 选择可送优惠(GET请求)
 
 

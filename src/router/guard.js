@@ -36,6 +36,7 @@ router.beforeEach((to, from, next) => {
     } else {
       //不然就跳转到登录；
       next("/webapp/login");
+//    next();
     }
   }
 });
