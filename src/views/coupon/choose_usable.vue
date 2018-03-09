@@ -13,13 +13,12 @@
 
 <script>
   import Coupon from '@/components/coupon/coupon'
-  import { mapMutations } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
   import { showGiveCouponList } from '@/service'
   export default {
     name: 'coupon_choose_usable',
     data() {
       return {
-        backurl: this.$route.query.backurl,
         act: 0,
         nav: [{
           name: '加息券',
@@ -34,6 +33,11 @@
         res: {},
         couponlist: []
       }
+    },
+    computed: {
+      ...mapGetters([
+        'coupon'
+      ])
     },
     components: {
       Coupon,
@@ -57,12 +61,18 @@
         this.act = index;
         this.init(i);
       },
-      checkedCb(res){
-        this.couponlist.push(res)
+      checkedCb(data){
+        this.couponlist.length
+          ? this.couponlist.concat(this.couponlist.filter(t=>{
+            return t.couponNo !== data.couponNo
+          }))
+          : this.couponlist.push(data)
       },
       submit(){
-        this.SET_COUPON(this.couponlist);
-        this.$go(this.backurl)
+        this.SET_COUPON({
+          data: this.couponlist
+        });
+        this.$go(this.coupon.backurl)
       }
     },
     watch: {
@@ -72,8 +82,10 @@
 
 <style lang="sass" scoped>
   .coupon_choose_usable
+    height: 100%
     padding-top: .2rem
     .nav
+      height: 100%
       position: fixed
       left: 0
       top: 1.08rem

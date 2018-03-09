@@ -5,57 +5,38 @@
       <span class="f32 color_font">从通讯录导入</span>
       <img src="../../assets/common/arrow-right.png" alt="" class="arrow">
     </div>
-    <div class="item" v-for="i in item">
+    <div class="item" v-for="i in list" v-if="list.length">
       <div class="top flex">
-        <img src="" alt="" class="icon">
+        <img src="" alt="" class="icon place-img">
         <div class="text">
-          <h2 class="f36 color_font">{{i.name}}</h2>
-          <p class="f20 color_font-s">{{i.phone}} {{i.text}}</p>
+          <h2 class="f36 color_font">{{i.customerName}}</h2>
+          <p class="f20 color_font-s">{{i.customerPhone}} {{i.createTime}}成为潜在客户</p>
         </div>
       </div>
       <div class="bot">
-        <a class="color_main f32" :href="`tel:${i.phone}`">拨打电话</a>
+        <a class="color_main f32" :href="`tel:${i.customerPhone}`">拨打电话</a>
       </div>
     </div>
+    <p class="f36 color_font-s center mt4" v-if="!list.length">暂无潜在客户</p>
   </div>
 </template>
 
 <script>
+  import { searchPotentialCustomers, getShowBusinessHistory } from '@/service'
   export default {
     name: 'customer_potential',
     data() {
       return {
-        item: [{
-          name: '赵一',
-          phone: '13112341234',
-          text: '2016.01.15 成为我的客户'
-        },{
-          name: '赵一',
-          phone: '13112341234',
-          text: '2016.01.15 成为我的客户'
-        },{
-          name: '赵一',
-          phone: '13112341234',
-          text: '2016.01.15 成为我的客户'
-        },{
-          name: '赵一',
-          phone: '13112341234',
-          text: '2016.01.15 成为我的客户'
-        },{
-          name: '赵一',
-          phone: '13112341234',
-          text: '2016.01.15 成为我的客户'
-        }],
+        pageIndex: 1,
+        userCode: '',
+        list: [],
       }
     },
     created() {
+      searchPotentialCustomers({pageIndex:this.pageIndex}).then(r=>{
+        this.list = r && r.customerList
+      })
     },
-    components: {
-    },
-    methods: {
-    },
-    watch: {
-    }
   }
 </script>
 
@@ -79,8 +60,6 @@
         .icon
           margin-right: .4rem
           width: .96rem
-          border: 1px solid red
-          border-radius: 50%
           height: .96rem
         .text
           line-height: 1.5

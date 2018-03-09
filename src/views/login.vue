@@ -10,7 +10,7 @@
       <span class="name f44 color-font">密码</span>
       <input type="password" placeholder="请输入登录密码" class="f44" v-model="item.password">
     </div>
-    <button class="btn" @click="submit">登录</button>
+    <button class="btn" @click="submit">{{text}}</button>
     <p class="link flex f32 color_font-s">
       <span class="forgetpwd" @click="$go('forget_pwd')">忘记密码？</span>
       <span class="reg" @click="$go('register')">快速注册</span>
@@ -25,6 +25,7 @@
     name: 'login',
     data () {
       return {
+        text: '登录',
         item: {
           mobile: '18030003016',
           password: 'a123456',
@@ -42,6 +43,7 @@
         'set_user',
       ]),
       submit(){
+        this.text = '登录中';
         if(this.item.password){
           let CryptoJS= require('@/lib/aes');
           this.item.password = CryptoJS.aes(this.item.password);
@@ -49,6 +51,9 @@
         login(this.item).then(res=>{
           this.set_user(res);
           this.$go('/webapp')
+        }).catch(()=>{
+            this.item.password = '';
+            this.text = '重新登录';
         })
       },
     }

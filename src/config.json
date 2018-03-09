@@ -2,7 +2,15 @@
 	"version": "1.0",
 	"vconsole": false,
 	"state": {
-		"user": {}
+    "token": "",
+    "coupon": {
+      "receiveNoList": [],
+      "data": [],
+      "backurl": "",
+      "params": {}
+    },
+		"user": {},
+    "user_info": {}
 	},
 	"route": [
 		{
@@ -79,10 +87,10 @@
 				}, {
 					"path": "wealth",
 					"title": "财富",
-					"back": {
-						"icon": false,
-						"background": "main"
-					}
+          "back": false,
+          "foot": {
+            "style": "padding-bottom: 1.5rem"
+          }
 				}, {
 					"path": "found",
 					"title": "发现",

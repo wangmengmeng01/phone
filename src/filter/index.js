@@ -8,11 +8,19 @@ export function desensitization(val, start = 0, end = 0) {
 	return val && val.substr(start, end || undefined)
 }
 
+/**
+ * 性别
+ * @param val 数值
+ */
+export function sex(num) {
+  return ['男', '女', '未知'][parseInt(num)-1];
+}
+
 export function tofixed(val) {
-	return val && val.toFixed(0);
+  return val && val.toFixed(0);
 }
 export function tofixed2(val) {
-	return val && val.toFixed(2);
+  return val && val.toFixed(2);
 }
 export function formatNum(value) {
 	var str;

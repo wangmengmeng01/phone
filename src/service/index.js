@@ -6,6 +6,8 @@ import api from './api';
 export * from './main'
 export * from './product'
 export * from './coupon'
+export * from './mine'
+export * from './wealth'
 
 /**
  * 登录
@@ -74,7 +76,7 @@ export const getValidateImage = ()=>{
         timestamp: +new Date()
       };
       resolve(`${config.url}${api.getValidateImage}?${transformRequest(params)}`);
-      store.commit('SET_TOKEN', r.token);
+      store.commit('SET_IMGCODE_TOKEN', r.token);
       $http({
         method: 'get',
         api: api.getValidateImage,
