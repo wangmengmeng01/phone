@@ -25,6 +25,6 @@ let _config;
 if(process.env.NODE_ENV === 'production'){
   _config = _default;
 }else{
-  _config = dev;
+  _config = test;
 }
 export default _config

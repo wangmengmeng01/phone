@@ -6,6 +6,7 @@ import api from './api';
 export * from './main'
 export * from './product'
 export * from './coupon'
+export * from './wealth'
 
 /**
  * 登录
