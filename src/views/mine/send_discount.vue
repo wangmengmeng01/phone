@@ -32,6 +32,7 @@
     },
     methods: {
       ...mapMutations([
+        'RESET',
         'SET_COUPON',
         'DEL_COUPON',
       ]),
@@ -44,10 +45,11 @@
       },
       submit(){
         saveGiveCoupon({
-          giveUserCode: this.userCode,
+          giveUserCode: this.coupon.params.userCode,
           receiveNoList: this.coupon.receiveNoList
-        }).then(r=>{
-            log(r)
+        }).then(()=>{
+          this.RESET('coupon');
+          this.$go('')
         })
       }
     },

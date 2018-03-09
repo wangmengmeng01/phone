@@ -8,10 +8,15 @@
         <p class="f44 flex"><img src="../../assets/main/mine/phone.png" alt="">  {{item.mobile}}</p>
       </div>
     </div>
+    <div class="code">
+      <canvas id="code"></canvas>
+      <p class="f32 color_font-s center">扫一扫该二维码，加我为理财师</p>
+    </div>
   </div>
 </template>
 
 <script>
+  import QRious from 'qrious'
   import { mapGetters } from 'vuex'
   export default {
     name: 'qrcode',
@@ -26,8 +31,17 @@
       ])
     },
     created() {
-      this.item = this.user_info
+      this.item = this.user_info;
       this.item.position = 1
+    },
+    mounted(){
+      this.$nextTick(()=>{
+        new QRious({
+          element: document.getElementById('code'),
+          value: this.user_info.userCode,
+          size: 200
+        });
+      });
     },
     components: {
     },
@@ -44,6 +58,12 @@
   .qrcode
     height: 100%
     background: #fff
+    .code
+      text-align: center
+      #code
+        margin: 1rem auto .4rem
+        width: 3.8rem
+        height: 3.8rem
     .head
       background: #fff
       padding: .76rem .4rem .6rem

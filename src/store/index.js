@@ -71,7 +71,7 @@ export default new Vuex.Store({
      */
     RESET(state, obj){
       if(obj){
-        Object.assign(state,obj)
+        Object.assign(state[obj],root_state[obj])
       }else{
         sessionStorage.clear();
         localStorage.clear();

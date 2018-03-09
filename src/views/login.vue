@@ -43,7 +43,7 @@
         'set_user',
       ]),
       submit(){
-        this.text = '登录中';
+        this.text = '登录中...';
         if(this.item.password){
           let CryptoJS= require('@/lib/aes');
           this.item.password = CryptoJS.aes(this.item.password);

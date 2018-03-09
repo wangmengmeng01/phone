@@ -36,13 +36,13 @@
         list: []
       }
     },
-    ...mapMutations([
-      'SET_COUPON',
-    ]),
     created() {
       this.init()
     },
     methods: {
+      ...mapMutations([
+        'SET_COUPON',
+      ]),
       init(){
         searchExistingCustomers({pageIndex: this.pageIndex}).then(r=>{
           this.list = r && r.list
