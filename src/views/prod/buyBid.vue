@@ -83,7 +83,7 @@
 				<p><span>¥0.00</span><span>预期收益</span></p>
 				<p><span>¥999.00</span><span>实付款</span></p>
 			</div>
-			<p class="buyBidBottomRight">确认购买</p>
+			<p class="buyBidBottomRight" @click="$go('/webapp/prod/buySucc')">确认购买</p>
 		</div>
 
 	</div>
@@ -99,7 +99,7 @@
 			return {
 				item: {
 					bidNo: this.$route.query.bidNo,
-					promiseInviteId:''
+					promiseInviteId: ''
 				},
 				detail: {},
 			}
@@ -115,14 +115,16 @@
 </script>
 
 <style scoped>
-	.i1{
+	.i1 {
 		font-style: inherit;
 		font-size: 0.48rem;
 	}
-	.i2{
+	
+	.i2 {
 		font-style: inherit;
 		font-size: 0.24rem;
 	}
+	
 	.buyBidTop {
 		margin: 0 auto;
 		padding: 0;

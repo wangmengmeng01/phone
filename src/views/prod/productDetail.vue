@@ -15,7 +15,7 @@
 				<p class="pdtLine" :style="{width:detail.amountScale*6.7+'rem'}"></p>
 				<p class="pdtProgressMes">剩余可投<i>{{detail.amountWait| formatNum}}元</i></p>
 			</div>
-			<p class="pdtBugMes"><img class="pdtBugMesImg1" src="../../assets/main/prod/people.png" /><span> 已有{{detail.countPeople}}人购买 </span> <img class="pdtBugMesImg2" src="../../assets/main/prod/lnextIcon.png" /></p>
+			<p class="pdtBugMes" @click="$go('/webapp/prod/joinList')"><img class="pdtBugMesImg1" src="../../assets/main/prod/people.png" /><span> 已有{{detail.countPeople}}人购买 </span> <img class="pdtBugMesImg2" src="../../assets/main/prod/lnextIcon.png" /></p>
 		</div>
 
 		<!--交易规则-->
@@ -89,16 +89,16 @@
 				<span>查看详情 <img src="../../assets/common/arrow-right.png"/></span>
 			</p>
 			<div class="pdcIntroduce">
-				<p>
+				<p @click="$go('/webapp/prod/bankDepository')">
 					<img class="pdcIntroduceImg1" src="../../assets/main/prod/Group47@2x.png" />
 					<span>资金银行存管</span>
 				</p>
-				<p>
+				<p @click="$go('/webapp/prod/higHqualityAssets')">
 					<img class="pdcIntroduceImg1" src="../../assets/main/prod/Group46@2x.png" />
-					<span>资金银行存管</span></p>
-				<p>
+					<span>严选优质资产</span></p>
+				<p @click="$go('/webapp/prod/Honour')">
 					<img class="pdcIntroduceImg2" src="../../assets/main/prod/Group45@2x.png" />
-					<span>资金银行存管</span></p>
+					<span>历史100%兑付</span></p>
 			</div>
 		</div>
 
