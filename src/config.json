@@ -141,31 +141,28 @@
 				}
 			]
 		}, {
-      "path": "coupon",
-      "component": "coupon",
-      "children": [
-        {
-          "path": "",
-          "redirect": "main",
-          "foot": false
-        },
-        {
-          "path": "main",
-          "title": "我的优惠",
-          "foot": false
-        },
-        {
-          "path": "choose",
-          "title": "选择优惠",
-          "foot": false
-        },
-        {
-          "path": "choose_usable",
-          "title": "选择可送优惠",
-          "foot": false
-        }
-      ]
-    }, {
+			"path": "coupon",
+			"component": "coupon",
+			"children": [
+				{
+					"path": "",
+					"redirect": "main",
+					"foot": false
+				}, {
+					"path": "main",
+					"title": "我的优惠",
+					"foot": false
+				}, {
+					"path": "choose",
+					"title": "选择优惠",
+					"foot": false
+				}, {
+					"path": "choose_usable",
+					"title": "选择可送优惠",
+					"foot": false
+				}
+			]
+		}, {
 			"path": "home",
 			"component": "home",
 			"children": [
@@ -192,6 +189,9 @@
 					"path": "productList",
 					"title": "产品列表页"
 				}, {
+					"path": "joinList",
+					"title": "加入记录"
+				}, {
 					"path": "productDetail",
 					"title": "产品详情",
 					"back": {
@@ -209,6 +209,22 @@
 					"foot": {
 						"style": "margin-bottom: 1.1rem"
 					}
+				}, {
+					"path": "buySucc",
+					"back": false,
+					"foot": {
+						"style": "background-color: #fff",
+						"type": "main"
+					}
+				}, {
+					"path": "higHqualityAssets",
+					"title": "严选优质资产"
+				}, {
+					"path": "bankDepository",
+					"title": "资金银行存管"
+				}, {
+					"path": "Honour",
+					"title": "100%历史兑付"
 				}
 			]
 		}, {
