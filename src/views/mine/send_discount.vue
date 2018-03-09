@@ -3,50 +3,52 @@
     <div class="customer p4 center">
       <h2 class="title f32 color_font">送给这位客户</h2>
       <img src="/" alt="" class="place-img" >
-      <p class="name center f28 color_font-s">{{item.name}}</p>
+      <p class="name center f28 color_font-s">{{coupon.params.realName}}</p>
     </div>
     <div class="send p4">
       <h2 class="title f32 color_font flex">送他(她)什么好呢 <span class="f24 color_font-s">可选一个或多个优惠</span></h2>
-      <Coupon v-for="(i,index) in coupon" :data="i" :key="index" class="item act" close="true" @closeCb="close"/>
-      <div class="item none" @click="$go('/webapp/coupon/choose_usable',{'backurl':'/webapp/mine/send_discount'})">
+      <Coupon v-for="(i,index) in coupon.data" :data="i" :key="index" class="item act" close="true" @closeCb="close"/>
+      <div class="item none" @click="choose">
         <img src="../../assets/coupon/none.png" alt="">
       </div>
     </div>
-    <button class="btn" :class="[!coupon.length?'dis':'']">赠送</button>
+    <button class="btn" :class="[!coupon.data.length?'dis':'']" @click="submit">赠送</button>
   </div>
 </template>
 
 <script>
   import Coupon from '@/components/coupon/coupon'
+  import { saveGiveCoupon } from '@/service'
   import { mapGetters, mapMutations } from 'vuex'
   export default {
     name: 'send_discount',
-    data() {
-      return {
-        item:{
-            name: '赵一'
-        },
-      }
-    },
     computed: {
       ...mapGetters([
         'coupon'
       ])
-    },
-    created() {
-      this.init();
     },
     components: {
       Coupon,
     },
     methods: {
       ...mapMutations([
+        'SET_COUPON',
         'DEL_COUPON',
       ]),
-      init(){
+      choose(){
+        this.SET_COUPON({backurl: this.$route.path});
+        this.$go('/webapp/coupon/choose_usable')
       },
       close(data){
         this.DEL_COUPON(data);
+      },
+      submit(){
+        saveGiveCoupon({
+          giveUserCode: this.userCode,
+          receiveNoList: this.coupon.receiveNoList
+        }).then(r=>{
+            log(r)
+        })
       }
     },
     watch: {
@@ -88,6 +90,7 @@
             height: .76rem
         &.act
           margin: 0
+          margin-top: .2rem
     .btn
       position: fixed
       right: 0

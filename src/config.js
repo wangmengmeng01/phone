@@ -4,8 +4,9 @@ export const _default = {
 };
 
 export const dev = {
+  url: 'http://192.168.8.161:8506/zw/api/',
   // url: 'http://192.168.7.110:8507/zw/api/',
-  url: 'https://zw-api.chinazyjr.net/zw/api/',
+  // url: 'https://zw-api.chinazyjr.net/zw/api/',
 };
 
 export const test = {

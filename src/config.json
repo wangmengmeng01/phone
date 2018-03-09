@@ -2,7 +2,15 @@
 	"version": "1.0",
 	"vconsole": false,
 	"state": {
-		"user": {}
+    "token": "",
+    "coupon": {
+      "receiveNoList": [],
+      "data": [],
+      "backurl": "",
+      "params": {}
+    },
+		"user": {},
+    "user_info": {}
 	},
 	"route": [
 		{

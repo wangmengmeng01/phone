@@ -1,18 +1,19 @@
 <template>
   <div class="mine">
     <div class="head flex" @click="$go('/webapp/mine/qrcode')">
-      <img :src="item.icon" alt="" class="head_icon">
+      <img :src="item.pic || head" alt="" class="head_icon">
       <div class="msg">
-        <h2 class="f44"><span>{{item.name}}</span><img src="" alt=""></h2>
-        <p class="f24">{{item.complany}}</p>
-        <p class="f24">手机号  {{item.phone}}</p>
+        <h2 class="f44 flex"><span>{{item.userName}}</span><span v-if="!!item.position" class="status"><img src="../../assets/main/mine/status_yellow.png" alt=""><i class="f12">{{['一般理财师','大区经理'][parseInt(item.position)-1]}}</i></span></h2>
+        <p class="f24">{{item.pic}}</p>
+        <p class="f24">手机号  {{item.mobile}}</p>
       </div>
       <span class="qrcode flex">
         <img src="../../assets/main/mine/qrcode.png" alt="" class="qrcode_icon">
         <img src="../../assets/common/arrow-transparent-right.png" alt="" class="arrow-transparent">
       </span>
     </div>
-    <ul class="item" v-for="i in menu">
+    <!--菜单栏-->
+    <ul class="item" v-for="i in menu" v-if="menu.length">
       <li v-for="j in i" class="flex border-notend-b" @click="$go(`/webapp/mine/${j.url}`)">
         <img :src="require(`@/assets/main/mine/${j.icon}.png`)" alt="" class="icon">
         <span class="name f32">{{j.name}}</span>
@@ -24,28 +25,45 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+  import { searchUserInfo } from '@/service'
   export default {
     name: 'mine',
     data() {
       return {
-        item: {
-          icon: require('@/assets/main/mine/head.png'),
-          name: '贞子问',
-          complany: '中赢卓信财富投资管理(北京)有限公司闵行分公司',
-          phone: '17211112222'
-        },
-       menu: [[{
+        head: require('@/assets/main/mine/head.png'),
+        item: {},
+        menu:[],
+       menu_normal:[[{
+           icon: 'sweep',
+           name: '扫一扫添加客户',
+           url: 'qrcode'
+         },
+         {
+           icon: 'mine',
+           name: '我的理财师',
+           url: 'qrcode'
+         },{
+           icon: 'join',
+           name: '我要加盟的理财师',
+           url: 'qrcode'
+         }],[{
+         icon: 'seting',
+         name: '设置',
+         url: 'seting'
+       }]],
+      menu_manage: [[{
         icon: 'sweep',
         name: '扫一扫添加客户',
         url: 'qrcode'
       },{
         icon: 'sweep',
         name: '扫一扫添加理财师',
-         url: ''
+         url: 'qrcode'
       },{
         icon: 'mine',
         name: '我的理财师',
-         url: ''
+         url: 'qrcode'
       }],[{
         icon: 'have',
         name: '已有客户',
@@ -82,8 +100,19 @@
       }
     },
     created() {
+      this.init()
     },
     methods: {
+      ...mapActions([
+        'set_user_info',
+      ]),
+      init(){
+        searchUserInfo().then(r=>{
+          this.item = r;
+          this.menu = r.flag === 1 ? this.menu_manage : this.menu_normal;
+          this.set_user_info(r);
+        })
+      }
     },
     watch: {
     }
@@ -98,10 +127,34 @@
       color: #fff
       background: rgb(50,153,209)
       .head_icon
+        border-radius: 50%
         width: 1.16rem
+        height: 1.16rem
       .msg
         flex: 1
         padding: 0 .4rem
+        h2
+          justify-content: flex-start
+          .status
+            left: .1rem
+            position: relative
+            height: .38rem
+            line-height: .38rem
+            width: 1.54rem
+            display: flex
+            align-items: center
+            justify-content: center
+            i
+              padding-left: .2rem
+              position: relative
+              z-index: 1
+              font-style: normal
+            img
+              height: 100%
+              width: 100%
+              left: 0
+              top: 0
+              position: absolute
         p
           margin-top: .1rem
           line-height: .34rem
