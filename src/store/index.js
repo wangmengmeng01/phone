@@ -40,6 +40,15 @@ export default new Vuex.Store({
      * @param data
      * @constructor
      */
+    SET_SUCC_PAGE(state, data) {
+      Object.assign(state.succ_page, data)
+    },
+    /**
+     * 处理优惠券
+     * @param state
+     * @param data
+     * @constructor
+     */
     SET_COUPON(state, data) {
       state.coupon = Object.assign({},state.coupon, data);
       state.coupon.receiveNoList = state.coupon.data.map(t=>t.receiveNo)

@@ -2,6 +2,14 @@
 	"version": "1.0",
 	"vconsole": false,
 	"state": {
+    "succ_page": {
+      "title": "",
+      "sub_title": "",
+      "btn_text": "",
+      "backurl": "",
+      "sub_btn_text": "",
+      "sub_backurl": ""
+    },
     "token": "",
     "coupon": {
       "receiveNoList": [],
@@ -236,7 +244,13 @@
 					"redirect": "succ"
 				}, {
 					"path": "succ",
-					"title": "成功"
+					"title": "成功",
+          "back": {
+            "title": false
+          },
+          "foot": {
+            "style": "background-color: #fff;margin-top: -3rem"
+          }
 				}
 			]
 		}, {
