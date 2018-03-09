@@ -25,12 +25,23 @@ export const getProductBidsList = async (params)=>{
 }
 
 /**
- * 产品列表页
+ * 产品详情页
  */
 export const searchProductBidsDetail = async (params)=>{
   return await $http({
     method: 'get',
     api: api.searchProductBidsDetail,
+    params,
+  });
+}
+
+/**
+ * 确认购买页
+ */
+export const doConfirmBuyPage = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.doConfirmBuyPage,
     params,
   });
 }

@@ -1,205 +1,224 @@
 {
-  "version": "1.0",
-  "vconsole": false,
-  "state": {
-    "user": {}
-  },
-  "route": [
-    {
-      "path": "/",
-      "redirect": "/webapp"
-    },
-    {
-      "path": "login",
-      "title": "登录",
-      "filter": true,
-      "back": {
-        "title": false
-      },
-      "foot": {
-        "type": "main",
-        "style": "padding-bottom: 1rem"
-      }
-    },
-    {
-      "path": "register",
-      "title": "注册",
-      "filter": true,
-      "foot": {
-        "type": "main",
-        "style": "padding-bottom: 1rem"
-      }
-    },
-    {
-      "path": "set_pwd",
-      "title": "注册",
-      "filter": true,
-      "foot": {
-        "type": "main",
-        "style": "padding-bottom: 1rem"
-      }
-    },
-    {
-      "path": "forget_pwd",
-      "title": "修改登录密码",
-      "filter": true,
-      "foot": false,
-      "back": {
-        "showTip": true,
-        "title": false
-      }
-    },
-    {
-      "path": "reg_bank",
-      "title": "开通银行存管账户",
-      "filter": true,
-      "foot": {
-        "type": "main",
-        "style": "padding-bottom: 1rem"
-      }
-    },
-    {
-      "path": "webapp",
-      "component": "main",
-      "children": [
-        {
-          "path": "",
-          "redirect": "home"
-        },
-        {
-          "path": "home",
-          "title": "首页",
-          "filter": true,
-          "back": false,
-          "foot": false
-        },
-        {
-          "path": "product",
-          "title": "产品",
-          "filter": true,
-          "back": {
-            "icon": false,
-            "background": "main"
-          },
-          "foot":{
-          	"style":"margin-bottom:.98rem"
-          }
-        },
-        {
-          "path": "wealth",
-          "title": "财富",
+	"version": "1.0",
+	"vconsole": false,
+	"state": {
+		"user": {}
+	},
+	"route": [
+		{
+			"path": "/",
+			"redirect": "/webapp"
+		}, {
+			"path": "login",
+			"title": "登录",
+			"filter": true,
+			"back": {
+				"title": false
+			},
+			"foot": {
+				"type": "main",
+				"style": "padding-bottom: 1rem"
+			}
+		}, {
+			"path": "register",
+			"title": "注册",
+			"filter": true,
+			"foot": {
+				"type": "main",
+				"style": "padding-bottom: 1rem"
+			}
+		}, {
+			"path": "set_pwd",
+			"title": "注册",
+			"filter": true,
+			"foot": {
+				"type": "main",
+				"style": "padding-bottom: 1rem"
+			}
+		}, {
+			"path": "forget_pwd",
+			"title": "修改登录密码",
+			"filter": true,
+			"foot": false,
+			"back": {
+				"showTip": true,
+				"title": false
+			}
+		}, {
+			"path": "reg_bank",
+			"title": "开通银行存管账户",
+			"filter": true,
+			"foot": {
+				"type": "main",
+				"style": "padding-bottom: 1rem"
+			}
+		}, {
+			"path": "webapp",
+			"component": "main",
+			"children": [
+				{
+					"path": "",
+					"redirect": "home"
+				}, {
+					"path": "home",
+					"title": "首页",
+					"filter": true,
+					"back": false,
+					"foot": false
+				}, {
+					"path": "product",
+					"title": "产品",
+					"filter": true,
+					"back": {
+						"icon": false,
+						"background": "main"
+					},
+					"foot": {
+						"style": "margin-bottom:.98rem"
+					}
+				}, {
+					"path": "wealth",
+					"title": "财富",
           "back": false,
           "foot": {
             "style": "padding-bottom: 1.5rem"
           }
-        },
-        {
-          "path": "found",
-          "title": "发现",
-          "back": {
-            "icon": false,
-            "background": "main"
-          }
-        },
-        {
-          "path": "mine",
-          "title": "我的",
-          "back": {
-            "icon": false,
-            "background": "main"
-          }
-        }
-      ]
-    },
-    {
-      "path": "mine",
-      "component": "mine",
-      "children": [
-        {
-          "path": "",
-          "redirect": "index"
-        },
-        {
-          "path": "qrcode",
-          "title": "我的二维码",
-          "foot": false
-        },
-        {
-          "path": "customer",
-          "title": "已有客户",
-          "foot": false
-        },
-        {
-          "path": "customer_detail",
-          "title": "已有客户详情",
-          "foot": false
-        },
-        {
-          "path": "customer_potential",
-          "title": "潜在客户",
-          "foot": false
-        },
-        {
-          "path": "send_discount",
-          "title": "赠送优惠",
-          "foot": false
-        },
-        {
-          "path": "seting",
-          "title": "个人设置",
-          "foot": false
-        }
-      ]
-    },
-    {
+				}, {
+					"path": "found",
+					"title": "发现",
+					"back": {
+						"icon": false,
+						"background": "main"
+					}
+				}, {
+					"path": "mine",
+					"title": "我的",
+					"back": {
+						"icon": false,
+						"background": "main"
+					}
+				}
+			]
+		}, {
+			"path": "mine",
+			"component": "mine",
+			"children": [
+				{
+					"path": "",
+					"redirect": "index"
+				}, {
+					"path": "qrcode",
+					"title": "我的二维码",
+					"foot": false
+				}, {
+					"path": "customer",
+					"title": "已有客户",
+					"foot": false
+				}, {
+					"path": "customer_detail",
+					"title": "已有客户详情",
+					"foot": false
+				}, {
+					"path": "customer_potential",
+					"title": "潜在客户",
+					"foot": false
+				}, {
+					"path": "send_discount",
+					"title": "赠送优惠",
+					"foot": false
+				}, {
+					"path": "seting",
+					"title": "个人设置",
+					"foot": false
+				}
+			]
+		}, {
       "path": "coupon",
       "component": "coupon",
       "children": [
         {
           "path": "",
-          "redirect": "main"
+          "redirect": "main",
+          "foot": false
         },
         {
           "path": "main",
-          "title": "我的优惠券"
-        }
-      ]
-    },
-        {
-      "path": "prod",
-      "component": "prod",
-      "children": [
-        {
-          "path": "productList",
-          "title": "产品列表页"
+          "title": "我的优惠",
+          "foot": false
         },
         {
-          "path": "productDetail",
-          "title": "产品详情",
-          "back": {
-            "background": "main"
-          }
-        }
-      ]
-    },
-    {
-      "path": "static",
-      "component": "static",
-      "children": [
-        {
-          "path": "",
-          "redirect": "succ"
+          "path": "choose",
+          "title": "选择优惠",
+          "foot": false
         },
         {
-          "path": "succ",
-          "title": "成功"
+          "path": "choose_usable",
+          "title": "选择可送优惠",
+          "foot": false
         }
       ]
-    },
-    {
-      "path": "*",
-      "component": "notfound",
-      "title": "404"
-    }
-  ]
+    }, {
+			"path": "home",
+			"component": "home",
+			"children": [
+				{
+					"path": "",
+					"redirect": "index"
+				}, {
+					"path": "joinFinlManager",
+					"title": "我要加盟理财师",
+					"back": {
+						"background": "#fff"
+					},
+					"filter": false,
+					"foot": {
+						"style": "margin-bottom: 1.1rem"
+					}
+				}
+			]
+		}, {
+			"path": "prod",
+			"component": "prod",
+			"children": [
+				{
+					"path": "productList",
+					"title": "产品列表页"
+				}, {
+					"path": "productDetail",
+					"title": "产品详情",
+					"back": {
+						"background": "main"
+					},
+					"foot": {
+						"style": "margin-bottom: 1.1rem"
+					}
+				}, {
+					"path": "buyBid",
+					"title": "确认购买",
+					"back": {
+						"background": "main"
+					},
+					"foot": {
+						"style": "margin-bottom: 1.1rem"
+					}
+				}
+			]
+		}, {
+			"path": "static",
+			"component": "static",
+			"children": [
+				{
+					"path": "",
+					"redirect": "succ"
+				}, {
+					"path": "succ",
+					"title": "成功"
+				}
+			]
+		}, {
+			"path": "*",
+			"component": "notfound",
+			"title": "404"
+		}
+	]
 }

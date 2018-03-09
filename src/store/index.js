@@ -26,6 +26,26 @@ export default new Vuex.Store({
       state.user = data;
     },
     /**
+     * 处理优惠券
+     * @param state
+     * @param data
+     * @constructor
+     */
+    SET_COUPON(state, data) {
+      state.coupon = data;
+    },
+    /**
+     * 处理优惠券
+     * @param state
+     * @param data
+     * @constructor
+     */
+    DEL_COUPON(state, data) {
+      state.coupon = state.coupon.filter(t=>{
+        return t.couponNo !== data.couponNo
+      })
+    },
+    /**
      * 重置state
      * @param state
      * @constructor

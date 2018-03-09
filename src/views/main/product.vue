@@ -39,7 +39,7 @@
 				<p class="hotProductDivMessage" :class="[n<=i.bidList.length-2?'bb':'']">
 					<span>累计销售 <i>1000万</i></span>
 					<span>累计收益 <i>102万</i></span>
-					<span class="hotProductDivTitleBtn">购买</span>
+					<span class="hotProductDivTitleBtn" @click="$go('/webapp/prod/productDetail',{bidNo:j.bidNo,backTitle:j.bidName})">购买</span>
 				</p>
 			</div>
 
@@ -362,7 +362,7 @@
 		margin-left: 0.05rem;
 		color: #F84740;
 		line-height: 0.32rem;
-		font-size: 0.32rem;
+		font-size: 0.24rem;
 	}
 	
 	.redTipsImg {
@@ -413,7 +413,7 @@
 	
 	.hotProductDivMessage {
 		float: left;
-		padding: 0.28rem 0 0.44rem ;
+		padding: 0.28rem 0 0.44rem;
 		margin: 0 0.4rem;
 		height: 0.48rem;
 		width: 6.3rem;

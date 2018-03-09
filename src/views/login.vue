@@ -1,5 +1,6 @@
 <template>
   <div class="login p4" @keyup.enter="submit">
+    <input type="file" value="123123">
     <img src="../assets/user/logo.png" class="logo">
     <div class="item flex phone border-b">
       <span class="name f44 color-font">手机号</span>
@@ -18,19 +19,25 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapActions, mapMutations } from 'vuex'
   import { login } from '@/service'
   export default {
     name: 'login',
     data () {
       return {
         item: {
-          mobile: '',
+          mobile: '18030003016',
           password: 'a123456',
         }
       }
     },
+    created() {
+      this.RESET();
+    },
     methods: {
+      ...mapMutations([
+        'RESET',
+      ]),
       ...mapActions([
         'set_user',
       ]),

@@ -41,7 +41,6 @@ class http{
       let _params = {
         method: this.method,
         url: this.url,
-        header: store.state.header,
         transformRequest: [function (data) {
           let ret = '';
           for (let it in data) {
@@ -82,6 +81,9 @@ class http{
     if (r.code === '100') { // 0才会resole
       resole(r.result)
     } else {  // 其他reject
+      if(r.code === '1000'){
+        self.$go('/webapp/login')
+      }
       this.$reject(reject,r.message)
     }
   }
