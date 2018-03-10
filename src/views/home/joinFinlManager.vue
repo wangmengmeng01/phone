@@ -6,6 +6,9 @@
 			<p class="joinFMp2"><span>上传身份证</span><span>人工审核</span><span>完成加盟</span></p>
 		</div>
 
+
+
+		
 		<!--身份信息-->
 		<div class="upDate">
 			<!--上传身份证-->
