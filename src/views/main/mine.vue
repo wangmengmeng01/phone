@@ -34,11 +34,12 @@
         head: require('@/assets/main/mine/head.png'),
         item: {},
         menu:[],
-       menu_normal:[[{
-           icon: 'sweep',
-           name: '扫一扫添加客户',
-           url: 'qrcode'
-         },
+       menu_normal:[[
+//           {
+//           icon: 'sweep',
+//           name: '扫一扫添加客户',
+//           url: 'qrcode'
+//         },
          {
            icon: 'mine',
            name: '我的理财师',
@@ -52,15 +53,17 @@
          name: '设置',
          url: 'seting'
        }]],
-      menu_manage: [[{
-        icon: 'sweep',
-        name: '扫一扫添加客户',
-        url: 'qrcode'
-      },{
-        icon: 'sweep',
-        name: '扫一扫添加理财师',
-         url: 'qrcode'
-      },{
+      menu_manage: [[
+//          {
+//        icon: 'sweep',
+//        name: '扫一扫添加客户',
+//        url: 'qrcode'
+//      },{
+//        icon: 'sweep',
+//        name: '扫一扫添加理财师',
+//         url: 'qrcode'
+//      },
+        {
         icon: 'mine',
         name: '我的理财师',
          url: 'qrcode'

@@ -32,8 +32,10 @@
     },
     methods: {
       ...mapMutations([
+        'RESET',
         'SET_COUPON',
         'DEL_COUPON',
+        'SET_SUCC_PAGE'
       ]),
       choose(){
         this.SET_COUPON({backurl: this.$route.path});
@@ -44,10 +46,19 @@
       },
       submit(){
         saveGiveCoupon({
-          giveUserCode: this.userCode,
+          giveUserCode: this.coupon.params.userCode,
           receiveNoList: this.coupon.receiveNoList
-        }).then(r=>{
-            log(r)
+        }).then(()=>{
+          this.RESET('coupon');
+          this.SET_SUCC_PAGE({
+            "title": "赠送客户优惠成功",
+            "sub_title": "优惠已存入客户为的优惠中",
+            "btn_text": "继续赠送其他客户",
+            "sub_btn_text": "查看赠送记录",
+            "sub_backurl": "/webapp/mine/customer",
+            "backurl": "/webapp/mine/customer"
+          });
+          this.$go('/webapp/static/succ');
         })
       }
     },
