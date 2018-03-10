@@ -8,6 +8,7 @@ export * from './product'
 export * from './coupon'
 export * from './mine'
 export * from './wealth'
+export * from './home'
 
 /**
  * 登录

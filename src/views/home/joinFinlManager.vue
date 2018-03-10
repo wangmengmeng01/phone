@@ -7,32 +7,24 @@
 		</div>
 
 		<!--身份信息-->
-		<div style="display: none;">
-
+		<div class="upDate">
 			<!--上传身份证-->
-
 			<div class="joinFMdiv">
 				<p class="joinFMdivWord"><span>1</span>身份证正面</p>
-
 				<p class="inputFile">
 					<input type="file" name="" id="" value="" />
 				</p>
-
 			</div>
-
 			<div class="joinFMdiv">
 				<p class="joinFMdivWord"><span>2</span>身份证反面</p>
 
 				<p class="inputFile">
 					<input type="file" name="" id="" value="" />
 				</p>
-
 			</div>
-
 			<!--阅读协议-->
 			<div class="joinFMdiv h">
 				<div class="pdcTitle">已阅读同意</div>
-
 				<div class="checkAgreement">
 					<p class="checkAgreementImg">
 						<img src="../../assets/common/check_succ.png" />
@@ -40,21 +32,16 @@
 					</p>
 					<p class="agreement">《卓信理财师加盟协议》</p>
 				</div>
-
 			</div>
-
 			<!--立刻购买-->
 			<div class="productDetailBottom" @click="$go('/webapp/prod/buyBid',{bidNo:detail.bidNo,backTitle:'确认购买'})">
 				申请加盟
 			</div>
-
 		</div>
 
 		<!--申请提交-->
-
-		<div class="submission">
+		<div class="submission submission1">
 			<p class="submissionTitle"> <img src="../../assets/main/home/Doubt@2x.png" /><span>已提交申请，请等待</span></p>
-
 			<div class="subDivleft">
 				<p>审核中</p>
 				<p>当前状态</p>
@@ -71,7 +58,7 @@
 
 		<!--加盟成功-->
 
-		<div class="submission">
+		<div class="submission submission2">
 			<p class="submissionTitle"> <img src="../../assets/main/home/DoubtH@2x.png" /><span>已成功加盟，恭喜您</span></p>
 
 			<div class="subDivleft1">
@@ -84,7 +71,7 @@
 			</div>
 		</div>
 
-		<div class="submission">
+		<div class="submission submission2">
 			<p class="submissionTitle1"> <img src="../../assets/main/home/earth@2x.png" /><span>尝试以下功能，开启精彩理财师生涯</span></p>
 
 			<div class="submissionDIV">
@@ -101,7 +88,7 @@
 
 		</div>
 
-		<div class="submission">
+		<div class="submission submission3">
 			<p class="submissionTitle"> <img style="margin-left:0.82rem ;" src="../../assets/main/home/close@2x.png" /><span>对不起，您的加盟申请被拒绝</span></p>
 
 			<div class="subDivleft1">
@@ -114,7 +101,7 @@
 			</div>
 		</div>
 
-		<div class="submission" style="height: 5.36rem;">
+		<div class="submission submission3" style="height: 5.36rem;">
 			<p class="submissionFalseP1">拒绝原因</p>
 			<p class="submissionFalseP2">注册信息与身份证照片不一致</p>
 			<p class="submissionFalseP3">重新提交申请</p>
@@ -123,7 +110,6 @@
 
 	</div>
 </template>
-
 <script>
 	export default {
 
@@ -138,6 +124,12 @@
 </script>
 
 <style scoped>
+	.submission1,
+	.submission2,
+	.submission3 {
+		display: none;
+	}
+	
 	.submissionFalseP1 {
 		height: 0.28rem;
 		line-height: 0.28rem;
