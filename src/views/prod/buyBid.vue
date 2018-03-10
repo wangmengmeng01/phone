@@ -51,7 +51,7 @@
 
 		<!--我的优惠券-->
 
-		<div class="buyBidCenter">
+		<div class="buyBidCenter" @click="choose">
 			<div class="pdcTitle" style="margin: 0.28rem 0;">
 				<span>我的优惠</span>
 				<span style="color: #F84740;">2张可用 <img  src="../../assets/main/home/nextIcon.png" alt="" /></span>
@@ -91,6 +91,7 @@
 
 <script>
 	import { doConfirmBuyPage } from '@/service'
+	import { mapGetters, mapMutations } from 'vuex'
 	export default {
 
 		name: 'buyBid',
@@ -110,7 +111,19 @@
 				this.detail = res;
 			});
 		},
-		methods: {}
+		methods: {
+			...mapMutations([
+				'RESET',
+				'SET_COUPON',
+			]),
+			choose() {
+				this.SET_COUPON({
+					backurl: this.$route.path
+				});
+				this.$go('/webapp/coupon/choose')
+			},
+
+		}
 	}
 </script>
 
