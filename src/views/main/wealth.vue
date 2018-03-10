@@ -6,20 +6,20 @@
         <span>总金额(元)</span>
         <img src="../../assets/wealth/wealth/tips.png">
         <div class="status">已开通存管账户</div>
-        <div class="amount">0.00</div>
+        <div class="amount">{{home.totalAmount}}</div>
       </div>
       <div class="wealthEarn">
         <div class="yesterE">
           <div>昨日收益(元)</div>
-          <div class="wealthEarnData">0.00</div>
+          <div class="wealthEarnData">{{home.yesterdayAmount}}</div>
         </div>
         <div class="totalE">
           <div>累计收益(元)</div>
-          <div class="wealthEarnData">0.00</div>
+          <div class="wealthEarnData">{{home.sumAmount}}</div>
         </div>
         <div class="avalibleE">
           <div>可用余额(元)</div>
-          <div class="wealthEarnData">0.00</div>
+          <div class="wealthEarnData">{{home.availableAmount}}</div>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
     <!-- 我的资产 -->
     <div class="wealthMyAssert">
       <div class="wealthMATop">
-        <div class="wealthMATopT">0.00元</div>
+        <div class="wealthMATopT">{{invesProperty.res.totalAmount | formatNum}}元</div>
         <div class="wealthMATopB">
           <div class="wealthMATopBL">
             我的资产
@@ -46,57 +46,33 @@
           </div>
         </div>
         <ul class="wealthMyObject">
-          <li>
+          <li v-for="(i,index) in invesProperty.res" v-if="index<2">
             <div class="wealthMyObjectT">
-              <div class="wealthMyObjectTT">月月赢 <span>-12M500G号</span></div>
-              <div class="wealthMyObjectTC">持有中</div>
-              <div class="wealthMyObjectTB">查看</div>
+              <div class="wealthMyObjectTT">{{i.borrowName}} </div>
+              <div class="wealthMyObjectTC">{{i.cashStatus=='4'?'已到期':'持有中'}}</div>
+              <div class="wealthMyObjectTB" @click="$go('/webapp/prod/productDetail',{bidNo:i.borrowNo,backTitle:i.borrowName})">查看</div>
             </div>
             <div class="wealthMyObjectC">
               <div class="wealthMyObjectCL">
                 <span>持有金额</span>
-                <em class="bigAmount">0.00</em>
+                <em class="bigAmount">{{i.initCashAmount | formatNum
+                  }}</em>
               </div>
               <div class="wealthMyObjectCR">
                 <span>昨日收益</span>
-                <em>+10.00</em>
+                <em>+{{i.yesterdayAmount | formatNum
+                  }}</em>
               </div>
             </div>
             <div class="wealthMyObjectB">
               <div class="wealthMyObjectBL">
                 <span>到期天数</span>
-                <i>42天</i>
+                <i>{{i.interestEndDate}}天</i>
               </div>
               <div class="wealthMyObjectBR">
                 <span>持有收益</span>
-                <em>+460.00</em>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="wealthMyObjectT">
-              <div class="wealthMyObjectTT">月月赢 <span>-12M500G号</span></div>
-              <div class="wealthMyObjectTC">持有中</div>
-              <div class="wealthMyObjectTB">查看</div>
-            </div>
-            <div class="wealthMyObjectC">
-              <div class="wealthMyObjectCL">
-                <span>持有金额</span>
-                <em class="bigAmount">0.00</em>
-              </div>
-              <div class="wealthMyObjectCR">
-                <span>昨日收益</span>
-                <em>+10.00</em>
-              </div>
-            </div>
-            <div class="wealthMyObjectB">
-              <div class="wealthMyObjectBL">
-                <span>到期天数</span>
-                <i>42天</i>
-              </div>
-              <div class="wealthMyObjectBR">
-                <span>持有收益</span>
-                <em>+460.00</em>
+                <em>+{{i.holdAmount | formatNum
+                  }}</em>
               </div>
             </div>
           </li>
@@ -104,7 +80,7 @@
       </div>
     </div>
     <!-- 为您推荐 -->
-    <div class="recommend">
+    <div class="recommend hide">
       <p class="recommendTip">最新热标</p>
       <p class="recommendTitle">为您推荐 <span>更多 <img src="../../assets/main/home/nextIcon.png"/></span></p>
       <!--周周赢  -->
@@ -149,7 +125,7 @@
 </template>
 
 <script>
-  import { wealthIndex } from '@/service'
+  import { wealthIndex,invesProperty } from '@/service'
   export default {
     name: 'wealth',
     data() {
@@ -200,7 +176,17 @@
           name: '我的积分',
           url: ''
         }
-      ]
+      ],
+      home:"",
+      invesProperty:{
+        data:{
+          bidType: '2',
+          status: '1',
+          pageNum: '1'
+        },
+        res:{}
+      }
+
     }
   },
   created() {
@@ -212,8 +198,12 @@
     },
     init(){
       wealthIndex().then(res=>{
-        this.res =res;
+        this.home =res;
+      });
+      invesProperty(this.invesProperty.data).then(res=>{
         console.log(res)
+        this.invesProperty.res =res.dataList.slice(0,2);
+        console.log(this.invesProperty.res)
       });
     }
   },
@@ -224,6 +214,9 @@
 
 <style lang="stylus" scoped>
   i,em{font-style: normal;}
+  .hide{
+    display: none;
+  }
   //背景函数
   bg(n)
     background  url("../../assets/wealth/wealth/"+n) no-repeat

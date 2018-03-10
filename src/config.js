@@ -3,6 +3,10 @@ export const _default = {
   origin: `${location.origin}/`,
 };
 
+export const duxin = {
+  url: 'http://192.168.8.161:8506/zw/api/',
+};
+
 export const dev = {
   url: 'http://192.168.8.161:8506/zw/api/',
   // url: 'http://192.168.7.110:8507/zw/api/',
