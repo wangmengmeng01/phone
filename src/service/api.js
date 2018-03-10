@@ -12,6 +12,10 @@ export default {
 
   getValidateImage: 'user/getValidateImage', // 获取图片验证码
 
+  getBanks: 'account/filter/getBanks', // 获取支持银行卡列表接口
+
+  openAccount: 'account/filter/openAccount', // 用户开户接口
+
 	productSearchBidsList:'bid/searchBidsList',//产品页
 
 	getProductBidsList:'bid/getProductBidsList',//产品列表页

@@ -171,6 +171,19 @@
 				}
 			]
 		}, {
+      "path": "bank",
+      "component": "bank",
+      "children": [
+        {
+          "path": "",
+          "redirect": "index"
+        }, {
+          "path": "choose",
+          "title": "选择开户银行",
+          "filter": true,
+          "foot": false
+        }]
+    },{
 			"path": "home",
 			"component": "home",
 			"children": [
@@ -245,6 +258,7 @@
 				}, {
 					"path": "succ",
 					"title": "成功",
+          "filter": true,
           "back": {
             "title": false
           },
