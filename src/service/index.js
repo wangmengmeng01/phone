@@ -18,8 +18,7 @@ export const login = async (params)=>{
     method: 'post',
     api: api.login,
     options: {
-      loading: false,
-      filter_code: false
+      loading: false
     },
     params,
   });

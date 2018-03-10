@@ -45,4 +45,18 @@ export const doConfirmBuyPage = async (params)=>{
     params,
   });
 }
+/**
+ * 获取用户状态
+ */
+export const getUserStatus = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.getUserStatus,
+    params,
+    options: {
+      filter_code:false,
+      filter_msg:false
+    }
+  });
+}
 

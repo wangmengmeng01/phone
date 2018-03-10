@@ -103,7 +103,7 @@
 		</div>
 
 		<!--立刻购买-->
-		<div class="productDetailBottom" @click="$go('/webapp/prod/buyBid',{bidNo:detail.bidNo,backTitle:'确认购买'})">
+		<div class="productDetailBottom" @click="getStatus">
 			立刻购买
 		</div>
 
@@ -111,7 +111,7 @@
 </template>
 
 <script>
-	import { searchProductBidsDetail } from '@/service'
+	import { searchProductBidsDetail, getUserStatus } from '@/service'
 	export default {
 		name: 'productDetail',
 		data() {
@@ -119,6 +119,7 @@
 				item: {
 					bidNo: this.$route.query.bidNo,
 				},
+				itemStatus: {},
 				detail: {},
 			}
 		},
@@ -128,7 +129,61 @@
 				this.detail = res;
 			});
 		},
-		methods: {}
+		methods: {
+
+			getStatus() {
+				getUserStatus(this.itemStatus).then(res => {
+					//@click=""
+					log(res);
+					const info = res.result;
+					if(res.code == "100") {
+
+						if(info.openAccountStatus == "1") {
+							//未开户
+							this.$go('/webapp/reg_bank');
+						} else if(info.openAccountStatus == "4") {
+							//激活
+
+						} else {
+
+							//电子签约
+							if(info.autoBuyBidGrantFlag == "1") {
+
+								//复投
+								if(info.autoBuyBidFlag == "1") {
+
+									//风险测评
+
+									if(info.riskRatingFlag == "1") {
+										this.$go('/webapp/prod/buyBid', {
+											bidNo: this.$route.query.bidNo,
+											backTitle: '确认购买'
+										})
+									} else {
+
+									}
+
+								} else {
+
+								}
+
+							} else {
+
+							}
+
+						}
+
+
+
+					} else if(res.code == "1210" || res.code == "1000") {
+						this.$go('/webapp/login');
+					} else {
+						this.$toask(res.message);
+					}
+				})
+
+			}
+		}
 	}
 </script>
 

@@ -2,27 +2,26 @@
 	<div class="joinFM">
 		<!--审核进度-->
 		<div class="joinFMtop">
-			<p class="joinFMp1"><span class="higSpan ml"></span><span></span><span class="boder"></span><span></span><span class="boder"></span></p>
+			<p class="joinFMp1"><span class="higSpan ml"></span><span></span><span class="boder" :class="[joinBol5?'higSpan':'' ]"></span><span></span><span class="boder" :class="[(joinBol3 || joinBol4 )?'higSpan':'' ]"></span></p>
 			<p class="joinFMp2"><span>上传身份证</span><span>人工审核</span><span>完成加盟</span></p>
 		</div>
 
-
-
-		
 		<!--身份信息-->
-		<div class="upDate">
+		<div class="upDate" v-show="joinBol">
 			<!--上传身份证-->
 			<div class="joinFMdiv">
 				<p class="joinFMdivWord"><span>1</span>身份证正面</p>
 				<p class="inputFile">
-					<input type="file" name="" id="" value="" />
+					<input type="file" @change="change($event,0)" class="fileInput1" name="" id="" value="" />
+					<img v-show="showFalse" :src="imgUrl" />
 				</p>
 			</div>
 			<div class="joinFMdiv">
 				<p class="joinFMdivWord"><span>2</span>身份证反面</p>
 
 				<p class="inputFile">
-					<input type="file" name="" id="" value="" />
+					<input type="file" @change="change($event,1)" name="" id="" value="" />
+					<img v-show="showFalse2" :src="imgUrl2" />
 				</p>
 			</div>
 			<!--阅读协议-->
@@ -30,27 +29,25 @@
 				<div class="pdcTitle">已阅读同意</div>
 				<div class="checkAgreement">
 					<p class="checkAgreementImg">
-						<img src="../../assets/common/check_succ.png" />
-						<input type="checkbox" class="checkInput" name="" id="" value="" />
+						<img @click="checked=!checked" :src="require(`@/assets/coupon/check_${checked?'succ':'none'}.png`)" />
 					</p>
 					<p class="agreement">《卓信理财师加盟协议》</p>
 				</div>
 			</div>
 			<!--立刻购买-->
-			<div class="productDetailBottom" @click="$go('/webapp/prod/buyBid',{bidNo:detail.bidNo,backTitle:'确认购买'})">
+			<div class="productDetailBottom" @click="join" :class="[(checked && showFalse && showFalse2)?'':'disable']">
 				申请加盟
 			</div>
 		</div>
-
 		<!--申请提交-->
-		<div class="submission submission1">
+		<div class="submission" v-show="!joinBol && joinBol2">
 			<p class="submissionTitle"> <img src="../../assets/main/home/Doubt@2x.png" /><span>已提交申请，请等待</span></p>
 			<div class="subDivleft">
 				<p>审核中</p>
 				<p>当前状态</p>
 			</div>
 			<div class="subDivcenter">
-				<p>2018.01.01 12:38</p>
+				<p>{{jionMes.createdTime}}</p>
 				<p>提交时间</p>
 			</div>
 			<div class="subDivright">
@@ -61,7 +58,7 @@
 
 		<!--加盟成功-->
 
-		<div class="submission submission2">
+		<div class="submission" v-show="!joinBol&&joinBol3">
 			<p class="submissionTitle"> <img src="../../assets/main/home/DoubtH@2x.png" /><span>已成功加盟，恭喜您</span></p>
 
 			<div class="subDivleft1">
@@ -69,12 +66,12 @@
 				<p>当前状态</p>
 			</div>
 			<div class="subDivright1">
-				<p>2018.01.01 12:38</p>
+				<p>{{jionMes.createdTime}}</p>
 				<p>审核时间</p>
 			</div>
 		</div>
 
-		<div class="submission submission2">
+		<div class="submission" v-show="!joinBol&&joinBol3">
 			<p class="submissionTitle1"> <img src="../../assets/main/home/earth@2x.png" /><span>尝试以下功能，开启精彩理财师生涯</span></p>
 
 			<div class="submissionDIV">
@@ -91,7 +88,7 @@
 
 		</div>
 
-		<div class="submission submission3">
+		<div class="submission" v-show="!joinBol&&joinBol4">
 			<p class="submissionTitle"> <img style="margin-left:0.82rem ;" src="../../assets/main/home/close@2x.png" /><span>对不起，您的加盟申请被拒绝</span></p>
 
 			<div class="subDivleft1">
@@ -99,12 +96,12 @@
 				<p>当前状态</p>
 			</div>
 			<div class="subDivright1">
-				<p>2018.01.01 12:38</p>
+				<p>{{jionMes.createdTime}}</p>
 				<p>审核时间</p>
 			</div>
 		</div>
 
-		<div class="submission submission3" style="height: 5.36rem;">
+		<div class="submission" style="height: 5.36rem;" v-show="!joinBol&&joinBol4">
 			<p class="submissionFalseP1">拒绝原因</p>
 			<p class="submissionFalseP2">注册信息与身份证照片不一致</p>
 			<p class="submissionFalseP3">重新提交申请</p>
@@ -114,24 +111,112 @@
 	</div>
 </template>
 <script>
+	import { upload } from '@/until'
+	import { searchManagerCheckStatus, saveUserManager } from '@/service'
 	export default {
 
 		name: 'joinFinlManager',
 
 		data() {
 			return {
+				checked: false,
+				imgUrl: '',
+				imgUrl2: '',
+				showFalse: false,
+				showFalse2: false,
+				checkBol: false,
+				item: {},
+				joinBol: true,
+				joinBol2: false,
+				joinBol3: false,
+				joinBol4: false,
+				joinBol5: false,
+				itemJoin: {
+					cardNumberFrontFileStream: this.imgUrl,
+					cardNumberBackFileStream: this.imgUrl2,
+					flag: this.checked,
+				},
+				jionMes: {}
 
 			}
+		},
+		created() {
+
+			searchManagerCheckStatus(this.item).then(res => {
+				if(res.code == "1001") {
+				} else if(res.code == "100") {
+					this.joinBol = !this.joinBol;
+					this.jionMes = res.result;
+					if(res.result.status == "1") {
+						this.joinBol2 = !this.joinBol2;
+						this.joinBol5 = !this.joinBol5;
+					} else if(res.result.status == "2") {
+						this.joinBol3 = !this.joinBol3;
+					} else {
+						this.joinBol4 = !this.joinBol4;
+					}
+				} else {
+
+					this.$go('/webapp/login');
+				}
+
+			})
+
+			//			.catch(()=>{
+			//				this.$toask("dddd")
+			//				
+			//			});
+
+		},
+		methods: {
+			//图片上传
+			change(e, i) {
+				upload(e).then((res) => {
+					if(!i) {
+						this.imgUrl = "";
+						this.showFalse = true;
+						this.imgUrl = res;
+					} else {
+						this.imgUrl2 = "";
+						this.showFalse2 = true;
+						this.imgUrl2 = res;
+					}
+				});
+			},
+
+			join() {
+				if(!this.showFalse || !this.showFalse2) {
+					this.$toask("请提交身份证照片");
+				} else {
+					if(!this.checked) {
+						this.$toask("请勾选加盟协议");
+					} else {
+						saveUserManager(this.itemJoin).then(res => {
+							if(res.code == "100" || res.code == "1019") {
+								this.joinBol = !this.joinBol;
+								this.joinBol2 = !this.joinBol2;
+							} else if(res.code == "1000") {
+								this.$go('/webapp/login');
+							} else {
+								this.$toask(res.message);
+							}
+						})
+
+					}
+
+				}
+			}
+
 		}
 	}
 </script>
 
 <style scoped>
-	.submission1,
+	/*.submission1,
 	.submission2,
 	.submission3 {
 		display: none;
-	}
+	}*/
 	
 	.submissionFalseP1 {
 		height: 0.28rem;
@@ -467,12 +552,28 @@
 		border: 1px dashed #8D8D94;
 		box-sizing: border-box;
 		overflow: hidden;
+		position: relative;
 	}
 	
 	.inputFile>input {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 2;
 		float: left;
 		width: 5.6rem;
 		height: 2.6rem;
+		opacity: 0;
+	}
+	
+	.inputFile>img {
+		position: absolute;
+		left: 0;
+		top: 0;
+		float: left;
+		width: 5.6rem;
+		height: 2.6rem;
+		background-size: 100% 100%;
 	}
 	
 	.pdcTitle {
@@ -512,7 +613,7 @@
 		height: 0.32rem;
 		left: 0;
 		top: 0;
-		opacity: 0;
+		/*opacity: 0;*/
 	}
 	
 	.agreement {
@@ -529,6 +630,7 @@
 		margin: 0 auto;
 		padding: 0;
 		position: fixed;
+		z-index: 10;
 		left: 0;
 		right: 0;
 		bottom: 0;
@@ -540,5 +642,9 @@
 		text-align: center;
 		background-color: #3299D1;
 		color: #FFFFFF;
+	}
+	
+	.disable {
+		background: #98cceb;
 	}
 </style>

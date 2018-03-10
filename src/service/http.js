@@ -78,6 +78,10 @@ class http{
    * @param r
    */
   $resole(resole,reject,r){
+  	if (!this.filter_code){
+  		resole(r)
+  		return 
+  	}
     if (r.code === '100') { // 0才会resole
       resole(r.result)
     } else {  // 其他reject
@@ -95,7 +99,7 @@ class http{
    */
   $reject(reject,message){
     if(!message) return;
-    self.$toask(message);
+    this.filter_msg && self.$toask(message);
     reject(message)
   }
 }

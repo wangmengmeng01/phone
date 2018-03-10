@@ -34,3 +34,35 @@ export const sellsProduct = async (params)=>{
   });
 }
 
+
+/**
+ * 理财师审核状态查询
+ */
+export const searchManagerCheckStatus = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.searchManagerCheckStatus,
+    params,
+    options: {
+      filter_code:false,
+      filter_msg:false
+    },
+  });
+}
+
+
+/**
+ * 加盟理财师
+ */
+export const saveUserManager = async (params)=>{
+  return await $http({
+    method: 'post',
+    api: api.saveUserManager,
+    params,
+    options: {
+      filter_code:false,
+      filter_msg:false
+    },
+  });
+}
+
