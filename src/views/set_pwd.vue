@@ -3,17 +3,17 @@
     <h2 class="text color-font">设置登录密码</h2>
     <p class="text2 f28 color_font-s">{{text}}</p>
     <div class="imgcode item flex phone border-b">
-      <input type="text" placeholder="请输入图形验证码" class="f32 color_border" v-model="item.imageCode">
+      <input type="text" placeholder="请输入图形验证码" class="f32 color_font color_border" v-model="item.imageCode" maxlength="4">
       <span class="f28 color_main"><img :src="imageCode" alt="" @click="changeImgCode"></span>
     </div>
     <div class="smscode item flex phone border-b">
-      <input type="text" placeholder="请输入短信验证码" class="f32 color_border" v-model="item.smsCode">
-      <span class="f28 color_main" @click="sendCode">{{codeText}}</span>
+      <input type="tel" placeholder="请输入短信验证码" class="f32 color_font color_border" v-model="item.smsCode" maxlength="6">
+      <span class="f28 color_main" @click="sendCode" :class="click_code ? 'dis' : ''">{{codeText}}</span>
     </div>
     <div class="smscode item flex phone border-b">
-      <input type="password" placeholder="请设置你的登录密码" class="f32 color_border" v-model="item.password">
+      <input type="password" placeholder="请设置你的登录密码" class="f32 color_font color_border" v-model="item.password" minlength="6" maxlength="12">
     </div>
-    <p class="tip f12 color_font-s">密码须为6～12位大小写字母、数字至少2</p>
+    <p class="tip f12 color_font-s">密码须为6～12位大小写字母、数字至少2位数</p>
     <button class="btn" @click="submit">注册</button>
   </div>
 </template>
@@ -26,7 +26,10 @@
     data () {
       return {
         codeText: '获取短信验证码',
+        num: 60,
+        click_code: false,
         text: '',
+
         imageCode: '',
         item: {
           mobile: this.$route.query.mobile,
@@ -61,7 +64,22 @@
           imageCode: this.item.imageCode,
           operationType: 'register'
         };
-        sendSMS(params)
+        sendSMS(params).then(r=>{
+          this.countdown()
+        })
+      },
+      countdown(){
+        this.click_code = !this.click_code;
+        let time = setInterval(()=>{
+          this.num--;
+          if(this.num<0){
+            clearInterval(time);
+            this.click_code = !this.click_code;
+            this.codeText = '获取短信验证码';
+            return
+          }
+          this.codeText = `发送(${this.num})`;
+        },1000)
       },
       changeImgCode(){
         getValidateImage().then(r=>this.imageCode = r);
@@ -115,6 +133,8 @@
         text-align: right
     .smscode
       span
+        &.dis
+          pointer-events: none
         line-height: .52rem
         text-align: center
         background: #F0F0F8

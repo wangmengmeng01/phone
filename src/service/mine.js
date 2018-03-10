@@ -51,7 +51,7 @@ export const getUserBrokerageRecordList = async (params)=>{
 
 
 /**
- * 获取已有客户
+ * 获取历史展业登记
  */
 export const getShowBusinessHistory = async (params)=>{
   return await $http({
@@ -61,6 +61,18 @@ export const getShowBusinessHistory = async (params)=>{
   });
 }
 
+
+
+/**
+ * 查询已有客户信息详情
+ */
+export const getExistingCustomers = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.getExistingCustomers,
+    params,
+  });
+}
 
 
 /**

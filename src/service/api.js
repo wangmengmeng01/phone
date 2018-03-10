@@ -24,6 +24,8 @@ export default {
 
   searchExistingCustomers: 'home/filter/searchExistingCustomers', // 获取已有客户
 
+  getExistingCustomers: 'home/filter/getExistingCustomers', // 查询已有客户信息详情
+
   searchPotentialCustomers: 'home/filter/searchPotentialCustomers', // 获取潜在客户
 
   searchUserInfo: 'user/filter/searchUserInfo', // 查询用户信息
@@ -33,10 +35,10 @@ export default {
   getShowBusinessHistory: 'home/filter/getShowBusinessHistory', // 获取历史展业登记
 
   getUserBrokerageRecordList: 'brokerage/filter/getUserBrokerageRecordList',  // 获取用户佣金流水信息
-  
+
   noviceExclusive:'product/noviceExclusive',//新手专享
-  
+
 	recommendProduct:'product/recommendProduct',//为您推荐
-	
+
 	sellsProduct:'/product/sellsProduct',//热销产品
 }
