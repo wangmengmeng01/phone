@@ -1,6 +1,6 @@
 <template>
   <div class="withdraw">
-    充值
+
   </div>
 </template>
 

@@ -11,16 +11,21 @@ export default {
   sendSmsCode: 'account/filter/sendSmsCode',  // 发送短信验证码(合规汇付)
 
   getValidateImage: 'user/getValidateImage', // 获取图片验证码
-  
+
 	productSearchBidsList:'bid/searchBidsList',//产品页
-	
+
 	getProductBidsList:'bid/getProductBidsList',//产品列表页
-	
+
 	searchProductBidsDetail:'bid/searchProductBidsDetail',//产品详情页
-	
+
 	doConfirmBuyPage:'product/filter/doConfirmBuyPage',//确认购买页
-	
+
   showGiveCouponList: 'coupon/filter/showGiveCouponList', // 选择可送优惠(GET请求)
+
+  autoInvestQuary:'account/filter/queryTenderPlan',//自动复投信息查询
+
+  wealthIndex:"account/filter/searchUserAccount" ,//财富首页信息
+
 
 
 }
