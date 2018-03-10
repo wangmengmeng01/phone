@@ -24,6 +24,8 @@ export default {
 
   wealthIndex:"account/filter/searchUserAccount" ,//财富首页信息
 
+  invesProperty:"account/filter/invesProperty" ,//财富首页信息
+
   showGiveCouponList: 'coupon/filter/showGiveCouponList', // 选择可送优惠
 
   searchExistingCustomers: 'home/filter/searchExistingCustomers', // 获取已有客户

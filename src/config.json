@@ -260,7 +260,7 @@
         {
           "path": "",
           "redirect": "index"
-        }, {
+        },{
           "path": "recharge",
           "title": "充值"
         },{
@@ -273,6 +273,15 @@
           "path": "riskTest",
           "title": "风险评测",
           "foot": false
+        },{
+          "path": "productDetail",
+          "title": "产品详情",
+          "back": {
+            "background": "main"
+          },
+          "foot": {
+            "style": "margin-bottom: 1.1rem"
+          }
         }
       ]
     },{

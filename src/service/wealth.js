@@ -21,7 +21,16 @@ export const autoInvestQuary = async (params)=>{
 export const wealthIndex = async (params)=>{
   return await $http({
     method: 'get',
-    api: api.autoInvestQuary,
+    api: api.wealthIndex,
+    params,
+  });
+};
+
+// 财富我的资产
+export const invesProperty = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.invesProperty,
     params,
   });
 };
