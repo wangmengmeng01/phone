@@ -33,5 +33,10 @@ export default {
   getShowBusinessHistory: 'home/filter/getShowBusinessHistory', // 获取历史展业登记
 
   getUserBrokerageRecordList: 'brokerage/filter/getUserBrokerageRecordList',  // 获取用户佣金流水信息
-
+  
+  noviceExclusive:'product/noviceExclusive',//新手专享
+  
+	recommendProduct:'product/recommendProduct',//为您推荐
+	
+	sellsProduct:'/product/sellsProduct',//热销产品
 }

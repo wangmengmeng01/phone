@@ -18,7 +18,7 @@
       "params": {}
     },
 		"user": {},
-    "user_info": {}
+		"user_info": {}
 	},
 	"route": [
 		{
@@ -95,10 +95,10 @@
 				}, {
 					"path": "wealth",
 					"title": "财富",
-          "back": false,
-          "foot": {
-            "style": "padding-bottom: 1.5rem"
-          }
+					"back": false,
+					"foot": {
+						"style": "padding-bottom: 1.5rem"
+					}
 				}, {
 					"path": "found",
 					"title": "发现",
