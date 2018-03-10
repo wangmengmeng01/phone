@@ -20,6 +20,10 @@ export default {
 
 	doConfirmBuyPage:'product/filter/doConfirmBuyPage',//确认购买页
 
+  autoInvestQuary:'account/filter/queryTenderPlan',//自动复投信息查询
+
+  wealthIndex:"account/filter/searchUserAccount" ,//财富首页信息
+
   showGiveCouponList: 'coupon/filter/showGiveCouponList', // 选择可送优惠
 
   searchExistingCustomers: 'home/filter/searchExistingCustomers', // 获取已有客户

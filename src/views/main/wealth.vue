@@ -24,11 +24,11 @@
       </div>
     </div>
     <div class="RWWrap">
-      <div class="withdraw"><img src="../../assets/wealth/wealth/withdraw.png" alt="">提现</div>
-      <div class="recharge"><img src="../../assets/wealth/wealth/recharge.png" alt="">充值</div>
+      <div class="withdraw" @click="$go('/webapp/wealth/withdraw')"><img src="../../assets/wealth/wealth/withdraw.png" alt="">提现</div>
+      <div class="recharge" @click="$go('/webapp/wealth/recharge')"><img src="../../assets/wealth/wealth/recharge.png" alt="">充值</div>
     </div>
     <ul class="wealthContent">
-      <li v-for="i in menu">
+      <li v-for="i in menu" @click="linkto(i.url)">
         <img :src="require(`@/assets/wealth/wealth/${i.icon}.png`)" alt="" class="icon">
         <div class="wealthCName">{{i.name}}</div>
       </li>
@@ -149,6 +149,7 @@
 </template>
 
 <script>
+  import { wealthIndex } from '@/service'
   export default {
     name: 'wealth',
     data() {
@@ -187,12 +188,12 @@
         {
           icon: 'wautoin',
           name: '自动投标',
-          url: ''
+          url: 'autoInvest'
         },
         {
           icon: 'wrisktest',
           name: '风险测评',
-          url: ''
+          url: 'riskTest'
         },
         {
           icon: 'wmyPoint',
@@ -203,8 +204,18 @@
     }
   },
   created() {
+      this.init()
   },
   methods: {
+    linkto(url){
+      this.$go(`/webapp/wealth/${url}`)
+    },
+    init(){
+      wealthIndex().then(res=>{
+        this.res =res;
+        console.log(res)
+      });
+    }
   },
   watch: {
   }

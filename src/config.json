@@ -253,7 +253,29 @@
           }
 				}
 			]
-		}, {
+		},{
+      "path": "wealth",
+      "component": "wealth",
+      "children": [
+        {
+          "path": "",
+          "redirect": "index"
+        }, {
+          "path": "recharge",
+          "title": "充值"
+        },{
+          "path": "withdraw",
+          "title": "提现"
+        },{
+          "path": "autoInvest",
+          "title": "自动投标"
+        },{
+          "path": "riskTest",
+          "title": "风险评测",
+          "foot": false
+        }
+      ]
+    },{
 			"path": "*",
 			"component": "notfound",
 			"title": "404"
