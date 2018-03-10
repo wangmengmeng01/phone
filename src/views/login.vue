@@ -1,10 +1,9 @@
 <template>
   <div class="login p4" @keyup.enter="submit">
-    <input type="file" value="123123">
     <img src="../assets/user/logo.png" class="logo">
     <div class="item flex phone border-b">
       <span class="name f44 color-font">手机号</span>
-      <input type="number" placeholder="请输入手机号" class="f44" v-model="item.mobile">
+      <input type="tel" placeholder="请输入手机号" class="f44" v-model="item.mobile" maxlength="11">
     </div>
     <div class="item flex password border-b">
       <span class="name f44 color-font">密码</span>
@@ -43,6 +42,18 @@
         'set_user',
       ]),
       submit(){
+        if(!this.item.mobile) {
+          this.$toask('手机号不能为空!');
+          return
+        }
+        if(!this.item.password) {
+          this.$toask('登录密码不能为空!');
+          return
+        }
+        if(!(/^1\d{10}$/.test(this.item.mobile))) {
+          this.$toask('手机号格式不正确!');
+          return
+        }
         this.text = '登录中...';
         if(this.item.password){
           let CryptoJS= require('@/lib/aes');

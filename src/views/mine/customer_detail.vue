@@ -2,18 +2,18 @@
   <div class="customer_detail">
     <div class="head center">
       <img class="icon place-img" src="/" alt="">
-      <h2 class="name f28 color_font">{{item.name}}</h2>
-      <p class="text f24 color_font-s">{{item.text}}</p>
+      <h2 class="name f28 color_font">{{item.userName}}</h2>
+      <p class="text f24 color_font-s">{{item.beInviteDate}} 成为我的客户</p>
     </div>
-    <div class="bg p4">
-      <h2 class="title f32 color_font">客户投资背景</h2>
-      <ul>
-        <li v-for="i in list">
-          <h2 class="f28 color_font">{{i.tip1}}</h2>
-          <p class="f24 color_font-s">{{i.tip2}}</p>
-        </li>
-      </ul>
-    </div>
+    <!--<div class="bg p4">-->
+      <!--<h2 class="title f32 color_font">客户投资背景</h2>-->
+      <!--<ul>-->
+        <!--<li v-for="i in list">-->
+          <!--<h2 class="f28 color_font">{{i.tip1}}</h2>-->
+          <!--<p class="f24 color_font-s">{{i.tip2}}</p>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
     <!--<div class="introduction">-->
 
     <!--</div>-->
@@ -24,15 +24,12 @@
 </template>
 
 <script>
-  import { getUserBrokerageRecordList } from '@/service'
+  import { getExistingCustomers } from '@/service'
   export default {
     name: 'customer_detail',
     data() {
       return {
-        item: {
-          name: '赵一',
-          text: '2016.01.15 成为我的客户'
-        },
+        item: {},
         list:[{
           tip1: '男 45岁',
           tip2: '性别&年龄'
@@ -66,13 +63,11 @@
     created() {
       this.init()
     },
-    components: {
-    },
     methods: {
       init(){
+        const userCode = this.$route.query.userCode;
+        getExistingCustomers({userCode}).then(r=>this.item = r);
       }
-    },
-    watch: {
     }
   }
 </script>

@@ -36,6 +36,11 @@
     components: {
       Coupon,
     },
+    computed: {
+      ...mapGetters([
+        'coupon'
+      ])
+    },
     created() {
       this.init(this.nav[0]);
     },
@@ -43,7 +48,7 @@
     	  ...mapMutations([
         'SET_COUPON',
       ]),
-    	
+
       init(item){
         showGiveCouponList({couponType: item.type}).then(res=>{
           this.res = res.couponList
@@ -56,7 +61,7 @@
         this.act = index;
         this.init(i);
       },
-          checkedCb(data){
+      checkedCb(data){
         this.couponlist.length
           ? this.couponlist.concat(this.couponlist.filter(t=>{
             return t.couponNo !== data.couponNo
@@ -64,10 +69,11 @@
           : this.couponlist.push(data)
       },
       submit(){
+        const bidNo = this.$route.query.bidNo;
         this.SET_COUPON({
           data: this.couponlist
         });
-        this.$go(this.coupon.backurl)
+        this.$go(this.coupon.backurl,{bidNo})
       }
     },
     watch: {
@@ -77,6 +83,7 @@
 
 <style lang="sass" scoped>
   .coupon_choose
+    height: 100%
     padding-bottom: 1.08rem
     .nav
       padding: .2rem

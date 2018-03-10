@@ -171,6 +171,19 @@
 				}
 			]
 		}, {
+      "path": "bank",
+      "component": "bank",
+      "children": [
+        {
+          "path": "",
+          "redirect": "index"
+        }, {
+          "path": "choose",
+          "title": "选择开户银行",
+          "filter": true,
+          "foot": false
+        }]
+    },{
 			"path": "home",
 			"component": "home",
 			"children": [
@@ -245,15 +258,47 @@
 				}, {
 					"path": "succ",
 					"title": "成功",
-					"back": {
-						"title": false
-					},
-					"foot": {
-						"style": "background-color: #fff;margin-top: -3rem"
-					}
+          "filter": true,
+          "back": {
+            "title": false
+          },
+          "foot": {
+            "style": "background-color: #fff;margin-top: -3rem"
+          }
 				}
 			]
-		}, {
+		},{
+      "path": "wealth",
+      "component": "wealth",
+      "children": [
+        {
+          "path": "",
+          "redirect": "index"
+        },{
+          "path": "recharge",
+          "title": "充值"
+        },{
+          "path": "withdraw",
+          "title": "提现"
+        },{
+          "path": "autoInvest",
+          "title": "自动投标"
+        },{
+          "path": "riskTest",
+          "title": "风险评测",
+          "foot": false
+        },{
+          "path": "productDetail",
+          "title": "产品详情",
+          "back": {
+            "background": "main"
+          },
+          "foot": {
+            "style": "margin-bottom: 1.1rem"
+          }
+        }
+      ]
+    },{
 			"path": "*",
 			"component": "notfound",
 			"title": "404"

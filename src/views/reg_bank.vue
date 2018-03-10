@@ -10,9 +10,10 @@
       <span class="f36 color_font">身份证</span>
       <input type="number" placeholder="请输入18位二代身份证号码" class="f32 color_border">
     </div>
-    <div class="bank item flex phone border-b">
+    <div class="bank item flex phone border-b" @click="linkto">
       <span class="f36 color_font">开户银行</span>
       <input type="number" placeholder="请选择开户银行" class="f32 color_border">
+      <img src="../assets/common/arrow-right.png" alt="" class="arrow">
     </div>
     <div class="bankid item flex phone border-b">
       <span class="f36 color_font">银行卡号</span>
@@ -31,6 +32,7 @@
 </template>
 
 <script>
+  import { mapActions, mapMutations } from 'vuex'
   export default {
     name: 'reg_bank',
     data () {
@@ -38,8 +40,15 @@
       }
     },
     created() {
+      this.RESET();
     },
     methods: {
+      ...mapMutations([
+        'RESET',
+      ]),
+      linkto(){
+        this.$go('/webapp/bank/choose')
+      },
       submit(){
       },
     }
@@ -48,11 +57,14 @@
 
 <style lang="sass" scoped>
   .reg_bank
+    background: #fff
     .item
       span
         flex: 1
       input
         flex: 1.5
+      .arrow
+        height: .34rem
       margin-top: .58rem
       padding-bottom: .3rem
     .text

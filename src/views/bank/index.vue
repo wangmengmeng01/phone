@@ -7,7 +7,7 @@
 <script>
   export default {
 
-    name: 'wealth-index',
+    name: 'coupon',
 
     data () {
       return {

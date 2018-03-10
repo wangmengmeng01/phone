@@ -1,9 +1,9 @@
 <template>
   <div class="customer">
-    <div class="item" v-for="i in list" v-if="list.length">
+    <div class="item mb4" v-for="i in list" v-if="list.length">
       <div class="t flex" @click="$go('customer_detail',{userCode: i.userCode})">
         <div class="l flex">
-          <img src="/" alt="">
+          <img src="/" alt="" class="place-img">
           <div class="ll">
             <h2 class="color_font f36">{{i.realName}}</h2>
             <p class="color_font-s f24">{{i.sex | sex}} {{i.age}}岁</p>
@@ -37,10 +37,12 @@
       }
     },
     created() {
-      this.init()
+      this.RESET('coupon');
+      this.init();
     },
     methods: {
       ...mapMutations([
+        'RESET',
         'SET_COUPON',
       ]),
       init(){
@@ -78,7 +80,6 @@
         width: .96rem
         height: .96rem
         border-radius: 50%
-        border: 1px solid red
       .c
         flex: 1
         padding-left: .3rem

@@ -6,6 +6,7 @@ import api from './api';
 export * from './main'
 export * from './product'
 export * from './coupon'
+export * from './bank'
 export * from './mine'
 export * from './wealth'
 export * from './home'
@@ -118,13 +119,13 @@ export const findPasswordBack = (params)=>{
 
 
 /**
- * 字典
+ * 银行开户
  * @param  {String} pid 产品id
  */
-export const getDictCodeList = (dict_type_)=>{
+export const openAccount = (params)=>{
   return $http({
-    method: 'get',
-    api: api.getDictCodeList,
-    params:{dict_type_},
+    method: 'post',
+    api: api.openAccount,
+    params
   });
 }
