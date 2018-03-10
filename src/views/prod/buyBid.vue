@@ -83,7 +83,7 @@
 				<p><span>¥0.00</span><span>预期收益</span></p>
 				<p><span>¥999.00</span><span>实付款</span></p>
 			</div>
-			<p class="buyBidBottomRight" @click="$go('/webapp/prod/buySucc')">确认购买</p>
+			<p class="buyBidBottomRight" @click="submit">确认购买</p>
 		</div>
 
 	</div>
@@ -105,7 +105,13 @@
 				detail: {},
 			}
 		},
+    computed: {
+      ...mapGetters([
+        'coupon'
+      ])
+    },
 		created() {
+      log(this.coupon.receiveNoList)
 			doConfirmBuyPage(this.item).then(res => {
 				log(res);
 				this.detail = res;
@@ -117,12 +123,16 @@
 				'SET_COUPON',
 			]),
 			choose() {
+        const bidNo = this.item.bidNo;
 				this.SET_COUPON({
 					backurl: this.$route.path
 				});
-				this.$go('/webapp/coupon/choose')
+				this.$go('/webapp/coupon/choose',{bidNo})
 			},
-
+      submit(){
+        this.RESET('coupon');
+        this.$go('/webapp/prod/buySucc')
+      }
 		}
 	}
 </script>
@@ -132,12 +142,12 @@
 		font-style: inherit;
 		font-size: 0.48rem;
 	}
-	
+
 	.i2 {
 		font-style: inherit;
 		font-size: 0.24rem;
 	}
-	
+
 	.buyBidTop {
 		margin: 0 auto;
 		padding: 0;
@@ -148,7 +158,7 @@
 		color: #FFFFFF;
 		overflow: hidden;
 	}
-	
+
 	.buyBidTopName {
 		float: left;
 		margin-top: 0.36rem;
@@ -156,7 +166,7 @@
 		height: 0.44rem;
 		overflow: hidden;
 	}
-	
+
 	.buyBidTopName span:nth-child(1) {
 		float: left;
 		text-align: left;
@@ -165,7 +175,7 @@
 		line-height: 0.44rem;
 		margin-right: 0.3rem;
 	}
-	
+
 	.buyBidTopName span:nth-child(2) {
 		float: left;
 		margin: 0.1rem 0;
@@ -174,7 +184,7 @@
 		text-align: left;
 		font-size: 0.24rem;
 	}
-	
+
 	.buyBidTopMes {
 		float: left;
 		margin-top: 0.46rem;
@@ -182,7 +192,7 @@
 		height: 1.06rem;
 		overflow: hidden;
 	}
-	
+
 	.buyBidTopMes>span:nth-child(1) {
 		float: left;
 		width: 2.35rem;
@@ -190,7 +200,7 @@
 		font-size: 0.76rem;
 		text-align: left;
 	}
-	
+
 	.buyBidTopMes>span:nth-child(2) {
 		float: left;
 		margin: 0.48rem 0 0.08rem;
@@ -200,7 +210,7 @@
 		font-size: 0.36rem;
 		text-align: center;
 	}
-	
+
 	.buyBidTopMes span:nth-child(3) {
 		float: left;
 		margin: 0.48rem 0 0.08rem;
@@ -210,7 +220,7 @@
 		font-size: 0.36rem;
 		text-align: right;
 	}
-	
+
 	.buyBidTopWord {
 		float: left;
 		margin-bottom: 0.32rem;
@@ -220,25 +230,25 @@
 		font-size: 0.24rem;
 		overflow: hidden;
 	}
-	
+
 	.buyBidTopWord span:nth-child(1) {
 		float: left;
 		width: 2.35rem;
 		text-align: left;
 	}
-	
+
 	.buyBidTopWord span:nth-child(2) {
 		float: left;
 		width: 2.0rem;
 		text-align: center;
 	}
-	
+
 	.buyBidTopWord span:nth-child(3) {
 		float: left;
 		width: 2.35rem;
 		text-align: right;
 	}
-	
+
 	.buyBidCenter {
 		margin: 0 auto;
 		padding: 0;
@@ -249,7 +259,7 @@
 		color: #FFFFFF;
 		overflow: hidden;
 	}
-	
+
 	.pdcTitle {
 		float: left;
 		width: 6.7rem;
@@ -258,7 +268,7 @@
 		overflow: hidden;
 		margin-top: 0.36rem;
 	}
-	
+
 	.pdcTitle>span:nth-child(1) {
 		float: left;
 		font-size: 0.32rem;
@@ -267,7 +277,7 @@
 		color: #181818;
 		overflow: hidden;
 	}
-	
+
 	.pdcTitle>span:nth-child(2) {
 		float: right;
 		font-size: 0.32rem;
@@ -276,7 +286,7 @@
 		color: #8D8D94;
 		overflow: hidden;
 	}
-	
+
 	.pdcTitle>span:nth-child(2) img {
 		float: right;
 		margin: 0.04rem 0 0.04rem 0.14rem;
@@ -284,7 +294,7 @@
 		height: 0.34rem;
 		background-size: 100% 100%;
 	}
-	
+
 	.buyBidInvest {
 		float: left;
 		width: 6.7rem;
@@ -293,7 +303,7 @@
 		overflow: hidden;
 		border-bottom: 0.04rem solid #CDCED3;
 	}
-	
+
 	.buyBidInvest>i {
 		font-style: inherit;
 		float: left;
@@ -304,7 +314,7 @@
 		margin-right: 0.38rem;
 		color: #181818;
 	}
-	
+
 	.buyBidInput {
 		float: left;
 		width: 4.0rem;
@@ -315,7 +325,7 @@
 		border: none;
 		margin: 0.14rem 0;
 	}
-	
+
 	.allInvestBtn {
 		float: right;
 		margin: 0.13rem 0;
@@ -328,7 +338,7 @@
 		color: #3299D1;
 		border-radius: 0.32rem;
 	}
-	
+
 	.userAccount {
 		float: left;
 		width: 6.7rem;
@@ -339,13 +349,13 @@
 		line-height: 0.4rem;
 		text-align: left;
 	}
-	
+
 	.userAccount>i {
 		font-style: inherit;
 		color: #8D8D94;
 		margin-left: 0.2rem;
 	}
-	
+
 	.autoRenewBtn {
 		float: right;
 		width: 1.0rem;
@@ -354,7 +364,7 @@
 		border-radius: 0.32rem;
 		position: relative;
 	}
-	
+
 	.autoRenewBtn>span {
 		position: absolute;
 		width: 0.6rem;
@@ -367,7 +377,7 @@
 		text-align: center;
 		line-height: 0.52rem;
 	}
-	
+
 	.buyBidCenterautoRenewTips {
 		float: left;
 		width: 6.7rem;
@@ -378,15 +388,15 @@
 		margin-bottom: 0.08rem;
 		color: #8D8D94;
 	}
-	
+
 	.marTop {
 		margin-top: 0.7rem;
 	}
-	
+
 	.marBot {
 		margin-bottom: 0.94rem;
 	}
-	
+
 	.checkAgreement {
 		float: left;
 		width: 6.7rem;
@@ -394,7 +404,7 @@
 		margin: 0.66rem 0 1.0rem;
 		overflow: hidden;
 	}
-	
+
 	.checkAgreementImg {
 		float: left;
 		width: 0.32rem;
@@ -402,7 +412,7 @@
 		margin: 0.01rem 0;
 		position: relative;
 	}
-	
+
 	.checkAgreementImg>img {
 		position: absolute;
 		left: 0;
@@ -411,7 +421,7 @@
 		height: 0.32rem;
 		background-size: 100% 100%;
 	}
-	
+
 	.checkInput {
 		position: absolute;
 		width: 0.34rem;
@@ -420,7 +430,7 @@
 		top: 0;
 		opacity: 0;
 	}
-	
+
 	.agreement {
 		margin-left: 0.06rem;
 		float: left;
@@ -430,7 +440,7 @@
 		text-align: left;
 		color: #181818;
 	}
-	
+
 	.buyBidBottom {
 		margin: 0 auto;
 		padding: 0;
@@ -442,7 +452,7 @@
 		height: 1.1rem;
 		overflow: hidden;
 	}
-	
+
 	.buyBidBottomLeft {
 		float: left;
 		width: 5.1rem;
@@ -452,7 +462,7 @@
 		text-align: left;
 		background-color: #FFFFFF;
 	}
-	
+
 	.buyBidBottomRight {
 		float: left;
 		width: 2.4rem;
@@ -463,26 +473,26 @@
 		color: #FFFFFF;
 		background-color: #3299D1;
 	}
-	
+
 	.buyBidBottomLeft p:nth-child(1) {
 		float: left;
 		margin-left: 0.6rem;
 		width: 1.5rem;
 		overflow: hidden;
 	}
-	
+
 	.buyBidBottomLeft p:nth-child(2) {
 		float: left;
 		width: 1.48rem;
 		overflow: hidden;
 	}
-	
+
 	.buyBidBottomLeft p:nth-child(3) {
 		float: left;
 		width: 1.52rem;
 		overflow: hidden;
 	}
-	
+
 	.buyBidBottomLeft span:nth-child(1) {
 		float: left;
 		width: 100%;
@@ -491,7 +501,7 @@
 		line-height: 0.34rem;
 		color: #181818;
 	}
-	
+
 	.buyBidBottomLeft span:nth-child(2) {
 		float: left;
 		width: 100%;
