@@ -1,49 +1,65 @@
 <template>
   <div class="succ center">
     <img src="../../assets/common/succ.png" class="icon">
-    <div v-if="view==='forget_pwd'" class="forget_pwd item">
-      <h2 class="f36 color_font">登录密码修改成功</h2>
-      <p class="f28 color_font-s">使用您的新密码登录</p>
-      <button class="btn" @click="$go('/webapp/login')">登录</button>
+    <div class="forget_pwd item">
+      <h2 class="f36 color_font">{{succ_page.title}}</h2>
+      <p class="f28 color_font-s">{{succ_page.sub_title}}</p>
+      <button class="btn" @click="backurl">{{succ_page.btn_text}}</button>
+      <p class="f28 color_main" @click="sub_backurl">{{succ_page.sub_btn_text}}</p>
     </div>
-    <div v-if="view==='register'" class="register item">
-      <h2 class="f36 color_font">恭喜您注册成功</h2>
-      <button class="btn" @click="$go('/webapp/reg_bank')">立即开通银行存管账户</button>
-    </div>
-    <div v-if="view==='reg_bank'" class="reg_bank item">
-      <h2 class="f36 color_font">恭喜，开通银行存管账户成功</h2>
-      <button class="btn">立即充值</button>
-    </div>
-    <p class="no f28 color_main" @click="no" v-if="view!=='forget_pwd'">暂不</p>
-    <foot-tip/>
+    <!--<div v-if="view==='register'" class="register item">-->
+      <!--<h2 class="f36 color_font">恭喜您注册成功</h2>-->
+      <!--<button class="btn" @click="$go('/webapp/reg_bank')">立即开通银行存管账户</button>-->
+    <!--</div>-->
+    <!--<div v-if="view==='reg_bank'" class="reg_bank item">-->
+      <!--<h2 class="f36 color_font">恭喜，开通银行存管账户成功</h2>-->
+      <!--<button class="btn">立即充值</button>-->
+    <!--</div>-->
+    <!--<p class="no f28 color_main" @click="no" v-if="view!=='forget_pwd'">暂不</p>-->
   </div>
 </template>
 
 <script>
-  import footTip from '@/components/foot-tip/foot-tip'
+  import { mapGetters, mapMutations } from 'vuex'
   export default {
     name: 'succ',
     data () {
       return {
-        view: this.$route.query.view
+
       }
     },
-    created() {
-      if(!this.view) this.$go('/webapp/login');
+    computed: {
+      ...mapGetters([
+        'succ_page'
+      ])
     },
-    components: {
-      "foot-tip" : footTip
+    created() {
+      if(!this.succ_page.title){
+        this.$go('/');
+        return
+      }
+      document.title = this.succ_page.title
     },
     methods: {
-        no(){
-
-        }
+      ...mapMutations([
+        'RESET',
+      ]),
+      backurl(){
+        this.$go(this.succ_page.backurl);
+        this.RESET('succ_page');
+      },
+      sub_backurl(){
+        this.$go(this.succ_page.sub_backurl);
+        this.RESET('succ_page');
+      }
     }
   }
 </script>
 
 <style lang="sass" scoped>
 .succ
+  background: #fff
+  height: 100vh
   .icon
     margin: 2.2rem auto .6rem
     width: 1.54rem

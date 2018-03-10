@@ -79,6 +79,7 @@ export default {
 
 <style lang="sass" scoped>
   .main
+    height: auto
     .tab
       box-shadow: -3px -2px 15px 0px #dbdcdc
       background: #fff

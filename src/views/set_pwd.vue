@@ -8,7 +8,7 @@
     </div>
     <div class="smscode item flex phone border-b">
       <input type="text" placeholder="请输入短信验证码" class="f32 color_border" v-model="item.smsCode">
-      <span class="f28 color_main" @click="sendCode">获取短信验证码</span>
+      <span class="f28 color_main" @click="sendCode">{{codeText}}</span>
     </div>
     <div class="smscode item flex phone border-b">
       <input type="password" placeholder="请设置你的登录密码" class="f32 color_border" v-model="item.password">
@@ -20,11 +20,12 @@
 
 <script>
   import { getValidateImage, sendSMS, register } from '@/service'
-
+  import { mapMutations } from 'vuex'
   export default {
     name: 'set_pwd',
     data () {
       return {
+        codeText: '获取短信验证码',
         text: '',
         imageCode: '',
         item: {
@@ -47,6 +48,9 @@
       this.changeImgCode();
     },
     methods: {
+      ...mapMutations([
+        'SET_SUCC_PAGE'
+      ]),
       sendCode(){
         if(!this.item.imageCode){
           this.$toask('图像验证码不能为空!');
@@ -68,7 +72,17 @@
           this.item.password = CryptoJS.aes(this.item.password);
         }
         register(this.item).then(()=>{
-          this.$go('/static/succ', {view: this.$route.query.view})
+          let params = {
+            "title": "赠送客户优惠成功",
+            "sub_title": "优惠已存入客户为的优惠中",
+            "btn_text": "继续赠送其他客户",
+            "sub_btn_text": "查看赠送记录",
+            "sub_backurl": "/webapp/mine/customer",
+            "backurl": "/webapp/mine/customer"
+          };
+          this.RESET('coupon');
+          this.SET_SUCC_PAGE();
+          this.$go('/webapp/static/succ');
         })
       },
     }

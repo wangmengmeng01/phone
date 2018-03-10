@@ -94,7 +94,8 @@ class http{
    * @param isfetch
    */
   $reject(reject,message){
-    message && self.$toask(message);
+    if(!message) return;
+    self.$toask(message);
     reject(message)
   }
 }

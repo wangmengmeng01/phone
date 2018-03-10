@@ -1,12 +1,12 @@
 <template>
   <div class="customer">
-    <div class="item" v-for="i in list" >
-      <div class="t flex" @click="$go('customer_detail',{id:i.id})">
+    <div class="item" v-for="i in list" v-if="list.length">
+      <div class="t flex" @click="$go('customer_detail',{userCode: i.userCode})">
         <div class="l flex">
           <img src="/" alt="">
           <div class="ll">
-            <h2 class="color_font f36">{{i.name}}</h2>
-            <p class="color_font-s f24">{{i.sex}} {{i.age}}岁</p>
+            <h2 class="color_font f36">{{i.realName}}</h2>
+            <p class="color_font-s f24">{{i.sex | sex}} {{i.age}}岁</p>
           </div>
         </div>
         <div class="c">
@@ -17,39 +17,48 @@
         <span class="color_main f24">查询</span>
       </div>
       <div class="b color_main f28 flex">
-        <span @click="$go('send_discount',{id:i.id})">赠送优惠</span>
+        <span @click="send_coupon(i)">赠送优惠</span>
         <a  class="color_main" :href="`tel:${i.phone}`">拨打电话</a>
       </div>
     </div>
+    <p v-if="!list.length" class="f36 color_font-s center">暂无数据</p>
   </div>
 </template>
 
 <script>
+  import { mapMutations } from 'vuex'
+  import { searchExistingCustomers } from '@/service'
   export default {
     name: 'customer',
     data() {
       return {
-        list: [{
-          id: 1,
-          name: '赵一',
-          sex: '男',
-          age: '45',
-          list:[
-            '2016.01.15成为我的客户',
-            '2017.01.15完成最近一笔投资',
-            '累积年化投资额2,000元'
-          ]
-        }]
+        pageIndex: 1,
+        list: []
       }
     },
     created() {
-    },
-    components: {
+      this.init()
     },
     methods: {
+      ...mapMutations([
+        'SET_COUPON',
+      ]),
+      init(){
+        searchExistingCustomers({pageIndex: this.pageIndex}).then(r=>{
+          this.list = r && r.list
+        })
+      },
+      send_coupon(item){
+        const {userCode, realName} = item;
+        this.SET_COUPON({
+          params:{
+            userCode,
+            realName
+          }
+        });
+        this.$go('send_discount')
+      }
     },
-    watch: {
-    }
   }
 </script>
 
@@ -80,6 +89,9 @@
         span, a
           text-decoration: none
           padding: .08rem .1rem
-          border-radius: .08rem
+          border-radius: .28rem
           border: 1px solid rgb(50,153,209)
+        a
+          border: none
+          background: #E5E5F4
 </style>

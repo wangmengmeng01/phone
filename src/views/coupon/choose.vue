@@ -4,15 +4,16 @@
       <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}({{i.size}})</li>
     </ul>
     <div class="coupon p4" :class="[!res.length?'none':'']">
-      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list"/>
+      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true"  @checkedCb="checkedCb"/>
       <div v-if="!res.length" class="nothing f32 color_font">暂无可送优惠券</div>
     </div>
-    <button class="btn">选取</button>
+    <button class="btn" @click="submit">选取</button>
   </div>
 </template>
 
 <script>
   import Coupon from '@/components/coupon/coupon'
+  import { mapGetters, mapMutations } from 'vuex'
   import { showGiveCouponList } from '@/service'
   export default {
     name: 'coupon_choose',
@@ -28,16 +29,26 @@
           type: '2',
           size: 10
         }],
-        res: {}
+        res: {},
+        couponlist: []
       }
     },
     components: {
       Coupon,
     },
+    computed: {
+      ...mapGetters([
+        'coupon'
+      ])
+    },
     created() {
       this.init(this.nav[0]);
     },
     methods: {
+    	  ...mapMutations([
+        'SET_COUPON',
+      ]),
+
       init(item){
         showGiveCouponList({couponType: item.type}).then(res=>{
           this.res = res.couponList
@@ -50,8 +61,19 @@
         this.act = index;
         this.init(i);
       },
-      checked(res){
-        log(res)
+      checkedCb(data){
+        this.couponlist.length
+          ? this.couponlist.concat(this.couponlist.filter(t=>{
+            return t.couponNo !== data.couponNo
+          }))
+          : this.couponlist.push(data)
+      },
+      submit(){
+        const bidNo = this.$route.query.bidNo;
+        this.SET_COUPON({
+          data: this.couponlist
+        });
+        this.$go(this.coupon.backurl,{bidNo})
       }
     },
     watch: {
@@ -61,6 +83,7 @@
 
 <style lang="sass" scoped>
   .coupon_choose
+    height: 100%
     padding-bottom: 1.08rem
     .nav
       padding: .2rem

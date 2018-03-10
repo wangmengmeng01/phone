@@ -230,10 +230,6 @@
     background-size 100% 100%
   //圆角兼容
   border-radius(n)
-    -webkit-border-radius n
-    -moz-border-radius n
-    -o-border-radius n
-    -ms-border-radius n
     border-radius n
 
   .wealthTop

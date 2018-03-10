@@ -1,5 +1,5 @@
 <template>
-  <div class="back f36 flex p4" v-if="back !== false" :class="[back && back.background === 'main'?'main':'']">
+  <div class="back f36 flex p4" v-if="back !== false" :class="[back && back.background === 'main'?'main':'normal']">
     <div v-if="back && back.icon !== false" class="flex" @click="backFn">
       <img class="back-icon" v-if="islogin" :src="require(`@/assets/common/close.png`)" alt="">
       <img class="back-icon" v-else-if="back.background==='main'" :src="require(`@/assets/common/arrow-transparent-left.png`)" alt="">
@@ -46,7 +46,7 @@
     top: 0
     left: 0
     right: 0
-    background: #fff
+    background: transparent
     color: #181818
     .tip
       padding-left: .1rem
@@ -58,4 +58,6 @@
     &.main
       color: #fff
       background: rgb(50,153,209)
+    &.normal
+      background: #fff
 </style>

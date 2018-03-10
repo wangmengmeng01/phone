@@ -2,7 +2,23 @@
 	"version": "1.0",
 	"vconsole": false,
 	"state": {
-		"user": {}
+    "succ_page": {
+      "title": "",
+      "sub_title": "",
+      "btn_text": "",
+      "backurl": "",
+      "sub_btn_text": "",
+      "sub_backurl": ""
+    },
+    "token": "",
+    "coupon": {
+      "receiveNoList": [],
+      "data": [],
+      "backurl": "",
+      "params": {}
+    },
+		"user": {},
+		"user_info": {}
 	},
 	"route": [
 		{
@@ -79,10 +95,10 @@
 				}, {
 					"path": "wealth",
 					"title": "财富",
-          "back": false,
-          "foot": {
-            "style": "padding-bottom: 1.5rem"
-          }
+					"back": false,
+					"foot": {
+						"style": "padding-bottom: 1.5rem"
+					}
 				}, {
 					"path": "found",
 					"title": "发现",
@@ -132,32 +148,29 @@
 					"foot": false
 				}
 			]
-		},{
-      "path": "coupon",
-      "component": "coupon",
-      "children": [
-        {
-          "path": "",
-          "redirect": "main",
-          "foot": false
-        },
-        {
-          "path": "main",
-          "title": "我的优惠",
-          "foot": false
-        },
-        {
-          "path": "choose",
-          "title": "选择优惠",
-          "foot": false
-        },
-        {
-          "path": "choose_usable",
-          "title": "选择可送优惠",
-          "foot": false
-        }
-      ]
-    }, {
+		}, {
+			"path": "coupon",
+			"component": "coupon",
+			"children": [
+				{
+					"path": "",
+					"redirect": "main",
+					"foot": false
+				}, {
+					"path": "main",
+					"title": "我的优惠",
+					"foot": false
+				}, {
+					"path": "choose",
+					"title": "选择优惠",
+					"foot": false
+				}, {
+					"path": "choose_usable",
+					"title": "选择可送优惠",
+					"foot": false
+				}
+			]
+		}, {
 			"path": "home",
 			"component": "home",
 			"children": [
@@ -184,6 +197,9 @@
 					"path": "productList",
 					"title": "产品列表页"
 				}, {
+					"path": "joinList",
+					"title": "加入记录"
+				}, {
 					"path": "productDetail",
 					"title": "产品详情",
 					"back": {
@@ -201,6 +217,22 @@
 					"foot": {
 						"style": "margin-bottom: 1.1rem"
 					}
+				}, {
+					"path": "buySucc",
+					"back": false,
+					"foot": {
+						"style": "background-color: #fff",
+						"type": "main"
+					}
+				}, {
+					"path": "higHqualityAssets",
+					"title": "严选优质资产"
+				}, {
+					"path": "bankDepository",
+					"title": "资金银行存管"
+				}, {
+					"path": "Honour",
+					"title": "100%历史兑付"
 				}
 			]
 		}, {
@@ -212,7 +244,13 @@
 					"redirect": "succ"
 				}, {
 					"path": "succ",
-					"title": "成功"
+					"title": "成功",
+          "back": {
+            "title": false
+          },
+          "foot": {
+            "style": "background-color: #fff;margin-top: -3rem"
+          }
 				}
 			]
 		},{

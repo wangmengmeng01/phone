@@ -1,7 +1,7 @@
 <template>
   <div class="customer_detail">
     <div class="head center">
-      <img class="icon" src="/" alt="">
+      <img class="icon place-img" src="/" alt="">
       <h2 class="name f28 color_font">{{item.name}}</h2>
       <p class="text f24 color_font-s">{{item.text}}</p>
     </div>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+  import { getUserBrokerageRecordList } from '@/service'
   export default {
     name: 'customer_detail',
     data() {
@@ -63,10 +64,13 @@
       }
     },
     created() {
+      this.init()
     },
     components: {
     },
     methods: {
+      init(){
+      }
     },
     watch: {
     }

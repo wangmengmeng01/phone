@@ -1,7 +1,7 @@
 <template>
   <div class="seting">
     <ul class="item">
-      <li v-for="i in pwdList" class="m4 flex border-notend-b">
+      <li v-for="i in pwdList" class="m4 flex border-notend-b" @click="$go(i.url)">
         <span class="f32 color_font">{{i.name}}</span>
         <img src="../../assets/common/arrow-right.png" alt="">
       </li>
@@ -35,7 +35,7 @@
       return {
         pwdList:[{
           name: '修改登录密码',
-          url: ''
+          url: '/webapp/forget_pwd'
         },{
           name: '修改交易密码',
           url: ''
@@ -65,6 +65,7 @@
 
 <style lang="sass" scoped>
   .seting
+    height: 100%
     .item
       margin-top: .4rem
       background: #fff
@@ -81,6 +82,11 @@
     .tip
       margin: .2rem auto 2.7rem .4rem
     .btn
+      z-index: 100
+      position: fixed
+      bottom: 0
+      right: 0
+      left: 0
       background: #fff
       border-radius: 0
       color: #181818
