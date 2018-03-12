@@ -13,7 +13,7 @@ class http{
   constructor(obj){
     // 此参数为配置参数
     const options = {
-      filter_msg: false, // 是否过滤msg
+      filter_msg: true, // 是否过滤msg
       filter_code: true,  // 是否过滤errcode
       loading: true // 是否显示loading框
     };
@@ -79,8 +79,8 @@ class http{
    */
   $resole(resole,reject,r){
   	if (!this.filter_code){
-  		resole(r)
-  		return 
+  		resole(r);
+  		return
   	}
     if (r.code === '100') { // 0才会resole
       resole(r.result)

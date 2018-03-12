@@ -1,7 +1,7 @@
 <template>
   <div class="coupon_main">
     <ul class="nav flex f32">
-      <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}({{i.size}})</li>
+      <li v-for="(i,index) in nav" @click="gift(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}({{i.size}})</li>
     </ul>
     <div class="coupon p4" :class="[!res.length?'none':'']">
       <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list"/>

@@ -10,6 +10,7 @@ export * from './bank'
 export * from './mine'
 export * from './wealth'
 export * from './home'
+export * from './found'
 
 
 /**

@@ -174,7 +174,21 @@
 					"foot": false
 				}
 			]
-		}, {
+		},{
+      "path": "found",
+      "component": "found",
+      "children": [
+        {
+          "path": "",
+          "redirect": "index",
+          "foot": false
+        }, {
+          "path": "gift",
+          "title": "我收到的礼物",
+          "foot": false
+        }
+      ]
+    }, {
       "path": "bank",
       "component": "bank",
       "children": [

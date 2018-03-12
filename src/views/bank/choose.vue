@@ -1,7 +1,7 @@
 <template>
   <div class="bank_choose mt4">
     <ul v-if="list.length">
-      <li v-for="i in list" class="color_font m4" @click="choose(i)">
+      <li v-for="i in list" class="color_font m4" @click="gift(i)">
         <img :src="i.imgUrl" alt="" class="place-img">
         <span>{{i.bankName}}</span>
       </li>
