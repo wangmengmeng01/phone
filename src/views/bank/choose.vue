@@ -28,7 +28,8 @@
       choose(item){
         const {bankName, bankNo} = item;
         const backurl = this.$route.query.backurl;
-        this.$go(backurl ,{bankName, bankNo})
+        const data = this.$route.query.data;
+        this.$go(backurl ,{bankName, bankNo,data})
       }
     },
     watch: {

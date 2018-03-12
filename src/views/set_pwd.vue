@@ -23,8 +23,8 @@
 </template>
 
 <script>
-  import { getValidateImage, sendSMS, register } from '@/service'
-  import { mapMutations } from 'vuex'
+  import { getValidateImage, sendSMS, register, login } from '@/service'
+  import { mapMutations, mapActions } from 'vuex'
   export default {
     name: 'set_pwd',
     data () {
@@ -56,6 +56,9 @@
       this.changeImgCode();
     },
     methods: {
+      ...mapActions([
+        'set_user',
+      ]),
       ...mapMutations([
         'RESET',
         'SET_SUCC_PAGE'
@@ -115,22 +118,29 @@
         let CryptoJS= require('@/lib/aes');
         this.item.password = CryptoJS.aes(this.item.password);
         register(this.item).then(()=>{
-          let params = this.$route.query.view === 'forget_pwd'
-            ? {
-              "title": "登录密码修改成功",
-              "sub_title": "使用您的新密码登录",
-              "btn_text": "登录",
-              "backurl": "/webapp/login"
-            }
-            : {
-              "title": "恭喜您注册成功",
-              "btn_text": "立即开通银行存管账户",
-              "backurl": "/webapp/reg_bank",
-              "sub_btn_text": "暂无",
-              "sub_backurl": "/webapp/login"
-            };
-          this.SET_SUCC_PAGE(params);
-          this.$go('/webapp/static/succ');
+          const {mobile, password} = this.item;
+          login({
+            mobile,
+            password
+          }).then(res=>{
+            this.set_user(res);
+            let params = this.$route.query.view === 'forget_pwd'
+              ? {
+                "title": "登录密码修改成功",
+                "sub_title": "使用您的新密码登录",
+                "btn_text": "登录",
+                "backurl": "/webapp"
+              }
+              : {
+                "title": "恭喜您注册成功",
+                "btn_text": "立即开通银行存管账户",
+                "backurl": "/webapp/reg_bank",
+                "sub_btn_text": "暂无",
+                "sub_backurl": "/webapp"
+              };
+            this.SET_SUCC_PAGE(params);
+            this.$go('/webapp/static/succ');
+          })
         })
       },
     }

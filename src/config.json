@@ -70,7 +70,7 @@
 			"filter": true,
 			"foot": {
 				"type": "main",
-				"style": "padding-bottom: 1rem"
+				"style": "padding-bottom: 1rem;"
 			}
 		}, {
 			"path": "webapp",
@@ -174,7 +174,21 @@
 					"foot": false
 				}
 			]
-		}, {
+		},{
+      "path": "found",
+      "component": "found",
+      "children": [
+        {
+          "path": "",
+          "redirect": "index",
+          "foot": false
+        }, {
+          "path": "gift",
+          "title": "我收到的礼物",
+          "foot": false
+        }
+      ]
+    }, {
       "path": "bank",
       "component": "bank",
       "children": [
@@ -219,6 +233,7 @@
 				}, {
 					"path": "productDetail",
 					"title": "产品详情",
+					"filter": true,
 					"back": {
 						"background": "main"
 					},

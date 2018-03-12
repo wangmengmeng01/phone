@@ -60,3 +60,49 @@ export const getUserStatus = async (params)=>{
   });
 }
 
+/**
+ * 获取用户各种金额
+ */
+export const accountAcmountInfo = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.accountAcmountInfo,
+    params,
+  });
+}
+
+
+/**
+ * 计算收益
+ */
+export const getExpectedRevenue = async (params)=>{
+  return await $http({
+    method: 'post',
+    api: api.getExpectedRevenue,
+    params,
+  });
+}
+
+
+/**
+ * 购买
+ */
+export const borrowInvest = async (params)=>{
+  return await $http({
+    method: 'post',
+    api: api.borrowInvest,
+    params,
+  });
+}
+
+/**
+ * 查询可用卡券数目
+ */
+export const searchCouponList = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.searchCouponList,
+    params,
+  });
+}
+

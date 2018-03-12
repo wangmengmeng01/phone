@@ -27,11 +27,11 @@
 			</p>
 			<div class="buyBidInvest">
 				<i>￥</i>
-				<input type="tel" class="buyBidInput" placeholder="1000元起，100元递增" oninput="if( ! /^-?\d+\.?\d{0,2}$/.test(this.value)){ var s = this.value;this.value=s.substring(0,s.length-1);}" />
-				<span class="allInvestBtn">全投</span>
+				<input type="tel" class="buyBidInput" v-model="investMoney" :placeholder="`${detail.investMinAmount}元起，${detail.investAscendingAmount}元递增`" @blur="inputBlur(0)" oninput="if( ! /^-?\d+\.?\d{0,2}$/.test(this.value)){ var s = this.value;this.value=s.substring(0,s.length-1);}" />
+				<span class="allInvestBtn" @click="investAll">全投</span>
 			</div>
 			<p class="userAccount">
-				可用余额<i>0.00元</i>
+				可用余额<i>{{accountBalance.availableAmount}}元</i>
 			</p>
 		</div>
 
@@ -39,8 +39,9 @@
 		<div class="buyBidCenter">
 			<div class="pdcTitle">
 				<span>到期后自动续费</span>
-				<p class="autoRenewBtn">
-					<span>开</span>
+				<p class="autoRenewBtn" @click="autoRenewBol=!autoRenewBol">
+					<span v-show="autoRenewBol">关</span>
+					<span v-show="!autoRenewBol">开</span>
 				</p>
 			</div>
 
@@ -51,10 +52,11 @@
 
 		<!--我的优惠券-->
 
-		<div class="buyBidCenter" @click="choose">
+		<div class="buyBidCenter" @click="gift">
 			<div class="pdcTitle" style="margin: 0.28rem 0;">
 				<span>我的优惠</span>
-				<span style="color: #F84740;">2张可用 <img  src="../../assets/main/home/nextIcon.png" alt="" /></span>
+				<span v-if="counpBol" style="color: #F84740;">{{counpNum}}张可用 <img  src="../../assets/main/home/nextIcon.png" alt="" /></span>
+				<span v-else style="color: #F84740;">已选择{{counpNum}}张 <img  src="../../assets/main/home/nextIcon.png" alt="" /></span>
 			</div>
 
 		</div>
@@ -67,9 +69,9 @@
 			</div>
 
 			<div class="checkAgreement">
-				<p class="checkAgreementImg">
-					<img src="../../assets/common/check_succ.png" />
-					<input type="checkbox" class="checkInput" name="" id="" value="" />
+				<p class="checkAgreementImg" @click="agreCheckBol=!agreCheckBol">
+					<img v-if="agreCheckBol" src="../../assets/common/check_succ.png" />
+					<img v-else src="../../assets/common/check_none.png" />
 				</p>
 				<p class="agreement">《投资出借服务协议》《自动投标授权合同》《风险揭示函》</p>
 			</div>
@@ -79,18 +81,18 @@
 		<!--确认购买-->
 		<div class="buyBidBottom">
 			<div class="buyBidBottomLeft">
-				<p><span>10.11%</span><span>历史年化</span></p>
-				<p><span>¥0.00</span><span>预期收益</span></p>
-				<p><span>¥999.00</span><span>实付款</span></p>
+				<p><span>{{detail.annualizedRate}}%</span><span>历史年化</span></p>
+				<p><span>¥{{ExpectedRevenue}}</span><span>预期收益</span></p>
+				<p><span>¥{{investMoney}}</span><span>实付款</span></p>
 			</div>
-			<p class="buyBidBottomRight" @click="submit">确认购买</p>
+			<p class="buyBidBottomRight" :class="agreCheckBol?'':'disable'" @click="submit">确认购买</p>
 		</div>
 
 	</div>
 </template>
 
 <script>
-	import { doConfirmBuyPage } from '@/service'
+	import { doConfirmBuyPage, accountAcmountInfo, getExpectedRevenue, searchCouponList, borrowInvest } from '@/service'
 	import { mapGetters, mapMutations } from 'vuex'
 	export default {
 
@@ -103,36 +105,226 @@
 					promiseInviteId: ''
 				},
 				detail: {},
+				accountBalance: {},
+				itemProd: {}, //计算收益参数
+				investMoney: '', //够买金额
+				ExpectedRevenue: 0, //预期收益
+				autoRenewBol: true, //自动续费
+				agreCheckBol: false, //是否同意协议
+				counpNum: 0, //优惠券可用张数
+				counpBol: true, //是否选择优惠券
+
+				appendRate: 0, //优惠券加息
 			}
 		},
-    computed: {
-      ...mapGetters([
-        'coupon'
-      ])
-    },
+		computed: {
+			...mapGetters([
+				'coupon'
+			])
+
+		},
 		created() {
-      log(this.coupon.receiveNoList)
+			//从卡券页面 返回来   记录一些状态	
+			if(this.$route.query.linkType == "0") {
+
+				this.coupon.params.agreCheckBol ? this.agreCheckBol = this.coupon.params.agreCheckBol : this.agreCheckBol = false;
+
+				this.investMoney = this.coupon.params.investAmount;
+
+				log(this.coupon.params.autoRenewBol);
+
+				if(this.coupon.params.autoRenewBol == undefined) {
+
+					this.autoRenewBol = true;
+				} else {
+					this.autoRenewBol = false;
+				}
+
+				//获取选择的卡券
+
+				log(this.coupon.data);
+
+				if(this.coupon.data.length) {
+					this.counpBol = false;
+					this.counpNum = this.coupon.data.length;
+
+					for(var i = 0; i < this.coupon.data.length; i++) {
+
+						if(this.coupon.data[i].type == "1") {
+							//获取总的附加利率
+							this.appendRate += this.coupon.data[i].profitRate;
+						}
+					}
+
+				}
+
+			}
+
 			doConfirmBuyPage(this.item).then(res => {
 				log(res);
 				this.detail = res;
+				this.itemProd = {
+					appendRate: this.detail.appendRate,
+					annualizedRate: this.detail.annualizedRate + this.appendRate,
+					periodLength: this.detail.periodLength,
+					periodUnit: this.detail.periodUnit,
+					profitPlan: this.detail.profitPlan,
+				};
+				//从卡券页面 返回来 
+				if(this.$route.query.linkType == "0") {
+					if(this.coupon.params.investAmount) {
+						this.inputBlur(1);
+					};
+
+				} else {
+
+					this.SET_COUPON({
+						data: []
+					});
+				}
+
 			});
+
+			accountAcmountInfo().then(res => {
+				log(res);
+				this.accountBalance = res;
+			});
+
 		},
 		methods: {
 			...mapMutations([
 				'RESET',
 				'SET_COUPON',
+				'SET_SUCC_PAGE',
 			]),
+
 			choose() {
-        const bidNo = this.item.bidNo;
+				const bidNo = this.item.bidNo;
 				this.SET_COUPON({
-					backurl: this.$route.path
+					backurl: this.$route.path,
+					params: {
+						productNo: this.detail.productNo,
+						investAmount: this.investMoney,
+						agreCheckBol: this.agreCheckBol,
+						autoRenewBol: this.autoRenewBol,
+					},
+
 				});
-				this.$go('/webapp/coupon/choose',{bidNo})
+				this.$go('/webapp/coupon/choose', {
+					bidNo,
+					linkType: 0,
+				})
 			},
-      submit(){
-        this.RESET('coupon');
-        this.$go('/webapp/prod/buySucc')
-      }
+			submit() {
+
+				if(this.investMoney) {} else {
+					this.$toask("请输入购买金额");
+					return;
+				}
+
+				if(this.agreCheckBol) {} else {
+					this.$toask("请勾选协议书");
+					return;
+				}
+
+				let params = {
+					"title": "恭喜，购买成功",
+					'sub_title': "您已成功购买了该标的",
+					"btn_text": "继续购买其他标的",
+					"backurl": "/webapp/product",
+					"sub_btn_text": "查看我的资产",
+					"sub_backurl": "/webapp/product"
+				};
+				this.SET_SUCC_PAGE(params);
+				this.$go('/webapp/static/succ');
+
+				//购买
+
+				//					borrowInvest({
+				//						bidNo:this.detail.bidNo,
+				//						payAmount:this.investMoney,
+				//						retUrl:'',
+				//						couponRate:
+				//						receiveNo:
+				//						couponNo:
+				//						autoOpen:
+				//						investAmount:
+				//						annualizedProfit:
+				//						expectedRevenue:
+				//						promiseInviteId:
+				//					}).then(res => {
+				//						log(res);
+				//					});
+
+				//				this.RESET('coupon');
+				//				this.$go('/webapp/prod/buySucc')
+			},
+			//全投
+			investAll() {
+				let amountWait = this.detail.amountWait; //标的剩余金额
+				let accountBalance = this.accountBalance.availableAmount; //账户余额
+				let maxInvest = this.detail.investMaxAmount; //最大金额
+				let minInvest = this.detail.investMinAmount; //起投金额
+				let investAscendingAmount = this.detail.investAscendingAmount; //递增金额
+				if(accountBalance >= amountWait) {
+					this.investMoney = amountWait;
+
+					this.itemProd.amount = amountWait;
+					getExpectedRevenue(this.itemProd).then(res => {
+						this.ExpectedRevenue = (res.amount - this.investMoney).toFixed(2);
+					});
+					this.CouponList();
+				} else {
+					if(accountBalance < minInvest) {
+						this.$toask("账户余额小于起投金额");
+					} else {
+						//取余
+						let remainder = Math.floor(accountBalance / investAscendingAmount);
+						if(remainder == 0) {
+							this.investMoney = minInvest;
+						} else {
+							this.investMoney = remainder * investAscendingAmount;
+						}
+						this.itemProd.amount = this.investMoney;
+						getExpectedRevenue(this.itemProd).then(res => {
+							this.ExpectedRevenue = (res.amount - this.investMoney).toFixed(2);
+						});
+						this.CouponList();
+					}
+
+				}
+
+			},
+			//查询卡券数目
+			CouponList() {
+				searchCouponList({
+					productNo: this.detail.productNo,
+					investAmount: this.investMoney,
+					useType: '1',
+					pageIndex: '1',
+
+				}).then(res => {
+					log(res);
+					this.counpNum = res.availableNum;
+				});
+			},
+
+			//计算收益     
+
+			inputBlur(type) {
+
+				this.itemProd.amount = this.investMoney;
+				getExpectedRevenue(this.itemProd).then(res => {
+					this.ExpectedRevenue = (res.amount - this.investMoney).toFixed(2);
+				});
+
+				if(!type) {
+
+					this.CouponList();
+				}
+
+			},
+
 		}
 	}
 </script>
@@ -142,12 +334,12 @@
 		font-style: inherit;
 		font-size: 0.48rem;
 	}
-
+	
 	.i2 {
 		font-style: inherit;
 		font-size: 0.24rem;
 	}
-
+	
 	.buyBidTop {
 		margin: 0 auto;
 		padding: 0;
@@ -158,7 +350,7 @@
 		color: #FFFFFF;
 		overflow: hidden;
 	}
-
+	
 	.buyBidTopName {
 		float: left;
 		margin-top: 0.36rem;
@@ -166,7 +358,7 @@
 		height: 0.44rem;
 		overflow: hidden;
 	}
-
+	
 	.buyBidTopName span:nth-child(1) {
 		float: left;
 		text-align: left;
@@ -175,7 +367,7 @@
 		line-height: 0.44rem;
 		margin-right: 0.3rem;
 	}
-
+	
 	.buyBidTopName span:nth-child(2) {
 		float: left;
 		margin: 0.1rem 0;
@@ -184,7 +376,7 @@
 		text-align: left;
 		font-size: 0.24rem;
 	}
-
+	
 	.buyBidTopMes {
 		float: left;
 		margin-top: 0.46rem;
@@ -192,7 +384,7 @@
 		height: 1.06rem;
 		overflow: hidden;
 	}
-
+	
 	.buyBidTopMes>span:nth-child(1) {
 		float: left;
 		width: 2.35rem;
@@ -200,7 +392,7 @@
 		font-size: 0.76rem;
 		text-align: left;
 	}
-
+	
 	.buyBidTopMes>span:nth-child(2) {
 		float: left;
 		margin: 0.48rem 0 0.08rem;
@@ -210,7 +402,7 @@
 		font-size: 0.36rem;
 		text-align: center;
 	}
-
+	
 	.buyBidTopMes span:nth-child(3) {
 		float: left;
 		margin: 0.48rem 0 0.08rem;
@@ -220,7 +412,7 @@
 		font-size: 0.36rem;
 		text-align: right;
 	}
-
+	
 	.buyBidTopWord {
 		float: left;
 		margin-bottom: 0.32rem;
@@ -230,25 +422,25 @@
 		font-size: 0.24rem;
 		overflow: hidden;
 	}
-
+	
 	.buyBidTopWord span:nth-child(1) {
 		float: left;
 		width: 2.35rem;
 		text-align: left;
 	}
-
+	
 	.buyBidTopWord span:nth-child(2) {
 		float: left;
 		width: 2.0rem;
 		text-align: center;
 	}
-
+	
 	.buyBidTopWord span:nth-child(3) {
 		float: left;
 		width: 2.35rem;
 		text-align: right;
 	}
-
+	
 	.buyBidCenter {
 		margin: 0 auto;
 		padding: 0;
@@ -259,7 +451,7 @@
 		color: #FFFFFF;
 		overflow: hidden;
 	}
-
+	
 	.pdcTitle {
 		float: left;
 		width: 6.7rem;
@@ -268,7 +460,7 @@
 		overflow: hidden;
 		margin-top: 0.36rem;
 	}
-
+	
 	.pdcTitle>span:nth-child(1) {
 		float: left;
 		font-size: 0.32rem;
@@ -277,7 +469,7 @@
 		color: #181818;
 		overflow: hidden;
 	}
-
+	
 	.pdcTitle>span:nth-child(2) {
 		float: right;
 		font-size: 0.32rem;
@@ -286,7 +478,7 @@
 		color: #8D8D94;
 		overflow: hidden;
 	}
-
+	
 	.pdcTitle>span:nth-child(2) img {
 		float: right;
 		margin: 0.04rem 0 0.04rem 0.14rem;
@@ -294,7 +486,7 @@
 		height: 0.34rem;
 		background-size: 100% 100%;
 	}
-
+	
 	.buyBidInvest {
 		float: left;
 		width: 6.7rem;
@@ -303,7 +495,7 @@
 		overflow: hidden;
 		border-bottom: 0.04rem solid #CDCED3;
 	}
-
+	
 	.buyBidInvest>i {
 		font-style: inherit;
 		float: left;
@@ -314,7 +506,7 @@
 		margin-right: 0.38rem;
 		color: #181818;
 	}
-
+	
 	.buyBidInput {
 		float: left;
 		width: 4.0rem;
@@ -325,7 +517,7 @@
 		border: none;
 		margin: 0.14rem 0;
 	}
-
+	
 	.allInvestBtn {
 		float: right;
 		margin: 0.13rem 0;
@@ -338,7 +530,7 @@
 		color: #3299D1;
 		border-radius: 0.32rem;
 	}
-
+	
 	.userAccount {
 		float: left;
 		width: 6.7rem;
@@ -349,13 +541,13 @@
 		line-height: 0.4rem;
 		text-align: left;
 	}
-
+	
 	.userAccount>i {
 		font-style: inherit;
 		color: #8D8D94;
 		margin-left: 0.2rem;
 	}
-
+	
 	.autoRenewBtn {
 		float: right;
 		width: 1.0rem;
@@ -364,8 +556,8 @@
 		border-radius: 0.32rem;
 		position: relative;
 	}
-
-	.autoRenewBtn>span {
+	
+	.autoRenewBtn>span:nth-child(1) {
 		position: absolute;
 		width: 0.6rem;
 		height: 0.52rem;
@@ -377,7 +569,20 @@
 		text-align: center;
 		line-height: 0.52rem;
 	}
-
+	
+	.autoRenewBtn>span:nth-child(2) {
+		position: absolute;
+		width: 0.6rem;
+		height: 0.52rem;
+		right: 0;
+		top: 0;
+		border-radius: 0.32rem;
+		background-color: #3299D1;
+		font-size: 0.28rem;
+		text-align: center;
+		line-height: 0.52rem;
+	}
+	
 	.buyBidCenterautoRenewTips {
 		float: left;
 		width: 6.7rem;
@@ -388,15 +593,15 @@
 		margin-bottom: 0.08rem;
 		color: #8D8D94;
 	}
-
+	
 	.marTop {
 		margin-top: 0.7rem;
 	}
-
+	
 	.marBot {
 		margin-bottom: 0.94rem;
 	}
-
+	
 	.checkAgreement {
 		float: left;
 		width: 6.7rem;
@@ -404,7 +609,7 @@
 		margin: 0.66rem 0 1.0rem;
 		overflow: hidden;
 	}
-
+	
 	.checkAgreementImg {
 		float: left;
 		width: 0.32rem;
@@ -412,7 +617,7 @@
 		margin: 0.01rem 0;
 		position: relative;
 	}
-
+	
 	.checkAgreementImg>img {
 		position: absolute;
 		left: 0;
@@ -421,7 +626,7 @@
 		height: 0.32rem;
 		background-size: 100% 100%;
 	}
-
+	
 	.checkInput {
 		position: absolute;
 		width: 0.34rem;
@@ -430,7 +635,7 @@
 		top: 0;
 		opacity: 0;
 	}
-
+	
 	.agreement {
 		margin-left: 0.06rem;
 		float: left;
@@ -440,7 +645,7 @@
 		text-align: left;
 		color: #181818;
 	}
-
+	
 	.buyBidBottom {
 		margin: 0 auto;
 		padding: 0;
@@ -452,7 +657,7 @@
 		height: 1.1rem;
 		overflow: hidden;
 	}
-
+	
 	.buyBidBottomLeft {
 		float: left;
 		width: 5.1rem;
@@ -462,7 +667,7 @@
 		text-align: left;
 		background-color: #FFFFFF;
 	}
-
+	
 	.buyBidBottomRight {
 		float: left;
 		width: 2.4rem;
@@ -473,26 +678,30 @@
 		color: #FFFFFF;
 		background-color: #3299D1;
 	}
-
+	
+	.disable {
+		background: #98cceb;
+	}
+	
 	.buyBidBottomLeft p:nth-child(1) {
 		float: left;
 		margin-left: 0.6rem;
 		width: 1.5rem;
 		overflow: hidden;
 	}
-
+	
 	.buyBidBottomLeft p:nth-child(2) {
 		float: left;
 		width: 1.48rem;
 		overflow: hidden;
 	}
-
+	
 	.buyBidBottomLeft p:nth-child(3) {
 		float: left;
 		width: 1.52rem;
 		overflow: hidden;
 	}
-
+	
 	.buyBidBottomLeft span:nth-child(1) {
 		float: left;
 		width: 100%;
@@ -501,7 +710,7 @@
 		line-height: 0.34rem;
 		color: #181818;
 	}
-
+	
 	.buyBidBottomLeft span:nth-child(2) {
 		float: left;
 		width: 100%;
