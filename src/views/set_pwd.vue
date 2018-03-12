@@ -15,6 +15,10 @@
     </div>
     <p class="tip f12 color_font-s">密码须为6～12位大小写字母、数字至少2位数</p>
     <button class="btn" @click="submit">注册</button>
+    <div class="protocol mt4">
+      <img :src="require(`../assets/common/check_${checked?'succ':'none'}.png`)" alt="" @click="checked=!checked">
+      <p class="color_font-s f24">注册即表示您已阅读并同意<span class="color_main">《平台注册协议》</span></p>
+    </div>
   </div>
 </template>
 
@@ -25,6 +29,7 @@
     name: 'set_pwd',
     data () {
       return {
+        checked: false,
         codeText: '获取短信验证码',
         num: 60,
         click_code: false,
@@ -63,9 +68,9 @@
         const params = {
           mobile: this.item.mobile,
           imageCode: this.item.imageCode,
-          operationType: 'register'
+          operationType: this.$route.query.view === 'forget_pwd' ? 'forget' : 'register'
         };
-        sendSMS(params).then(r=>{
+        sendSMS(params).then(()=>{
           this.countdown()
         })
       },
@@ -77,6 +82,7 @@
             clearInterval(time);
             this.click_code = !this.click_code;
             this.codeText = '获取短信验证码';
+            this.num = 60;
             return
           }
           this.codeText = `发送(${this.num})`;
@@ -102,10 +108,12 @@
           this.$toask('密码须为6～12位大小写字母、数字至少2位数!');
           return
         }
-        if(this.item.password){
-          let CryptoJS= require('@/lib/aes');
-          this.item.password = CryptoJS.aes(this.item.password);
+        if(!this.checked){
+          this.$toask('请阅读并勾选《平台注册协议》!');
+          return
         }
+        let CryptoJS= require('@/lib/aes');
+        this.item.password = CryptoJS.aes(this.item.password);
         register(this.item).then(()=>{
           let params = this.$route.query.view === 'forget_pwd'
             ? {
@@ -120,7 +128,7 @@
               "backurl": "/webapp/reg_bank",
               "sub_btn_text": "暂无",
               "sub_backurl": "/webapp/login"
-            }
+            };
           this.SET_SUCC_PAGE(params);
           this.$go('/webapp/static/succ');
         })
@@ -161,4 +169,11 @@
         text-align: center
         background: #F0F0F8
         border-radius: .32rem
+    .protocol
+      display: flex
+      align-items: center
+      img
+        height: .32rem
+        width: .32rem
+        margin-right: .2rem
 </style>

@@ -24,7 +24,11 @@
 		{
 			"path": "/",
 			"redirect": "/webapp"
-		}, {
+		},
+    {
+      "path": "/webapp/recharge",
+      "redirect": "/webapp/wealth/recharge"
+    },{
 			"path": "login",
 			"title": "登录",
 			"filter": true,
@@ -277,10 +281,18 @@
           "redirect": "index"
         },{
           "path": "recharge",
-          "title": "充值"
+          "title": "充值",
+          "foot": {
+            "type": "main",
+            "style": "background:#f1f1f9"
+          }
         },{
           "path": "withdraw",
-          "title": "提现"
+          "title": "提现",
+          "foot": {
+            "type": "main",
+            "style": "background:#f1f1f9"
+          }
         },{
           "path": "autoInvest",
           "title": "自动投标"
