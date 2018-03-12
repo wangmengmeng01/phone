@@ -78,6 +78,8 @@
       text-align center
       position absolute
       left 0
+    .on
+      background #3299D1
   .autoIC
     color #8D8D94
     font-size 0.28rem

@@ -308,6 +308,28 @@
           "foot": {
             "style": "margin-bottom: 1.1rem"
           }
+        },{
+          "path": "continueInvest",
+          "title":"我的续投",
+          "foot":false,
+          "back": {
+            "background": "main"
+          }
+        },{
+          "path": "tradeRecord",
+          "title":"交易记录",
+          "foot":false
+        },{
+          "path": "changeBank",
+          "title":"我的银行卡",
+          "foot": {
+            "type": "main",
+            "style": "background:#f1f1f9"
+          }
+        },{
+          "path": "assertList",
+          "title":"我的资产",
+          "foot": false
         }
       ]
     },{
