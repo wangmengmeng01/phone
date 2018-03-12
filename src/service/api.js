@@ -30,6 +30,8 @@ export default {
 
   invesProperty:"account/filter/invesProperty" ,//财富首页信息
 
+  userReskEvaluation:"evaluation/filter/userReskEvaluation" ,// 风险评测
+
   showGiveCouponList: 'coupon/filter/showGiveCouponList', // 选择可送优惠
 
   searchExistingCustomers: 'home/filter/searchExistingCustomers', // 获取已有客户
@@ -51,10 +53,10 @@ export default {
 	recommendProduct:'product/recommendProduct',//为您推荐
 
 	sellsProduct:'/product/sellsProduct',//热销产品
-	
+
 	searchManagerCheckStatus:'manager/filter/searchManagerCheckStatus',//理财师审核状态查询
-	
+
 	saveUserManager:'manager/filter/saveUserManager',//加盟理财师
-	
+
 	getUserStatus:'account/filter/getUserStatus',//获取用户状态
 }

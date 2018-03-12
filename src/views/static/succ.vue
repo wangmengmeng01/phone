@@ -45,12 +45,14 @@
         'RESET',
       ]),
       backurl(){
-        this.$go(this.succ_page.backurl);
+        const backurl = this.succ_page.backurl;
         this.RESET('succ_page');
+        this.$go(backurl);
       },
       sub_backurl(){
-        this.$go(this.succ_page.sub_backurl);
+        const sub_backurl = this.succ_page.sub_backurl;
         this.RESET('succ_page');
+        this.$go(sub_backurl);
       }
     }
   }
