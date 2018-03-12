@@ -1,7 +1,7 @@
 <template>
   <transition name="bouncelnRight" mode="out-in">
     <div class="coupon-item" v-if="visibility && data" @click="checkedFn">
-      <img :src="require(`@/assets/coupon/${['voucher','cash','red','dis'][parseInt(data.couponType)-1]}.png`)" alt="" class="bg">
+      <img :src="require(`@/assets/coupon/${['voucher','cash','red','dis'][parseInt(data.couponType || data.type)-1]}.png`)" alt="" class="bg">
       <img src="../../assets/common/close_circle.png" alt="" class="close" v-if="close" @click="closeFn">
       <div class="con">
         <div class="top f20">

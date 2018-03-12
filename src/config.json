@@ -215,6 +215,7 @@
 				}, {
 					"path": "productDetail",
 					"title": "产品详情",
+					"filter": true,
 					"back": {
 						"background": "main"
 					},

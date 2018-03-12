@@ -14,7 +14,7 @@
 <script>
   import Coupon from '@/components/coupon/coupon'
   import { mapGetters, mapMutations } from 'vuex'
-  import { showGiveCouponList } from '@/service'
+  import { searchCouponList } from '@/service'
   export default {
     name: 'coupon_choose',
     data() {
@@ -23,14 +23,15 @@
         nav: [{
           name: '可用优惠',
           type: '1',
-          size: 2
+          size: 0
         },{
           name: '不可用优惠',
           type: '2',
-          size: 10
+          size: 0
         }],
         res: {},
-        couponlist: []
+        couponlist: [],
+        pageIndex:1,//分页
       }
     },
     components: {
@@ -42,6 +43,9 @@
       ])
     },
     created() {
+    	this.SET_COUPON({
+          data: []
+        });
       this.init(this.nav[0]);
     },
     methods: {
@@ -50,8 +54,18 @@
       ]),
 
       init(item){
-        showGiveCouponList({couponType: item.type}).then(res=>{
+      	const {productNo, investAmount} = this.coupon.params;
+      	let pageIndex=this.pageIndex;
+        searchCouponList({
+        	productNo,
+        	investAmount,
+        	useType:item.type,
+        	pageIndex
+        }).then(res=>{
           this.res = res.couponList
+          this.nav[0].size=res.availableNum;
+          this.nav[1].size=res.disabledNum;
+          
         }).catch(err=>{
           this.res = []
         })
@@ -73,7 +87,7 @@
         this.SET_COUPON({
           data: this.couponlist
         });
-        this.$go(this.coupon.backurl,{bidNo})
+        this.$go(this.coupon.backurl,{bidNo,linkType:this.$route.query.linkType})
       }
     },
     watch: {
