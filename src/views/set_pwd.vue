@@ -63,9 +63,9 @@
         const params = {
           mobile: this.item.mobile,
           imageCode: this.item.imageCode,
-          operationType: 'register'
+          operationType: this.$route.query.view === 'forget_pwd' ? 'forget' : 'register'
         };
-        sendSMS(params).then(r=>{
+        sendSMS(params).then(()=>{
           this.countdown()
         })
       },
@@ -77,6 +77,7 @@
             clearInterval(time);
             this.click_code = !this.click_code;
             this.codeText = '获取短信验证码';
+            this.num = 60;
             return
           }
           this.codeText = `发送(${this.num})`;
@@ -120,7 +121,7 @@
               "backurl": "/webapp/reg_bank",
               "sub_btn_text": "暂无",
               "sub_backurl": "/webapp/login"
-            }
+            };
           this.SET_SUCC_PAGE(params);
           this.$go('/webapp/static/succ');
         })

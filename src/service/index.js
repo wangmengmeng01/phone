@@ -11,6 +11,7 @@ export * from './mine'
 export * from './wealth'
 export * from './home'
 
+
 /**
  * 登录
  */
@@ -49,6 +50,19 @@ export const sendSMS = (params)=>{
   return $http({
     method: 'post',
     api: api.getSmsCode,
+    params,
+  })
+}
+
+
+
+/**
+ * 发送汇付短信
+ */
+export const sendSmsCode = (params)=>{
+  return $http({
+    method: 'post',
+    api: api.sendSmsCode,
     params,
   })
 }

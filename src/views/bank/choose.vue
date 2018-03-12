@@ -1,7 +1,7 @@
 <template>
   <div class="bank_choose mt4">
     <ul v-if="list.length">
-      <li v-for="i in list" class="color_font m4">
+      <li v-for="i in list" class="color_font m4" @click="choose(i)">
         <img :src="i.imgUrl" alt="" class="place-img">
         <span>{{i.bankName}}</span>
       </li>
@@ -25,6 +25,11 @@
       })
     },
     methods: {
+      choose(item){
+        const {bankName, bankNo} = item;
+        const backurl = this.$route.query.backurl;
+        this.$go(backurl ,{bankName, bankNo})
+      }
     },
     watch: {
     }

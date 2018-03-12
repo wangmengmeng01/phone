@@ -24,7 +24,11 @@
 		{
 			"path": "/",
 			"redirect": "/webapp"
-		}, {
+		},
+    {
+      "path": "/webapp/recharge",
+      "redirect": "/webapp/wealth/recharge"
+    },{
 			"path": "login",
 			"title": "登录",
 			"filter": true,
