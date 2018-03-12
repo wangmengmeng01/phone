@@ -61,4 +61,12 @@ export default {
 	saveUserManager:'manager/filter/saveUserManager',//加盟理财师
 
 	getUserStatus:'account/filter/getUserStatus',//获取用户状态
+	
+	accountAcmountInfo:'account/filter/accountAcmountInfo',//获取用户各种金额
+	
+	getExpectedRevenue:'bid/filter/getExpectedRevenue',//计算收益
+	
+	searchCouponList:'coupon/filter/searchCouponList',//查询购买的可用卡券数量
+	
+	borrowInvest:'api/bid/filter/borrowInvest',//购买标的
 }

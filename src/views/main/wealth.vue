@@ -288,6 +288,8 @@
       line-height 0.96rem
       img
         vertical-align middle
+        width 0.59rem
+        height 0.36rem
         margin -0.05rem 0.18rem 0 0
 
   .wealthContent
@@ -304,7 +306,8 @@
       text-align center
       img
         margin 0.56rem 0 0.16rem 0
-
+        width 0.56rem
+        height 0.56rem
   .wealthMyAssert
     overflow hidden
     padding 0 0.4rem
@@ -332,6 +335,8 @@
         img
           vertical-align middle
           margin-top -0.05rem
+          width 0.2rem
+          height 0.36rem
 
   .wealthMyObject
     li

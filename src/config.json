@@ -233,6 +233,7 @@
 				}, {
 					"path": "productDetail",
 					"title": "产品详情",
+					"filter": true,
 					"back": {
 						"background": "main"
 					},
@@ -294,10 +295,18 @@
           "redirect": "index"
         },{
           "path": "recharge",
-          "title": "充值"
+          "title": "充值",
+          "foot": {
+            "type": "main",
+            "style": "background:#f1f1f9"
+          }
         },{
           "path": "withdraw",
-          "title": "提现"
+          "title": "提现",
+          "foot": {
+            "type": "main",
+            "style": "background:#f1f1f9"
+          }
         },{
           "path": "autoInvest",
           "title": "自动投标"
