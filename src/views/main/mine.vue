@@ -3,7 +3,7 @@
     <div class="head flex" @click="$go('/webapp/mine/qrcode')">
       <img :src="item.pic || head" alt="" class="head_icon">
       <div class="msg">
-        <h2 class="f44 flex"><span>{{item.userName}}</span><span v-if="item.position!='-1'" class="status"><img src="../../assets/main/mine/status_yellow.png" alt=""><i class="f12">{{['一般理财师','大区经理'][parseInt(item.position)-1]}}</i></span></h2>
+        <h2 class="f44 flex"><span>{{item.userName}}</span><span v-if="(item.position=='1')||(item.position=='2')" class="status"><img src="../../assets/main/mine/status_yellow.png" alt=""><i class="f12">{{['一般理财师','大区经理'][parseInt(item.position)-1]}}</i></span></h2>
         <p class="f24">{{item.pic}}</p>
         <p class="f24">手机号  {{item.mobile}}</p>
       </div>

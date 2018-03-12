@@ -70,7 +70,7 @@
 			"filter": true,
 			"foot": {
 				"type": "main",
-				"style": "padding-bottom: 1rem"
+				"style": "padding-bottom: 1rem;"
 			}
 		}, {
 			"path": "webapp",

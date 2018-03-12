@@ -3,7 +3,7 @@
     <div class="head flex">
       <img :src="item.icon" alt="" class="head_icon place-img">
       <div class="msg">
-        <h2 class="f36 flex"><span>{{item.userName}}</span><span v-if="item.position!='-1'" class="status color_main"><img src="../../assets/main/mine/status_yellow.png" alt=""><i class="f12">{{['一般理财师','大区经理'][parseInt(item.position)-1]}}</i></span></h2>
+        <h2 class="f36 flex"><span>{{item.userName}}</span><span v-if="(item.position=='1')||(item.position=='2')" class="status color_main"><img src="../../assets/main/mine/status_yellow.png" alt=""><i class="f12">{{['一般理财师','大区经理'][parseInt(item.position)-1]}}</i></span></h2>
         <p class="f24">{{item.pic}}</p>
         <p class="f44 flex"><img src="../../assets/main/mine/phone.png" alt="">  {{item.mobile}}</p>
       </div>

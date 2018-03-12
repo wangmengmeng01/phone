@@ -27,7 +27,7 @@
       <input type="text" placeholder="请输入短信验证码" class="f32 color_border color_font" v-model="item.smsCode">
       <span class="f28 color_main" :class="click_code ? 'dis' : ''" @click="sendCode">{{codeText}}</span>
     </div>
-    <button class="btn">下一步</button>
+    <button class="btn" @click="submit">下一步</button>
   </div>
 </template>
 
@@ -41,11 +41,11 @@
         codeText: '获取短信验证码',
         num: 60,
         click_code: false,
-        bankName: this.$route.query.bankName || '',
+        bankName: '',
         item: {
           realName: '',
           idno: '',
-          bankNo: this.$route.query.bankNo || '',
+          bankNo: '',
           bankCardNo: '',
           userType: '2',
           retUrl: '',
@@ -57,6 +57,12 @@
     },
     created() {
       this.RESET('succ_page');
+      const {data, bankName, bankNo} = this.$route.query;
+      if(data){
+        this.item = JSON.parse(data);
+        this.bankName = bankName;
+        this.item.bankNo = bankNo;
+      }
     },
     methods: {
       ...mapMutations([
@@ -64,11 +70,15 @@
         'SET_SUCC_PAGE'
       ]),
       linkto(){
-        this.$go('/webapp/bank/choose',{backurl:this.$route.path})
+        this.$go('/webapp/bank/choose',{backurl:this.$route.path,data:JSON.stringify(this.item)}, false)
       },
       sendCode(){
         if(!this.item.mobile){
           this.$toask('手机号码不能为空!');
+          return
+        }
+        if(!(/^1\d{10}$/.test(this.item.mobile))) {
+          this.$toask('手机号格式不正确!');
           return
         }
         if(!this.item.bankCardNo){
@@ -109,6 +119,10 @@
           this.$toask('身份证号不能为空!');
           return
         }
+        if(!(/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(this.item.idno))) {
+          this.$toask('身份证号码格式不正确!');
+          return
+        }
         if(!this.item.bankNo){
           this.$toask('请选择开户银行!');
           return
@@ -117,8 +131,16 @@
           this.$toask('银行卡号不能为空!');
           return
         }
+        if(!(/^\d{16,30}$/.test(this.item.bankCardNo))) {
+          this.$toask('银行卡号格式不正确!');
+          return
+        }
         if(!this.item.mobile){
           this.$toask('银行预留手机号不能为空!');
+          return
+        }
+        if(!(/^1\d{10}$/.test(this.item.mobile))) {
+          this.$toask('手机号格式不正确!');
           return
         }
         if(!this.item.smsCode){
@@ -141,6 +163,7 @@
 
 <style lang="sass" scoped>
   .reg_bank
+    height: auto
     background: #fff
     .item
       span
@@ -159,6 +182,12 @@
     .tip
       margin-top: 2.04rem
       margin-bottom: .38rem
+    .btn
+      position: fixed
+      bottom: 0
+      right: 0
+      left: 0
+      border-radius: 0
     .smscode
       span
         &.dis
