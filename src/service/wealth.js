@@ -34,3 +34,13 @@ export const invesProperty = async (params)=>{
     params,
   });
 };
+
+
+// 风险评测
+export const userReskEvaluation = async (params)=>{
+  return await $http({
+    method: 'post',
+    api: api.userReskEvaluation,
+    params,
+  });
+};
