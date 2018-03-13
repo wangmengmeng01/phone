@@ -5,6 +5,7 @@
     <div class="item flex phone border-b">
       <span class="name f44 color_font">手机号</span>
       <input type="tel" placeholder="请输入手机号" class="f44" v-model="mobile" maxlength="11">
+      <img src="../assets/common/del.png" alt="" class="del" @click="mobile=''">
     </div>
     <button class="btn" @click="submit">下一步</button>
     <p class="gologin f32 color_main" @click="$go('login',{mobile})">已有账号，去登录</p>
@@ -42,7 +43,12 @@
     .item
       span
         flex: 1
+      .del
+        height: .4rem
+        opacity: 0
       input
+        &:focus ~ .del
+          opacity: 1
         flex: 1.5
       margin-top: 1.4rem
       padding-bottom: .3rem

@@ -42,7 +42,7 @@
         codeText: '获取短信验证码',
         num: 60,
         click_code: false,
-        bankName: '',
+        bankName: '',                       // 银行卡名
         item: {
           realName: '',
           idno: '',
@@ -57,8 +57,11 @@
       }
     },
     created() {
+      // 开始清楚成功页面的缓存
       this.RESET('succ_page');
+      // 获取从选择银行卡页面返回的数据
       const {data, bankName, bankNo} = this.$route.query;
+      // 如果有的话重新赋值
       if(data){
         this.item = JSON.parse(decodeURIComponent(data));
         this.bankName = bankName;
@@ -71,9 +74,16 @@
         'RESET',
         'SET_SUCC_PAGE'
       ]),
+      /**
+       * 跳转选择银行
+       */
       linkto(){
+        // 把当前的数据传过去，防止写完了点选择银行返回重新填写
         this.$go('/bank/choose',{backurl:this.$route.path,data: encodeURIComponent(JSON.stringify(this.item))}, false)
       },
+      /**
+       * 发送短信
+       */
       sendCode(){
         if(!this.item.mobile){
           this.$toask('手机号码不能为空!');
@@ -95,9 +105,13 @@
         };
         sendSmsCode(params).then(r=>{
           this.item.smsSeq = r.smsSeq = 'AAAAAAAA';
+          // 倒计时
           this.countdown()
         })
       },
+      /**
+       * 倒计时
+       */
       countdown(){
         this.click_code = !this.click_code;
         let time = setInterval(()=>{
@@ -112,6 +126,9 @@
           this.codeText = `发送(${this.num})`;
         },1000)
       },
+      /**
+       * 提交
+       */
       submit(){
         if(!this.item.realName){
           this.$toask('姓名不能为空!');
@@ -149,7 +166,9 @@
           this.$toask('短信验证码不能为空!');
           return
         }
+        // 开户
         openAccount(this.item).then(res=>{
+          // 开户完成跳成功页面的参数
           this.SET_SUCC_PAGE({
             "title": "恭喜，开通银行存管账户成功",
             "btn_text": "立即充值",
@@ -157,6 +176,7 @@
             "sub_btn_text": "暂无",
             "sub_backurl": "/login"
           });
+          // 调用汇付
           axios({
             method: 'post',
             url: res.serviceUrl,

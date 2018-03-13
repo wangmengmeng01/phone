@@ -4,7 +4,7 @@
     <div class="item flex phone border-b">
       <span class="name f44 color-font">手机号</span>
       <input type="tel" placeholder="请输入手机号" class="f44" v-model="item.mobile" maxlength="11">
-      <img src="../assets/common/del.png" alt="" class="del" @click="del">
+      <img src="../assets/common/del.png" alt="" class="del" @click="item.mobile=''">
     </div>
     <div class="item flex password border-b">
       <span class="name f44 color-font">密码</span>
@@ -26,8 +26,8 @@
     name: 'login',
     data () {
       return {
-        checked: true,
-        text: '登录',
+        checked: true,                                              // 密码框的类型显示隐藏
+        text: '登录',                                                // 登录按钮文字提示
         item: {
           mobile: this.$route.query.mobile || '18030003016',
           password: 'a123456',
@@ -35,6 +35,7 @@
       }
     },
     created() {
+      // 登录清除全部缓存数据
       this.RESET();
     },
     methods: {
@@ -44,9 +45,9 @@
       ...mapActions([
         'set_user',
       ]),
-      del(){
-        this.item.mobile = '';
-      },
+      /**
+       * 提交
+       */
       submit(){
         if(!this.item.mobile) {
           this.$toask('手机号不能为空!');
@@ -65,14 +66,15 @@
           return
         }
         this.text = '登录中...';
-        if(this.item.password){
-          let CryptoJS= require('@/lib/aes');
-          this.item.password = CryptoJS.aes(this.item.password);
-        }
+        let CryptoJS= require('@/lib/aes');
+        this.item.password = CryptoJS.aes(this.item.password);
+        // 登录
         login(this.item).then(res=>{
+          // 成功的话把返回的数据放到缓存中
           this.set_user(res);
           this.$go('/')
         }).catch(()=>{
+            //失败的话提示
             this.item.password = '';
             this.text = '重新登录';
         })
@@ -93,9 +95,12 @@
     text-align: left
     span
       width: 2rem
+    .del
+      height: .4rem
+      opacity: 0
     input
       &:focus ~ .del
-        opacity: 0
+        opacity: 1
       flex: 1
     padding-bottom: .3rem
     .eyes
