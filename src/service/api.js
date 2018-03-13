@@ -32,6 +32,8 @@ export default {
 
   userReskEvaluation:"evaluation/filter/userReskEvaluation" ,// 风险评测
 
+  searchGiveCouponList: 'coupon/filter/searchGiveCouponList', // 查询卡券礼物列表
+
   showGiveCouponList: 'coupon/filter/showGiveCouponList', // 选择可送优惠
 
   searchExistingCustomers: 'home/filter/searchExistingCustomers', // 获取已有客户

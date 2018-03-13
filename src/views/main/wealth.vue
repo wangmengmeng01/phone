@@ -41,7 +41,7 @@
           <div class="wealthMATopBL">
             我的资产
           </div>
-          <div class="wealthMATopBR">
+          <div class="wealthMATopBR" @click="$go('/webapp/wealth/assertList')">
             更多 <img src="../../assets/common/arrow-right.png" alt="">
           </div>
         </div>
@@ -144,32 +144,32 @@
         {
           icon: "wcontinue",
           name: '我的续投',
-          url: ''
+          url: 'wealth/continueInvest'
         },
         {
           icon: 'wchangeBank',
           name: '换绑银行卡',
-          url: ''
+          url: 'wealth/changeBank'
         },
         {
           icon: 'wtradeRecord',
           name: '交易记录',
-          url: ''
+          url: 'wealth/tradeRecord'
         },
         {
           icon: 'wmyConpun',
           name: '我的优惠',
-          url: ''
+          url: '/webapp/coupon'
         },
         {
           icon: 'wautoin',
           name: '自动投标',
-          url: 'autoInvest'
+          url: 'wealth/autoInvest'
         },
         {
           icon: 'wrisktest',
           name: '风险测评',
-          url: 'riskTest'
+          url: 'wealth/riskTest'
         },
         {
           icon: 'wmyPoint',
@@ -194,7 +194,7 @@
   },
   methods: {
     linkto(url){
-      this.$go(`/webapp/wealth/${url}`)
+      this.$go(url)
     },
     init(){
       wealthIndex().then(res=>{

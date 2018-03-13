@@ -52,7 +52,7 @@
 
 		<!--我的优惠券-->
 
-		<div class="buyBidCenter" @click="choose">
+		<div class="buyBidCenter" @click="gift">
 			<div class="pdcTitle" style="margin: 0.28rem 0;">
 				<span>我的优惠</span>
 				<span v-if="counpBol" style="color: #F84740;">{{counpNum}}张可用 <img  src="../../assets/main/home/nextIcon.png" alt="" /></span>
