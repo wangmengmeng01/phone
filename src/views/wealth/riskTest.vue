@@ -6,7 +6,7 @@
         <p class="color_main">{{index+1<10?'0'+(index+1):index+1}}<span class="f28 color_font-s">/{{list.length}}</span></p>
       </div>
       <ul class="a">
-        <li class="color_font f32 border-b" v-for="(j, sub_index) in i.a" @click="gift(sub_index)">{{['A','B','C','D','E'][sub_index]}}. {{j}}</li>
+        <li class="color_font f32 border-b" v-for="(j, sub_index) in i.a" @click="choose(sub_index)">{{['A','B','C','D','E'][sub_index]}}. {{j}}</li>
       </ul>
     </div>
     <button class="btn prev" v-show="act && act<list.length" @click="prev">{{res.length===list.length?'查看我的评测结果':'上一题'}}</button>
