@@ -63,7 +63,7 @@
   background: #fff
   height: 100vh
   .icon
-    margin: 2.2rem auto .6rem
+    margin: 1.32rem auto .6rem
     width: 1.54rem
   .item
     h2
