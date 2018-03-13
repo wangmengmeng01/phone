@@ -157,7 +157,7 @@
 					}
 				} else {
 
-					this.$go('/webapp/login');
+					this.$go('/login');
 				}
 
 			})
@@ -196,7 +196,7 @@
 								this.joinBol = !this.joinBol;
 								this.joinBol2 = !this.joinBol2;
 							} else if(res.code == "1000") {
-								this.$go('/webapp/login');
+								this.$go('/login');
 							} else {
 								this.$toask(res.message);
 							}

@@ -4,10 +4,12 @@
     <div class="item flex phone border-b">
       <span class="name f44 color-font">手机号</span>
       <input type="tel" placeholder="请输入手机号" class="f44" v-model="item.mobile" maxlength="11">
+      <img src="../assets/common/del.png" alt="" class="del" @click="del">
     </div>
     <div class="item flex password border-b">
       <span class="name f44 color-font">密码</span>
-      <input type="password" placeholder="请输入登录密码" class="f44" v-model="item.password">
+      <input :type="[checked?'password':'text']" placeholder="请输入登录密码" class="f44" v-model="item.password">
+      <img :src="require(`@/assets/common/${checked?'eyes':'eyebrow'}.png`)" alt="" class="eyes" @click="checked=!checked">
     </div>
     <button class="btn" @click="submit">{{text}}</button>
     <p class="link flex f32 color_font-s">
@@ -24,6 +26,7 @@
     name: 'login',
     data () {
       return {
+        checked: true,
         text: '登录',
         item: {
           mobile: this.$route.query.mobile || '18030003016',
@@ -41,6 +44,9 @@
       ...mapActions([
         'set_user',
       ]),
+      del(){
+        this.item.mobile = '';
+      },
       submit(){
         if(!this.item.mobile) {
           this.$toask('手机号不能为空!');
@@ -65,7 +71,7 @@
         }
         login(this.item).then(res=>{
           this.set_user(res);
-          this.$go('/webapp')
+          this.$go('/')
         }).catch(()=>{
             this.item.password = '';
             this.text = '重新登录';
@@ -86,10 +92,14 @@
   .item
     text-align: left
     span
-      flex: 1
+      width: 2rem
     input
-      flex: 1.5
+      &:focus
+
+      flex: 1
     padding-bottom: .3rem
+    .eyes
+      height: .18rem
   .phone
     margin-bottom: .6rem
   .btn

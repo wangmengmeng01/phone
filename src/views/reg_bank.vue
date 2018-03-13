@@ -63,7 +63,7 @@
         this.item = JSON.parse(decodeURIComponent(data));
         this.bankName = bankName;
         this.item.bankNo = bankNo;
-        this.item.retUrl = location.host+'/webapp/status/succ'
+        this.item.retUrl = location.host+'/status/succ'
       }
     },
     methods: {
@@ -72,7 +72,7 @@
         'SET_SUCC_PAGE'
       ]),
       linkto(){
-        this.$go('/webapp/bank/choose',{backurl:this.$route.path,data: encodeURIComponent(JSON.stringify(this.item))}, false)
+        this.$go('/bank/choose',{backurl:this.$route.path,data: encodeURIComponent(JSON.stringify(this.item))}, false)
       },
       sendCode(){
         if(!this.item.mobile){
@@ -153,9 +153,9 @@
           this.SET_SUCC_PAGE({
             "title": "恭喜，开通银行存管账户成功",
             "btn_text": "立即充值",
-            "backurl": "/webapp/recharge",
+            "backurl": "/recharge",
             "sub_btn_text": "暂无",
-            "sub_backurl": "/webapp/login"
+            "sub_backurl": "/login"
           });
           axios({
             method: 'post',

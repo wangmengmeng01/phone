@@ -11,7 +11,8 @@
       <span class="f28 color_main" @click="sendCode" :class="click_code ? 'dis' : ''">{{codeText}}</span>
     </div>
     <div class="smscode item flex phone border-b">
-      <input type="password" placeholder="请设置你的登录密码" class="f32 color_font color_border" v-model="item.password" minlength="6" maxlength="12">
+      <input  :type="[passwordType?'password':'text']"  type="password" placeholder="请设置你的登录密码" class="f32 color_font color_border" v-model="item.password" minlength="6" maxlength="12">
+      <img :src="require(`@/assets/common/${passwordType?'eyes':'eyebrow'}.png`)" alt="" class="eyes" @click="passwordType=!passwordType">
     </div>
     <p class="tip f12 color_font-s">密码须为6～12位大小写字母、数字至少2位数</p>
     <button class="btn" @click="submit">注册</button>
@@ -29,6 +30,7 @@
     name: 'set_pwd',
     data () {
       return {
+        passwordType: true,
         checked: false,
         codeText: '获取短信验证码',
         num: 60,
@@ -129,17 +131,17 @@
                 "title": "登录密码修改成功",
                 "sub_title": "使用您的新密码登录",
                 "btn_text": "登录",
-                "backurl": "/webapp"
+                "backurl": "/"
               }
               : {
                 "title": "恭喜您注册成功",
                 "btn_text": "立即开通银行存管账户",
-                "backurl": "/webapp/reg_bank",
+                "backurl": "/reg_bank",
                 "sub_btn_text": "暂无",
-                "sub_backurl": "/webapp"
+                "sub_backurl": "/"
               };
             this.SET_SUCC_PAGE(params);
-            this.$go('/webapp/static/succ');
+            this.$go('/static/succ');
           })
         })
       },
@@ -172,6 +174,8 @@
       span
         text-align: right
     .smscode
+      .eyes
+        height: .18rem
       span
         &.dis
           pointer-events: none

@@ -44,3 +44,15 @@ export const userReskEvaluation = async (params)=>{
     params,
   });
 };
+
+
+
+// 我的优惠
+export const searchUserCouponInfo = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.searchUserCouponInfo,
+    params,
+  });
+};
+

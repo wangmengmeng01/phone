@@ -3,7 +3,7 @@
 		<img src="../../assets/common/succ.png" />
 		<p class="f36 color_font ffl">恭喜，购买成功</p>
 		<p class="f28 color_font-s ffl">您已成功购买了该标的</p>
-		<p class="f36 ffl" @click="$go('/webapp/product')">继续购买其他标的</p>
+		<p class="f36 ffl" @click="$go('/product')">继续购买其他标的</p>
 		<p class="f28 ffl">查看我的资产</p>
 	</div>
 </template>

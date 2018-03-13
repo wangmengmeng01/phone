@@ -13,7 +13,7 @@
           <div class="wealthMyObjectT">
             <div class="wealthMyObjectTT">{{i.borrowName}} </div>
             <div class="wealthMyObjectTC">{{i.cashStatus=='4'?'已到期':'持有中'}}</div>
-            <div class="wealthMyObjectTB" @click="$go('/webapp/prod/productDetail',{bidNo:i.borrowNo,backTitle:i.borrowName})">查看</div>
+            <div class="wealthMyObjectTB" @click="$go('/prod/productDetail',{bidNo:i.borrowNo,backTitle:i.borrowName})">查看</div>
           </div>
           <div class="wealthMyObjectC">
             <div class="wealthMyObjectCL">

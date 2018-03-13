@@ -4,7 +4,7 @@
 		<!--产品列表-->
 		<!--月月赢-->
 		<div v-for="(i,index) in productList" v-if="i.bidList.length" class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
-			<div class="productDivTitle" @click="$go('/webapp/prod/productList',{productName:i.productName,productNo:i.productNo,productType:i.productType,backTitle:i.productName})">
+			<div class="productDivTitle" @click="$go('/prod/productList',{productName:i.productName,productNo:i.productNo,productType:i.productType,backTitle:i.productName})">
 				<span>{{i.productName}}</span>
 				<span v-show="i.isCoupon==1">我有优惠</span>
 				<span>更多 <img src="../../assets/main/home/nextIcon.png" alt="" /></span>
@@ -39,7 +39,7 @@
 				<p class="hotProductDivMessage" :class="[n<=i.bidList.length-2?'bb':'']">
 					<span>累计销售 <i>1000万</i></span>
 					<span>累计收益 <i>102万</i></span>
-					<span class="hotProductDivTitleBtn" @click="$go('/webapp/prod/productDetail',{bidNo:j.bidNo,backTitle:j.bidName})">购买</span>
+					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,backTitle:j.bidName})">购买</span>
 				</p>
 			</div>
 
@@ -75,7 +75,7 @@
 
 		<!--售罄状态-->
 		<div v-else class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
-			<div class="productDivTitle" @click="$go('/webapp/prod/productList',{productName:i.productName,productNo:i.productNo,productType:i.productType,backTitle:i.productName})">
+			<div class="productDivTitle" @click="$go('/prod/productList',{productName:i.productName,productNo:i.productNo,productType:i.productType,backTitle:i.productName})">
 				<span>{{i.productName}}</span>
 				<span style="display: none;">我有优惠</span>
 				<span style="color: #8D8D94;">更多 <img src="../../assets/main/home/nextIcon.png" alt="" /></span>

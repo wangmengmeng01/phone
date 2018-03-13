@@ -210,7 +210,7 @@
 					},
 
 				});
-				this.$go('/webapp/coupon/choose', {
+				this.$go('/coupon/choose', {
 					bidNo,
 					linkType: 0,
 				})
@@ -264,12 +264,12 @@
 					"title": "恭喜，购买成功",
 					'sub_title': "您已成功购买了该标的",
 					"btn_text": "继续购买其他标的",
-					"backurl": "/webapp/product",
+					"backurl": "/product",
 					"sub_btn_text": "查看我的资产",
-					"sub_backurl": "/webapp/product"
+					"sub_backurl": "/product"
 				};
 //				this.SET_SUCC_PAGE(params);
-				this.$go('/webapp/static/succ');
+				this.$go('/static/succ');
 
 				//购买
 
@@ -290,7 +290,7 @@
 				//					});
 
 				//				this.RESET('coupon');
-				//				this.$go('/webapp/prod/buySucc')
+				//				this.$go('/prod/buySucc')
 			},
 			//全投
 			investAll() {
