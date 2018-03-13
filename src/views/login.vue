@@ -94,8 +94,8 @@
     span
       width: 2rem
     input
-      &:focus
-
+      &:focus ~ .del
+        opacity: 0
       flex: 1
     padding-bottom: .3rem
     .eyes
