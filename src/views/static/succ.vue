@@ -23,21 +23,17 @@
   import { mapGetters, mapMutations } from 'vuex'
   export default {
     name: 'succ',
-    data () {
-      return {
-
-      }
-    },
     computed: {
       ...mapGetters([
         'succ_page'
       ])
     },
+    beforeRouteEnter (to, from, next) {
+      next(vm => {
+        !vm.succ_page.title && vm.$go('/webapp');
+      })
+    },
     created() {
-      if(!this.succ_page.title){
-        this.$go('/');
-        return
-      }
       document.title = this.succ_page.title
     },
     methods: {
@@ -54,7 +50,7 @@
         this.RESET('succ_page');
         this.$go(sub_backurl,'',false);
       }
-    }
+    },
   }
 </script>
 

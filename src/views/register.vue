@@ -7,7 +7,7 @@
       <input type="tel" placeholder="请输入手机号" class="f44" v-model="mobile" maxlength="11">
     </div>
     <button class="btn" @click="submit">下一步</button>
-    <p class="gologin f32 color_main" @click="$go('login')">已有账号，去登录</p>
+    <p class="gologin f32 color_main" @click="$go('login',{mobile})">已有账号，去登录</p>
   </div>
 </template>
 

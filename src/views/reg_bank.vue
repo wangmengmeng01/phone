@@ -33,7 +33,8 @@
 
 <script>
   import { mapActions, mapMutations } from 'vuex'
-  import { sendSmsCode } from '@/service'
+  import { sendSmsCode, openAccount } from '@/service'
+  import axios from 'axios'
   export default {
     name: 'reg_bank',
     data () {
@@ -59,9 +60,10 @@
       this.RESET('succ_page');
       const {data, bankName, bankNo} = this.$route.query;
       if(data){
-        this.item = JSON.parse(data);
+        this.item = JSON.parse(decodeURIComponent(data));
         this.bankName = bankName;
         this.item.bankNo = bankNo;
+        this.item.retUrl = location.host+'/webapp/status/succ'
       }
     },
     methods: {
@@ -70,7 +72,7 @@
         'SET_SUCC_PAGE'
       ]),
       linkto(){
-        this.$go('/webapp/bank/choose',{backurl:this.$route.path,data:JSON.stringify(this.item)}, false)
+        this.$go('/webapp/bank/choose',{backurl:this.$route.path,data: encodeURIComponent(JSON.stringify(this.item))}, false)
       },
       sendCode(){
         if(!this.item.mobile){
@@ -92,7 +94,7 @@
           busiType: 'user_register'
         };
         sendSmsCode(params).then(r=>{
-          this.item.smsSeq = r.smsSeq;
+          this.item.smsSeq = r.smsSeq = 'AAAAAAAA';
           this.countdown()
         })
       },
@@ -147,7 +149,7 @@
           this.$toask('短信验证码不能为空!');
           return
         }
-        sendSmsCode(this.item).then(()=>{
+        openAccount(this.item).then(res=>{
           this.SET_SUCC_PAGE({
             "title": "恭喜，开通银行存管账户成功",
             "btn_text": "立即充值",
@@ -155,6 +157,21 @@
             "sub_btn_text": "暂无",
             "sub_backurl": "/webapp/login"
           });
+          axios({
+            method: 'post',
+            url: res.serviceUrl,
+            data: res.inMap,
+            transformRequest: [function (data) {
+              let ret = '';
+              for (let it in data) {
+                ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+              }
+              return ret.slice(0,ret.length-1)
+            }],
+          }).then(r=>{
+            log(r)
+          })
+
         })
       },
     }

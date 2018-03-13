@@ -11,7 +11,7 @@
     </div>
     <button class="btn" @click="submit">{{text}}</button>
     <p class="link flex f32 color_font-s">
-      <span class="forgetpwd" @click="$go('forget_pwd')">忘记密码？</span>
+      <span class="forgetpwd" @click="$go('forget_pwd',{mobile: item.mobile})">忘记密码？</span>
       <span class="reg" @click="$go('register')">快速注册</span>
     </p>
   </div>
@@ -26,7 +26,7 @@
       return {
         text: '登录',
         item: {
-          mobile: '18030003016',
+          mobile: this.$route.query.mobile || '18030003016',
           password: 'a123456',
         }
       }
@@ -52,6 +52,10 @@
         }
         if(!(/^1\d{10}$/.test(this.item.mobile))) {
           this.$toask('手机号格式不正确!');
+          return
+        }
+        if(!(/^(?!^\d+$)(?!^[a-zA-Z]+$)(?!^_+$)[\d|a-zA-Z|_]{6,12}$/.test(this.item.password))) {
+          this.$toask('密码格式不正确!');
           return
         }
         this.text = '登录中...';

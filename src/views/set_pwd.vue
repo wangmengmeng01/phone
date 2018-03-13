@@ -107,8 +107,8 @@
           this.$toask('登录密码不能为空!');
           return
         }
-        if(/^(([A-Za-z]+)(\d+)){6,12}$/.test(this.item.password)){
-          this.$toask('密码须为6～12位大小写字母、数字至少2位数!');
+        if(!(/^(?!^\d+$)(?!^[a-zA-Z]+$)(?!^_+$)[\d|a-zA-Z|_]{6,12}$/.test(this.item.password))) {
+          this.$toask('密码格式不正确!');
           return
         }
         if(!this.checked){
