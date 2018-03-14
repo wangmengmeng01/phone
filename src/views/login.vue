@@ -2,13 +2,17 @@
   <div class="login p4" @keyup.enter="submit">
     <img src="../assets/user/logo.png" class="logo">
     <div class="item flex phone border-b">
-      <span class="name f44 color-font">手机号</span>
-      <input type="tel" placeholder="请输入手机号" class="f44" v-model="item.mobile" maxlength="11">
-      <img src="../assets/common/del.png" alt="" class="del" @click="item.mobile=''">
+      <div class="flex con">
+        <span class="name f44 color-font">手机号</span>
+        <input type="tel" placeholder="请输入手机号" class="f44" v-model="item.mobile" maxlength="11">
+        <img src="../assets/common/del.png" alt="" class="del" @click="item.mobile=''">
+      </div>
     </div>
     <div class="item flex password border-b">
-      <span class="name f44 color-font">密码</span>
-      <input :type="[checked?'password':'text']" placeholder="请输入登录密码" class="f44" v-model="item.password">
+     <div class="flex con">
+       <span class="name f44 color-font">密码</span>
+       <input :type="[checked?'password':'text']" placeholder="请输入登录密码" class="f44" v-model="item.password">
+     </div>
       <img :src="require(`@/assets/common/${checked?'eyes':'eyebrow'}.png`)" alt="" class="eyes" @click="checked=!checked">
     </div>
     <button class="btn" @click="submit">{{text}}</button>
@@ -29,7 +33,7 @@
         checked: true,                                              // 密码框的类型显示隐藏
         text: '登录',                                                // 登录按钮文字提示
         item: {
-          mobile: this.$route.query.mobile || '18030003016',
+          mobile: this.$route.query.mobile || '17810001001',
           password: 'a123456',
         }
       }
@@ -93,6 +97,8 @@
     margin: 1.2rem 0
   .item
     text-align: left
+    .con
+      flex: 1
     span
       width: 2rem
     .del
@@ -101,7 +107,6 @@
     input
       &:focus ~ .del
         opacity: 1
-      flex: 1
     padding-bottom: .3rem
     .eyes
       height: .18rem

@@ -121,6 +121,7 @@
         display: flex
         align-items: center
         p
+          align-self: flex-end
           font-size: .48rem
           width: 1rem
         h2

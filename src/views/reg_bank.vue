@@ -24,7 +24,7 @@
       <input type="tel" placeholder="请输入银行预留手机号" class="f32 color_border color_font" v-model="item.mobile" maxlength="11">
     </div>
     <div class="smscode item flex phone border-b">
-      <input type="text" placeholder="请输入短信验证码" class="f32 color_border color_font" v-model="item.smsCode">
+      <input type="tel" placeholder="请输入短信验证码" class="f32 color_border color_font" v-model="item.smsCode" maxlength="6">
       <span class="f28 color_main" :class="click_code ? 'dis' : ''" @click="sendCode">{{codeText}}</span>
     </div>
     <button class="btn" @click="submit">下一步</button>
@@ -189,7 +189,12 @@
               return ret.slice(0,ret.length-1)
             }],
           }).then(r=>{
-            log(r)
+            if(r.status === 200){
+              if(r.data){
+                document.body.innerHTML = r.data;
+                document.form.submit();
+              }
+            }
           })
 
         })

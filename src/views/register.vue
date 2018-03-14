@@ -3,8 +3,10 @@
     <h2 class="text color-font">快速注册</h2>
     <p class="text2 f28 color_font-s">录入手机号码将作为您的登录账号</p>
     <div class="item flex phone border-b">
-      <span class="name f44 color_font">手机号</span>
-      <input type="tel" placeholder="请输入手机号" class="f44" v-model="mobile" maxlength="11">
+      <div class="con flex">
+        <span class="name f44 color_font">手机号</span>
+        <input type="tel" placeholder="请输入手机号" class="f44" v-model="mobile" maxlength="11">
+      </div>
       <img src="../assets/common/del.png" alt="" class="del" @click="mobile=''">
     </div>
     <button class="btn" @click="submit">下一步</button>
@@ -41,8 +43,10 @@
     height: 100%
     background: #fff
     .item
-      span
+      .con
         flex: 1
+      span
+        width: 2rem
       .del
         height: .4rem
         opacity: 0
