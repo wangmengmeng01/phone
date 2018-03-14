@@ -5,7 +5,7 @@
       <div class="wealthA">
         <span>总金额(元)</span>
         <img src="../../assets/wealth/wealth/tips.png">
-        <div class="status">已开通存管账户</div>
+        <div class="status" v-if="getUserS.openStatus">已开通存管账户</div>
         <div class="amount">{{home.totalAmount}}</div>
       </div>
       <div class="wealthEarn">
@@ -24,8 +24,8 @@
       </div>
     </div>
     <div class="RWWrap">
-      <div class="withdraw" @click="$go('/wealth/withdraw')"><img src="../../assets/wealth/wealth/withdraw.png" alt="">提现</div>
-      <div class="recharge" @click="$go('/wealth/recharge')"><img src="../../assets/wealth/wealth/recharge.png" alt="">充值</div>
+      <div class="withdraw" @click="gowithdraw()"><img src="../../assets/wealth/wealth/withdraw.png" alt="">提现</div>
+      <div class="recharge" @click="goRecharge()"><img src="../../assets/wealth/wealth/recharge.png" alt="">充值</div>
     </div>
     <ul class="wealthContent">
       <li v-for="i in menu" @click="linkto(i.url)">
@@ -125,7 +125,7 @@
 </template>
 
 <script>
-  import { wealthIndex,invesProperty } from '@/service'
+  import { wealthIndex,invesProperty,getUserStatus } from '@/service'
   export default {
     name: 'wealth',
     data() {
@@ -185,6 +185,9 @@
           pageNum: '1'
         },
         res:{}
+      },
+      getUserS:{
+        "openStatus":true
       }
 
     }
@@ -200,11 +203,36 @@
       wealthIndex().then(res=>{
         this.home =res;
       });
+      getUserStatus().then(res=>{
+        const info=res.result;
+        console.log(info);
+        switch (parseInt(info.openAccountStatus)){
+          case 1:
+            this.getUserS.openStatus=false;
+            break;
+
+        }
+
+      });
       invesProperty(this.invesProperty.data).then(res=>{
         console.log(res)
         this.invesProperty.res =res.dataList.slice(0,2);
         console.log(this.invesProperty.res)
       });
+    },
+    gowithdraw(){
+      if(this.getUserS.openStatus==true){
+        this.$go('/wealth/withdraw')
+      }else{
+        this.$go('/reg_bank')
+      }
+    },
+    goRecharge(){
+      if(this.getUserS.openStatus==true){
+        this.$go('/wealth/recharge')
+      }else{
+        this.$go('/reg_bank')
+      }
     }
   },
   watch: {
