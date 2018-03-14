@@ -1,6 +1,5 @@
 export const _default = {
-  url: `${location.origin}/apigw/client/`,
-  origin: `${location.origin}/`,
+  url: `${location.origin}/zw/api/`,
 };
 
 export const duxin = {
@@ -8,13 +7,14 @@ export const duxin = {
 };
 
 export const dev = {
-  url: 'http://192.168.8.161:8506/zw/api/',
-  // url: 'http://192.168.7.110:8507/zw/api/',
+//url: 'http://192.168.8.161:8506/zw/api/',
+//   url: 'http://192.168.7.110:8506/zw/api/',
   // url: 'https://zw-api.chinazyjr.net/zw/api/',
 };
 
 export const test = {
-  url: 'http://192.168.7.110:8506/zw/api/',
+    url: 'http://192.168.7.110:8506/zw/api/',
+  // url: 'https://zw-api.chinazyjr.net/',
 };
 
 export const uat = {

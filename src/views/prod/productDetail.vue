@@ -15,7 +15,7 @@
 				<p class="pdtLine" :style="{width:detail.amountScale*6.7+'rem'}"></p>
 				<p class="pdtProgressMes">剩余可投<i>{{detail.amountWait| formatNum}}元</i></p>
 			</div>
-			<p class="pdtBugMes" @click="$go('/webapp/prod/joinList')"><img class="pdtBugMesImg1" src="../../assets/main/prod/people.png" /><span> 已有{{detail.countPeople}}人购买 </span> <img class="pdtBugMesImg2" src="../../assets/main/prod/lnextIcon.png" /></p>
+			<p class="pdtBugMes" @click="$go('/prod/joinList')"><img class="pdtBugMesImg1" src="../../assets/main/prod/people.png" /><span> 已有{{detail.countPeople}}人购买 </span> <img class="pdtBugMesImg2" src="../../assets/main/prod/lnextIcon.png" /></p>
 		</div>
 
 		<!--交易规则-->
@@ -89,14 +89,14 @@
 				<span>查看详情 <img src="../../assets/common/arrow-right.png"/></span>
 			</p>
 			<div class="pdcIntroduce">
-				<p @click="$go('/webapp/prod/bankDepository')">
+				<p @click="$go('/prod/bankDepository')">
 					<img class="pdcIntroduceImg1" src="../../assets/main/prod/Group47@2x.png" />
 					<span>资金银行存管</span>
 				</p>
-				<p @click="$go('/webapp/prod/higHqualityAssets')">
+				<p @click="$go('/prod/higHqualityAssets')">
 					<img class="pdcIntroduceImg1" src="../../assets/main/prod/Group46@2x.png" />
 					<span>严选优质资产</span></p>
-				<p @click="$go('/webapp/prod/Honour')">
+				<p @click="$go('/prod/Honour')">
 					<img class="pdcIntroduceImg2" src="../../assets/main/prod/Group45@2x.png" />
 					<span>历史100%兑付</span></p>
 			</div>
@@ -140,7 +140,7 @@
 
 						if(info.openAccountStatus == "1") {
 							//未开户
-							this.$go('/webapp/reg_bank');
+							this.$go('/reg_bank');
 						} else if(info.openAccountStatus == "4") {
 							//激活
 
@@ -155,7 +155,7 @@
 									//风险测评
 
 									if(info.riskRatingFlag == "1") {
-										this.$go('/webapp/prod/buyBid', {
+										this.$go('/prod/buyBid', {
 											bidNo: this.$route.query.bidNo,
 											backTitle: '确认购买'
 										})
@@ -176,7 +176,7 @@
 
 
 					} else if(res.code == "1210" || res.code == "1000") {
-						this.$go('/webapp/login');
+						this.$go('/login');
 					} else {
 						this.$toask(res.message);
 					}

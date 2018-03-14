@@ -40,7 +40,7 @@ const dealRoutes = (arr, child = false) => {
       });
     } else {
       // 正常的路由
-      let path = `${child ? "" : "/webapp/"}${t.path}`; // 如果是子路由则无需加上webapp前置
+      let path = `${child ? "" : "/"}${t.path}`; // 如果是子路由则无需加上webapp前置
       let name = `${child ? child + "-" : ""}${t.path}`; // 子路由名字 = 子组件+加上父组件
 
       // 子组件需要加上父组件的路径，如果是父组件需要加上index的路由，不知道为什么这个自动生成的时候没有默认找index，太懒了
@@ -54,11 +54,6 @@ const dealRoutes = (arr, child = false) => {
       let back = typeof t.back === 'boolean' ? t.back : t.back || true; // 顶部返回
       let foot = typeof t.foot === 'boolean' ? t.foot : t.foot || true; // 底部风险提示
       let filter = !!t.filter; // 是否过滤
-
-      if (t.path.includes("webapp")) {
-        // 如果是 webapp单独做下处理
-        path = "/webapp";
-      }
       if (t.path.includes("*")) {
         // 同上
         path = "*";

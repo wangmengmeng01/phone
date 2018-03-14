@@ -86,7 +86,7 @@ class http{
       resole(r.result)
     } else {  // 其他reject
       if(r.code === '1000'){
-        self.$go('/webapp/login')
+        self.$go('/login')
       }
       this.$reject(reject,r.message)
     }

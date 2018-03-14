@@ -38,7 +38,7 @@
       init(){
         autoInvestQuary().then(res=>{
           this.res =res;
-          // this.$go('/webapp')
+          // this.$go('/')
           console.log(res)
         })
       }

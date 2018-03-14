@@ -41,7 +41,7 @@
           <div class="wealthMATopBL">
             我的资产
           </div>
-          <div class="wealthMATopBR" @click="$go('/webapp/wealth/assertList')">
+          <div class="wealthMATopBR" @click="$go('/wealth/assertList')">
             更多 <img src="../../assets/common/arrow-right.png" alt="">
           </div>
         </div>
@@ -50,7 +50,7 @@
             <div class="wealthMyObjectT">
               <div class="wealthMyObjectTT">{{i.borrowName}} </div>
               <div class="wealthMyObjectTC">{{i.cashStatus=='4'?'已到期':'持有中'}}</div>
-              <div class="wealthMyObjectTB" @click="$go('/webapp/prod/productDetail',{bidNo:i.borrowNo,backTitle:i.borrowName})">查看</div>
+              <div class="wealthMyObjectTB" @click="$go('/prod/productDetail',{bidNo:i.borrowNo,backTitle:i.borrowName})">查看</div>
             </div>
             <div class="wealthMyObjectC">
               <div class="wealthMyObjectCL">
@@ -159,7 +159,7 @@
         {
           icon: 'wmyConpun',
           name: '我的优惠',
-          url: '/webapp/coupon'
+          url: '/coupon'
         },
         {
           icon: 'wautoin',

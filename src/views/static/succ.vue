@@ -9,7 +9,7 @@
     </div>
     <!--<div v-if="view==='register'" class="register item">-->
       <!--<h2 class="f36 color_font">恭喜您注册成功</h2>-->
-      <!--<button class="btn" @click="$go('/webapp/reg_bank')">立即开通银行存管账户</button>-->
+      <!--<button class="btn" @click="$go('/reg_bank')">立即开通银行存管账户</button>-->
     <!--</div>-->
     <!--<div v-if="view==='reg_bank'" class="reg_bank item">-->
       <!--<h2 class="f36 color_font">恭喜，开通银行存管账户成功</h2>-->
@@ -23,21 +23,17 @@
   import { mapGetters, mapMutations } from 'vuex'
   export default {
     name: 'succ',
-    data () {
-      return {
-
-      }
-    },
     computed: {
       ...mapGetters([
         'succ_page'
       ])
     },
+    beforeRouteEnter (to, from, next) {
+      next(vm => {
+        !vm.succ_page.title && vm.$go('/');
+      })
+    },
     created() {
-      if(!this.succ_page.title){
-        this.$go('/');
-        return
-      }
       document.title = this.succ_page.title
     },
     methods: {
@@ -54,7 +50,7 @@
         this.RESET('succ_page');
         this.$go(sub_backurl,'',false);
       }
-    }
+    },
   }
 </script>
 

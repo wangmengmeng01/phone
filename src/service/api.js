@@ -32,6 +32,8 @@ export default {
 
   userReskEvaluation:"evaluation/filter/userReskEvaluation" ,// 风险评测
 
+  getCouponBenefit: 'coupon/filter/getCouponBenefit',// 选取优惠
+
   searchGiveCouponList: 'coupon/filter/searchGiveCouponList', // 查询卡券礼物列表
 
   showGiveCouponList: 'coupon/filter/showGiveCouponList', // 选择可送优惠
@@ -61,12 +63,19 @@ export default {
 	saveUserManager:'manager/filter/saveUserManager',//加盟理财师
 
 	getUserStatus:'account/filter/getUserStatus',//获取用户状态
-	
+
 	accountAcmountInfo:'account/filter/accountAcmountInfo',//获取用户各种金额
-	
+
 	getExpectedRevenue:'bid/filter/getExpectedRevenue',//计算收益
-	
+
 	searchCouponList:'coupon/filter/searchCouponList',//查询购买的可用卡券数量
-	
+
 	borrowInvest:'api/bid/filter/borrowInvest',//购买标的
+	
+	selectBeforeRecharge:'account/filter/selectBeforeRecharge',//充值前信息查询
+	
+	rechargeSendSmsCode:'account/filter/sendSmsCode',//充值发送短信
+
+  searchUserCouponInfo: 'coupon/filter/searchUserCouponInfo', // 我的优惠
+
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="mine">
-    <div class="head flex" @click="$go('/webapp/mine/qrcode')">
+    <div class="head flex" @click="$go('/mine/qrcode')">
       <img :src="item.pic || head" alt="" class="head_icon">
       <div class="msg">
         <h2 class="f44 flex"><span>{{item.userName}}</span><span v-if="(item.position=='1')||(item.position=='2')" class="status"><img src="../../assets/main/mine/status_yellow.png" alt=""><i class="f12">{{['一般理财师','大区经理'][parseInt(item.position)-1]}}</i></span></h2>
@@ -14,7 +14,7 @@
     </div>
     <!--菜单栏-->
     <ul class="item" v-for="i in menu" v-if="menu.length">
-      <li v-for="j in i" class="flex border-notend-b" @click="$go(`/webapp/mine/${j.url}`)">
+      <li v-for="j in i" class="flex border-notend-b" @click="$go(`/mine/${j.url}`)">
         <img :src="require(`@/assets/main/mine/${j.icon}.png`)" alt="" class="icon">
         <span class="name f32">{{j.name}}</span>
         <span class="f28 color_font-s" v-if="!j.url">敬请期待</span>

@@ -27,14 +27,14 @@
 				<p class="hotProductDivMessage" :class="[n<=i.bidList.length-2?'bb':'']">
 					<span>起投金额 <i>{{j.investMinAmount}}元</i></span>
 					<span>投资期限 <i>{{j.periodLength}}</i>{{j.periodUnit|Totime}}</span>
-					<span class="hotProductDivTitleBtn" @click="$go('/webapp/prod/productDetail',{bidNo:j.bidNo,backTitle:j.bidName})">购买</span>
+					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,backTitle:j.bidName})">购买</span>
 				</p>
 			</div>
 
 		</div>
 		<!--售罄状态-->
 		<div v-else class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
-			<div class="productDivTitle" @click="$go('/webapp/prod/productList',{productName:i.productName,productNo:i.productNo,productType:i.productType,backTitle:i.productName})">
+			<div class="productDivTitle" @click="$go('/prod/productList',{productName:i.productName,productNo:i.productNo,productType:i.productType,backTitle:i.productName})">
 				<span>{{i.productName}}</span>
 				<span style="display: none;">我有优惠</span>
 				<span style="color: #8D8D94;">更多 <img src="../../assets/main/home/nextIcon.png" alt="" /></span>

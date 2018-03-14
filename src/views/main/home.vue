@@ -39,7 +39,7 @@
 				</p>
 				<p>信息披露</p>
 			</div>
-			<div class="indexMessageTip" @click="$go('/webapp/home/joinFinlManager')">
+			<div class="indexMessageTip" @click="$go('/home/joinFinlManager')">
 				<p class="jionFinancial">
 					<img :src="require('@/assets/main/home/jm.png')" alt="">
 				</p>
@@ -62,7 +62,7 @@
 								<span>剩余不到<i>{{i.amountWait/10000+1|tofixed}}</i>万元</span>
 								<span><i>{{i.investMinAmount}}</i>元起投</span>
 							</p>
-							<p class="newBtn" @click="$go('/webapp/prod/productDetail',{bidNo:i.bidNo,backTitle:i.bidName})">立即投资</p>
+							<p class="newBtn" @click="$go('/prod/productDetail',{bidNo:i.bidNo,backTitle:i.bidName})">立即投资</p>
 						</div>
 					</div>
 				</div>
@@ -85,7 +85,7 @@
 					<p>1000元起投</p>
 					<p>锁定28天</p>
 				</div>
-				<div class="recommendDivButton" @click="$go('/webapp/prod/productList',{productName:a.productName,productNo:a.productNo,productType:a.productType,backTitle:a.productName})">投资</div>
+				<div class="recommendDivButton" @click="$go('/prod/productList',{productName:a.productName,productNo:a.productNo,productType:a.productType,backTitle:a.productName})">投资</div>
 			</div>
 			<!-- 月月赢 -->
 			<!--<div class="recommendDiv recommendDiv2">
@@ -117,7 +117,7 @@
 			<p class="recommendTitle" style="margin-bottom: 0.26rem;display: none;">热销产品 <span>更多<img src="../../assets/main/home/nextIcon.png"/></span></p>
 			<!--热销产品-->
 			<div class="hotProductDiv" v-for="(b,index) in hotPro" :class="[!index==0?'hotProductDiv0':'']">
-				<p class="hotProductDivTitle"> <img :src="require(`@/assets/main/home/no${index+1}.png`)" /> <span class="hotProductDivTitleBidName">中赢宝1101</span> <span class="hotProductDivTitleBtn" @click="$go('/webapp/prod/productDetail',{bidNo:b.bidNo,backTitle:b.bidName})">购买</span></p>
+				<p class="hotProductDivTitle"> <img :src="require(`@/assets/main/home/no${index+1}.png`)" /> <span class="hotProductDivTitleBidName">中赢宝1101</span> <span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:b.bidNo,backTitle:b.bidName})">购买</span></p>
 				<p class="hotProductDivRate">{{b.annualizedRate}}%</p>
 				<p class="hotProductDivWord">历史年化收益率</p>
 				<!--进度条-->

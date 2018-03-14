@@ -11,7 +11,8 @@
       <span class="f28 color_main" @click="sendCode" :class="click_code ? 'dis' : ''">{{codeText}}</span>
     </div>
     <div class="smscode item flex phone border-b">
-      <input type="password" placeholder="请设置你的登录密码" class="f32 color_font color_border" v-model="item.password" minlength="6" maxlength="12">
+      <input  :type="[passwordType?'password':'text']"  type="password" placeholder="请设置你的登录密码" class="f32 color_font color_border" v-model="item.password" minlength="6" maxlength="12">
+      <img :src="require(`@/assets/common/${passwordType?'eyes':'eyebrow'}.png`)" alt="" class="eyes" @click="passwordType=!passwordType">
     </div>
     <p class="tip f12 color_font-s">密码须为6～12位大小写字母、数字至少2位数</p>
     <button class="btn" @click="submit">注册</button>
@@ -29,12 +30,13 @@
     name: 'set_pwd',
     data () {
       return {
-        checked: false,
-        codeText: '获取短信验证码',
-        num: 60,
-        click_code: false,
-        text: '',
-        imageCode: '',
+        passwordType: true,                       // 密码显示隐藏
+        checked: false,                           // 同意复选框勾选
+        codeText: '获取短信验证码',                 // 获取验证码提示
+        num: 60,                                  // 验证码倒计时
+        click_code: false,                        // 短信按钮能否点击
+        text: '',                                 // 页面标题
+        imageCode: '',                            // 图形验证码url
         item: {
           mobile: this.$route.query.mobile,
           password: '',
@@ -45,14 +47,18 @@
       }
     },
     created() {
+      // 开始清楚成功页面的缓存
       this.RESET('succ_page');
+      // 如果没有手机号跳转到注册页面
       if(!this.item.mobile){
         this.$go('register');
         return
       }
+      // 判断是哪个忘记密码页面进来的还是注册页面进来的
       this.text = this.$route.query.view === 'forget_pwd'
         ? '输入正确的图形验证码后，可点击"获取短信验证码"获取验证码'
         : `输入正确的图形验证码后，可点击“获取短信验证码” 系统将向${this.item.mobile}发送短信`;
+      // 默认显示图片验证码
       this.changeImgCode();
     },
     methods: {
@@ -63,7 +69,11 @@
         'RESET',
         'SET_SUCC_PAGE'
       ]),
+      /**
+       * 发送验证码
+       */
       sendCode(){
+       // 验证图像验证码
         if(!this.item.imageCode){
           this.$toask('图像验证码不能为空!');
           return
@@ -74,9 +84,13 @@
           operationType: this.$route.query.view === 'forget_pwd' ? 'forget' : 'register'
         };
         sendSMS(params).then(()=>{
+        // 发送成功倒计时
           this.countdown()
         })
       },
+      /**
+       * 倒计时
+       */
       countdown(){
         this.click_code = !this.click_code;
         let time = setInterval(()=>{
@@ -91,9 +105,15 @@
           this.codeText = `发送(${this.num})`;
         },1000)
       },
+      /**
+       * 获取图像验证码
+       */
       changeImgCode(){
         getValidateImage().then(r=>this.imageCode = r);
       },
+      /**
+       * 提交
+       */
       submit(){
         if(!this.item.imageCode){
             this.$toask('图形验证码不能为空!');
@@ -107,39 +127,44 @@
           this.$toask('登录密码不能为空!');
           return
         }
-        if(/^(([A-Za-z]+)(\d+)){6,12}$/.test(this.item.password)){
-          this.$toask('密码须为6～12位大小写字母、数字至少2位数!');
+        if(!(/^(?!^\d+$)(?!^[a-zA-Z]+$)(?!^_+$)[\d|a-zA-Z|_]{6,12}$/.test(this.item.password))) {
+          this.$toask('密码格式不正确!');
           return
         }
         if(!this.checked){
           this.$toask('请阅读并勾选《平台注册协议》!');
           return
         }
+        // 加密
         let CryptoJS= require('@/lib/aes');
         this.item.password = CryptoJS.aes(this.item.password);
+        // 注册
         register(this.item).then(()=>{
           const {mobile, password} = this.item;
+        // 注册之后调用登录接口
           login({
             mobile,
             password
           }).then(res=>{
+          // 把返回的数据放入状态管理中
             this.set_user(res);
             let params = this.$route.query.view === 'forget_pwd'
               ? {
                 "title": "登录密码修改成功",
                 "sub_title": "使用您的新密码登录",
                 "btn_text": "登录",
-                "backurl": "/webapp"
+                "backurl": "/"
               }
               : {
                 "title": "恭喜您注册成功",
                 "btn_text": "立即开通银行存管账户",
-                "backurl": "/webapp/reg_bank",
+                "backurl": "/reg_bank",
                 "sub_btn_text": "暂无",
-                "sub_backurl": "/webapp"
+                "sub_backurl": "/"
               };
+            // 跳转成功页面
             this.SET_SUCC_PAGE(params);
-            this.$go('/webapp/static/succ');
+            this.$go('/static/succ');
           })
         })
       },
@@ -172,6 +197,8 @@
       span
         text-align: right
     .smscode
+      .eyes
+        height: .18rem
       span
         &.dis
           pointer-events: none
