@@ -11,3 +11,16 @@ export const showGiveCouponList = (params)=>{
     params,
   });
 }
+
+
+
+/**
+ * 选取优惠
+ */
+export const getCouponBenefit = (params)=>{
+  return $http({
+    method: 'get',
+    api: api.getCouponBenefit,
+    params,
+  });
+}

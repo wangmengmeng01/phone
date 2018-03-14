@@ -63,6 +63,8 @@ class http{
         Object.assign(_params,{
           params: this.params,
         });
+      // console.log(_params)
+
       axios(_params).then(r => {
         this.$resole(resole,reject,r.data)
       }).catch(() => {

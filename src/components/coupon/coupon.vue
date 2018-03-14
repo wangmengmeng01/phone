@@ -46,7 +46,7 @@
         this.visibility =! this.visibility;
         this.$emit('closeCb', this.data)
       }
-    }
+    },
   }
 </script>
 
