@@ -4,14 +4,16 @@
     <div class="item flex phone border-b">
       <span class="name f44 color-font">手机号</span>
       <input type="tel" placeholder="请输入手机号" class="f44" v-model="item.mobile" maxlength="11">
+      <img src="../assets/common/del.png" alt="" class="del" @click="item.mobile=''">
     </div>
     <div class="item flex password border-b">
       <span class="name f44 color-font">密码</span>
-      <input type="password" placeholder="请输入登录密码" class="f44" v-model="item.password">
+      <input :type="[checked?'password':'text']" placeholder="请输入登录密码" class="f44" v-model="item.password">
+      <img :src="require(`@/assets/common/${checked?'eyes':'eyebrow'}.png`)" alt="" class="eyes" @click="checked=!checked">
     </div>
     <button class="btn" @click="submit">{{text}}</button>
     <p class="link flex f32 color_font-s">
-      <span class="forgetpwd" @click="$go('forget_pwd')">忘记密码？</span>
+      <span class="forgetpwd" @click="$go('forget_pwd',{mobile: item.mobile})">忘记密码？</span>
       <span class="reg" @click="$go('register')">快速注册</span>
     </p>
   </div>
@@ -24,14 +26,16 @@
     name: 'login',
     data () {
       return {
-        text: '登录',
+        checked: true,                                              // 密码框的类型显示隐藏
+        text: '登录',                                                // 登录按钮文字提示
         item: {
-          mobile: '18030003016',
+          mobile: this.$route.query.mobile || '18030003016',
           password: 'a123456',
         }
       }
     },
     created() {
+      // 登录清除全部缓存数据
       this.RESET();
     },
     methods: {
@@ -41,6 +45,9 @@
       ...mapActions([
         'set_user',
       ]),
+      /**
+       * 提交
+       */
       submit(){
         if(!this.item.mobile) {
           this.$toask('手机号不能为空!');
@@ -54,15 +61,20 @@
           this.$toask('手机号格式不正确!');
           return
         }
-        this.text = '登录中...';
-        if(this.item.password){
-          let CryptoJS= require('@/lib/aes');
-          this.item.password = CryptoJS.aes(this.item.password);
+        if(!(/^(?!^\d+$)(?!^[a-zA-Z]+$)(?!^_+$)[\d|a-zA-Z|_]{6,12}$/.test(this.item.password))) {
+          this.$toask('密码格式不正确!');
+          return
         }
+        this.text = '登录中...';
+        let CryptoJS= require('@/lib/aes');
+        this.item.password = CryptoJS.aes(this.item.password);
+        // 登录
         login(this.item).then(res=>{
+          // 成功的话把返回的数据放到缓存中
           this.set_user(res);
-          this.$go('/webapp')
+          this.$go('/')
         }).catch(()=>{
+            //失败的话提示
             this.item.password = '';
             this.text = '重新登录';
         })
@@ -82,10 +94,17 @@
   .item
     text-align: left
     span
-      flex: 1
+      width: 2rem
+    .del
+      height: .4rem
+      opacity: 0
     input
-      flex: 1.5
+      &:focus ~ .del
+        opacity: 1
+      flex: 1
     padding-bottom: .3rem
+    .eyes
+      height: .18rem
   .phone
     margin-bottom: .6rem
   .btn

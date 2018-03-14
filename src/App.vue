@@ -43,8 +43,6 @@
         this.$router[url.includes('login') ? 'replace' : 'push'](`${url}${params?'?'+transformRequest(params):''}`)
       };
     },
-    methods: {
-    },
     watch:{
       $route(to,from){
         this.isAppear = !from.matched.length; //from.matched路由记录为空这表示首次加载，首次加载是用淡入淡出即可

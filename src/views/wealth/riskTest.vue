@@ -96,12 +96,12 @@
             "title": sumScore+'分',
             "sub_title": '评测结果: '+investType_res,
             "btn_text": "我已了解，立即买入",
-            "backurl": "/webapp/product",
+            "backurl": "/product",
             "sub_btn_text": "重新评测",
             "sub_backurl": sub_backurl
           };
           this.SET_SUCC_PAGE(page_params);
-          this.$go('/webapp/static/succ');
+          this.$go('/static/succ');
         })
       }
     },

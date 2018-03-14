@@ -21,13 +21,9 @@
 		"user_info": {}
 	},
 	"route": [
-		{
-			"path": "/",
-			"redirect": "/webapp"
-		},
     {
-      "path": "/webapp/recharge",
-      "redirect": "/webapp/wealth/recharge"
+      "path": "/recharge",
+      "redirect": "/wealth/recharge"
     },{
 			"path": "login",
 			"title": "登录",
@@ -73,7 +69,7 @@
 				"style": "padding-bottom: 1rem;"
 			}
 		}, {
-			"path": "webapp",
+			"path": "/",
 			"component": "main",
 			"children": [
 				{

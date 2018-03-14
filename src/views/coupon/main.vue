@@ -12,7 +12,7 @@
 
 <script>
   import Coupon from '@/components/coupon/coupon'
-  import { showGiveCouponList } from '@/service'
+  import { searchUserCouponInfo } from '@/service'
   export default {
     name: 'coupon_main',
     data() {
@@ -21,15 +21,18 @@
         nav: [{
           name: '未使用',
           type: '1',
-          size: 2
+          status: '3',
+          size: 0
         },{
           name: '已使用',
-          type: '2',
-          size: 2
+          type: '1',
+          status: '4',
+          size: 0
         },{
           name: '过期未使用',
-          type: '3',
-          size: 2
+          type: '1',
+          status: '6',
+          size: 0
         }],
         res: {}
       }
@@ -41,9 +44,12 @@
       this.init(this.nav[0]);
     },
     methods: {
-      init(item){
-        showGiveCouponList({couponType: item.type}).then(res=>{
+      init(params){
+        searchUserCouponInfo(params).then(res=>{
           this.res = res.couponList
+          this.nav[0].size=res.notUsedCount;
+          this.nav[1].size=res.usedCount;
+          this.nav[2].size=res.expireNotUsedCount;
         }).catch(err=>{
           this.res = []
         })
@@ -53,9 +59,6 @@
         this.act = index;
         this.init(i);
       },
-      checked(res){
-        log(res)
-      }
     },
     watch: {
     }

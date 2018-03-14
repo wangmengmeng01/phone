@@ -39,7 +39,7 @@
       ]),
       choose(){
         this.SET_COUPON({backurl: this.$route.path});
-        this.$go('/webapp/coupon/choose_usable')
+        this.$go('/coupon/choose_usable')
       },
       close(data){
         this.DEL_COUPON(data);
@@ -55,10 +55,10 @@
             "sub_title": "优惠已存入客户为的优惠中",
             "btn_text": "继续赠送其他客户",
             "sub_btn_text": "查看赠送记录",
-            "sub_backurl": "/webapp/mine/customer",
-            "backurl": "/webapp/mine/customer"
+            "sub_backurl": "/mine/customer",
+            "backurl": "/mine/customer"
           });
-          this.$go('/webapp/static/succ');
+          this.$go('/static/succ');
         })
       }
     },

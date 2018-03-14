@@ -24,7 +24,7 @@
       </li>
     </ul>
     <p class="tip f24 color_font-s">服务时间 9:00-18:00</p>
-    <button class="btn" @click="$go('/webapp/login')">退出登录</button>
+    <button class="btn" @click="$go('/login')">退出登录</button>
   </div>
 </template>
 
@@ -35,7 +35,7 @@
       return {
         pwdList:[{
           name: '修改登录密码',
-          url: '/webapp/forget_pwd'
+          url: '/forget_pwd'
         },{
           name: '修改交易密码',
           url: ''

@@ -14,7 +14,7 @@
     name: 'forget_pwd',
     data () {
       return {
-        mobile: ''
+        mobile: this.$route.query.mobile || ''
       }
     },
     methods: {

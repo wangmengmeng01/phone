@@ -76,11 +76,25 @@
         this.init(i);
       },
       checkedCb(data){
-        this.couponlist.length
-          ? this.couponlist.concat(this.couponlist.filter(t=>{
-            return t.couponNo !== data.couponNo
-          }))
-          : this.couponlist.push(data)
+        if(data.isSameOverlap == '2'){
+          this.$toask('此券不允许同类叠加');
+          return
+        }
+        if(data.isDifferentOverlap == '2'){
+          let i=0,len = this.couponlist.length;
+          for(;i<len;i++){
+            if(this.couponlist[i].couponType != data.couponType){
+              this.$toask('此券不允许异类叠加');
+              break
+            }
+          }
+        }else{
+//          this.couponlist.length
+//            ? this.couponlist.concat(this.couponlist.filter(t=>{
+//            return t.couponNo !== data.couponNo
+//          }))
+//            : this.couponlist.push(data)
+        }
       },
       submit(){
         const bidNo = this.$route.query.bidNo;

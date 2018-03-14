@@ -99,4 +99,3 @@ export default new Vuex.Store({
   plugins: [createPersistedState({ storage: window.sessionStorage })] // 此插件会将stare同步到session中
 })
 
-
