@@ -11,8 +11,8 @@ import './components/toask'
 let config = require('./config.json');
 Vue.use(VueRouter);
 
-  window.log = console.log;
 if(process.env.NODE_ENV !== 'production'){
+  window.log = console.log;
   if(config.vconsole){
     let VConsole = require('vconsole');
     let vConsole = new VConsole();
