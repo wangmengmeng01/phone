@@ -9,8 +9,9 @@
       <li>
         <div class="CTCtop">
           <div class="CTCTleft">中赢宝-1234期</div>
-          <div class="OOWrap">
-            <div class="OOButton">关</div>
+          <div class="OOWrap" @click="autoRenewBol=!autoRenewBol">
+            <div class="OOButton" v-if="autoRenewBol">关</div>
+            <div class="OOButton on" v-else>开</div>
           </div>
         </div>
         <div class="CTCBottom">
@@ -27,10 +28,7 @@
     name: 'continueInvest',
     data() {
       return{
-        res: {},
-        item: {
-
-        }
+        autoRenewBol: true, //自动续费
       }
     },
     created() {
@@ -92,6 +90,8 @@
       position absolute
       left 0
     .on
-      background:#3299D1;
+      left 0.4rem
+      background #3299D1
+
 
 </style>
