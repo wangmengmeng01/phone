@@ -222,7 +222,8 @@
 			"children": [
 				{
 					"path": "productList",
-					"title": "产品列表页"
+					"title": "产品列表页",
+					"filter": true
 				}, {
 					"path": "joinList",
 					"title": "加入记录"
@@ -264,6 +265,23 @@
 				}
 			]
 		}, {
+			"path": "forPhone",
+			"component": "forPhone",
+			"children": [
+				{
+					"path": "",
+					"redirect": "downLoad"
+				}, 
+				{
+					"path": "downLoad",
+					"title": "APP下载页",
+					"filter": true,
+					"back": false,
+					"foot": false
+					
+				}
+			]
+		},{
 			"path": "static",
 			"component": "static",
 			"children": [

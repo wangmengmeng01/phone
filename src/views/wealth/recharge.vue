@@ -3,36 +3,57 @@
     <div class="top">
       <img src="../../assets/common/contacts.png">
       <div class="topRight">
-        <div class="TRTop"><span>招商银行</span><em>快捷支付</em></div>
-        <p>6214*********0891</p>
+        <div class="TRTop"><span>{{cardMes.bankName}}</span><em>快捷支付</em></div>
+        <p>{{cardMes.bankCardNo}}</p>
       </div>
     </div>
-    <div class="rechargeLimit">单笔限额1000元，每日限额1000元</div>
+    <div class="rechargeLimit">单笔限额{{cardMes.singleTransQuota}}元，每日限额{{cardMes.cardDailyTransQuota}}元</div>
     <div class="center">
       <div class="centerTop">充值金额</div>
       <div class="centerC"><span>¥</span><input type="text" placeholder="100元起"></div>
-      <div class="centerB"><span>账户余额</span><em>0.00元</em></div>
+      <div class="centerB"><span>账户余额</span><em>{{cardMes.availableAmount|tofixed2}}元</em></div>
     </div>
     <div class="bottom">
-      <div class="bottomTop">银行预留手机号<span>183****5642</span></div>
+      <div class="bottomTop">银行预留手机号<span>{{cardMes.mobile}}</span></div>
       <div class="bottomB">
         <input type="text" placeholder="请输入短信验证码">
         <div class="getCode">获取短信验证码</div>
       </div>
     </div>
+    <p class="rechargeBtn disable">下一步</p>
   </div>
 </template>
 
 <script>
+	import {selectBeforeRecharge,rechargeSendSmsCode} from '@/service'
+	
   export default {
     name: 'recharge',
     data() {
       return{
+      	cardMes:{},//银行卡信息
+      	
       }
     },
     created() {
+    	selectBeforeRecharge().then(res => {
+				log(res);
+				this.cardMes=res;
+			});
     },
     methods: {
+    	
+    	
+    	
+    	sendMess(){
+    		
+    			selectBeforeRecharge().then(res => {
+					log(res);
+					this.cardMes=res;
+				});
+    	}
+ 	
+    	
     },
     watch: {
     }
@@ -44,7 +65,26 @@
   .hide{
     display: none;
   }
-
+	.rechargeBtn {
+		margin: 0 auto;
+		padding: 0;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 7.5rem;
+		height: 1.1rem;
+		overflow: hidden;
+		line-height: 1.1rem;
+		font-size: 0.36rem;
+		text-align: center;
+		background-color: #3299D1;
+		color: #FFFFFF;
+	}  
+	.disable {
+		background: #98cceb;
+	}
+	
   .recharge
     .top
       height 2.28rem
