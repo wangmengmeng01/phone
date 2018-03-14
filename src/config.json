@@ -69,7 +69,7 @@
 				"style": "padding-bottom: 1rem;"
 			}
 		}, {
-			"path": "webapp",
+			"path": "/",
 			"component": "main",
 			"children": [
 				{
