@@ -222,16 +222,16 @@
     },
     gowithdraw(){
       if(this.getUserS.openStatus==true){
-        this.$go('/webapp/wealth/withdraw')
+        this.$go('/wealth/withdraw')
       }else{
-        this.$go('/webapp/reg_bank')
+        this.$go('/reg_bank')
       }
     },
     goRecharge(){
       if(this.getUserS.openStatus==true){
-        this.$go('/webapp/wealth/recharge')
+        this.$go('/wealth/recharge')
       }else{
-        this.$go('/webapp/reg_bank')
+        this.$go('/reg_bank')
       }
     }
   },
