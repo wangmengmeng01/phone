@@ -13,8 +13,8 @@ export const dev = {
 };
 
 export const test = {
-    // url: 'http://192.168.7.110:8506/zw/api/',
-  url: 'https://zw-api.chinazyjr.net/',
+    url: 'http://192.168.7.110:8506/zw/api/',
+  // url: 'https://zw-api.chinazyjr.net/',
 };
 
 export const uat = {

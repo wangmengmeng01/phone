@@ -29,7 +29,7 @@
         checked: true,                                              // 密码框的类型显示隐藏
         text: '登录',                                                // 登录按钮文字提示
         item: {
-          mobile: this.$route.query.mobile || '18030003016',
+          mobile: this.$route.query.mobile || '17810001001',
           password: 'a123456',
         }
       }
@@ -94,7 +94,7 @@
   .item
     text-align: left
     span
-      width: 2rem
+      width: 3rem
     .del
       height: .4rem
       opacity: 0
