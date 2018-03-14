@@ -76,3 +76,17 @@ export const searchUserCouponInfo = async (params)=>{
   });
 };
 
+
+// 充值提交
+export const submitUserRecharge = async (params)=>{
+  return await $http({
+    method: 'post',
+    api: api.submitUserRecharge,
+    params,
+    options: {
+		filter_code: false,
+		filter_msg: false
+	}
+  });
+};
+

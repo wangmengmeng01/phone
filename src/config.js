@@ -9,12 +9,13 @@ export const duxin = {
 
 export const dev = {
 //url: 'http://192.168.8.161:8506/zw/api/',
-  url: 'http://192.168.7.110:8506/zw/api/',
-  // url: 'https://zw-api.chinazyjr.net/zw/api/',
+//	url: 'http://192.168.7.110:8506/zw/api/',
+url: 'https://zw-api.chinazyjr.net/zw/api/',
 };
 
 export const test = {
   url: 'http://192.168.7.110:8506/zw/api/',
+//url: 'http://192.168.8.161:8506/zw/api/',
 };
 
 export const uat = {

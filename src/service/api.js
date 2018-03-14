@@ -77,5 +77,6 @@ export default {
 	rechargeSendSmsCode:'account/filter/sendSmsCode',//充值发送短信
 
   searchUserCouponInfo: 'coupon/filter/searchUserCouponInfo', // 我的优惠
-
+  
+	submitUserRecharge:'account/filter/submitUserRecharge',//充值提交
 }

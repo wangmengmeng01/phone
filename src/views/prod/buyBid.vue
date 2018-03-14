@@ -131,7 +131,6 @@
 
 				this.investMoney = this.coupon.params.investAmount;
 
-				log(this.coupon.params.autoRenewBol);
 
 				if(this.coupon.params.autoRenewBol == undefined) {
 
@@ -142,7 +141,7 @@
 
 				//获取选择的卡券
 
-				log(this.coupon.data);
+				console.log(this.coupon.data);
 
 				if(this.coupon.data.length) {
 					this.counpBol = false;
@@ -161,7 +160,7 @@
 			}
 
 			doConfirmBuyPage(this.item).then(res => {
-				log(res);
+				console.log(res);
 				this.detail = res;
 				this.itemProd = {
 					appendRate: this.detail.appendRate,
@@ -186,7 +185,7 @@
 			});
 
 			accountAcmountInfo().then(res => {
-				log(res);
+				console.log(res);
 				this.accountBalance = res;
 			});
 
@@ -286,7 +285,6 @@
 				//						expectedRevenue:
 				//						promiseInviteId:
 				//					}).then(res => {
-				//						log(res);
 				//					});
 
 				//				this.RESET('coupon');
@@ -337,7 +335,6 @@
 					pageIndex: '1',
 
 				}).then(res => {
-					log(res);
 					this.counpNum = res.availableNum;
 				});
 			},

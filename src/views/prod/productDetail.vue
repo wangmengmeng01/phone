@@ -125,7 +125,7 @@
 		},
 		created() {
 			searchProductBidsDetail(this.item).then(res => {
-				log(res);
+				console.log(res);
 				this.detail = res;
 			});
 		},
@@ -134,7 +134,7 @@
 			getStatus() {
 				getUserStatus(this.itemStatus).then(res => {
 					//@click=""
-					log(res);
+					console.log(res);
 					const info = res.result;
 					if(res.code == "100") {
 
