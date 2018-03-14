@@ -1,5 +1,5 @@
 <template>
-	<div class="productDetail">
+	<div class="productDetail"  @click="$go('downLoad')">
 		<!--详情页-->
 		<!--详情头部-->
 		<div class="productDetailTop">

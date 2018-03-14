@@ -209,17 +209,17 @@
 		components: {},
 		created() {
 			noviceExclusive(this.itemNew).then(res => {
-				log(res);
+				console.log(res);
 				this.newList = res.productList;
 			});
 
 			recommendProduct(this.itemNew).then(res => {
-				log(res);
+				console.log(res);
 				this.recomPro = res.productList;
 			});
 
 			sellsProduct(this.itemNew).then(res => {
-				log(res);
+				console.log(res);
 				this.hotPro = res.productList;
 			});
 

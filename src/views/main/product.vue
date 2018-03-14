@@ -112,7 +112,6 @@
 		},
 		created() {
 			productSearchBidsList(this.item).then(res => {
-				//      		log(res);
 				this.productList = res.productList;
 				console.log(this.productList);
 			});

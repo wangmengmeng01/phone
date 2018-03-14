@@ -103,7 +103,7 @@
 			//			console.log(this.$route.query);
 
 			getProductBidsList(this.item).then(res => {
-				log(res);
+				console.log(res);
 				this.productList = res.productList;
 				//				console.log(this.productList);
 			});
