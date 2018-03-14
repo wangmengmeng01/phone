@@ -69,4 +69,8 @@ export default {
 	searchCouponList:'coupon/filter/searchCouponList',//查询购买的可用卡券数量
 	
 	borrowInvest:'api/bid/filter/borrowInvest',//购买标的
+	
+	selectBeforeRecharge:'account/filter/selectBeforeRecharge',//充值前信息查询
+	
+	rechargeSendSmsCode:'account/filter/sendSmsCode',//充值发送短信
 }
