@@ -74,9 +74,9 @@
 			"children": [
 				{
 					"path": "",
-					"redirect": "home"
+					"redirect": "/"
 				}, {
-					"path": "home",
+					"path": "/",
 					"title": "首页",
 					"filter": true,
 					"back": false,
