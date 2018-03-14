@@ -83,10 +83,6 @@ export const submitUserRecharge = async (params)=>{
     method: 'post',
     api: api.submitUserRecharge,
     params,
-    options: {
-		filter_code: false,
-		filter_msg: false
-	}
   });
 };
 

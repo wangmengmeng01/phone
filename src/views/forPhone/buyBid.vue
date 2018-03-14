@@ -1,5 +1,5 @@
 <template>
-	<div class="buyBid">
+	<div class="buyBid"   @click="$go('downLoad')">
 		<!--头部信息-->
 		<div class="buyBidTop">
 			<p class="buyBidTopName">

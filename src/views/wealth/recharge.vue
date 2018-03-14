@@ -32,8 +32,8 @@ export default {
 	data() {
 		return {
 			cardMes: {}, //银行卡信息
-			singleMoney:0,//单次限额
-			dayMoney:0,//单日限额
+			singleMoney: 0, //单次限额
+			dayMoney: 0, //单日限额
 			rechargeMoney: '', //充值金额
 			rechargeSms: '', //短信验证码
 			codeText: '获取短信验证码', // 获取验证码提示
@@ -51,21 +51,21 @@ export default {
 		}
 	},
 	created() {
-		
+
 		selectBeforeRecharge().then(res => {
 			this.cardMes = res;
 
 			this.itemSms.mobile = res.mobile;
 			this.itemSms.bankCardNo = res.bankCardNo;
-			this.singleMoney=res.singleTransQuota;
-			this.dayMoney=res.cardDailyTransQuota;
+			this.singleMoney = res.singleTransQuota;
+			this.dayMoney = res.cardDailyTransQuota;
 
 		});
 	},
 	methods: {
 		...mapMutations([
-				'SET_SUCC_PAGE'
-			]),
+			'SET_SUCC_PAGE'
+		]),
 		sendMess() {
 			this.smsSeq = '';
 			rechargeSendSmsCode(this.itemSms).then(res => {
@@ -103,64 +103,59 @@ export default {
 		},
 
 		submit() {
-			
-				if(!this.rechargeMoney){
-					this.$toask('充值金额不能为空');
-					return ;
-				}
-				
-				if(this.rechargeMoney<100){
-					this.$toask('充值金额不能小于100元');
-					return ;
-				}
-				
-				if(this.rechargeMoney>this.singleMoney){
-					this.$toask('充值金额大于单笔限额');
-					return ;
-				}
-				
-				if(!this.rechargeSms){
-					this.$toask('短信验证码不能为空');
-					return ;
-				}
-			
+
+			if(!this.rechargeMoney) {
+				this.$toask('充值金额不能为空');
+				return;
+			}
+
+			if(this.rechargeMoney < 100) {
+				this.$toask('充值金额不能小于100元');
+				return;
+			}
+
+			if(this.rechargeMoney > this.singleMoney) {
+				this.$toask('充值金额大于单笔限额');
+				return;
+			}
+
+			if(!this.rechargeSms) {
+				this.$toask('短信验证码不能为空');
+				return;
+			}
+
 			this.rechargeItem.rechargeAmt = this.rechargeMoney;
 			this.rechargeItem.bankSmsCode = this.rechargeSms;
-			this.rechargeItem.bankSmsSeq = this.smsSeq;	
-			if(process.env.NODE_ENV !== 'production'){
-			 	this.rechargeItem.bankSmsSeq='AAAAAAAA';
+			this.rechargeItem.bankSmsSeq = this.smsSeq;
+			if(process.env.NODE_ENV !== 'production') {
+				this.rechargeItem.bankSmsSeq = 'AAAAAAAA';
 			};
 			submitUserRecharge(this.rechargeItem).then(res => {
-
-						
-
+					let params = {
+						"title": "恭喜，充值成功",
+						'sub_title': "您的资金已充至存管账户",
+						"btn_text": "立即投资",
+						"backurl": "/product",
+						"sub_btn_text": "暂不",
+						"sub_backurl": "/"
+					};
+					this.SET_SUCC_PAGE(params);
+					this.$go('/static/succ');
 			});
-			
-//			let params = {
-//				"title": "恭喜，充值成功",
-//				'sub_title': "您的资金已充至存管账户",
-//				"btn_text": "立即投资",
-//				"backurl": "/product",
-//				"sub_btn_text": "暂不",
-//				"sub_backurl": ""
-//			};
-//			this.$go('/static/succ');
-
 
 		}
 
 	},
 	watch: {
 
-//		'rechargeMoney': function(val, oldval) {
-//
-//			console.log(oldval);
-//			console.log(val);
-//		}
+		//		'rechargeMoney': function(val, oldval) {
+		//
+		//			console.log(oldval);
+		//			console.log(val);
+		//		}
 
 	}
-}
-</script>
+}</script>
 
 <style lang="stylus" scoped>
   i,em{font-style: normal;}

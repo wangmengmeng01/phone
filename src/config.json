@@ -21,10 +21,10 @@
 		"user_info": {}
 	},
 	"route": [
-    {
-      "path": "/recharge",
-      "redirect": "/wealth/recharge"
-    },{
+		{
+			"path": "/recharge",
+			"redirect": "/wealth/recharge"
+		}, {
 			"path": "login",
 			"title": "登录",
 			"filter": true,
@@ -170,34 +170,35 @@
 					"foot": false
 				}
 			]
-		},{
-      "path": "found",
-      "component": "found",
-      "children": [
-        {
-          "path": "",
-          "redirect": "index",
-          "foot": false
-        }, {
-          "path": "gift",
-          "title": "我收到的礼物",
-          "foot": false
-        }
-      ]
-    }, {
-      "path": "bank",
-      "component": "bank",
-      "children": [
-        {
-          "path": "",
-          "redirect": "index"
-        }, {
-          "path": "choose",
-          "title": "选择开户银行",
-          "filter": true,
-          "foot": false
-        }]
-    },{
+		}, {
+			"path": "found",
+			"component": "found",
+			"children": [
+				{
+					"path": "",
+					"redirect": "index",
+					"foot": false
+				}, {
+					"path": "gift",
+					"title": "我收到的礼物",
+					"foot": false
+				}
+			]
+		}, {
+			"path": "bank",
+			"component": "bank",
+			"children": [
+				{
+					"path": "",
+					"redirect": "index"
+				}, {
+					"path": "choose",
+					"title": "选择开户银行",
+					"filter": true,
+					"foot": false
+				}
+			]
+		}, {
 			"path": "home",
 			"component": "home",
 			"children": [
@@ -273,77 +274,114 @@
 				}, {
 					"path": "succ",
 					"title": "成功",
-          "filter": true,
-          "back": {
-            "title": false
-          },
-          "foot": {
-            "style": "background-color: #fff;margin-top: -3rem"
-          }
+					"filter": true,
+					"back": {
+						"title": false
+					},
+					"foot": {
+						"style": "background-color: #fff;margin-top: -3rem"
+					}
 				}
 			]
-		},{
-      "path": "wealth",
-      "component": "wealth",
-      "children": [
-        {
-          "path": "",
-          "redirect": "index"
-        },{
-          "path": "recharge",
-          "title": "充值",
-          "foot": {
-            "type": "main",
-            "style": "background:#f1f1f9"
-          }
-        },{
-          "path": "withdraw",
-          "title": "提现",
-          "foot": {
-            "type": "main",
-            "style": "background:#f1f1f9"
-          }
-        },{
-          "path": "autoInvest",
-          "title": "自动投标"
-        },{
-          "path": "riskTest",
-          "title": "风险评测",
-          "foot": false
-        },{
-          "path": "productDetail",
-          "title": "产品详情",
-          "back": {
-            "background": "main"
-          },
-          "foot": {
-            "style": "margin-bottom: 1.1rem"
-          }
-        },{
-          "path": "continueInvest",
-          "title":"我的续投",
-          "foot":false,
-          "back": {
-            "background": "main"
-          }
-        },{
-          "path": "tradeRecord",
-          "title":"交易记录",
-          "foot":false
-        },{
-          "path": "changeBank",
-          "title":"我的银行卡",
-          "foot": {
-            "type": "main",
-            "style": "background:#f1f1f9"
-          }
-        },{
-          "path": "assertList",
-          "title":"我的资产",
-          "foot": false
-        }
-      ]
-    },{
+		}, {
+			"path": "forPhone",
+			"component": "forPhone",
+			"children": [
+				{
+					"path": "",
+					"redirect": "downLoad"
+				}, {
+					"path": "downLoad",
+					"title": "APP下载页",
+					"filter": true,
+					"back": false,
+					"foot": false
+				},
+				{
+					"path": "productDetail",
+					"title": "产品详情",
+					"filter": true,
+					"back": {
+						"background": "main"
+					},
+					"foot": {
+						"style": "margin-bottom: 1.1rem"
+					}
+				}, {
+					"path": "buyBid",
+					"title": "确认购买",
+					"filter": true,
+					"back": {
+						"background": "main"
+					},
+					"foot": {
+						"style": "margin-bottom: 1.1rem"
+					}
+				}
+				
+			]
+		}, {
+			"path": "wealth",
+			"component": "wealth",
+			"children": [
+				{
+					"path": "",
+					"redirect": "index"
+				}, {
+					"path": "recharge",
+					"title": "充值",
+					"foot": {
+						"type": "main",
+						"style": "background:#f1f1f9"
+					}
+				}, {
+					"path": "withdraw",
+					"title": "提现",
+					"foot": {
+						"type": "main",
+						"style": "background:#f1f1f9"
+					}
+				}, {
+					"path": "autoInvest",
+					"title": "自动投标"
+				}, {
+					"path": "riskTest",
+					"title": "风险评测",
+					"foot": false
+				}, {
+					"path": "productDetail",
+					"title": "产品详情",
+					"back": {
+						"background": "main"
+					},
+					"foot": {
+						"style": "margin-bottom: 1.1rem"
+					}
+				}, {
+					"path": "continueInvest",
+					"title": "我的续投",
+					"foot": false,
+					"back": {
+						"background": "main"
+					}
+				}, {
+					"path": "tradeRecord",
+					"title": "交易记录",
+					"foot": false
+				}, {
+					"path": "changeBank",
+					"title": "我的银行卡",
+					"foot": {
+						"type": "main",
+						"style": "background:#f1f1f9"
+					}
+				}, {
+					"path": "assertList",
+					"title": "我的资产",
+					"foot": false
+				}
+			]
+		}, {
 			"path": "*",
 			"component": "notfound",
 			"title": "404"
