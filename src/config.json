@@ -69,14 +69,14 @@
 				"style": "padding-bottom: 1rem;"
 			}
 		}, {
-			"path": "/",
+			"path": "webapp",
 			"component": "main",
 			"children": [
 				{
 					"path": "",
-					"redirect": ""
+					"redirect": "home"
 				}, {
-					"path": "",
+					"path": "home",
 					"title": "首页",
 					"filter": true,
 					"back": false,
