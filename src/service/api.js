@@ -76,7 +76,11 @@ export default {
 
 	rechargeSendSmsCode:'account/filter/sendSmsCode',//充值发送短信
 
-  searchUserCouponInfo: 'coupon/filter/searchUserCouponInfo', // 我的优惠
+    searchUserCouponInfo: 'coupon/filter/searchUserCouponInfo', // 我的优惠
 
 	submitUserRecharge:'account/filter/submitUserRecharge',//充值提交
+	
+	searchBidsInvestList:'bid/searchBidsInvestList',//购买记录
+	
+	standardAndPlanList:'bid/standardAndPlanList',//严选优质列表
 }

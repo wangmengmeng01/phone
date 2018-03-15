@@ -106,3 +106,24 @@ export const searchCouponList = async (params)=>{
   });
 }
 
+/**
+ * 购买记录
+ */
+export const searchBidsInvestList = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.searchBidsInvestList,
+    params,
+  });
+}
+/**
+ * 严选优质列表
+ */
+export const standardAndPlanList = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.standardAndPlanList,
+    params,
+  });
+}
+

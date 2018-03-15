@@ -27,7 +27,7 @@
 				<p class="hotProductDivMessage" :class="[n<=i.bidList.length-2?'bb':'']">
 					<span>起投金额 <i>{{j.investMinAmount}}元</i></span>
 					<span>投资期限 <i>{{j.periodLength}}</i>{{j.periodUnit|Totime}}</span>
-					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,backTitle:j.bidName})">购买</span>
+					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName})">购买</span>
 				</p>
 			</div>
 

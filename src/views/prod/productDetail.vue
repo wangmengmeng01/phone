@@ -15,7 +15,7 @@
 				<p class="pdtLine" :style="{width:detail.amountScale*6.7+'rem'}"></p>
 				<p class="pdtProgressMes">剩余可投<i>{{detail.amountWait| formatNum}}元</i></p>
 			</div>
-			<p class="pdtBugMes" @click="$go('/prod/joinList')"><img class="pdtBugMesImg1" src="../../assets/main/prod/people.png" /><span> 已有{{detail.countPeople}}人购买 </span> <img class="pdtBugMesImg2" src="../../assets/main/prod/lnextIcon.png" /></p>
+			<p class="pdtBugMes" @click="$go('/prod/joinList',{productNo:detail.productNo,bidNo:detail.bidNo})"><img class="pdtBugMesImg1" src="../../assets/main/prod/people.png" /><span> 已有{{detail.countPeople}}人购买 </span> <img class="pdtBugMesImg2" src="../../assets/main/prod/lnextIcon.png" /></p>
 		</div>
 
 		<!--交易规则-->
