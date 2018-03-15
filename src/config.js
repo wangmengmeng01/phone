@@ -12,15 +12,15 @@ export const dev = {
 
 
 export const test = {
-  url: 'https://zw-api-test.chinazyjr.net',
+  url: 'https://zw-api-test.chinazyjr.net/zw/api/',
 };
 
 export const stage = {
-  url: 'https://zw-api-stage.chinazyjr.net',
+  url: 'https://zw-api-stage.chinazyjr.net/zw/api/',
 };
 
 export const pro = {
-  url: 'https://zw-api.chinazyjr.com',
+  url: 'https://zw-api.chinazyjr.com/zw/api/',
 };
 
 
