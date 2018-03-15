@@ -7,29 +7,26 @@ export const duxin = {
 };
 
 export const dev = {
-//url: 'http://192.168.8.161:8506/zw/api/',
-//url: 'https://zw-api-stage.chinazyjr.net/api/',
-	url: 'https://zw-api.chinazyjr.net/zw/api/',
+  url: 'http://192.168.7.110:8506/zw/api/',
 };
 
 
 export const test = {
-    url: 'http://192.168.7.110:8506/zw/api/',
-  // url: 'https://zw-api.chinazyjr.net/',
+  url: 'https://zw-api-test.chinazyjr.net',
 };
 
-export const uat = {
-  url: 'https://192.168.7.110:8506/zw/api/',
+export const stage = {
+  url: 'https://zw-api-stage.chinazyjr.net',
 };
 
 export const pro = {
-  url: 'https://192.168.7.110:8506/zw/api/',
+  url: 'https://zw-api.chinazyjr.com',
 };
 
 
 let _config;
 if(process.env.NODE_ENV === 'production'){
-  _config = _default;
+  _config = test;
 }else{
   _config = test;
 }

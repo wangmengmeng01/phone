@@ -94,11 +94,11 @@
         let end = this.couponlist[this.couponlist.length-1];
         // 类型相同做同类对比
         if(current.type === end.type){
-          this.isSameOverlap(current, end, index);
+          this.logic(current, end, index, 'isSameOverlap','此券不允许同类叠加');
           return
         }
         // 做异类对比
-        this.differentOverlap(current, end, index);
+        this.logic(current, end, index, 'isDifferentOverlap','此券不允许异类叠加');
       },
       /**
        * 判断是否删除元素,
@@ -113,51 +113,36 @@
         return false
       },
       /**
-       * 卡券类型相同
+       * 主要逻辑
        * @param current         // 当前值
        * @param end             // 最后一个值
        * @param index           // 当前index
-       * @returns {boolean}
+       * @param attr   判断属性
+       * @param msg    提示信息
        */
-      isSameOverlap(current, end, index){
+      logic(current, end, index, attr,msg){
         // 首先把当前值和最后一个值组成新的数组
         let arr =  [...[current],...[end]];
-        // 然后判断这个数组里面有没有isSameOverlap=='2'的数据，
-        let hasSameOverlap = arr.filter(t=>t.isSameOverlap=='2');
+        // 然后获取这个数组里面有没有当前判断类型的数据
+        let hasAttr = arr.filter(t=>t[attr]=='2');
         // 如果没有的话说明，可以直接插入了
-        if(!hasSameOverlap.length) {
+        if(!hasAttr.length) {
           this.couponlist.push(current);
           return
         };
         // 没有的话取消勾选框，同时提示
         this.$refs.coupon[index].check = false;
-        this.$toask('此券不允许同类叠加');
-      },
-      /**
-       * 卡券类型不同。逻辑同上
-       * @param current
-       * @param end
-       * @param index
-       */
-      differentOverlap(current, end, index){
-        let arr =  [...[current],...[end]];
-        let hasSameOverlap = arr.filter(t=>t.isDifferentOverlap=='2');
-        if(!hasSameOverlap.length) {
-          this.couponlist.push(current);
-          return
-        };
-        this.$refs.coupon[index].check = false;
-        this.$toask('此券不允许异类叠加');
+        this.$toask(msg);
       },
       transformParams(data){
         let str = '';
         return
       },
       submit(){
-        if(!this.couponlist.lenth){
-          this.$go(this.coupon.backurl,{bidNo,linkType:this.$route.query.linkType})
-          return
-        }
+//        if(!this.couponlist.lenth){
+//          this.$go(this.coupon.backurl,{bidNo,linkType:this.$route.query.linkType})
+//          return
+//        }
         const bidNo = this.$route.query.bidNo;
         this.SET_COUPON({
           data: this.couponlist
@@ -166,7 +151,11 @@
             const {couponNo, couponType, couponRate, isSameOverlap, isDifferentOverlap, receiveNo} = t;
            return {couponNo, couponType, couponRate, isSameOverlap, isDifferentOverlap, receiveNo};
   })
-        axios.get('http://192.168.8.161:8506/zw/api/coupon/filter/getCouponBenefit?client=2&userToken=c03e58915b154e7cad16d730cd63f1f8&couponList=[{"couponNo":"JXQ_ZZT_20180201_01","couponType":1,"couponRate":"0.1","isSameOverlap":1,"isDifferentOverlap":1,"receiveNo":"ZZT_20180201"},{"couponNo":"JXQ_ZZT_20180201_02","couponType":1,"couponRate":"0.2","isSameOverlap":1,"isDifferentOverlap":1,"receiveNo":"ZZT_20180202"}]')
+
+
+        const a = '{"couponNo":"JXQ_ZZT_20180201_01","couponType":1,"couponRate":"0.1","isSameOverlap":1,"isDifferentOverlap":1,"receiveNo":"ZZT_20180201"},{"couponNo":"JXQ_ZZT_20180201_02","couponType":1,"couponRate":"0.2","isSameOverlap":1,"isDifferentOverlap":1,"receiveNo":"ZZT_20180202"}'
+
+        axios.get('http://192.168.7.110:8506/zw/api/coupon/filter/getCouponBenefit?client=2&userToken=c03e58915b154e7cad16d730cd63f1f8&couponList=['+encodeURIComponent(a)+']')
           .then(function (response) {
             console.log(response);
           })
