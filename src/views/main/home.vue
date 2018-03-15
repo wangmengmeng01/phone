@@ -47,7 +47,7 @@
 			</div>
 		</div>
 		<!-- 新手专享 -->
-		<div class="new">
+		<div class="new" v-show="newList.length">
 			<p class="newTitle">新手专享</p>
 			<div class="swiper-container swiper-container2">
 				<div class="swiper-wrapper swiper-wrapper2">
@@ -72,7 +72,7 @@
 			</div>
 		</div>
 		<!-- 为您推荐 -->
-		<div class="recommend">
+		<div class="recommend" v-show="recomPro.length">
 			<p class="recommendTip">最新热标</p>
 			<p class="recommendTitle">为您推荐 </p>
 			<!--周周赢  -->
@@ -112,7 +112,7 @@
 		</div>
 
 		<!--热销产品-->
-		<div class="hotProduct">
+		<div class="hotProduct" v-show="hotPro.length">
 			<p class="recommendTip">畅销排行榜</p>
 			<p class="recommendTitle" style="margin-bottom: 0.26rem;display: none;">热销产品 <span>更多<img src="../../assets/main/home/nextIcon.png"/></span></p>
 			<!--热销产品-->
@@ -122,22 +122,22 @@
 				<p class="hotProductDivWord">历史年化收益率</p>
 				<!--进度条-->
 				<div class="hotProductDivProgress">
-					<div class="tipsImg" :style="{left:b.amountScale*5+'rem'}" v-if="b.amountScale<=0.5">
-						<img src="../../assets/main/home/tipsImg.png" /><span>{{b.amountScale*100 | tofixed}}%</span>
+					<div class="tipsImg" :style="{left:b.amountScale*4.6/100+'rem'}" v-if="b.amountScale<=50||b.amountScale==100">
+						<img src="../../assets/main/home/tipsImg.png" /><span>{{b.amountScale | tofixed}}%</span>
 					</div>
-					<div class="redTipsImg" v-else>
-						<p><i>{{b.amountWait/10000|tofixed}}</i>万</p>
+					<div class="redTipsImg" :style="{left:b.amountScale*4.6/100+'rem'}" v-else>
+						<p><i>{{b.amountWait|numfixed}}</i>万</p>
 						<p>剩余不到</p>
 					</div>
 
 					<p class="grayLine"></p>
-					<p class="proLine"></p>
+					<p class="proLine" :style="{width:b.amountScale*4.6/100+'rem'}"></p>
 					<p class="proTip"><i>{{b.countPeople}}</i>人参与</p>
 				</div>
 				<p class="hotProductDivMessage">
 					<span>起投金额 <i>{{b.investMinAmount}}元</i></span>
 					<span>投资期限 <i>{{b.periodLength}}{{b.periodUnit|Totime}} </i></span>
-					<span>剩余金额 <i>{{b.amountWait/10000|tofixed}}</i>万</span>
+					<span>剩余金额 <i>{{b.amountWait|numfixed}}</i>万</span>
 					<!--<span>锁定期限 <i>28天</i></span>-->
 				</p>
 
@@ -800,7 +800,7 @@
 		left: 0;
 		bottom: 0;
 		z-index: 2;
-		width: 2.8rem;
+		/*width: 2.8rem;*/
 		height: 0.28rem;
 		background: linear-gradient(to right, #8E9EAB, #EEF2F3);
 	}
@@ -813,7 +813,8 @@
 		height: 1.04rem;
 		background-size: 100% 100%;
 		bottom: 0.28rem;
-		left: 3.0rem;
+		/*left: 3.0rem;*/
+		margin-left: -0.46rem;
 	}
 	
 	.redTipsImg>p:nth-child(1) {

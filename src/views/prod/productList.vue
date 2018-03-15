@@ -13,11 +13,11 @@
 				<p class="productDivRate">{{j.annualizedRate | tofixed}}%</p>
 				<p class="productDivWrod">历史年化</p>
 				<div class="hotProductDivProgress">
-					<div class="tipsImg" :style="{left:j.amountScale*5+'rem'}" v-if="j.amountScale<=0.5">
-						<img src="../../assets/main/home/tipsImg.png" /><span>{{j.amountScale*100 | tofixed}}%</span>
+					<div class="tipsImg" :style="{left:j.amountScale*5/100+'rem'}" v-if="j.amountScale<=50||j.amountScale==100">
+						<img src="../../assets/main/home/tipsImg.png" /><span>{{j.amountScale| tofixed}}%</span>
 					</div>
-					<div class="redTipsImg" v-else>
-						<p><i>{{j.amountWait/10000|tofixed}}</i>万</p>
+					<div class="redTipsImg"  :style="{left:j.amountScale*5/100+'rem'}" v-else>
+						<p><i>{{j.amountWait|numfixed}}</i>万</p>
 						<p>剩余不到</p>
 					</div>
 					<p class="grayLine"></p>
@@ -94,6 +94,7 @@
 				item: {
 					userToken: "",
 					productNo: this.$route.query.productNo,
+					pageIndex:1,
 				},
 				productList: '',
 			}
@@ -339,7 +340,8 @@
 		height: 1.04rem;
 		background-size: 100% 100%;
 		bottom: 0.28rem;
-		left: 3.0rem;
+		/*left: 3.0rem;*/
+		margin-left: -0.46rem;
 	}
 	
 	.redTipsImg>p:nth-child(1) {

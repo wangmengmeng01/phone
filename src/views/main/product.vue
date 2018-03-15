@@ -25,20 +25,20 @@
 				<p class="productDivRate">{{j.annualizedRate | tofixed}}%</p>
 				<p class="productDivWrod">历史年化</p>
 				<div class="hotProductDivProgress">
-					<div class="tipsImg" :style="{left:j.amountScale*5+'rem'}" v-if="j.amountScale<=0.5">
-						<img src="../../assets/main/home/tipsImg.png" /><span>{{j.amountScale*100 | tofixed}}%</span>
+					<div class="tipsImg" :style="{left:j.amountScale*5/100+'rem'}" v-if="j.amountScale<=50||j.amountScale==100">
+						<img src="../../assets/main/home/tipsImg.png" /><span>{{j.amountScale | tofixed}}%</span>
 					</div>
-					<div class="redTipsImg" v-else>
-						<p><i>{{j.amountWait/10000|tofixed}}</i>万</p>
+					<div class="redTipsImg" :style="{left:j.amountScale*5/100+'rem'}" v-else>
+						<p><i>{{j.amountWait|numfixed}}</i>万</p>
 						<p>剩余不到</p>
 					</div>
 					<p class="grayLine"></p>
-					<p class="proLine" :style="{width:j.amountScale*5+'rem'}"></p>
+					<p class="proLine" :style="{width:j.amountScale*5/100+'rem'}"></p>
 					<p class="proTip"><i>{{j.countPeople}}</i>人参与</p>
 				</div>
 				<p class="hotProductDivMessage" :class="[n<=i.bidList.length-2?'bb':'']">
-					<span>累计销售 <i>1000万</i></span>
-					<span>累计收益 <i>102万</i></span>
+					<span>起投金额 <i>{{j.investMinAmount}}元</i></span>
+					<span>投资期限 <i>{{j.periodLength}}{{j.periodUnit|Totime}} </i></span>
 					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName})">购买</span>
 				</p>
 			</div>
@@ -372,7 +372,8 @@
 		height: 1.04rem;
 		background-size: 100% 100%;
 		bottom: 0.28rem;
-		left: 3.0rem;
+		/*left: 3.0rem;*/
+		margin-left: -0.46rem;
 	}
 	
 	.redTipsImg>p:nth-child(1) {
