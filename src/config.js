@@ -25,8 +25,8 @@ export const pro = {
 
 let _config;
 if(process.env.NODE_ENV === 'production'){
-  _config = pro;
+  _config = test;
 }else{
-  _config = pro;
+  _config = test;
 }
 export default _config

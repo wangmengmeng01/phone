@@ -73,10 +73,11 @@
 				background-size: 100% 100%;
 			}
 			&-t{
+				margin-top: 0.4rem;
 				text-align: center;
-				line-height: 0.20rem;
-				height: 0.2rem;
-				font-size: 0.18rem;
+				line-height: 0.36rem;
+				height: 0.36rem;
+				font-size: 0.36rem;
 				color: #8D8D94;
 				
 			}
