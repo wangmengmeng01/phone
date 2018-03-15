@@ -8,7 +8,7 @@
 			</p>
 
 			<p class="buyBidTopMes">
-				<span>{{detail.annualizedRate}}<i class="i1">%</i></span>
+				<span>{{rate}}<i class="i1">%</i></span>
 				<span>{{detail.periodLength}}<i class="i2">{{detail.periodUnit | Totime}}</i></span>
 				<span>{{detail.amountWait| formatNum}}<i class="i2">元</i></span>
 			</p>
@@ -113,8 +113,8 @@
 				agreCheckBol: false, //是否同意协议
 				counpNum: 0, //优惠券可用张数
 				counpBol: true, //是否选择优惠券
-				rate:0,//总利息	
 				appendRate: 0, //优惠券加息
+				rate:0,//总利息
 			}
 		},
 		computed: {
@@ -169,6 +169,7 @@
 					periodUnit: this.detail.periodUnit,
 					profitPlan: this.detail.profitPlan,
 				};
+				this.rate=res.annualizedRate+res.appendRate;
 				//从卡券页面 返回来
 				if(this.$route.query.linkType == "0") {
 					if(this.coupon.params.investAmount) {
