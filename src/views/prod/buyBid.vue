@@ -113,7 +113,7 @@
 				agreCheckBol: false, //是否同意协议
 				counpNum: 0, //优惠券可用张数
 				counpBol: true, //是否选择优惠券
-
+				rate:0,//总利息	
 				appendRate: 0, //优惠券加息
 			}
 		},

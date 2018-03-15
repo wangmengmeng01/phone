@@ -108,7 +108,7 @@
        * 判断是否删除元素,
        */
       isDel(current){
-        let i = this.couponlist.findIndex(t=>t.couponNo===current.couponNo);
+        let i = this.couponlist.findIndex(t=>t.receiveNo===current.receiveNo);
         // 元素存在则删除，不存在再继续判断需要不需要添加
         if(i>-1){
           this.couponlist.splice(i,1);
@@ -212,7 +212,7 @@
       margin: auto .2rem
       border-radius: .2rem
       padding-top: .6rem
-      padding-bottom: .3rem
+      padding-bottom: 1.3rem
       background: #fff
       .coupon_list
         margin-bottom: .4rem
