@@ -31,7 +31,6 @@
        * @param params 参数
        */
       Vue.prototype.$go = (url, params, replace=false) => {
-          console.log('跳转的页面是:'+url);
         if(url.includes('http')||url.includes('https')){
           location.href = url;
           return
