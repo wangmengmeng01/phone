@@ -11,7 +11,7 @@
     <div class="item flex password border-b">
      <div class="flex con">
        <span class="name f44 color-font">密码</span>
-       <input :type="[checked?'password':'text']" placeholder="请输入登录密码" class="f44" v-model="item.password">
+       <input :type="[checked?'password':'text']" placeholder="请输入登录密码" class="f44" v-model="passWord">
      </div>
       <img :src="require(`@/assets/common/${checked?'eyes':'eyebrow'}.png`)" alt="" class="eyes" @click="checked=!checked">
     </div>
@@ -31,11 +31,12 @@
     data () {
       return {
         checked: true,                                              // 密码框的类型显示隐藏
-        text: '登录',                                                // 登录按钮文字提示
+        text: '登录', // 登录按钮文字提示
         item: {
           mobile: this.$route.query.mobile || '17810001002',
-          password: 'a123456',
-        }
+          password: 'a123456',//加密密码
+        },
+        passWord:'a123456',//未加密密码
       }
     },
     created() {
@@ -57,7 +58,7 @@
           this.$toask('手机号不能为空!');
           return
         }
-        if(!this.item.password) {
+        if(!this.passWord) {
           this.$toask('登录密码不能为空!');
           return
         }
@@ -65,13 +66,13 @@
           this.$toask('手机号格式不正确!');
           return
         }
-        if(!(/^(?!^\d+$)(?!^[a-zA-Z]+$)(?!^_+$)[\d|a-zA-Z|_]{6,12}$/.test(this.item.password))) {
+        if(!(/^(?!^\d+$)(?!^[a-zA-Z]+$)(?!^_+$)[\d|a-zA-Z|_]{6,12}$/.test(this.passWord))) {
           this.$toask('密码格式不正确!');
           return
         }
         this.text = '登录中...';
         let CryptoJS= require('@/lib/aes');
-        this.item.password = CryptoJS.aes(this.item.password);
+        this.item.password = CryptoJS.aes(this.passWord);
         // 登录
         login(this.item).then(res=>{
           // 成功的话把返回的数据放到缓存中
@@ -79,7 +80,7 @@
           this.$go('/')
         }).catch(()=>{
             //失败的话提示
-            this.item.password = '';
+            this.passWord = '';
             this.text = '重新登录';
         })
       },
