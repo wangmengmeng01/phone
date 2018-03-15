@@ -56,7 +56,7 @@ export default {
 
 	recommendProduct:'product/recommendProduct',//为您推荐
 
-	sellsProduct:'/product/sellsProduct',//热销产品
+	sellsProduct: 'product/sellsProduct',//热销产品
 
 	searchManagerCheckStatus:'manager/filter/searchManagerCheckStatus',//理财师审核状态查询
 
@@ -77,6 +77,6 @@ export default {
 	rechargeSendSmsCode:'account/filter/sendSmsCode',//充值发送短信
 
   searchUserCouponInfo: 'coupon/filter/searchUserCouponInfo', // 我的优惠
-  
+
 	submitUserRecharge:'account/filter/submitUserRecharge',//充值提交
 }
