@@ -227,9 +227,11 @@
 			"children": [
 				{
 					"path": "productList",
-					"title": "产品列表页"
+					"title": "产品列表页",
+					"filter": true
 				}, {
 					"path": "joinList",
+					"filter": true,
 					"title": "加入记录"
 				}, {
 					"path": "productDetail",
@@ -259,12 +261,15 @@
 					}
 				}, {
 					"path": "higHqualityAssets",
+					"filter": true,
 					"title": "严选优质资产"
 				}, {
 					"path": "bankDepository",
+					"filter": true,
 					"title": "资金银行存管"
 				}, {
 					"path": "Honour",
+					"filter": true,
 					"title": "100%历史兑付"
 				}
 			]
