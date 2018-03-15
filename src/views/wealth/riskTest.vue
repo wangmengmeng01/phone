@@ -15,12 +15,12 @@
 
 <script>
   import { userReskEvaluation } from '@/service'
-  import { mapMutations } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
   export default {
     name: 'riskTest',
     data() {
       return{
-        act: 0,         // 显示的当前问题
+        act: 0,                                 // 显示的当前问题
         list:[{
           q: '您的年龄是？',
           a: ['18-28岁（3）','28-55岁（5）','56-65岁（2）','60岁以上（1）'],
@@ -54,6 +54,11 @@
         }],
         res: [] // 最终的结果列表
       }
+    },
+    computed: {
+      ...mapGetters([
+        'client'
+      ])
     },
     created() {
       this.RESET('succ_page');
@@ -95,6 +100,9 @@
         // 切换到上一题
         this.act--;
       },
+      /**
+       * 提交
+       */
       submit(){
         // 重新编辑参数
         let params = {};
@@ -118,8 +126,8 @@
             "sub_btn_text": "重新评测",
             "sub_backurl": sub_backurl
           };
-          // 如果有type参数，表示是原生调用，去除不显示的参数
-          if(this.$route.query.type){
+          // 如果有client参数，表示是原生调用，去除不显示的参数
+          if(this.$route.query.client){
             delete page_params.btn_text;
             delete page_params.backurl;
             delete page_params.sub_btn_text;

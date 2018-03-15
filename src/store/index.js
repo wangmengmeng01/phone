@@ -74,6 +74,15 @@ export default new Vuex.Store({
       state.token = data
     },
     /**
+     * 设置client
+     * @param state
+     * @param data
+     * @constructor
+     */
+    SET_CLIENT(state, data) {
+      state.client = data
+    },
+    /**
      * 重置state
      * @param state
      * @constructor

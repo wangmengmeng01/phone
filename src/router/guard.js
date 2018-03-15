@@ -7,6 +7,7 @@ router.beforeEach((to, from, next) => {
   const query = Object.keys(to.query);
   if (query.length) {
     query.includes("userToken") && store.commit("SET_USER", to.query);
+    query.includes("client") && store.commit("SET_CLIENT", to.client);
   }
 
   const user = localStorage.getItem("user");
