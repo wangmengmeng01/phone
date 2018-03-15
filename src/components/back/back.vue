@@ -6,7 +6,7 @@
       <img class="back-icon" v-else="back.background" :src="require(`@/assets/common/arrow-left.png`)" alt="">
       <span v-if="back.showTip" class="tip">返回</span>
     </div>
-    <span v-if="back && back.title !== false">{{backTitle || $route.meta.title}}</span>
+    <span class="title" v-if="back && back.title !== false">{{backTitle || $route.meta.title}}</span>
   </div>
 </template>
 
@@ -39,6 +39,7 @@
 </script>
 <style lang="sass" scoped>
   .back
+    .title
     z-index: 100
     height: .88rem
     line-height: .88rem
@@ -55,6 +56,7 @@
     span
       text-align: center
       flex: 1
+      -webkit-flex: 1
     &.main
       color: #fff
       background: rgb(50,153,209)
