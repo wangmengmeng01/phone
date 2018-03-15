@@ -92,7 +92,7 @@
           const investAmount_res = ['投资金额无上限','500W','300W','400W','0'][parseInt(investAmount)-1];
           const endurance_res = ['风险承受能力很高','风险承受能力较高','风险承受能力一般','风险承受能力较低','风险承受能力极低'][parseInt(endurance)-1];
           const sub_backurl = this.$route.path;
-          const page_params = {
+          let page_params = {
             "title": sumScore+'分',
             "sub_title": '评测结果: '+investType_res,
             "btn_text": "我已了解，立即买入",
@@ -100,6 +100,13 @@
             "sub_btn_text": "重新评测",
             "sub_backurl": sub_backurl
           };
+
+          if(this.$route.query.type){
+            delete page_params.btn_text;
+            delete page_params.backurl;
+            delete page_params.sub_btn_text;
+            delete page_params.sub_backurl;
+          }
           this.SET_SUCC_PAGE(page_params);
           this.$go('/static/succ');
         })
