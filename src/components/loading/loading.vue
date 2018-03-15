@@ -32,7 +32,6 @@
       img
         transform: scale(.7)
         padding: .3rem
-        background: rgba(000,000,000,.7)
         border-radius: 1rem
 </style>
 <script>

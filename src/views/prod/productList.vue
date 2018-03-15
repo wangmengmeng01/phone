@@ -21,7 +21,7 @@
 						<p>剩余不到</p>
 					</div>
 					<p class="grayLine"></p>
-					<p class="proLine" :style="{width:j.amountScale*5+'rem'}"></p>
+					<p class="proLine" :style="{width:j.amountScale*5/100+'rem'}"></p>
 					<p class="proTip"><i>{{j.countPeople}}</i>人参与</p>
 				</div>
 				<p class="hotProductDivMessage" :class="[n<=i.bidList.length-2?'bb':'']">
