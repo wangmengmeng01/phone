@@ -66,8 +66,8 @@
         this.item = JSON.parse(decodeURIComponent(data));
         this.bankName = bankName;
         this.item.bankNo = bankNo;
-//        this.item.retUrl = location.host+'/status/succ'
-        this.item.retUrl = 'https://www.baidu.com/'
+        this.item.retUrl = location.origin+'/static/succ'
+//        this.item.retUrl = 'https://www.baidu.com/'
       }
     },
     methods: {
@@ -178,6 +178,7 @@
             "sub_backurl": "/login"
           });
           // 调用汇付
+          window.history.replaceState(null, null, this.$route.path);
           axios({
             method: 'post',
             url: res.serviceUrl,
@@ -192,8 +193,10 @@
           }).then(r=>{
             if(r.status === 200){
               if(r.data){
-                document.body.innerHTML = r.data;
-                document.form.submit();
+                console.log(r.data)
+                console.log(r.data.replace(/http:/g,''))
+//                document.body.innerHTML = r.data;
+//                setTimeout(()=>{document.form.submit()},0)
               }
             }
           })
