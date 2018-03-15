@@ -31,6 +31,6 @@ let _config;
 if(process.env.NODE_ENV === 'production'){
   _config = _default;
 }else{
-  _config = test;
+  _config = duxin;
 }
 export default _config

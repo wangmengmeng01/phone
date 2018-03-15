@@ -28,6 +28,12 @@
         'succ_page'
       ])
     },
+    /**
+     * 跳转之前状态里面没有title，直接跳转首页
+     * @param to
+     * @param from
+     * @param next
+     */
     beforeRouteEnter (to, from, next) {
       next(vm => {
         !vm.succ_page.title && vm.$go('/');

@@ -33,7 +33,7 @@
         checked: true,                                              // 密码框的类型显示隐藏
         text: '登录',                                                // 登录按钮文字提示
         item: {
-          mobile: this.$route.query.mobile || '17810001001',
+          mobile: this.$route.query.mobile || '17810001002',
           password: 'a123456',
         }
       }
