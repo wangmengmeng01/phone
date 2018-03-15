@@ -10,7 +10,6 @@ export const dev = {
   url: 'http://192.168.7.110:8506/api/',
 };
 
-
 export const test = {
   url: 'https://zw-api-test.chinazyjr.net/api/',
 };
@@ -26,7 +25,7 @@ export const pro = {
 
 let _config;
 if(process.env.NODE_ENV === 'production'){
-  _config = stage;
+  _config = test;
 }else{
   _config = test;
 }
