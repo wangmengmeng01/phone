@@ -52,7 +52,7 @@
       this.init(this.nav[0]);
     },
     methods: {
-    	  ...mapMutations([
+      ...mapMutations([
         'SET_COUPON',
       ]),
       init(item){
@@ -64,68 +64,100 @@
         	useType:item.type,
         	pageIndex
         }).then(res=>{
-          this.res = res.couponList
+          this.res = res.couponList;
           this.nav[0].size=res.availableNum;
           this.nav[1].size=res.disabledNum;
-
         }).catch(err=>{
           this.res = []
         })
       },
+      /**
+       * 菜单栏
+       */
       choose(i,index){
         if(this.act===index)return;
         this.act = index;
         this.init(i);
       },
-      checkedCb(data, index){
+      /**
+       * 选取勾选框的回调
+       */
+      checkedCb(current, index){
+        // 没有数据直接push
         if(!this.couponlist.length){
-          this.couponlist.push(data)
+          this.couponlist.push(current)
           return
         }
-        if(!this.$refs.coupon[index].check){
-          const couponlistIndex = this.couponlist.findIndex(t=>t.couponNo === data.couponNo);
-          this.couponlist.splice(couponlistIndex,1)
+        // 判断需不需要删除
+        if(this.isDel(current)) return;
+        // 直接获取最后一个元素做对比
+        let end = this.couponlist[this.couponlist.length-1];
+        // 类型相同做同类对比
+        if(current.type === end.type){
+          this.isSameOverlap(current, end, index);
           return
         }
-
-         if(!this.isSameOverlapList(data, index)) return;
-        if(!this.isDifferentOverlap(data, index)) return;
-        const couponlistIndex = this.couponlist.findIndex(t=>t.couponNo === data.couponNo);
-          couponlistIndex == -1
-          ?
-          this.couponlist.push(data)
-          :
-          this.couponlist.splice(couponlistIndex,1)
+        // 做异类对比
+        this.differentOverlap(current, end, index);
       },
-      isSameOverlapList(data, index){
-        // 抽出所有类型相同并且不能同类相加的卡券
-        const isSameOverlapList = this.couponlist.filter(t=>(t.type === data.type && t.isSameOverlap == '2'));
-        // 如果有了则不能再加了，否则可以加
-        if(!isSameOverlapList.length){
-          this.$refs.coupon[index].check = false;
-          this.$toask('此券不允许同类叠加');
-          return false
+      /**
+       * 判断是否删除元素,
+       */
+      isDel(current){
+        let i = this.couponlist.findIndex(t=>t.couponNo===current.couponNo);
+        // 元素存在则删除，不存在再继续判断需要不需要添加
+        if(i>-1){
+          this.couponlist.splice(i,1);
+          return true
         }
-        return true
+        return false
       },
-      isDifferentOverlap(data, index){
-        // 抽出所有类型不同并且不能异类相加的卡券
-        const isSameOverlapList = this.couponlist.filter(t=>(t.type != data.type && t.isDifferentOverlap == '2'));
-        // 如果有了则不能再加了，否则可以加
-        if(!isSameOverlapList.length){
-          this.$refs.coupon[index].check = false;
-          this.$toask('此券不允许异类叠加');
-          return false
-        }
-        return true
+      /**
+       * 卡券类型相同
+       * @param current         // 当前值
+       * @param end             // 最后一个值
+       * @param index           // 当前index
+       * @returns {boolean}
+       */
+      isSameOverlap(current, end, index){
+        // 首先把当前值和最后一个值组成新的数组
+        let arr =  [...[current],...[end]];
+        // 然后判断这个数组里面有没有isSameOverlap=='2'的数据，
+        let hasSameOverlap = arr.filter(t=>t.isSameOverlap=='2');
+        // 如果没有的话说明，可以直接插入了
+        if(!hasSameOverlap.length) {
+          this.couponlist.push(current);
+          return
+        };
+        // 没有的话取消勾选框，同时提示
+        this.$refs.coupon[index].check = false;
+        this.$toask('此券不允许同类叠加');
       },
-
+      /**
+       * 卡券类型不同。逻辑同上
+       * @param current
+       * @param end
+       * @param index
+       */
+      differentOverlap(current, end, index){
+        let arr =  [...[current],...[end]];
+        let hasSameOverlap = arr.filter(t=>t.isDifferentOverlap=='2');
+        if(!hasSameOverlap.length) {
+          this.couponlist.push(current);
+          return
+        };
+        this.$refs.coupon[index].check = false;
+        this.$toask('此券不允许异类叠加');
+      },
       transformParams(data){
         let str = '';
-        data.
         return
       },
       submit(){
+        if(!this.couponlist.lenth){
+          this.$go(this.coupon.backurl,{bidNo,linkType:this.$route.query.linkType})
+          return
+        }
         const bidNo = this.$route.query.bidNo;
         this.SET_COUPON({
           data: this.couponlist
