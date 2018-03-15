@@ -66,7 +66,8 @@
         this.item = JSON.parse(decodeURIComponent(data));
         this.bankName = bankName;
         this.item.bankNo = bankNo;
-        this.item.retUrl = location.host+'/status/succ'
+//        this.item.retUrl = location.host+'/status/succ'
+        this.item.retUrl = 'https://www.baidu.com/'
       }
     },
     methods: {
