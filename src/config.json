@@ -326,6 +326,16 @@
 					"foot": {
 						"style": "margin-bottom: 1.1rem"
 					}
+				}, {
+					"path": "bankDepository",
+					"filter": true,
+					"back":false,
+					"title": "资金银行存管"
+				}, {
+					"path": "Honour",
+					"filter": true,
+					"back":false,
+					"title": "100%历史兑付"
 				}
 
 			]
