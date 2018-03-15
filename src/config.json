@@ -25,7 +25,10 @@
 		{
 			"path": "/recharge",
 			"redirect": "/wealth/recharge"
-		}, {
+		},{
+      "path": "/riskTest",
+      "redirect": "/wealth/riskTest"
+    }, {
 			"path": "login",
 			"title": "登录",
 			"filter": true,
