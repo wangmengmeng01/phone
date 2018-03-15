@@ -16,6 +16,8 @@
   import { mapGetters, mapMutations } from 'vuex'
   import { searchCouponList, getCouponBenefit } from '@/service'
   import axios from 'axios'
+  import config from '@/config';
+  import Api from '@/service/api';
   import {transformRequest} from '@/until'
 
   export default {
@@ -42,6 +44,8 @@
     },
     computed: {
       ...mapGetters([
+        'user',
+        'client',
         'coupon'
       ])
     },
@@ -134,42 +138,47 @@
         this.$refs.coupon[index].check = false;
         this.$toask(msg);
       },
-      transformParams(data){
-        let str = '';
-        return
-      },
       submit(){
-//        if(!this.couponlist.lenth){
-//          this.$go(this.coupon.backurl,{bidNo,linkType:this.$route.query.linkType})
-//          return
-//        }
         const bidNo = this.$route.query.bidNo;
+        const linkType = this.$route.query.linkType;
+        // 没有选择的直接返回
+        if(!this.couponlist.length){
+          this.$go(this.coupon.backurl,{bidNo,linkType})
+          return
+        }
+        // 优惠券数据存入状态管理中
         this.SET_COUPON({
           data: this.couponlist
         });
+        // 选取优惠接口编辑
         const couponList = this.couponlist.map(t=>{
-            const {couponNo, couponType, couponRate, isSameOverlap, isDifferentOverlap, receiveNo} = t;
-           return {couponNo, couponType, couponRate, isSameOverlap, isDifferentOverlap, receiveNo};
-  })
-
-
-        const a = '{"couponNo":"JXQ_ZZT_20180201_01","couponType":1,"couponRate":"0.1","isSameOverlap":1,"isDifferentOverlap":1,"receiveNo":"ZZT_20180201"},{"couponNo":"JXQ_ZZT_20180201_02","couponType":1,"couponRate":"0.2","isSameOverlap":1,"isDifferentOverlap":1,"receiveNo":"ZZT_20180202"}'
-
-        axios.get('http://192.168.7.110:8506/zw/api/coupon/filter/getCouponBenefit?client=2&userToken=c03e58915b154e7cad16d730cd63f1f8&couponList=['+encodeURIComponent(a)+']')
-          .then(function (response) {
-            console.log(response);
+            let {couponNo, type, profitRate, isSameOverlap, isDifferentOverlap, receiveNo} = t;
+           return {couponNo, couponRate:profitRate, isSameOverlap, isDifferentOverlap, receiveNo, couponType:type};
+        });
+        // 不知道为什么用封装的不行，传参有问题，只能拿出来单独传了，参数还需要url编码下
+        axios.get(`${config.url}${Api.getCouponBenefit}?client=${this.client}&userToken=${this.user.userToken}&couponList=${encodeURIComponent(JSON.stringify(couponList))}`)
+          .then( r=> {
+              r = r.data;
+            if (r.code === '100') {
+              let res = r.result;
+              // 参数编辑
+              const params = {
+                bidNo,
+                linkType,
+                ...res
+              };
+              // 有结果传到backurl中
+              this.$go(this.coupon.backurl,params)
+            } else {
+              if(r.code === '1000'){
+                this.$go('/login')
+              }
+              this.$toask(r.message)
+            }
           })
           .catch(function (error) {
             console.log(error);
           });
-
-
-//        getCouponBenefit({
-//          couponList
-//        }).then(r=>{
-//          log(r)
-//        });
-//        this.$go(this.coupon.backurl,{bidNo,linkType:this.$route.query.linkType})
       }
     },
     watch: {

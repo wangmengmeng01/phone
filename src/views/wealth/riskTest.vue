@@ -102,12 +102,14 @@
           i++;
           params[`answer${i}`] = i+t
         });
+        // 调用结果接口
         userReskEvaluation(params).then(r=>{
           const {sumScore, investType, investAmount, endurance} = r;
           const investType_res = ['激进型','进取型','稳健性','谨慎性','保守型'][parseInt(investType)-1];
           const investAmount_res = ['投资金额无上限','500W','300W','400W','0'][parseInt(investAmount)-1];
           const endurance_res = ['风险承受能力很高','风险承受能力较高','风险承受能力一般','风险承受能力较低','风险承受能力极低'][parseInt(endurance)-1];
           const sub_backurl = this.$route.path;
+          // 传到成功页面的参数
           let page_params = {
             "title": sumScore+'分',
             "sub_title": '评测结果: '+investType_res,
@@ -116,7 +118,7 @@
             "sub_btn_text": "重新评测",
             "sub_backurl": sub_backurl
           };
-
+          // 如果有type参数，表示是原生调用，去除不显示的参数
           if(this.$route.query.type){
             delete page_params.btn_text;
             delete page_params.backurl;

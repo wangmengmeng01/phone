@@ -10,7 +10,7 @@
     </div>
     <div class="code">
       <canvas id="code"></canvas>
-      <p class="f32 color_font-s center">扫一扫该二维码，加我为理财师</p>
+      <p class="f32 color_font-s center">扫一扫该二维码，添加我</p>
     </div>
   </div>
 </template>

@@ -1,5 +1,7 @@
 export default {
 
+  client: state => state.client,
+
   user: state => state.user,
 
   user_info: state => state.user_info,

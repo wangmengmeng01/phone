@@ -7,7 +7,7 @@ export const duxin = {
 };
 
 export const dev = {
-  url: 'http://192.168.7.110:8506/api/',
+  url: 'http://192.168.7.110:8506/zw/api/',
 };
 
 export const test = {
@@ -27,6 +27,6 @@ let _config;
 if(process.env.NODE_ENV === 'production'){
   _config = stage;
 }else{
-  _config = test;
+  _config = dev;
 }
 export default _config

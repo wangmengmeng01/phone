@@ -18,7 +18,8 @@
 			"params": {}
 		},
 		"user": {},
-		"user_info": {}
+		"user_info": {},
+    "client": "2"
 	},
 	"route": [
 		{
@@ -318,7 +319,7 @@
 						"style": "margin-bottom: 1.1rem"
 					}
 				}
-				
+
 			]
 		}, {
 			"path": "wealth",
@@ -347,7 +348,8 @@
 				}, {
 					"path": "riskTest",
 					"title": "风险评测",
-					"foot": false
+          "filter": true,
+          "foot": false
 				}, {
 					"path": "productDetail",
 					"title": "产品详情",
