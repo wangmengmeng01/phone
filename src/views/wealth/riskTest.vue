@@ -20,8 +20,7 @@
     name: 'riskTest',
     data() {
       return{
-        checked_index: false,
-        act: 0,
+        act: 0,         // 显示的当前问题
         list:[{
           q: '您的年龄是？',
           a: ['18-28岁（3）','28-55岁（5）','56-65岁（2）','60岁以上（1）'],
@@ -53,7 +52,7 @@
           q: '您的投资出现何种程度的波动时，您会呈现明显的焦虑？',
           a: ['本金无损失，但收益未达预期（0）','出现轻微本金损失（1）','本金10%以内的损失（5）','本金20-50%的损失（10）','本金50%以上损失（15）'],
         }],
-        res: []
+        res: [] // 最终的结果列表
       }
     },
     created() {
@@ -64,23 +63,40 @@
         'RESET',
         'SET_SUCC_PAGE'
       ]),
+      /**
+       * 选择选项
+       * @param index
+       */
       choose(index){
+        // 判断边界，如果结果大于等于当前问题列表，不做操作
         if(this.res.length>=this.list.length) return;
+        // 选择到下一题默认滚动到顶部
         window.scroll(0,0);
+        // 给选择的选项编号，并且存到结果数组中
         this.res.push(['A','B','C','D','E'][index]);
+        // 判断边界，如果当前的问题列表一个问题，不做操作
         if(this.act===(this.list.length-1)) return;
+        // 点击的时候切换当前页面，显示下一个问题
         this.act++;
       },
+      /**
+       * 上一题
+       */
       prev(){
+        // 如果是最后一题，点击表示提交
         if(this.res.length===this.list.length){
           this.submit();
           return
         }
+        // 选择到上一题默认滚动到顶部
         window.scroll(0,0);
+        // 删除最后一个数据
         this.res.pop();
+        // 切换到上一题
         this.act--;
       },
       submit(){
+        // 重新编辑参数
         let params = {};
         this.res.forEach((t,i)=>{
           i++;
