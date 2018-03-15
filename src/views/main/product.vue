@@ -39,7 +39,7 @@
 				<p class="hotProductDivMessage" :class="[n<=i.bidList.length-2?'bb':'']">
 					<span>累计销售 <i>1000万</i></span>
 					<span>累计收益 <i>102万</i></span>
-					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,backTitle:j.bidName})">购买</span>
+					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName})">购买</span>
 				</p>
 			</div>
 

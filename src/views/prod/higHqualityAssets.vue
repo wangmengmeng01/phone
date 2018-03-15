@@ -1,71 +1,52 @@
 <template>
-	<div class="higHqualityAssets">
+	<div class="higHqualityAssets" @scroll="dd">
 
-		<div class="hha-div">
-			<p class="hha-div-title f32 color-font ffl">月月赢-12M500G号</p>
+		<div  v-for="(i,index) in list" class="hha-div">
+			<p class="hha-div-title f32 color-font ffl">{{i.borrowName}}</p>
 			<p class="f32 hha-div-p1 ffl">
-				<span class="ffl">9.61%</span>
-				<span class="ffl">＜5万</span>
-				<span class="ffl">募集金额</span>
+				<span class="ffl">{{i.annualizedRate}}%</span>
+				<span class="ffl">＜{{i.contractAmount/10000|tofixed}}万</span>
+				<span class="ffl">{{i.periodLength}}{{i.periodLength|Totime}}</span>
 			</p>
-			<p class="f24 color_font-s hha-div-p2 ffl bb">
+			<p class="f24 color_font-s hha-div-p2 ffl"  :class="index<list.length-1?'bb':''">
 				<span class="ffl">历史年化</span>
 				<span class="ffl">募集金额</span>
 				<span class="ffl">项目期限</span>
 			</p>
 		</div>
-
-		<div class="hha-div">
-			<p class="hha-div-title f32 color-font ffl">月月赢-12M500G号</p>
-			<p class="f32 hha-div-p1 ffl">
-				<span class="ffl">9.61%</span>
-				<span class="ffl">＜5万</span>
-				<span class="ffl">募集金额</span>
-			</p>
-			<p class="f24 color_font-s hha-div-p2 ffl bb">
-				<span class="ffl">历史年化</span>
-				<span class="ffl">募集金额</span>
-				<span class="ffl">项目期限</span>
-			</p>
-		</div>
-
-		<div class="hha-div">
-			<p class="hha-div-title f32 color-font ffl">月月赢-12M500G号</p>
-			<p class="f32 hha-div-p1 ffl">
-				<span class="ffl">9.61%</span>
-				<span class="ffl">＜5万</span>
-				<span class="ffl">募集金额</span>
-			</p>
-			<p class="f24 color_font-s hha-div-p2 ffl bb">
-				<span class="ffl">历史年化</span>
-				<span class="ffl">募集金额</span>
-				<span class="ffl">项目期限</span>
-			</p>
-		</div>
-		<div class="hha-div">
-			<p class="hha-div-title f32 color-font ffl">月月赢-12M500G号</p>
-			<p class="f32 hha-div-p1 ffl">
-				<span class="ffl">9.61%</span>
-				<span class="ffl">＜5万</span>
-				<span class="ffl">募集金额</span>
-			</p>
-			<p class="f24 color_font-s hha-div-p2 ffl ">
-				<span class="ffl">历史年化</span>
-				<span class="ffl">募集金额</span>
-				<span class="ffl">项目期限</span>
-			</p>
-		</div>
-
 	</div>
 </template>
-
 <script>
+	import { standardAndPlanList } from '@/service'
 	export default {
 		name: 'higHqualityAssets',
+
 		data() {
 			return {
+				item: {
+					pageIndex: "1"
+				},
+				list: {}, //优选资产列表
+				totalPage:0,//总页数
 
 			}
+		},
+		created() {
+			standardAndPlanList(this.item).then(res => {
+				console.log("优选资产");
+				console.log(res);
+				this.list = res.list;
+				this.totalPage= Math.ceil(res.allCount/10);
+//				console.log(this.totalPage);
+			});
+		},
+		methods: {
+			
+			dd() {
+			   
+			}
+			
+			
 		}
 	}
 </script>
