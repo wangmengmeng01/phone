@@ -21,6 +21,8 @@
         <img src="../../assets/common/arrow-right.png" alt="" class="arrow">
       </li>
     </ul>
+    <p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>
+
   </div>
 </template>
 
@@ -124,6 +126,7 @@
 
 <style lang="sass" scoped>
   .mine
+    min-height: 100vh
     .head
       padding: .76rem .4rem .6rem
       align-items: flex-start
@@ -181,4 +184,14 @@
         .arrow
           padding-left: .2rem
           height: .34rem
+    .RiskTips
+      margin: 1.06rem 0 0.98rem
+      height: 0.84rem
+      text-align: center
+      line-height: 0.24rem
+      font-size: 0.24rem
+      color: #B6B2B2
+      i
+        font-style: inherit
+        margin: 0 0.2rem
 </style>

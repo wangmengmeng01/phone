@@ -144,3 +144,17 @@ export const openAccount = (params)=>{
     params
   });
 }
+
+
+
+/**
+ * 用户激活
+ * @param  {String} pid 产品id
+ */
+export const userActivate = (params)=>{
+  return $http({
+    method: 'post',
+    api: api.userActivate,
+    params
+  });
+}

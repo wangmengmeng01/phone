@@ -1,5 +1,5 @@
 <template>
-  <div class="reg_bank p4">
+  <div class="reg_bank p4" v-show="isfromhuifu">
     <h2 class="text color-font">填写开户信息</h2>
     <p class="text2 f28 color_font-s">请填写开通银行存管账户所需信息（须绑定储蓄卡）</p>
     <div class="name item flex border-b">
@@ -33,7 +33,7 @@
 
 <script>
   import { mapActions, mapMutations } from 'vuex'
-  import { sendSmsCode, openAccount } from '@/service'
+  import { sendSmsCode, openAccount, getUserStatus, userActivate } from '@/service'
   import axios from 'axios'
   export default {
     name: 'reg_bank',
@@ -60,14 +60,71 @@
       // 开始清楚成功页面的缓存
       this.RESET('succ_page');
       // 获取从选择银行卡页面返回的数据
-      const {data, bankName, bankNo} = this.$route.query;
+      const {data, bankName, bankNo, isfromhuifu} = this.$route.query;
       // 如果有的话重新赋值
       if(data){
         this.item = JSON.parse(decodeURIComponent(data));
         this.bankName = bankName;
         this.item.bankNo = bankNo;
-        this.item.retUrl = location.origin+'/static/succ'
-//        this.item.retUrl = 'https://www.baidu.com/'
+        this.item.retUrl = this.$route.path+'?isfromhuifu=1';
+      }
+      // 表示从汇付返回的判断是否开户成功
+      if(isfromhuifu){
+        window.history.replaceState(null, null, this.$route.path);
+        getUserStatus().then(r=>{
+          r.openAccountStatus='1'
+          // 未开户
+          if(r.openAccountStatus=='1'){
+            this.SET_SUCC_PAGE({
+              "title": "开户失败",
+              "sub_title": "请检查您所录入的开户信息",
+              "btn_text": "重新提交",
+              "backurl": "/reg_bank",
+              "sub_btn_text": "暂无",
+              "sub_backurl": "/"
+            });
+            this.$go('/static/fail','',false);
+          }
+          // 已开户
+          if(r.openAccountStatus=='3'){
+            this.SET_SUCC_PAGE({
+              "title": "恭喜，开通银行存管账户成功",
+              "btn_text": "立即充值",
+              "backurl": "/recharge",
+              "sub_btn_text": "暂无",
+              "sub_backurl": "/"
+            });
+            this.$go('/static/succ','',false);
+          }
+          // 待激活
+          if(r.openAccountStatus=='4'){
+            userActivate({
+              retUrl: this.$route.path+'?isfromhuifu=1'
+              }).then(res=>{
+              // 调用汇付先清除地址栏的参数
+              window.history.replaceState(null, null, this.$route.path);
+              axios({
+                method: 'post',
+                url: res.serviceUrl,
+                data: res.inMap,
+                transformRequest: [function (data) {
+                  let ret = '';
+                  for (let it in data) {
+                    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                  }
+                  return ret.slice(0,ret.length-1)
+                }],
+              }).then(r=>{
+                if(r.status === 200){
+                  if(r.data){
+                    document.body.innerHTML = r.data;
+                    setTimeout(()=>{document.form.submit()},0)
+                  }
+                }
+              })
+            })
+          }
+        })
       }
     },
     methods: {
@@ -169,15 +226,7 @@
         }
         // 开户
         openAccount(this.item).then(res=>{
-          // 开户完成跳成功页面的参数
-          this.SET_SUCC_PAGE({
-            "title": "恭喜，开通银行存管账户成功",
-            "btn_text": "立即充值",
-            "backurl": "/recharge",
-            "sub_btn_text": "暂无",
-            "sub_backurl": "/login"
-          });
-          // 调用汇付
+          // 调用汇付先清除地址栏的参数
           window.history.replaceState(null, null, this.$route.path);
           axios({
             method: 'post',
