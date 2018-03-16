@@ -6,7 +6,7 @@
 
 			<p class="f36 andriodLink"><img src="../../assets/main/forPhone/android.png" /><span>安卓下载</span>
 
-				<a href="http://fdfs.chinazyjr.com:6230/group1/M00/13/26/rBACZlqqmiKAf8ReAGOBcPfkDJA716.apk"></a>
+				<a href="https://zw-web.chinazyjr.com/img/app-debug.apk"></a>
 			</p>
 			<p class="f36"> <img src="../../assets/main/forPhone/ios.png" /><span>IOS下载</span></p>
 
