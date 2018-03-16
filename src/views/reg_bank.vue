@@ -193,10 +193,8 @@
           }).then(r=>{
             if(r.status === 200){
               if(r.data){
-                console.log(r.data)
-                console.log(r.data.replace(/http:/g,''))
-//                document.body.innerHTML = r.data;
-//                setTimeout(()=>{document.form.submit()},0)
+                document.body.innerHTML = r.data;
+                setTimeout(()=>{document.form.submit()},0)
               }
             }
           })
