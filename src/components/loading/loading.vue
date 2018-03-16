@@ -32,8 +32,6 @@
       img
         transform: scale(.7)
         padding: .3rem
-        background: rgba(000,000,000,.7)
-        border-radius: 1rem
 </style>
 <script>
     let num = 1;//默认第一张图片，因为总共是4张

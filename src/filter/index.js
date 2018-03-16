@@ -19,6 +19,17 @@ export function sex(num) {
 export function tofixed(val) {
   return val && val.toFixed(0);
 }
+
+export function numfixed(val) {
+	if(val>10000){
+ 		 return (val/10000).toFixed(0);
+	}else{
+		 return (val/10000).toFixed(1);	
+	}
+
+}
+
+
 export function tofixed2(val) {
   return val && val.toFixed(2);
 }
