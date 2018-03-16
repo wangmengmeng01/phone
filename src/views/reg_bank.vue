@@ -66,7 +66,7 @@
         this.item = JSON.parse(decodeURIComponent(data));
         this.bankName = bankName;
         this.item.bankNo = bankNo;
-        this.item.retUrl = this.$route.path+'?isfromhuifu=1';
+        this.item.retUrl = location+origin+this.$route.path+'?isfromhuifu=1&';
       }
       // 表示从汇付返回的判断是否开户成功
       if(isfromhuifu){
