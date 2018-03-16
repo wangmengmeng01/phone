@@ -66,8 +66,8 @@
         this.item = JSON.parse(decodeURIComponent(data));
         this.bankName = bankName;
         this.item.bankNo = bankNo;
-        this.item.retUrl = location+origin+this.$route.path+'?isfromhuifu=1&';
       }
+      const retUrl = this.item.retUrl = location+origin+'/reg_bank?isfromhuifu=1&';
       // 表示从汇付返回的判断是否开户成功
       if(isfromhuifu){
         window.history.replaceState(null, null, this.$route.path);
@@ -99,7 +99,7 @@
           // 待激活
           if(r.openAccountStatus=='4'){
             userActivate({
-              retUrl: this.$route.path+'?isfromhuifu=1'
+              retUrl
               }).then(res=>{
               // 调用汇付先清除地址栏的参数
               window.history.replaceState(null, null, this.$route.path);
