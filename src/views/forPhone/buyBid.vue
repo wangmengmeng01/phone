@@ -73,7 +73,7 @@
 					<img v-if="agreCheckBol" src="../../assets/common/check_succ.png" />
 					<img v-else src="../../assets/common/check_none.png" />
 				</p>
-				<p class="agreement">《投资出借服务协议》《自动投标授权合同》《风险揭示函》</p>
+				<p class="agreement">《投资出借服务协议》《自动投标授权合同》</p>
 			</div>
 
 		</div>
@@ -85,7 +85,7 @@
 				<p><span>¥{{ExpectedRevenue}}</span><span>预期收益</span></p>
 				<p><span>¥{{investMoney}}</span><span>实付款</span></p>
 			</div>
-			<p class="buyBidBottomRight" :class="agreCheckBol?'':'disable'" @click="submit">确认购买</p>
+			<p class="buyBidBottomRight" :class="agreCheckBol?'':'disable'">确认购买</p>
 		</div>
 
 	</div>
