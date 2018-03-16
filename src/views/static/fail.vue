@@ -1,6 +1,6 @@
 <template>
   <div class="succ center">
-    <img src="../../assets/common/succ.png" class="icon">
+    <img src="../../assets/common/fail.png" class="icon">
     <div class="forget_pwd item">
       <h2 class="f36 color_font">{{succ_page.title}}</h2>
       <p class="f28 color_font-s">{{succ_page.sub_title}}</p>

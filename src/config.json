@@ -113,7 +113,8 @@
 				}, {
 					"path": "mine",
 					"title": "我的",
-					"back": {
+          "foot": false,
+          "back": {
 						"icon": false,
 						"background": "main"
 					}
@@ -290,7 +291,17 @@
 					"foot": {
 						"style": "background-color: #fff;margin-top: -3rem"
 					}
-				}
+				}, {
+          "path": "fail",
+          "title": "失败",
+          "filter": true,
+          "back": {
+            "title": false
+          },
+          "foot": {
+            "style": "background-color: #fff;margin-top: -3rem"
+          }
+        }
 			]
 		}, {
 			"path": "forPhone",

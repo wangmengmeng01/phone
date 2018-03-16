@@ -16,7 +16,9 @@ export default {
 
   openAccount: 'account/filter/openAccount', // 用户开户接口
 
-	productSearchBidsList:'bid/searchBidsList',//产品页
+	productSearchBidsList:'bid/searchBidsList', // 产品页
+
+  userActivate: '/account/filter/userActivate', // 用户激活
 
 	getProductBidsList:'bid/getProductBidsList',//产品列表页
 
@@ -79,8 +81,8 @@ export default {
     searchUserCouponInfo: 'coupon/filter/searchUserCouponInfo', // 我的优惠
 
 	submitUserRecharge:'account/filter/submitUserRecharge',//充值提交
-	
+
 	searchBidsInvestList:'bid/searchBidsInvestList',//购买记录
-	
+
 	standardAndPlanList:'bid/standardAndPlanList',//严选优质列表
 }
