@@ -3,8 +3,8 @@
     <div class="top">
       <img src="../../assets/common/contacts.png">
       <div class="topRight">
-        <div class="TRTop"><span>招商银行</span><em>快捷支付</em></div>
-        <p>6214*********0891</p>
+        <div class="TRTop"><span>{{cardMes.bankName}}</span><em>快捷支付</em></div>
+        <p>{{cardMes.bankCardNo}}</p>
       </div>
     </div>
     <div class="rechargeLimit">预计到账时间T+1工作日，节假日顺延</div>
@@ -23,14 +23,27 @@
 </template>
 
 <script>
+	import { selectBeforeRecharge, rechargeSendSmsCode, submitUserRecharge } from '@/service'
+	import { mapGetters, mapMutations } from 'vuex'
   export default {
     name: 'withdraw',
     data() {
       return{
-
+			cardMes: {}, //银行卡信息
       }
     },
     created() {
+    	
+    	selectBeforeRecharge().then(res => {
+			this.cardMes = res;
+
+			this.itemSms.mobile = res.mobile;
+			this.itemSms.bankCardNo = res.bankCardNo;
+			this.singleMoney = res.singleTransQuota;
+			this.dayMoney = res.cardDailyTransQuota;
+
+		});
+    	
     },
     methods: {
     },
