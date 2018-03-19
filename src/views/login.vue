@@ -4,14 +4,14 @@
     <div class="item flex phone border-b">
       <div class="flex con">
         <span class="name f44 color-font">手机号</span>
-        <input type="tel" placeholder="请输入手机号" class="f44" v-model="item.mobile" maxlength="11">
+        <input type="tel" placeholder="请输入手机号" class="f44" v-model.trim="item.mobile" maxlength="11">
         <img src="../assets/common/del.png" alt="" class="del" @click="item.mobile=''">
       </div>
     </div>
     <div class="item flex password border-b">
      <div class="flex con">
        <span class="name f44 color-font">密码</span>
-       <input :type="[checked?'password':'text']" placeholder="请输入登录密码" class="f44" v-model="passWord">
+       <input :type="[checked?'password':'text']" placeholder="请输入登录密码" class="f44" v-model.trim="passWord">
      </div>
       <img :src="require(`@/assets/common/${checked?'eyes':'eyebrow'}.png`)" alt="" class="eyes" @click="checked=!checked">
     </div>

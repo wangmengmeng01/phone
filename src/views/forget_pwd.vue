@@ -3,7 +3,7 @@
     <h2 class="text color-font">修改登录密码</h2>
     <p class="text2 f28 color_font-s">请填写需要修改登录密码的手机号码</p>
     <div class="item flex phone border-b">
-      <input type="tel" placeholder="请输入手机号" class="f44" v-model="mobile" maxlength="11">
+      <input type="tel" placeholder="请输入手机号" class="f44" v-model.trim="mobile" maxlength="11">
     </div>
     <button class="btn" @click="submit">下一步</button>
   </div>
