@@ -81,30 +81,31 @@
 					retUrl:this.retUrl,
 					receiveNo:''
 				}).then(res => {
+					
+					
 					console.log(res);
 					
-          // 调用汇付先清除地址栏的参数
-          window.history.replaceState(null, null, this.$route.path);
-          axios({
-            method: 'post',
-            url: res.serviceUrl,
-            data: res.inMap,
-            transformRequest: [function (data) {
-              let ret = '';
-              for (let it in data) {
-                ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-              }
-              return ret.slice(0,ret.length-1)
-            }],
-          }).then(r=>{
-            if(r.status === 200){
-              if(r.data){
-                document.body.innerHTML = r.data;
-                setTimeout(()=>{document.form.submit()},0)
-              }
-            }
-          })
-
+         // 调用汇付先清除地址栏的参数
+              window.history.replaceState(null, null, this.$route.path);
+              axios({
+                method: 'post',
+                url: location.origin+ new URL(res.serviceUrl).pathname,
+                data: res.inMap,
+                transformRequest: [function (data) {
+                  let ret = '';
+                  for (let it in data) {
+                    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                  }
+                  return ret.slice(0,ret.length-1)
+                }],
+              }).then(r=>{
+                if(r.status === 200){
+                  if(r.data){
+                    document.body.innerHTML = r.data;
+                    setTimeout(()=>{document.form.submit()},0)
+                  }
+                }
+              })
         
 					
 					
