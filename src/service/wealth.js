@@ -95,4 +95,40 @@ export const userCashFee = async (params)=>{
   });
 };
 
+// 取现
+export const toCash = async (params)=>{
+  return await $http({
+    method: 'post',
+    api: api.toCash,
+    params,
+  });
+};
+// 自动复投
+export const autoTenderPlan = async (params)=>{
+  return await $http({
+    method: 'post',
+    api: api.autoTenderPlan,
+    params,
+  });
+};
+
+// 生成合同
+export const signingContract = async (params)=>{
+  return await $http({
+    method: 'post',
+    api: api.signingContract,
+    params,
+  });
+};
+
+
+// 签约状态
+export const querySigningStatus = async (params)=>{
+  return await $http({
+    method: 'post',
+    api: api.querySigningStatus,
+    params,
+  });
+};
+
 

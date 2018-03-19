@@ -87,4 +87,12 @@ export default {
 	standardAndPlanList:'bid/standardAndPlanList',//严选优质列表
 	
 	userCashFee:'account/filter/userCashFee',//取现手续费
+	
+	toCash:'account/filter/toCash',//取现
+	
+	autoTenderPlan:'account/filter/autoTenderPlan',//自动复投
+	
+	signingContract:'contract/filter/signingContract',//生成合同
+	
+	querySigningStatus:'contract/filter/querySigningStatus',//签约状态
 }

@@ -19,14 +19,18 @@
       <div class="bottomB"><span>手续费</span><em>{{userCashFeeMoney|formatNum}}元</em></div>
       <div class="bottomB"><span>实际到账</span><em>{{actualccountMoney|formatNum}}元</em></div>
     </div>
-    
-    <p class="rechargeBtn" :class="[withdrawMoney.length ?'':'disable']" >下一步</p>
+   <!--提交Form表单-->
+	<!--<form action="formItem.serviceUrl"   id="subForm" method="post" style="display: none;">
+		<input type="submit" value="提交" type="button" />
+	</form>-->
+    <p class="rechargeBtn" :class="[withdrawMoney.length ?'':'disable']" @click="toCash" >下一步</p>
   </div>
 </template>
 
 <script>
-	import { selectBeforeRecharge, accountAcmountInfo ,userCashFee} from '@/service'
+	import { selectBeforeRecharge, accountAcmountInfo ,userCashFee,toCash} from '@/service'
 	import { mapGetters, mapMutations } from 'vuex'
+	import axios from 'axios'
 	export default {
 		name: 'withdraw',
 		data() {
@@ -36,12 +40,14 @@
 				accountMoney:0,//可提现金额
 				withdrawMoney:'',//提现金额
 				userCashFeeMoney:0,//提现手续费
-				actualccountMoney:0,//实际到账
+				actualccountMoney:0,//实际到账回调地址
+				retUrl:'',//返回地址
+				formItem:'',
 				
 			}
 		},
 		created() {
-
+			const retUrl = this.retUrl = location+'?isfromhuifu=1&';
 			selectBeforeRecharge().then(res => {
 				this.cardMes = res;
 			});
@@ -57,7 +63,6 @@
 			wall(){
 				this.withdrawMoney=this.accountMoney;
 				this.userCashFee();
-				
 			},
 			/*计算手续费*/
 			userCashFee(){
@@ -67,14 +72,44 @@
 				}).then(res => {
 					this.userCashFeeMoney=res.fee;
 					this.actualccountMoney=this.withdrawMoney-this.userCashFeeMoney;
-					
 				});
 			},
-			
 			onblur(){
 				this.userCashFee();
+			},
+			toCash(){
+				toCash({
+					transAmount:this.withdrawMoney,
+					fee:this.userCashFeeMoney,
+					cashWay:'GENERAL',
+					retUrl:this.retUrl,
+					receiveNo:''
+				}).then(res => {
+					console.log(res);
+					this.formItem=res;
+					
+					let msgParamDto = res.InMap;
+					foreac(msgParamDto, function(key, value) {
+						if(key == "ReqExt") {
+							var ctc = '<textarea rows="1" cols="500" style="display: none" name="ReqExt">' + value + '</textarea>'
+						} else {
+							var ctc = '  <input type="hidden" name="' + key + '"  class="hidden"   value="' + value + '" /> ';
+						}
+						document.getElementById("subForm").appendChild(ctc);
+					});
+//						document.getElementById("subForm")..submit();
+	
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				});
 			}
-			
 			
 			
 			
