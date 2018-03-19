@@ -43,6 +43,21 @@ export const register = (params)=>{
 
 
 
+
+/**
+ * 忘记密码
+ */
+export const forgetPassWord = (params)=>{
+  params.token = store.state.token;
+  return $http({
+    method: 'post',
+    api: api.forgetPassWord,
+    params,
+  })
+}
+
+
+
 /**
  * 发送短信
  */

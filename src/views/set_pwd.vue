@@ -11,7 +11,7 @@
       <span class="f28 color_main" @click="sendCode" :class="click_code ? 'dis' : ''">{{codeText}}</span>
     </div>
     <div class="smscode item flex phone border-b">
-      <input  :type="[passwordType?'password':'text']"  type="password" placeholder="请设置你的登录密码" class="f32 color_font color_border" v-model.trim="password" minlength="6" maxlength="12">
+      <input :type="[passwordType?'password':'text']" placeholder="请设置你的登录密码" class="f32 color_font color_border" v-model.trim="password" minlength="6" maxlength="12">
       <img :src="require(`@/assets/common/${passwordType?'eyes':'eyebrow'}.png`)" alt="" class="eyes" @click="passwordType=!passwordType">
     </div>
     <p class="tip f12 color_font-s">密码须为6～12位大小写字母、数字至少2种组合</p>
@@ -25,7 +25,7 @@
 
 <script>
   import Protocol from '@/components/protocol'
-  import { getValidateImage, sendSMS, register, login } from '@/service'
+  import { getValidateImage, sendSMS, register, login, forgetPassWord } from '@/service'
   import { mapMutations, mapActions } from 'vuex'
   export default {
     name: 'set_pwd',
@@ -144,6 +144,30 @@
         // 加密
         let CryptoJS= require('@/lib/aes');
         this.item.password = CryptoJS.aes(this.password);
+        // 忘记密码
+        if(this.$route.query.view === 'forget_pwd'){
+          forgetPassWord(this.item).then(()=>{
+            const {mobile, password} = this.item;
+            // 注册之后调用登录接口
+            login({
+              mobile,
+              password
+            }).then(res=>{
+              // 把返回的数据放入状态管理中
+              this.set_user(res);
+              let params = {
+                  "title": "登录密码修改成功",
+                  "sub_title": "使用您的新密码登录",
+                  "btn_text": "登录",
+                  "backurl": "/login"
+                };
+              // 跳转成功页面
+              this.SET_SUCC_PAGE(params);
+              this.$go('/static/succ');
+            })
+          });
+          return
+        }
         // 注册
         register(this.item).then(()=>{
           const {mobile, password} = this.item;
@@ -154,14 +178,7 @@
           }).then(res=>{
           // 把返回的数据放入状态管理中
             this.set_user(res);
-            let params = this.$route.query.view === 'forget_pwd'
-              ? {
-                "title": "登录密码修改成功",
-                "sub_title": "使用您的新密码登录",
-                "btn_text": "登录",
-                "backurl": "/"
-              }
-              : {
+            let params = {
                 "title": "恭喜您注册成功",
                 "btn_text": "立即开通银行存管账户",
                 "backurl": "/reg_bank",

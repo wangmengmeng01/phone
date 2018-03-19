@@ -4,6 +4,8 @@ export default {
 
   register: 'user/register', // 注册
 
+  forgetPassWord: 'user/forgetPassWord', // 忘记密码
+
   getToken: 'user/getToken', // 获取token
 
   getSmsCode: 'user/getSmsCode', // 发送短信验证码(合规平台)
@@ -85,6 +87,6 @@ export default {
 	searchBidsInvestList:'bid/searchBidsInvestList',//购买记录
 
 	standardAndPlanList:'bid/standardAndPlanList',//严选优质列表
-	
+
 	userCashFee:'account/filter/userCashFee',//取现手续费
 }
