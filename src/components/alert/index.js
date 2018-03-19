@@ -10,13 +10,12 @@ let el;
 let Profile = Vue.extend(require('./alert.vue').default);
 class alert{
   constructor(arg){
-    let title, content, type, yes ,no, protocolType;
+    let title, content, type, yes ,no;
     typeof arg === 'object'
       ?
-        {title, content, type, yes, no, protocolType}  = arg
+        {title, content, type, yes, no}  = arg
       :
         title = arg;
-    this.protocolType = protocolType;
     this.callback = defaultCallback;
     this.content = content;
     this.component = null;
@@ -39,7 +38,6 @@ class alert{
     el = this.el = document.createElement('div');
     document.body.appendChild(this.el);
     this.component = new Profile().$mount(this.el);
-    this.component.protocolType = this.protocolType;
     this.component.callback = this.callback;
     this.component.content = this.content;
     this.component.title = this.title;

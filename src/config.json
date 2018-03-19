@@ -305,8 +305,14 @@
           "foot": {
             "style": "background-color: #fff;margin-top: -3rem"
           }
+        },{
+          "path": "protocol",
+          "title": "协议",
+          "filter": true,
+          "back": false,
+          "foot": false
         }
-			]
+      ]
 		}, {
 			"path": "forPhone",
 			"component": "forPhone",

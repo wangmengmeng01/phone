@@ -18,12 +18,13 @@
     <button class="btn" @click="submit">{{$route.query.view === 'forget_pwd' ? '修改' : '注册'}}</button>
     <div class="protocol mt4" v-if="$route.query.view !== 'forget_pwd'">
       <img :src="require(`../assets/common/check_${checked?'succ':'none'}.png`)" alt="" @click="checked=!checked">
-      <p class="color_font-s f24">注册即表示您已阅读并同意<span class="color_main">《平台注册协议》</span></p>
+      <p class="color_font-s f24">注册即表示您已阅读并同意<span class="color_main" @click="protocol">《平台注册协议》</span></p>
     </div>
   </div>
 </template>
 
 <script>
+  import Protocol from '@/components/protocol'
   import { getValidateImage, sendSMS, register, login } from '@/service'
   import { mapMutations, mapActions } from 'vuex'
   export default {
@@ -71,6 +72,9 @@
         'RESET',
         'SET_SUCC_PAGE'
       ]),
+      protocol(){
+        this.$alert({type: 'protocol', content: Protocol})
+      },
       /**
        * 发送验证码
        */
