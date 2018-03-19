@@ -1,6 +1,13 @@
 <template>
   <div class="found">
-    发现
+    <!--我的礼物-->
+    <div class="item mygift">
+      <h2 class="subtitle"></h2>
+      <h3>我的礼物</h3>
+      <div class="">
+
+      </div>
+    </div>
   </div>
 </template>
 
