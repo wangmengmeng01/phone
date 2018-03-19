@@ -84,6 +84,7 @@
             });
             this.$go('/static/fail','',false);
           }
+
           // 已开户
           if(r.openAccountStatus=='3'){
             this.SET_SUCC_PAGE({
@@ -95,6 +96,7 @@
             });
             this.$go('/static/succ','',false);
           }
+
           // 待激活
           if(r.openAccountStatus=='4'){
             userActivate({
