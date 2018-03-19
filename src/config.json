@@ -54,7 +54,11 @@
 			"foot": {
 				"type": "main",
 				"style": "padding-bottom: 1rem"
-			}
+			},
+      "back": {
+        "showTip": true,
+        "title": false
+      }
 		}, {
 			"path": "forget_pwd",
 			"title": "修改登录密码",

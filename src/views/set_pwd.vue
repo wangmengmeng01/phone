@@ -15,8 +15,8 @@
       <img :src="require(`@/assets/common/${passwordType?'eyes':'eyebrow'}.png`)" alt="" class="eyes" @click="passwordType=!passwordType">
     </div>
     <p class="tip f12 color_font-s">密码须为6～12位大小写字母、数字至少2位数</p>
-    <button class="btn" @click="submit">注册</button>
-    <div class="protocol mt4">
+    <button class="btn" @click="submit">{{$route.query.view === 'forget_pwd' ? '修改' : '注册'}}</button>
+    <div class="protocol mt4" v-if="$route.query.view !== 'forget_pwd'">
       <img :src="require(`../assets/common/check_${checked?'succ':'none'}.png`)" alt="" @click="checked=!checked">
       <p class="color_font-s f24">注册即表示您已阅读并同意<span class="color_main">《平台注册协议》</span></p>
     </div>
@@ -48,6 +48,7 @@
       }
     },
     created() {
+      document.title = this.$route.query.view === 'forget_pwd' ? '修改' : '注册';
       // 开始清楚成功页面的缓存
       this.RESET('succ_page');
       // 如果没有手机号跳转到注册页面
