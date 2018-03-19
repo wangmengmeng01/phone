@@ -19,10 +19,6 @@
       <div class="bottomB"><span>手续费</span><em>{{userCashFeeMoney|formatNum}}元</em></div>
       <div class="bottomB"><span>实际到账</span><em>{{actualccountMoney|formatNum}}元</em></div>
     </div>
-   <!--提交Form表单-->
-	<!--<form action="formItem.serviceUrl"   id="subForm" method="post" style="display: none;">
-		<input type="submit" value="提交" type="button" />
-	</form>-->
     <p class="rechargeBtn" :class="[withdrawMoney.length ?'':'disable']" @click="toCash" >下一步</p>
   </div>
 </template>
@@ -86,20 +82,30 @@
 					receiveNo:''
 				}).then(res => {
 					console.log(res);
-					this.formItem=res;
 					
-					let msgParamDto = res.InMap;
-					foreac(msgParamDto, function(key, value) {
-						if(key == "ReqExt") {
-							var ctc = '<textarea rows="1" cols="500" style="display: none" name="ReqExt">' + value + '</textarea>'
-						} else {
-							var ctc = '  <input type="hidden" name="' + key + '"  class="hidden"   value="' + value + '" /> ';
-						}
-						document.getElementById("subForm").appendChild(ctc);
-					});
-//						document.getElementById("subForm")..submit();
-	
-					
+          // 调用汇付先清除地址栏的参数
+          window.history.replaceState(null, null, this.$route.path);
+          axios({
+            method: 'post',
+            url: res.serviceUrl,
+            data: res.inMap,
+            transformRequest: [function (data) {
+              let ret = '';
+              for (let it in data) {
+                ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+              }
+              return ret.slice(0,ret.length-1)
+            }],
+          }).then(r=>{
+            if(r.status === 200){
+              if(r.data){
+                document.body.innerHTML = r.data;
+                setTimeout(()=>{document.form.submit()},0)
+              }
+            }
+          })
+
+        
 					
 					
 					
