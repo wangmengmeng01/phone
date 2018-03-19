@@ -137,7 +137,7 @@
           this.$toask('密码格式不正确!');
           return
         }
-        if(!this.checked){
+        if(!this.checked && this.$route.query.view !== 'forget_pwd'){
           this.$toask('请阅读并勾选《平台注册协议》!');
           return
         }
