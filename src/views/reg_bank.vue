@@ -70,7 +70,6 @@
       const retUrl = this.item.retUrl = location.origin+'/reg_bank?isfromhuifu=1&';
       // 表示从汇付返回的判断是否开户成功
       if(isfromhuifu){
-        window.history.replaceState(null, null, this.$route.path);
         getUserStatus().then(r=>{
           // 未开户
           if(r.openAccountStatus=='1'){
@@ -104,7 +103,7 @@
               window.history.replaceState(null, null, this.$route.path);
               axios({
                 method: 'post',
-                url: res.serviceUrl,
+                url: location.origin+ new URL(res.serviceUrl).pathname,
                 data: res.inMap,
                 transformRequest: [function (data) {
                   let ret = '';

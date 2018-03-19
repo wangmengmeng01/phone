@@ -111,7 +111,6 @@
         margin-top: .12rem
         font-size: .52rem
       img
-        width: .34rem
         height: .34rem
     .mygift
       ul
