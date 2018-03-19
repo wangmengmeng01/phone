@@ -103,7 +103,7 @@
 		</div>
 
 		<!--立刻购买-->
-		<div class="productDetailBottom" @click="getStatus">
+		<div class="productDetailBottom">
 			立刻购买
 		</div>
 
