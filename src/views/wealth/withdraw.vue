@@ -37,14 +37,13 @@
 				withdrawMoney:'',//提现金额
 				userCashFeeMoney:0,//提现手续费
 				actualccountMoney:0,//实际到账回调地址
-				retUrl:'',//返回地址
+				retUrl: location.origin+location.pathname,//返回地址
 				formItem:'',
-				
+
 			}
 		},
 		created() {
-			const retUrl = this.retUrl = location+'?isfromhuifu=1&';
-			selectBeforeRecharge().then(res => {
+      selectBeforeRecharge().then(res => {
 				this.cardMes = res;
 			});
 
@@ -78,15 +77,12 @@
 					transAmount:this.withdrawMoney,
 					fee:this.userCashFeeMoney,
 					cashWay:'GENERAL',
-					retUrl:this.retUrl,
+					retUrl: this.retUrl,
 					receiveNo:''
 				}).then(res => {
-					
-					
+
+
 					console.log(res);
-					
-         // 调用汇付先清除地址栏的参数
-              window.history.replaceState(null, null, this.$route.path);
               axios({
                 method: 'post',
                 url: location.origin+ new URL(res.serviceUrl).pathname,
@@ -106,23 +102,23 @@
                   }
                 }
               })
-        
-					
-					
-					
-					
-					
-					
-					
-					
+
+
+
+
+
+
+
+
+
 				});
 			}
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
 		},
 		watch: {}
 	}
