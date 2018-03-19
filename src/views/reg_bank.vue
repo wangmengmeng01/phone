@@ -4,27 +4,27 @@
     <p class="text2 f28 color_font-s">请填写开通银行存管账户所需信息（须绑定储蓄卡）</p>
     <div class="name item flex border-b">
       <span class="f36 color_font">姓名</span>
-      <input type="text" placeholder="请输入持卡人姓名" class="f32 color_border color_font" v-model="item.realName">
+      <input type="text" placeholder="请输入持卡人姓名" class="f32 color_border color_font" v-model.trim="item.realName">
     </div>
     <div class="idcard item flex phone border-b">
       <span class="f36 color_font">身份证</span>
-      <input type="tel" placeholder="请输入18位二代身份证号码" class="f32 color_border color_font" v-model="item.idno" maxlength="18">
+      <input type="tel" placeholder="请输入18位二代身份证号码" class="f32 color_border color_font" v-model.trim="item.idno" maxlength="18">
     </div>
     <div class="bank item flex phone border-b" @click="linkto">
       <span class="f36 color_font">开户银行</span>
-      <input type="text" placeholder="请选择开户银行" class="f32 color_border color_font" v-model="bankName" readonly>
+      <input type="text" placeholder="请选择开户银行" class="f32 color_border color_font" v-model.trim="bankName" readonly>
       <img src="../assets/common/arrow-right.png" alt="" class="arrow">
     </div>
     <div class="bankid item flex phone border-b">
       <span class="f36 color_font">银行卡号</span>
-      <input type="number" placeholder="请输入本人的银行卡号" class="f32 color_border color_font" v-model="item.bankCardNo">
+      <input type="number" placeholder="请输入本人的银行卡号" class="f32 color_border color_font" v-model.trim="item.bankCardNo">
     </div>
     <div class="phone item flex phone border-b">
       <span class="f36 color_font">银行预留手机号</span>
-      <input type="tel" placeholder="请输入银行预留手机号" class="f32 color_border color_font" v-model="item.mobile" maxlength="11">
+      <input type="tel" placeholder="请输入银行预留手机号" class="f32 color_border color_font" v-model.trim="item.mobile" maxlength="11">
     </div>
     <div class="smscode item flex phone border-b">
-      <input type="tel" placeholder="请输入短信验证码" class="f32 color_border color_font" v-model="item.smsCode" maxlength="6">
+      <input type="tel" placeholder="请输入短信验证码" class="f32 color_border color_font" v-model.trim="item.smsCode" maxlength="6">
       <span class="f28 color_main" :class="click_code ? 'dis' : ''" @click="sendCode">{{codeText}}</span>
     </div>
     <button class="btn" @click="submit">下一步</button>

@@ -5,7 +5,7 @@
     <div class="item flex phone border-b">
       <div class="con flex">
         <span class="name f44 color_font">手机号</span>
-        <input type="tel" placeholder="请输入手机号" class="f44" v-model="mobile" maxlength="11">
+        <input type="tel" placeholder="请输入手机号" class="f44" v-model.trim="mobile" maxlength="11">
       </div>
       <img src="../assets/common/del.png" alt="" class="del" @click="mobile=''">
     </div>

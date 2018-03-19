@@ -3,15 +3,15 @@
     <h2 class="text color-font">设置登录密码</h2>
     <p class="text2 f28 color_font-s">{{text}}</p>
     <div class="imgcode item flex phone border-b">
-      <input type="text" placeholder="请输入图形验证码" class="f32 color_font color_border" v-model="item.imageCode" maxlength="4">
+      <input type="text" placeholder="请输入图形验证码" class="f32 color_font color_border" v-model.trim="item.imageCode" maxlength="4">
       <span class="f28 color_main"><img :src="imageCode" alt="" @click="changeImgCode"></span>
     </div>
     <div class="smscode item flex phone border-b">
-      <input type="tel" placeholder="请输入短信验证码" class="f32 color_font color_border" v-model="item.smsCode" maxlength="6">
+      <input type="tel" placeholder="请输入短信验证码" class="f32 color_font color_border" v-model.trim="item.smsCode" maxlength="6">
       <span class="f28 color_main" @click="sendCode" :class="click_code ? 'dis' : ''">{{codeText}}</span>
     </div>
     <div class="smscode item flex phone border-b">
-      <input  :type="[passwordType?'password':'text']"  type="password" placeholder="请设置你的登录密码" class="f32 color_font color_border" v-model="password" minlength="6" maxlength="12">
+      <input :type="[passwordType?'password':'text']" placeholder="请设置你的登录密码" class="f32 color_font color_border" v-model.trim="password" minlength="6" maxlength="12">
       <img :src="require(`@/assets/common/${passwordType?'eyes':'eyebrow'}.png`)" alt="" class="eyes" @click="passwordType=!passwordType">
     </div>
     <p class="tip f12 color_font-s">密码须为6～12位大小写字母、数字至少2种组合</p>
@@ -25,7 +25,7 @@
 
 <script>
   import Protocol from '@/components/protocol'
-  import { getValidateImage, sendSMS, register, login } from '@/service'
+  import { getValidateImage, sendSMS, register, login, forgetPassWord } from '@/service'
   import { mapMutations, mapActions } from 'vuex'
   export default {
     name: 'set_pwd',
@@ -33,7 +33,7 @@
       return {
         password: '',
         passwordType: true,                       // 密码显示隐藏
-        checked: false,                           // 同意复选框勾选
+        checked: true,                           // 同意复选框勾选
         codeText: '获取短信验证码',                 // 获取验证码提示
         num: 60,                                  // 验证码倒计时
         click_code: false,                        // 短信按钮能否点击
@@ -137,13 +137,37 @@
           this.$toask('密码格式不正确!');
           return
         }
-        if(!this.checked){
+        if(!this.checked && this.$route.query.view !== 'forget_pwd'){
           this.$toask('请阅读并勾选《平台注册协议》!');
           return
         }
         // 加密
         let CryptoJS= require('@/lib/aes');
         this.item.password = CryptoJS.aes(this.password);
+        // 忘记密码
+        if(this.$route.query.view === 'forget_pwd'){
+          forgetPassWord(this.item).then(()=>{
+            const {mobile, password} = this.item;
+            // 注册之后调用登录接口
+            login({
+              mobile,
+              password
+            }).then(res=>{
+              // 把返回的数据放入状态管理中
+              this.set_user(res);
+              let params = {
+                  "title": "登录密码修改成功",
+                  "sub_title": "使用您的新密码登录",
+                  "btn_text": "登录",
+                  "backurl": "/login"
+                };
+              // 跳转成功页面
+              this.SET_SUCC_PAGE(params);
+              this.$go('/static/succ');
+            })
+          });
+          return
+        }
         // 注册
         register(this.item).then(()=>{
           const {mobile, password} = this.item;
@@ -154,14 +178,7 @@
           }).then(res=>{
           // 把返回的数据放入状态管理中
             this.set_user(res);
-            let params = this.$route.query.view === 'forget_pwd'
-              ? {
-                "title": "登录密码修改成功",
-                "sub_title": "使用您的新密码登录",
-                "btn_text": "登录",
-                "backurl": "/"
-              }
-              : {
+            let params = {
                 "title": "恭喜您注册成功",
                 "btn_text": "立即开通银行存管账户",
                 "backurl": "/reg_bank",
