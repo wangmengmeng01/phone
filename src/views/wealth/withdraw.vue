@@ -19,14 +19,14 @@
       <div class="bottomB"><span>手续费</span><em>{{userCashFeeMoney|formatNum}}元</em></div>
       <div class="bottomB"><span>实际到账</span><em>{{actualccountMoney|formatNum}}元</em></div>
     </div>
-    
-    <p class="rechargeBtn" :class="[withdrawMoney.length ?'':'disable']" >下一步</p>
+    <p class="rechargeBtn" :class="[withdrawMoney.length ?'':'disable']" @click="toCash" >下一步</p>
   </div>
 </template>
 
 <script>
-	import { selectBeforeRecharge, accountAcmountInfo ,userCashFee} from '@/service'
+	import { selectBeforeRecharge, accountAcmountInfo ,userCashFee,toCash} from '@/service'
 	import { mapGetters, mapMutations } from 'vuex'
+	import axios from 'axios'
 	export default {
 		name: 'withdraw',
 		data() {
@@ -36,12 +36,14 @@
 				accountMoney:0,//可提现金额
 				withdrawMoney:'',//提现金额
 				userCashFeeMoney:0,//提现手续费
-				actualccountMoney:0,//实际到账
+				actualccountMoney:0,//实际到账回调地址
+				retUrl:'',//返回地址
+				formItem:'',
 				
 			}
 		},
 		created() {
-
+			const retUrl = this.retUrl = location+'?isfromhuifu=1&';
 			selectBeforeRecharge().then(res => {
 				this.cardMes = res;
 			});
@@ -57,7 +59,6 @@
 			wall(){
 				this.withdrawMoney=this.accountMoney;
 				this.userCashFee();
-				
 			},
 			/*计算手续费*/
 			userCashFee(){
@@ -67,14 +68,54 @@
 				}).then(res => {
 					this.userCashFeeMoney=res.fee;
 					this.actualccountMoney=this.withdrawMoney-this.userCashFeeMoney;
-					
 				});
 			},
-			
 			onblur(){
 				this.userCashFee();
+			},
+			toCash(){
+				toCash({
+					transAmount:this.withdrawMoney,
+					fee:this.userCashFeeMoney,
+					cashWay:'GENERAL',
+					retUrl:this.retUrl,
+					receiveNo:''
+				}).then(res => {
+					console.log(res);
+					
+          // 调用汇付先清除地址栏的参数
+          window.history.replaceState(null, null, this.$route.path);
+          axios({
+            method: 'post',
+            url: res.serviceUrl,
+            data: res.inMap,
+            transformRequest: [function (data) {
+              let ret = '';
+              for (let it in data) {
+                ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+              }
+              return ret.slice(0,ret.length-1)
+            }],
+          }).then(r=>{
+            if(r.status === 200){
+              if(r.data){
+                document.body.innerHTML = r.data;
+                setTimeout(()=>{document.form.submit()},0)
+              }
+            }
+          })
+
+        
+					
+					
+					
+					
+					
+					
+					
+					
+				});
 			}
-			
 			
 			
 			
