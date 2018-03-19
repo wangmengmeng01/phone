@@ -12,8 +12,8 @@
       <div class="con">
         <ul>
           <li>
-            <p><span>收到礼物</span>赶快领取您的福利吧</p>
-            <p>2018.01.01收到～2018.06.30失效</p>
+            <p class="f26"><span>收到礼物</span>赶快领取您的福利吧</p>
+            <p class="f20">2018.01.01收到～2018.06.30失效</p>
           </li>
         </ul>
       </div>
@@ -30,7 +30,15 @@
       <div class="con">
         <ul>
           <li>
+            <div>
+              <div class="left">
 
+              </div>
+              <div class="right">
+
+              </div>
+            </div>
+            <p>现在购买</p>
           </li>
         </ul>
       </div>
@@ -106,9 +114,23 @@
         width: .34rem
         height: .34rem
     .mygift
-      li
-        height: 5.12rem
-        width: 4.38rem
-        background: url("../../assets/found/gift.png") no-repeat center center
-        background-size: 100% 100%
+      ul
+        margin-left: 1.36rem
+        li
+          padding-top: 2.8rem
+          text-align: center
+          height: 5.12-2.8rem
+          width: 4.38rem
+          background: url("../../assets/found/gift.png") no-repeat center center
+          background-size: 100% 100%
+          p
+            line-height: .36rem
+            color: #fff
+            span
+              display: block
+            &:last-child
+              padding-top: .28rem
+    .promise
+      ul
+        li
 </style>

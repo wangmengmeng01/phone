@@ -67,7 +67,7 @@
         this.bankName = bankName;
         this.item.bankNo = bankNo;
       }
-      const retUrl = this.item.retUrl = location+origin+'/reg_bank?isfromhuifu=1&';
+      const retUrl = this.item.retUrl = location.origin+'/reg_bank?isfromhuifu=1&';
       // 表示从汇付返回的判断是否开户成功
       if(isfromhuifu){
         window.history.replaceState(null, null, this.$route.path);
@@ -223,10 +223,10 @@
           this.$toask('短信验证码不能为空!');
           return
         }
+        this.item.retUrl = location.origin+'/reg_bank?isfromhuifu=1&';
         // 开户
         openAccount(this.item).then(res=>{
           // 调用汇付先清除地址栏的参数
-          window.history.replaceState(null, null, this.$route.path);
           axios({
             method: 'post',
             url: res.serviceUrl,
