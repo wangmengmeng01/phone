@@ -86,3 +86,13 @@ export const submitUserRecharge = async (params)=>{
   });
 };
 
+// 取现手续费
+export const userCashFee = async (params)=>{
+  return await $http({
+    method: 'post',
+    api: api.userCashFee,
+    params,
+  });
+};
+
+

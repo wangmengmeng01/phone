@@ -85,4 +85,6 @@ export default {
 	searchBidsInvestList:'bid/searchBidsInvestList',//购买记录
 
 	standardAndPlanList:'bid/standardAndPlanList',//严选优质列表
+	
+	userCashFee:'account/filter/userCashFee',//取现手续费
 }
