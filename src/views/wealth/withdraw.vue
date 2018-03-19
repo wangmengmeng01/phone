@@ -11,49 +11,102 @@
     <div class="withdrawTips">该时间为平台预估时间，具体以实际到账时间为准</div>
     <div class="center">
       <div class="centerTop">提现金额</div>
-      <div class="centerC"><span>¥</span><input type="text" placeholder="100元起"><div class="wall">全提</div></div>
-      <div class="centerB"><span>账户余额</span><em>0.00元</em></div>
-      <div class="centerB"><span>可提现余额</span><em>0.00元</em></div>
+      <div class="centerC"><span>¥</span><input type="text" @blur="onblur" oninput="if( ! /^-?\d+\.?\d{0,2}$/.test(this.value)){ var s = this.value;this.value=s.substring(0,s.length-1);}" v-model="withdrawMoney" placeholder="100元起"><div class="wall" @click="wall">全提</div></div>
+      <div class="centerB"><span>账户余额</span><em>{{cardMes.availableAmount|formatNum}}元</em></div>
+      <div class="centerB"><span>可提现余额</span><em>{{accountMes.canWithdrawAmount|formatNum}}元</em></div>
     </div>
     <div class="bottom">
-      <div class="bottomB"><span>手续费</span><em>0.00元</em></div>
-      <div class="bottomB"><span>实际到账</span><em>0.00元</em></div>
+      <div class="bottomB"><span>手续费</span><em>{{userCashFeeMoney|formatNum}}元</em></div>
+      <div class="bottomB"><span>实际到账</span><em>{{actualccountMoney|formatNum}}元</em></div>
     </div>
+    
+    <p class="rechargeBtn" :class="[withdrawMoney.length ?'':'disable']" >下一步</p>
   </div>
 </template>
 
 <script>
-	import { selectBeforeRecharge, rechargeSendSmsCode, submitUserRecharge } from '@/service'
+	import { selectBeforeRecharge, accountAcmountInfo ,userCashFee} from '@/service'
 	import { mapGetters, mapMutations } from 'vuex'
-  export default {
-    name: 'withdraw',
-    data() {
-      return{
-			cardMes: {}, //银行卡信息
-      }
-    },
-    created() {
-    	
-    	selectBeforeRecharge().then(res => {
-			this.cardMes = res;
+	export default {
+		name: 'withdraw',
+		data() {
+			return {
+				cardMes: {}, //银行卡信息
+				accountMes:{},//账户金额
+				accountMoney:0,//可提现金额
+				withdrawMoney:'',//提现金额
+				userCashFeeMoney:0,//提现手续费
+				actualccountMoney:0,//实际到账
+				
+			}
+		},
+		created() {
 
-			this.itemSms.mobile = res.mobile;
-			this.itemSms.bankCardNo = res.bankCardNo;
-			this.singleMoney = res.singleTransQuota;
-			this.dayMoney = res.cardDailyTransQuota;
+			selectBeforeRecharge().then(res => {
+				this.cardMes = res;
+			});
 
-		});
-    	
-    },
-    methods: {
-    },
-    watch: {
-    }
-  }
+			accountAcmountInfo().then(res => {
+				this.accountMes = res;
+				this.accountMoney=res.canWithdrawAmount;
+			});
+
+		},
+		methods: {
+			/*余额全提*/
+			wall(){
+				this.withdrawMoney=this.accountMoney;
+				this.userCashFee();
+				
+			},
+			/*计算手续费*/
+			userCashFee(){
+				userCashFee({
+					transAmount:this.withdrawMoney,
+					cashWay:'GENERAL',
+				}).then(res => {
+					this.userCashFeeMoney=res.fee;
+					this.actualccountMoney=this.withdrawMoney-this.userCashFeeMoney;
+					
+				});
+			},
+			
+			onblur(){
+				this.userCashFee();
+			}
+			
+			
+			
+			
+			
+			
+			
+		},
+		watch: {}
+	}
 </script>
 
 <style lang="stylus" scoped>
   i,em{font-style: normal;}
+  .rechargeBtn {
+		margin: 0 auto;
+		padding: 0;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 7.5rem;
+		height: 1.1rem;
+		overflow: hidden;
+		line-height: 1.1rem;
+		font-size: 0.36rem;
+		text-align: center;
+		background-color: #3299D1;
+		color: #FFFFFF;
+	}
+	.disable {
+		background: #98cceb;
+	}
   .hide{
     display: none;
   }
