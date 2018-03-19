@@ -3,6 +3,7 @@
 
 		<div class="bankDep">
 			<img class="bankDep-group" src="../../assets/main/prod/Group@2x.png" />
+			<p class="bankDep-t">历史兑付</p>
 		</div>
 
 		<div class="bankDep">
@@ -66,10 +67,19 @@
 				width: 6.76rem;
 			}
 			&-group {
-				margin: 0.6rem 2.34rem 0.76rem;
+				margin: 0.6rem 2.34rem 0;
 				width: 2.08rem;
 				height: 2.08rem;
 				background-size: 100% 100%;
+			}
+			&-t{
+				margin-top: 0.4rem;
+				text-align: center;
+				line-height: 0.36rem;
+				height: 0.36rem;
+				font-size: 0.36rem;
+				color: #8D8D94;
+				
 			}
 		}
 	}
