@@ -8,6 +8,8 @@ import * as filters from './filter'
 import './router/guard'
 import './style/common.sass'
 import './components/toask'
+import './components/alert'
+
 let config = require('./config.json');
 Vue.use(VueRouter);
 

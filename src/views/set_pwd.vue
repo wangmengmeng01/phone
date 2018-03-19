@@ -11,25 +11,27 @@
       <span class="f28 color_main" @click="sendCode" :class="click_code ? 'dis' : ''">{{codeText}}</span>
     </div>
     <div class="smscode item flex phone border-b">
-      <input  :type="[passwordType?'password':'text']"  type="password" placeholder="请设置你的登录密码" class="f32 color_font color_border" v-model="item.password" minlength="6" maxlength="12">
+      <input  :type="[passwordType?'password':'text']"  type="password" placeholder="请设置你的登录密码" class="f32 color_font color_border" v-model="password" minlength="6" maxlength="12">
       <img :src="require(`@/assets/common/${passwordType?'eyes':'eyebrow'}.png`)" alt="" class="eyes" @click="passwordType=!passwordType">
     </div>
-    <p class="tip f12 color_font-s">密码须为6～12位大小写字母、数字至少2位数</p>
-    <button class="btn" @click="submit">注册</button>
-    <div class="protocol mt4">
+    <p class="tip f12 color_font-s">密码须为6～12位大小写字母、数字至少2种组合</p>
+    <button class="btn" @click="submit">{{$route.query.view === 'forget_pwd' ? '修改' : '注册'}}</button>
+    <div class="protocol mt4" v-if="$route.query.view !== 'forget_pwd'">
       <img :src="require(`../assets/common/check_${checked?'succ':'none'}.png`)" alt="" @click="checked=!checked">
-      <p class="color_font-s f24">注册即表示您已阅读并同意<span class="color_main">《平台注册协议》</span></p>
+      <p class="color_font-s f24">注册即表示您已阅读并同意<span class="color_main" @click="protocol">《平台注册协议》</span></p>
     </div>
   </div>
 </template>
 
 <script>
+  import Protocol from '@/components/protocol'
   import { getValidateImage, sendSMS, register, login } from '@/service'
   import { mapMutations, mapActions } from 'vuex'
   export default {
     name: 'set_pwd',
     data () {
       return {
+        password: '',
         passwordType: true,                       // 密码显示隐藏
         checked: false,                           // 同意复选框勾选
         codeText: '获取短信验证码',                 // 获取验证码提示
@@ -47,6 +49,7 @@
       }
     },
     created() {
+      document.title = this.$route.query.view === 'forget_pwd' ? '修改' : '注册';
       // 开始清楚成功页面的缓存
       this.RESET('succ_page');
       // 如果没有手机号跳转到注册页面
@@ -69,6 +72,9 @@
         'RESET',
         'SET_SUCC_PAGE'
       ]),
+      protocol(){
+        this.$alert({type: 'protocol', content: Protocol})
+      },
       /**
        * 发送验证码
        */
@@ -123,11 +129,11 @@
           this.$toask('短信验证码不能为空!');
           return
         }
-        if(!this.item.password){
+        if(!this.password){
           this.$toask('登录密码不能为空!');
           return
         }
-        if(!(/^(?!^\d+$)(?!^[a-zA-Z]+$)(?!^_+$)[\d|a-zA-Z|_]{6,12}$/.test(this.item.password))) {
+        if(!(/^(?!^\d+$)(?!^[a-zA-Z]+$)(?!^_+$)[\d|a-zA-Z|_]{6,12}$/.test(this.password))) {
           this.$toask('密码格式不正确!');
           return
         }
@@ -137,7 +143,7 @@
         }
         // 加密
         let CryptoJS= require('@/lib/aes');
-        this.item.password = CryptoJS.aes(this.item.password);
+        this.item.password = CryptoJS.aes(this.password);
         // 注册
         register(this.item).then(()=>{
           const {mobile, password} = this.item;

@@ -54,7 +54,11 @@
 			"foot": {
 				"type": "main",
 				"style": "padding-bottom: 1rem"
-			}
+			},
+      "back": {
+        "showTip": true,
+        "title": false
+      }
 		}, {
 			"path": "forget_pwd",
 			"title": "修改登录密码",
@@ -301,8 +305,14 @@
           "foot": {
             "style": "background-color: #fff;margin-top: -3rem"
           }
+        },{
+          "path": "protocol",
+          "title": "协议",
+          "filter": true,
+          "back": false,
+          "foot": false
         }
-			]
+      ]
 		}, {
 			"path": "forPhone",
 			"component": "forPhone",

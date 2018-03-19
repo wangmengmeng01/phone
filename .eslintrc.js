@@ -9,7 +9,7 @@ module.exports = {
   env: {
     browser: true,
   },
-  // required to lint *.vue files
+  // required to lint *protocol.vue files
   plugins: [
     'html'
   ],

@@ -1,5 +1,5 @@
 <template>
-  <div class="reg_bank p4" v-hide="$route.query.isfromhuifu">
+  <div class="reg_bank p4" v-show="!$route.query.isfromhuifu">
     <h2 class="text color-font">填写开户信息</h2>
     <p class="text2 f28 color_font-s">请填写开通银行存管账户所需信息（须绑定储蓄卡）</p>
     <div class="name item flex border-b">
@@ -72,7 +72,6 @@
       if(isfromhuifu){
         window.history.replaceState(null, null, this.$route.path);
         getUserStatus().then(r=>{
-          r.openAccountStatus='1'
           // 未开户
           if(r.openAccountStatus=='1'){
             this.SET_SUCC_PAGE({
