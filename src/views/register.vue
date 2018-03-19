@@ -24,7 +24,6 @@
     },
     methods: {
       submit(){
-          log(this.mobile)
         if(!this.mobile) {
           this.$toask('手机号不能为空!');
           return

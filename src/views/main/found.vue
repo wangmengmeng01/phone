@@ -13,7 +13,7 @@
     <!--履行承诺-->
     <div class="item mygift">
       <h2 class="subtitle">一诺千金，奋争到底</h2>
-      <h3>我的礼物<span>更多</span></h3>
+      <h3>履行承诺<span>更多</span></h3>
       <div class="con">
         <ul>
           <li></li>
@@ -45,7 +45,7 @@
       <h2 class="subtitle">告诉你如何有效拓展自己的业务</h2>
       <h3>展业攻略</h3>
       <div class="con">
-
+        <p>良机不好错过，抓紧时间去开发客户吧良机不 好错过，抓紧时间去开发客户吧</p>
       </div>
     </div>
   </div>
