@@ -1,5 +1,5 @@
 <template>
-  <div class="reg_bank p4" v-show="!$route.query.isfromhuifu">
+  <div class="reg_bank p4" v-show="!$route.query.MerPriv">
     <h2 class="text color-font">填写开户信息</h2>
     <p class="text2 f28 color_font-s">请填写开通银行存管账户所需信息（须绑定储蓄卡）</p>
     <div class="name item flex border-b">
@@ -60,7 +60,7 @@
       // 开始清楚成功页面的缓存
       this.RESET('succ_page');
       // 获取从选择银行卡页面返回的数据
-      const {data, bankName, bankNo, isfromhuifu} = this.$route.query;
+      const {data, bankName, bankNo, MerPriv} = this.$route.query;
       // 如果有的话重新赋值
       if(data){
         this.item = JSON.parse(decodeURIComponent(data));
@@ -69,8 +69,9 @@
       }
       const retUrl = this.item.retUrl = location.origin+'/reg_bank?isfromhuifu=1&';
       // 表示从汇付返回的判断是否开户成功
-      if(isfromhuifu){
+      if(MerPriv){
         getUserStatus().then(r=>{
+            console.log(r)
           // 未开户
           if(r.openAccountStatus=='1'){
             this.SET_SUCC_PAGE({
