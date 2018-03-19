@@ -29,16 +29,20 @@
       </h3>
       <div class="con">
         <ul>
-          <li>
-            <div>
+          <li class="border-notend-b">
+            <div class="flex subitem">
               <div class="left">
-
+                <img src="../../assets/found/luo.png" alt="">
+                <p class="color_font-s f12">今天<br>收到履约邀请</p>
               </div>
               <div class="right">
-
+                <p class="f20 color_font-s">我承诺，理财师赵一</p>
+                <h2 class="f48 color_font">赚取<span class="f12 color_font-s">约</span><span class="color_font-red f44">5,000</span><span class="f12 color_font-s">元</span>月月赢收益</h2>
+                <h3 class="f28 color_font"><span class="f20 color_font-s">立投 </span>月月赢-12M500G号<span class="f20 color_font-s"> 剩余可投<5万</span></h3>
+                <p class="f36">50,000.00<span class="f20 color_font-s">元</span>9.6%<span class="f20 color_font-s">历史年化</span>50<span class="f20 color_font-s">周</span></p>
               </div>
             </div>
-            <p>现在购买</p>
+            <p class="flex subitemBtn"><span class="color_main f28 ">现在购买</span></p>
           </li>
         </ul>
       </div>
@@ -54,7 +58,27 @@
       </h3>
       <div class="con">
         <ul>
-          <li></li>
+          <li class="flex">
+            <img src="../../assets/found/new.png" alt="" class="left">
+            <div class="right">
+              <h2 class="flex subitemBtn color_font f32">一项新手专项的活动<span class="color_main">去捧场</span></h2>
+              <p class="f20 color_font-s">这项活动的介绍这项活动的介绍这项活动的介绍这项活动 的介绍</p>
+            </div>
+          </li>
+          <li class="flex">
+            <img src="../../assets/found/hot.png" alt="" class="left">
+            <div class="right">
+              <h2 class="flex subitemBtn color_font f32">一项平台力荐的活动<span class="color_main">去捧场</span></h2>
+              <p class="f20 color_font-s">这项活动的介绍这项活动的介绍这项活动的介绍这项活动 的介绍</p>
+            </div>
+          </li>
+          <li class="flex">
+            <img src="../../assets/found/zan.png" alt="" class="left">
+            <div class="right">
+              <h2 class="flex subitemBtn color_font f32">一项参与热度最高的活动<span class="color_main">去捧场</span></h2>
+              <p class="f20 color_font-s">这项活动的介绍这项活动的介绍这项活动的介绍这项活动 的介绍</p>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -69,7 +93,16 @@
       </h3>
       <div class="con">
         <ul>
-          <li></li>
+          <li class="flex">
+            <div class="left">
+              <img src="/" alt="" class="place-img">
+              <p class="color_font-s f20">张先生</p>
+            </div>
+            <div class="right">
+              <h2 class="flex"><span class="f52 color_font">10+万在投</span><span class="color_main f28">查看</span></h2>
+              <h3 class="flex"><span class="f32 color_font">3-6天内到期</span><p class="color_font-s f32">预计佣金 <span class="color_font-red">300+</span>元</p></h3>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -107,6 +140,14 @@
       background: #fff
       padding: .4rem
       border-radius: .2rem
+      .subitemBtn
+        margin-top: .3rem
+        span
+          padding: .1rem
+          background: #f0f0f8
+          border-radius: .2rem
+      .con
+        margin: .78rem auto
       .title
         margin-top: .12rem
         font-size: .52rem
@@ -114,7 +155,6 @@
         height: .34rem
     .mygift
       ul
-        margin-left: 1.36rem
         li
           padding-top: 2.8rem
           text-align: center
@@ -132,4 +172,55 @@
     .promise
       ul
         li
+          .subitemBtn
+            justify-content: flex-end
+          .subitem
+            align-items: flex-start
+            .left
+              text-align: center
+              width: 1rem
+              p
+                line-height: .28rem
+              img
+                width: .72rem
+                height: .78rem
+            .right
+              padding-left: .22rem
+              flex: 1
+              p:first-child
+                padding-bottom: .24rem
+              h2
+                line-height: .4rem
+                padding-bottom: .18rem
+              h3
+                padding-bottom: .24rem
+              p:last-child
+                color: #1C1C1C
+    .act
+      ul
+        li
+          .left
+            width: .72rem
+            height: .77rem
+          .right
+            flex: 1
+            padding-left: .46rem
+            h2
+              margin-bottom: .24rem
+            p
+              line-height: .28rem
+    .opportunity
+      .left
+        width: .72rem
+        padding-right: .48rem
+        img
+          width: .72rem
+          height: .72rem
+      .right
+        flex: 1
+        h2
+          margin-bottom: .4rem
+    .raiders
+      p
+        line-height: .44rem
 </style>

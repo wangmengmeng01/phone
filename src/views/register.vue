@@ -3,11 +3,11 @@
     <h2 class="text color-font">快速注册</h2>
     <p class="text2 f28 color_font-s">录入手机号码将作为您的登录账号</p>
     <div class="item flex phone border-b">
+      <span class="name f44 color_font">手机号</span>
       <div class="con flex">
-        <span class="name f44 color_font">手机号</span>
         <input type="tel" placeholder="请输入手机号" class="f44" v-model.trim="mobile" maxlength="11">
+        <img src="../assets/common/del.png" alt="" class="del" @click="mobile=''">
       </div>
-      <img src="../assets/common/del.png" alt="" class="del" @click="mobile=''">
     </div>
     <button class="btn" @click="submit">下一步</button>
     <p class="gologin f32 color_main" @click="$go('login',{mobile})">已有账号，去登录</p>
@@ -44,9 +44,9 @@
     background: #fff
     .item
       .con
-        flex: 1
+        width: 5rem
       span
-        width: 2rem
+        flex: 1
       .del
         height: .4rem
         opacity: 0
