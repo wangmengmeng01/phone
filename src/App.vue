@@ -25,6 +25,7 @@
       footTip
     },
     created(){
+      this.$alert('您确认要退出登录吗？')
       /**
        * 路由封装函数
        * @param url 地址

@@ -14,7 +14,7 @@
       <input  :type="[passwordType?'password':'text']"  type="password" placeholder="请设置你的登录密码" class="f32 color_font color_border" v-model="password" minlength="6" maxlength="12">
       <img :src="require(`@/assets/common/${passwordType?'eyes':'eyebrow'}.png`)" alt="" class="eyes" @click="passwordType=!passwordType">
     </div>
-    <p class="tip f12 color_font-s">密码须为6～12位大小写字母、数字至少2位数</p>
+    <p class="tip f12 color_font-s">密码须为6～12位大小写字母、数字至少2种组合</p>
     <button class="btn" @click="submit">{{$route.query.view === 'forget_pwd' ? '修改' : '注册'}}</button>
     <div class="protocol mt4" v-if="$route.query.view !== 'forget_pwd'">
       <img :src="require(`../assets/common/check_${checked?'succ':'none'}.png`)" alt="" @click="checked=!checked">
