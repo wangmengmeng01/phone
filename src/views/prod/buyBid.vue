@@ -183,7 +183,7 @@
 					profitPlan: this.detail.profitPlan,
 				};
 				this.rate = res.annualizedRate + res.appendRate;
-				this.buyItem.investAmount = res.inviteAmount;
+				this.buyItem.investAmount = res.investAmount;
 				//从卡券页面 返回来
 				if(this.$route.query.linkType == "0") {
 					if(this.coupon.params.investAmount) {

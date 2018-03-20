@@ -14,6 +14,10 @@ export const autoInvestQuary = async(params) => {
 		method: 'get',
 		api: api.autoInvestQuary,
 		params,
+		options: {
+			filter_code: false,
+			filter_msg: false
+		}
 	});
 };
 
