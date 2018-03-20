@@ -3,7 +3,7 @@ export const _default = {
 };
 
 export const duxin = {
-  url: 'http://192.168.8.161:8506/api/',
+  url: 'http://192.168.10.102:8506/api/',
 };
 
 export const dev = {

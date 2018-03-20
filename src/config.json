@@ -135,7 +135,11 @@
 					"path": "qrcode",
 					"title": "我的二维码",
 					"foot": false
-				}, {
+				},{
+          "path": "master",
+          "title": "我的理财师",
+          "foot": false
+        }, {
 					"path": "customer",
 					"title": "已有客户",
 					"foot": false

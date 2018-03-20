@@ -85,3 +85,16 @@ export const searchUserInfo = async (params)=>{
     params,
   });
 }
+
+
+
+/**
+ * 查询理财师信息
+ */
+export const searchMyManagerUserInfo = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.searchMyManagerUserInfo,
+    params,
+  });
+}

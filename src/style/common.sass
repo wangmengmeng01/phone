@@ -6,6 +6,7 @@ $color_main-dis: rgba(50,153,209,.4)  // 主色调禁用
 $color_border: #CDCED3                // 边框色调
 $color_font: #181818                  // 字体主色调
 $color_font-red: #F84740              // 字体醒目红色
+$color_font-purple: #CA8EFF           // 字体醒目紫色
 $color_font-s: #8D8D94                // 小号字体色调
 
 
@@ -23,6 +24,8 @@ $color_font-s: #8D8D94                // 小号字体色调
     color: $color_font
     &-red
       color: $color_font-red
+    &-purple
+      color: $color_font-purple
     &-s
       color: $color_font-s
 // 边框
@@ -121,7 +124,7 @@ $color_font-s: #8D8D94                // 小号字体色调
 // 隐藏滚动条
 ::-webkit-scrollbar
   width: 0px
-  height: 1px
+  height: 0px
 ::-webkit-scrollbar-thumb
   border-radius: 5px
   -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2)
@@ -141,3 +144,10 @@ $color_font-s: #8D8D94                // 小号字体色调
   transition: opacity .2s
 .fade-enter, .fade-leave-active
   opacity: 0
+
+/**从小到大**/
+.smallToBig-enter-active, .smallToBig-leave-active
+  transition: all .2s
+.smallToBig-enter, .smallToBig-leave-active
+  opacity: 0
+  transform: scale(0.5)
