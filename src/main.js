@@ -9,7 +9,6 @@ import './router/guard'
 import './style/common.sass'
 import './components/toask'
 import './components/alert'
-console.log('环境变量'+process.env.NODE_ENV);
 let config = require('./config.json');
 Vue.use(VueRouter);
 
