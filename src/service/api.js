@@ -22,17 +22,19 @@ export default {
 
   userActivate: '/account/filter/userActivate', // 用户激活
 
-	getProductBidsList:'bid/getProductBidsList',//产品列表页
+	getProductBidsList:'bid/getProductBidsList', //产品列表页
 
-	searchProductBidsDetail:'bid/searchProductBidsDetail',//产品详情页
+	searchProductBidsDetail:'bid/searchProductBidsDetail', //产品详情页
 
-	doConfirmBuyPage:'product/filter/doConfirmBuyPage',//确认购买页
+	doConfirmBuyPage:'product/filter/doConfirmBuyPage', //确认购买页
 
-  autoInvestQuary:'account/filter/queryTenderPlan',//自动复投信息查询
+  autoInvestQuary:'account/filter/queryTenderPlan', //自动复投信息查询
 
-  wealthIndex:"account/filter/searchUserAccount" ,//财富首页信息
+  wealthIndex:"account/filter/searchUserAccount" , //财富首页信息
 
-  invesProperty:"account/filter/invesProperty" ,//财富首页信息
+  invesProperty:"account/filter/invesProperty" , //财富首页信息
+
+  getPromiseInviteList: 'promise/filter/getPromiseInviteList', // 履行承诺列表
 
   userReskEvaluation:"evaluation/filter/userReskEvaluation" ,// 风险评测
 
@@ -40,9 +42,15 @@ export default {
 
   searchGiveCouponList: 'coupon/filter/searchGiveCouponList', // 查询卡券礼物列表
 
+  searchCouponReceiveDetails: 'coupon/filter/searchCouponReceiveDetails', // 查询卡券规则详情信息
+
+  getPossibleInviteList: 'showChance/getPossibleInviteList', // 展业良机
+
   showGiveCouponList: 'coupon/filter/showGiveCouponList', // 选择可送优惠
 
   searchExistingCustomers: 'home/filter/searchExistingCustomers', // 获取已有客户
+
+  searchMyManagerUserInfo: 'user/filter/searchMyManagerUserInfo', // 我的理财师
 
   getExistingCustomers: 'home/filter/getExistingCustomers', // 查询已有客户信息详情
 
@@ -89,13 +97,13 @@ export default {
 	standardAndPlanList:'bid/standardAndPlanList',//严选优质列表
 
 	userCashFee:'account/filter/userCashFee',//取现手续费
-	
+
 	toCash:'account/filter/toCash',//取现
-	
+
 	autoTenderPlan:'account/filter/autoTenderPlan',//自动复投
-	
+
 	signingContract:'contract/filter/signingContract',//生成合同
-	
+
 	querySigningStatus:'contract/filter/querySigningStatus',//签约状态
 	
 	quickBinding:'account/filter/quickBinding',//换绑银行卡

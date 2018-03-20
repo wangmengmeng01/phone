@@ -45,11 +45,11 @@
          {
            icon: 'mine',
            name: '我的理财师',
-           url: 'qrcode'
+           url: 'master'
          },{
            icon: 'join',
            name: '我要加盟的理财师',
-           url: 'qrcode'
+           url: '/home/joinFinlManager'
          }],[{
          icon: 'seting',
          name: '设置',
@@ -68,7 +68,7 @@
         {
         icon: 'mine',
         name: '我的理财师',
-         url: 'qrcode'
+         url: 'master'
       }],[{
         icon: 'have',
         name: '已有客户',
