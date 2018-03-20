@@ -160,7 +160,17 @@ export const openAccount = (params)=>{
   });
 }
 
-
+/**
+ * 银行换绑卡
+ * @param  {String} pid 产品id
+ */
+export const quickBinding = (params)=>{
+  return $http({
+    method: 'post',
+    api: api.quickBinding,
+    params
+  });
+}
 
 /**
  * 用户激活

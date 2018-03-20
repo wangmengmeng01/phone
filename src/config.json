@@ -2,6 +2,12 @@
 	"version": "1.0",
 	"vconsole": false,
 	"state": {
+		"bindCard": { 
+			"realName": "",
+			"cardNumber": "",
+			"orgSmsCode": "",
+			"orgSmsSeq": ""
+		},
 		"succ_page": {
 			"title": "",
 			"sub_title": "",
@@ -77,6 +83,14 @@
 				"style": "padding-bottom: 1rem;"
 			}
 		}, {
+			"path": "changeBank2",
+			"title": "换绑卡",
+			"filter": true,
+			"foot": {
+				"type": "main",
+				"style": "padding-bottom: 1rem;"
+			}
+		},{
 			"path": "/",
 			"component": "main",
 			"children": [

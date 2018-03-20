@@ -25,6 +25,15 @@ export default new Vuex.Store({
     SET_USER(state, data) {
       state.user = data;
     },
+     /**
+     * 换绑卡
+     * @param state
+     * @param data
+     * @constructor
+     */
+    SET_BINDCARD(state, data) {
+      state.bindCard = data;
+    },
     /**
      * 设置用户信息
      * @param state
