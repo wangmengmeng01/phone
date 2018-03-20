@@ -71,7 +71,7 @@
       // 表示从汇付返回的判断是否开户成功
       if(MerPriv){
         getUserStatus().then(r=>{
-            console.log(r)
+           r = r.result;
           // 未开户
           if(r.openAccountStatus=='1'){
             this.SET_SUCC_PAGE({
@@ -102,8 +102,6 @@
             userActivate({
               retUrl
               }).then(res=>{
-              // 调用汇付先清除地址栏的参数
-              window.history.replaceState(null, null, this.$route.path);
               axios({
                 method: 'post',
                 url: location.origin+ new URL(res.serviceUrl).pathname,

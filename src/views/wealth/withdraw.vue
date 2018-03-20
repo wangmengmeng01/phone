@@ -37,12 +37,13 @@
 				withdrawMoney:'',//提现金额
 				userCashFeeMoney:0,//提现手续费
 				actualccountMoney:0,//实际到账回调地址
-				retUrl:'',//返回地址
+				retUrl: location.origin+location.pathname,//返回地址
 				formItem:'',
-				
+
 			}
 		},
 		created() {
+<<<<<<< HEAD
 			
 			if(this.$route.query.isfromhuifu){
 			// 开始清楚成功页面的缓存
@@ -60,6 +61,9 @@
 			
 			const retUrl = this.retUrl = location+'?isfromhuifu=1';
 			selectBeforeRecharge().then(res => {
+=======
+      selectBeforeRecharge().then(res => {
+>>>>>>> 1e91d7c1ecf4d873ca82ddfeccf7f6174adafde8
 				this.cardMes = res;
 			});
 
@@ -97,9 +101,10 @@
 					transAmount:this.withdrawMoney,
 					fee:this.userCashFeeMoney,
 					cashWay:'GENERAL',
-					retUrl:this.retUrl,
+					retUrl: this.retUrl,
 					receiveNo:''
 				}).then(res => {
+<<<<<<< HEAD
 			         // 调用汇付先清除地址栏的参数
 			              window.history.replaceState(null, null, this.$route.path);
 			              axios({
@@ -124,6 +129,47 @@
 				});
 			}
 			
+=======
+
+
+					console.log(res);
+              axios({
+                method: 'post',
+                url: location.origin+ new URL(res.serviceUrl).pathname,
+                data: res.inMap,
+                transformRequest: [function (data) {
+                  let ret = '';
+                  for (let it in data) {
+                    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                  }
+                  return ret.slice(0,ret.length-1)
+                }],
+              }).then(r=>{
+                if(r.status === 200){
+                  if(r.data){
+                    document.body.innerHTML = r.data;
+                    setTimeout(()=>{document.form.submit()},0)
+                  }
+                }
+              })
+
+
+
+
+
+
+
+
+
+				});
+			}
+
+
+
+
+
+
+>>>>>>> 1e91d7c1ecf4d873ca82ddfeccf7f6174adafde8
 		},
 		watch: {
 			

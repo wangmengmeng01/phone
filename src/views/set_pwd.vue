@@ -217,6 +217,11 @@
     .tip
       margin: .2rem auto 1rem
     .imgcode
+      img
+        display: inline-block
+        height: .6rem
+        width: 1.8rem
+        background: #f1f1f1
       span
         text-align: right
     .smscode
