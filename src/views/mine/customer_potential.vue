@@ -27,16 +27,34 @@
     name: 'customer_potential',
     data() {
       return {
+        total: 0,
         pageIndex: 1,
         userCode: '',
         list: [],
       }
     },
     created() {
-      searchPotentialCustomers({pageIndex:this.pageIndex}).then(r=>{
-        this.list = r && r.customerList
-      })
+      this.init()
     },
+    mounted() {
+      document.body.onscroll = () => {
+        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+          if(this.list.length <= 10)return;
+          if(this.pageIndex < Math.ceil(this.total / 10)) return;
+          this.pageIndex++;
+          this.init();
+        }
+      }
+    },
+    methods: {
+      init() {
+        searchPotentialCustomers({pageIndex:this.pageIndex}).then(r=>{
+          this.list = this.list.concat(r.customerList);
+          this.total = r.total;
+        })
+      }
+
+    }
   }
 </script>
 

@@ -33,6 +33,7 @@
     name: 'customer',
     data() {
       return {
+        total: 0,
         pageIndex: 1,
         list: []
       }
@@ -41,6 +42,17 @@
       this.RESET('coupon');
       this.init();
     },
+    mounted() {
+      document.body.onscroll = () => {
+
+        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+          if(this.list.length <= 10)return;
+          if(this.pageIndex < Math.ceil(this.total / 10)) return;
+          this.pageIndex++;
+          this.init();
+        }
+      }
+    },
     methods: {
       ...mapMutations([
         'RESET',
@@ -48,7 +60,8 @@
       ]),
       init(){
         searchExistingCustomers({pageIndex: this.pageIndex}).then(r=>{
-          this.list = r && r.list
+          this.list = this.list.concat(r.list);
+          this.total = r.total;
         })
       },
       send_coupon(item){

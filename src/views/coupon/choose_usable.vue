@@ -58,6 +58,7 @@
       },
       choose(i,index){
         if(this.act===index)return;
+        window.scroll(0, 0);
         this.act = index;
         this.init(i);
       },

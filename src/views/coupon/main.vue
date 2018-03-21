@@ -46,7 +46,7 @@
     methods: {
       init(params){
         searchUserCouponInfo(params).then(res=>{
-          this.res = res.couponList
+          this.res = res.couponList;
           this.nav[0].size=res.notUsedCount;
           this.nav[1].size=res.usedCount;
           this.nav[2].size=res.expireNotUsedCount;
@@ -56,6 +56,7 @@
       },
       choose(i,index){
         if(this.act===index)return;
+        window.scroll(0, 0);
         this.act = index;
         this.init(i);
       },
