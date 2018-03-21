@@ -9,7 +9,7 @@
       <h2 class="title f32 color_font">客户投资背景</h2>
       <ul>
         <li>
-          <h2 class="f28 color_font">{{['男','女','未确定'][item.sex-1]}}  {{item.age}}岁</h2>
+          <h2 class="f28 color_font">{{['男','女','未确定'][item.sex-1] || '--'}}  {{item.age+'岁' || '--'}}</h2>
           <p class="f24 color_font-s">性别&年龄</p>
         </li>
         <li>
@@ -17,11 +17,11 @@
           <p class="f24 color_font-s">被展业次数</p>
         </li>
         <li>
-          <h2 class="f28 color_font">{{item.investCount}}次</h2>
+          <h2 class="f28 color_font">{{item.investCount+'次' || '--'}}</h2>
           <p class="f24 color_font-s">投资次数</p>
         </li>
         <li>
-          <h2 class="f28 color_font">{{['激进型','进取型','稳健型','谨慎型','保守型'][item.endurance-1]}}</h2>
+          <h2 class="f28 color_font">{{['激进型','进取型','稳健型','谨慎型','保守型'][item.endurance-1] || '--'}}</h2>
           <p class="f24 color_font-s">收益偏好</p>
         </li>
         <li>
@@ -37,7 +37,7 @@
           <p class="f24 color_font-s">累计收益</p>
         </li>
         <li>
-          <h2 class="f28 color_font">{{item.investAmount}}</h2>
+          <h2 class="f28 color_font">{{item.investAmount || '--'}}</h2>
           <p class="f24 color_font-s">最高单笔投资额</p>
         </li>
         <li>
