@@ -8,6 +8,18 @@ export function desensitization(val, start = 0, end = 0) {
 	return val && val.substr(start, end || undefined)
 }
 
+
+/**
+ * 转为万元，小于万元直接显示
+ * @param val 数值
+ */
+export function thousand(val) {
+  if(val>10000){
+    return val/10000 + '万'
+  }
+  return val
+}
+
 /**
  * 性别
  * @param val 数值
@@ -24,7 +36,7 @@ export function numfixed(val) {
 	if(val>10000){
  		 return (val/10000).toFixed(0);
 	}else{
-		 return (val/10000).toFixed(1);	
+		 return (val/10000).toFixed(1);
 	}
 
 }

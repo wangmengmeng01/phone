@@ -37,9 +37,9 @@
               </div>
               <div class="right">
                 <p class="f20 color_font-s">我承诺，理财师{{i.userName}}</p>
-                <h2 class="f48 color_font">赚取<span class="f12 color_font-s">约</span><span class="color_font-red f44">{{i.inviteAmount}}</span><span class="f12 color_font-s">元</span>{{i.productName}}收益</h2>
-                <h3 class="f28 color_font"><span class="f20 color_font-s">立投 </span>{{i.productName}}-{{i.productNo}}号<span class="f20 color_font-s"> 剩余可投<{{i.amountWait}}</span></h3>
-                <p class="f36">{{i.contractAmount}}<span class="f20 color_font-s">元</span>{{i.annualizedRate}}%<span class="f20 color_font-s">历史年化</span>{{i.periodLength}}<span class="f20 color_font-s">{{['天','周','月','年'][i.periodUnit-1]}}</span></p>
+                <h2 class="f48 color_font">赚取<span class="f12 color_font-s">约</span><span class="color_font-red f44">{{i.interest}}</span><span class="f12 color_font-s">元</span>{{i.productName}}收益</h2>
+                <h3 class="f28 color_font"><span class="f20 color_font-s">立投 </span>{{i.bidName}}号<span class="f20 color_font-s"> 剩余可投<{{i.amountWait | thousand}}</span></h3>
+                <p class="f36">{{i.inviteAmount}}<span class="f20 color_font-s">元</span>{{i.annualizedRate}}%<span class="f20 color_font-s">历史年化</span>{{i.periodLength}}<span class="f20 color_font-s">{{['天','周','月','年'][i.periodUnit-1]}}</span></p>
               </div>
             </div>
             <p class="flex subitemBtn"><span class="color_main f28 ">现在购买</span></p>

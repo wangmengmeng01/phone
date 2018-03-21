@@ -66,7 +66,7 @@
           this.$toask('手机号格式不正确!');
           return
         }
-        if(!(/^(?!^\d+$)(?!^[a-zA-Z]+$)(?!^_+$)[\d|a-zA-Z|_]{6,12}$/.test(this.passWord))) {
+        if(!(/\w{6,12}$/.test(this.passWord))) {
           this.$toask('密码格式不正确!');
           return
         }
