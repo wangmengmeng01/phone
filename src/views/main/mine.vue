@@ -3,9 +3,9 @@
     <div class="head flex" @click="$go('/mine/qrcode')">
       <img :src="item.pic || head" alt="" class="head_icon">
       <div class="msg">
-        <h2 class="f44 flex"><span>{{item.userName}}</span><span v-if="(item.position=='1')||(item.position=='2')" class="status"><img src="../../assets/main/mine/status_yellow.png" alt=""><i class="f12">{{['一般理财师','大区经理'][parseInt(item.position)-1]}}</i></span></h2>
+        <h2 class="f44 flex"><span>{{item.userName | nameDesensitization}}</span><span v-if="(item.position=='1')||(item.position=='2')" class="status"><img src="../../assets/main/mine/status_yellow.png" alt=""><i class="f12">{{['一般理财师','大区经理'][parseInt(item.position)-1]}}</i></span></h2>
         <p class="f24">{{item.pic}}</p>
-        <p class="f24">手机号  {{item.mobile}}</p>
+        <p class="f24">手机号  {{item.mobile | desensitization}}</p>
       </div>
       <span class="qrcode flex">
         <img src="../../assets/main/mine/qrcode.png" alt="" class="qrcode_icon">
@@ -22,7 +22,6 @@
       </li>
     </ul>
     <p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>
-
   </div>
 </template>
 
@@ -77,27 +76,30 @@
         icon: 'customer',
         name: '潜在客户',
          url: 'customer_potential'
-      }],[{
-        icon: 'advertisement',
-        name: '广告卓信产品记录',
-         url: ''
-      },{
-        icon: 'advertisement',
-        name: '针对客户展业记录',
-         url: ''
-      },{
-        icon: 'share',
-        name: '邀约客户投资记录',
-         url: ''
-      },{
-        icon: 'discount',
-        name: '赠送客户优惠记录',
-         url: ''
-      }], [{
-        icon: 'commission',
-        name: '我的佣金',
-         url: ''
-      }], [{
+      }],
+//        [{
+//        icon: 'advertisement',
+//        name: '广告卓信产品记录',
+//         url: ''
+//      },{
+//        icon: 'advertisement',
+//        name: '针对客户展业记录',
+//         url: ''
+//      },{
+//        icon: 'share',
+//        name: '邀约客户投资记录',
+//         url: ''
+//      },{
+//        icon: 'discount',
+//        name: '赠送客户优惠记录',
+//         url: ''
+//      }],
+//        [{
+//        icon: 'commission',
+//        name: '我的佣金',
+//         url: ''
+//      }],
+        [{
         icon: 'seting',
         name: '设置',
          url: 'seting'

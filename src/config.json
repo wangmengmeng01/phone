@@ -124,6 +124,7 @@
 				}, {
 					"path": "found",
 					"title": "发现",
+          "foot": false,
 					"back": {
 						"icon": false,
 						"background": "main"

@@ -8,10 +8,10 @@
           <div class="left">
             <h2 class="profitRate f20">+<span class="f36">{{data.profitRate}}</span>%</h2>
             <p class="couponName f36">{{data.couponName}}</p>
-            <p class="remark f12">不允许同类叠加使用</p>
+            <p class="remark f12">{{data.isSameOverlap=='2'?'不':''}}允许同类叠加使用</p>
           </div>
           <div class="right">
-            <h2 class="from f20">来自<span class="f36">江艺</span>理财师<img src="../../assets/coupon/info.png" alt="" class="info"></h2>
+            <h2 class="from f20">来自<span class="f36">{{data.name}}</span>理财师<img src="../../assets/coupon/info.png" alt="" class="info"></h2>
             <p>{{data.remark}}</p>
             <p class="f12">{{data.startDate}}至{{data.endDate}}</p>
           </div>
@@ -38,6 +38,7 @@
     props: ['data', 'checked', 'close'],
     methods: {
       checkedFn(){
+        if(!this.checked)return;
         this.check =! this.check;
         let res = this.check ? this.data : [];
         this.$emit('checkedCb', res)

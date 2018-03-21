@@ -4,8 +4,21 @@
  * @param start 开始
  * @param end 结束
  */
-export function desensitization(val, start = 0, end = 0) {
-	return val && val.substr(start, end || undefined)
+export function desensitization(val) {
+  let str = String(val);
+  let ruten = str.substring(3,8);
+  return str.replace(ruten,'*****');
+}
+
+
+/**
+ * 名字脱敏
+ * @param val
+ */
+export function nameDesensitization(str) {
+  str = String(str);
+  let ruten = str.substring(1);
+  return str.replace(ruten, '**');
 }
 
 
