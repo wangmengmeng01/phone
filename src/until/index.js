@@ -134,7 +134,7 @@ export const upload = (e) => {
       let FR = new FileReader();
         FR.onload = function() {
           if(size > 1024) {
-//          compress_img(this.result, resolve);
+            compress_img(this.result, resolve);
           }else{
             resolve(this.result)
           }

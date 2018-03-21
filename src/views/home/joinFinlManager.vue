@@ -132,9 +132,9 @@
 				joinBol4: false,
 				joinBol5: false,
 				itemJoin: {
-					cardNumberFrontFileStream: this.imgUrl,
-					cardNumberBackFileStream: this.imgUrl2,
-					flag: this.checked,
+					cardNumberFrontFileStream:'',
+					cardNumberBackFileStream: '',
+					flag: "",
 				},
 				jionMes: {}
 
@@ -152,8 +152,10 @@
 						this.joinBol5 = !this.joinBol5;
 					} else if(res.result.status == "2") {
 						this.joinBol3 = !this.joinBol3;
+						this.joinBol5 = !this.joinBol5;
 					} else {
 						this.joinBol4 = !this.joinBol4;
+						this.joinBol5 = !this.joinBol5;
 					}
 				} else {
 
@@ -191,10 +193,15 @@
 					if(!this.checked) {
 						this.$toask("请勾选加盟协议");
 					} else {
+						
+						this.itemJoin.cardNumberFrontFileStream=this.imgUrl.split(",")[1];
+						this.itemJoin.cardNumberBackFileStream=this.imgUrl2.split(",")[1];
+						this.itemJoin.flag=this.checked;
 						saveUserManager(this.itemJoin).then(res => {
 							if(res.code == "100" || res.code == "1019") {
 								this.joinBol = !this.joinBol;
 								this.joinBol2 = !this.joinBol2;
+								this.joinBol5=!this.joinBol5;
 							} else if(res.code == "1000") {
 								this.$go('/login');
 							} else {

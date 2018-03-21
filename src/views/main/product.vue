@@ -10,8 +10,8 @@
 				<span>更多 <img src="../../assets/main/home/nextIcon.png" alt="" /></span>
 			</div>
 			<div class="productDivTitleTips">
-				<span class="tispImg">中高风险</span>
-				<span class="">按期派息到期还本</span>
+				<!--<span class="tispImg">中高风险</span>-->
+				<span class="">{{profitPlanArr[i.profitPlan>4?'5':i.profitPlan]}}</span>
 			</div>
 
 			<div v-for="(j,n) in i.bidList" class="productDivDetial ">
@@ -19,10 +19,10 @@
 					<span class="pddTitleBidName">{{j.bidName}}</span>
 					<p class="pddTitleTips">
 						<span v-show="j.brokerageRate">佣金{{j.brokerageRate}}%</span>
-						<span>{{j.periodLength}}{{j.periodUnit|Totime}}锁定</span>
+						<span>{{j.lockPeriod}}天锁定</span>
 					</p>
 				</div>
-				<p class="productDivRate">{{j.annualizedRate | tofixed}}%</p>
+				<p class="productDivRate">{{j.annualizedRate | tofixed2}}%</p>
 				<p class="productDivWrod">历史年化</p>
 				<div class="hotProductDivProgress">
 					<div class="tipsImg" :style="{left:j.amountScale*5/100+'rem'}" v-if="j.amountScale<=50||j.amountScale==100">
@@ -108,6 +108,7 @@
 					userToken: "",
 				},
 				productList: '',
+				profitPlanArr:['','等额本息','等额本金','按期付息，到期还本','一次性还款','其他'],
 			}
 		},
 		created() {
@@ -242,7 +243,7 @@
 		color: #8D8D94;
 	}
 	
-	.productDivTitleTips>span:nth-child(2) {
+	.productDivTitleTips>span{
 		float: left;
 		margin-left: 0.12rem;
 		line-height: 0.44rem;
@@ -284,7 +285,7 @@
 		float: left;
 		line-height: 0.26rem;
 		font-size: 0.2rem;
-		width: 1.0rem;
+		/*width: 1.0rem;*/
 		height: 0.28rem;
 		margin-top: 0.02rem;
 		text-align: center;
@@ -293,6 +294,7 @@
 		box-sizing: border-box;
 		border-radius: 2px;
 		margin-right: 0.12rem;
+		padding: 0 0.05rem;
 	}
 	
 	.productDivRate {

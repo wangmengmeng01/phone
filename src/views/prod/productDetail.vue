@@ -39,7 +39,7 @@
 				</p>
 				<p class="pdcTimeT">
 					<span>今日</span>
-					<span>{{detail.interestStartDate}}</span>
+					<span>{{detail.interestStartDate==""?"&nbsp;":detail.interestStartDate}}</span>
 					<span>{{detail.interestEndDate}}</span>
 				</p>
 			</div>
