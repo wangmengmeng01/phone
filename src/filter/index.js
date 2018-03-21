@@ -120,3 +120,19 @@ export function profitPlan(val) {
 	}
 
 }
+
+export function optype(val) {
+
+	switch(val) {
+		case 1:
+			return "+";
+			break;
+		case 2:
+			return "-";
+			break;
+		default:
+			return "";
+			break;
+	}
+
+}

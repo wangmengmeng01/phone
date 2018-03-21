@@ -135,4 +135,11 @@ export const querySigningStatus = async (params)=>{
   });
 };
 
-
+// 交易记录
+export const transactionRecord = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.transactionRecord,
+    params,
+  });
+};

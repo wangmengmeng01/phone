@@ -1,43 +1,49 @@
 <template>
   <div class="tradeRecord">
-    <ul class="tradeRecordContent">
-      <li>
+    <ul class="tradeRecordContent" v-show="list.length">
+      <li v-for="(i,index) in list">
         <div class="top">
-            <div>充值</div>
-            <div>+100.00</div>
+            <div>{{i.typeName}}</div>
+            <div>{{i.optype|optype}}{{i.operationAmount|formatNum}}</div>
         </div>
         <div class="bottom">
-          <div>2017-10-11</div>
-          <div>可用余额 200.00</div>
-        </div>
-      </li>
-      <li>
-        <div class="top">
-            <div>充值</div>
-            <div>+100.00</div>
-        </div>
-        <div class="bottom">
-          <div>2017-10-11</div>
-          <div>可用余额 200.00</div>
+          <div>{{i.createTime}}</div>
+          <div>可用余额 {{i.availableAmountAfter|formatNum}}</div>
         </div>
       </li>
     </ul>
     <div class="tradeRecordFooter">上拉加载更多…</div>
+    
+    <div class="joinListDiv1" v-show="!list.length" style="background-color: #f1f1f9;">
+			<img src="../../assets/main/prod/norecord.png" />
+			<p class="noRecord">暂无记录</p>
+	</div>
+    
+    
   </div>
 </template>
 
 <script>
+	
+  import {transactionRecord} from '@/service'
   export default {
     name: 'tradeRecord',
     data() {
       return{
-        res: {},
         item: {
-
-        }
+			type:'0',
+			pageIndex:1,
+        },
+        list:[],
       }
     },
     created() {
+    		transactionRecord(this.item).then(res => {
+    			
+    			console.log(res);
+    			this.list=res.dataList;
+		}); 
+    	
     },
     methods: {
 
@@ -74,5 +80,22 @@
   font-size 0.28rem
   text-align center
   margin-top 0.54rem
+  
+.joinListDiv1 {
+	float: left;
+	width: 7.5rem;
+	overflow: hidden;
+}
 
+.joinListDiv1>img {
+	margin: 1.14rem 1.74rem 0.5rem;
+	width: 4.02rem;
+	height: 4.1rem;
+	background-size: 100% 100%;
+} 
+.noRecord {
+		text-align: center;
+		font-size: 0.28rem;
+		color: #8D8D94;
+	}
 </style>

@@ -105,4 +105,8 @@ export default {
 	signingContract:'contract/filter/signingContract',//生成合同
 
 	querySigningStatus:'contract/filter/querySigningStatus',//签约状态
+	
+	quickBinding:'account/filter/quickBinding',//换绑银行卡
+	
+	transactionRecord:'account/filter/transactionRecord',//交易记录
 }
