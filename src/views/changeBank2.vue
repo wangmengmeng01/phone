@@ -125,7 +125,8 @@
         sendSmsCode(params).then(r=>{
           this.item.smsSeq = r.smsSeq;
           // 倒计时
-          this.countdown()
+          this.countdown();
+          this.$toask('短信验证码已发送');
         })
       },
       /**
@@ -189,30 +190,27 @@
         quickBinding(this.item).then(res=>{
         	
         	
-        	
-        	
-        	console.log(res);
-          // 调用汇付先清除地址栏的参数
-//        axios({
-//          method: 'post',
-//          url: location.origin+ new URL(res.serviceUrl).pathname,
-//          data: res.inMap,
-//          transformRequest: [function (data) {
-//            let ret = '';
-//            for (let it in data) {
-//              ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-//            }
-//            return ret.slice(0,ret.length-1)
-//          }],
-//        }).then(r=>{
-//          if(r.status === 200){
-//            if(r.data){
-//              document.body.innerHTML = r.data;
-//              setTimeout(()=>{document.form.submit()},0)
-//            }
-//          }
-//        })
-
+        	if(res.code=="100"){
+        		// 开始清楚成功页面的缓存
+     		 this.RESET('succ_page');
+			 this.SET_SUCC_PAGE({
+             		"title": "换绑卡成功",
+					'sub_title': "您的账户已绑定新银行卡",
+					"btn_text": "立即充值",
+					"backurl": "/wealth/recharge",
+					"sub_btn_text": "暂不",
+					"sub_backurl": "/"
+            			});
+          		  this.$go('/static/succ','',false);
+        		
+        		
+        		
+        	}else if(res.code == "1210" || res.code == "1000") {
+			this.$go('/login');
+		} else {
+			this.$toask(res.message);
+		}
+       	 	console.log(res);
         })
       },
    }

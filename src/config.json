@@ -2,7 +2,7 @@
 	"version": "1.0",
 	"vconsole": false,
 	"state": {
-		"bindCard": { 
+		"bindCard": {
 			"realName": "",
 			"cardNumber": "",
 			"orgSmsCode": "",
@@ -25,16 +25,16 @@
 		},
 		"user": {},
 		"user_info": {},
-    "client": "2"
+		"client": "2"
 	},
 	"route": [
 		{
 			"path": "/recharge",
 			"redirect": "/wealth/recharge"
-		},{
-      "path": "/riskTest",
-      "redirect": "/wealth/riskTest"
-    }, {
+		}, {
+			"path": "/riskTest",
+			"redirect": "/wealth/riskTest"
+		}, {
 			"path": "login",
 			"title": "登录",
 			"filter": true,
@@ -61,10 +61,10 @@
 				"type": "main",
 				"style": "padding-bottom: 1rem"
 			},
-      "back": {
-        "showTip": true,
-        "title": false
-      }
+			"back": {
+				"showTip": true,
+				"title": false
+			}
 		}, {
 			"path": "forget_pwd",
 			"title": "修改登录密码",
@@ -90,7 +90,7 @@
 				"type": "main",
 				"style": "padding-bottom: 1rem;"
 			}
-		},{
+		}, {
 			"path": "/",
 			"component": "main",
 			"children": [
@@ -131,8 +131,8 @@
 				}, {
 					"path": "mine",
 					"title": "我的",
-          "foot": false,
-          "back": {
+					"foot": false,
+					"back": {
 						"icon": false,
 						"background": "main"
 					}
@@ -149,11 +149,11 @@
 					"path": "qrcode",
 					"title": "我的二维码",
 					"foot": false
-				},{
-          "path": "master",
-          "title": "我的理财师",
-          "foot": false
-        }, {
+				}, {
+					"path": "master",
+					"title": "我的理财师",
+					"foot": false
+				}, {
 					"path": "customer",
 					"title": "已有客户",
 					"foot": false
@@ -307,6 +307,14 @@
 					"path": "succ",
 					"title": "成功",
 					"filter": true,
+					"back": false,
+					"foot": {
+						"style": "background-color: #fff;margin-top: -3rem"
+					}
+				}, {
+					"path": "fail",
+					"title": "失败",
+					"filter": true,
 					"back": {
 						"title": false
 					},
@@ -314,23 +322,13 @@
 						"style": "background-color: #fff;margin-top: -3rem"
 					}
 				}, {
-          "path": "fail",
-          "title": "失败",
-          "filter": true,
-          "back": {
-            "title": false
-          },
-          "foot": {
-            "style": "background-color: #fff;margin-top: -3rem"
-          }
-        },{
-          "path": "protocol",
-          "title": "协议",
-          "filter": true,
-          "back": false,
-          "foot": false
-        }
-      ]
+					"path": "protocol",
+					"title": "协议",
+					"filter": true,
+					"back": false,
+					"foot": false
+				}
+			]
 		}, {
 			"path": "forPhone",
 			"component": "forPhone",
@@ -344,8 +342,7 @@
 					"filter": true,
 					"back": false,
 					"foot": false
-				},
-				{
+				}, {
 					"path": "productDetail",
 					"title": "产品详情",
 					"filter": true,
@@ -368,15 +365,14 @@
 				}, {
 					"path": "bankDepository",
 					"filter": true,
-					"back":false,
+					"back": false,
 					"title": "资金银行存管"
 				}, {
 					"path": "Honour",
 					"filter": true,
-					"back":false,
+					"back": false,
 					"title": "100%历史兑付"
 				}
-
 			]
 		}, {
 			"path": "wealth",
@@ -405,8 +401,8 @@
 				}, {
 					"path": "riskTest",
 					"title": "风险评测",
-          "filter": true,
-          "foot": false
+					"filter": true,
+					"foot": false
 				}, {
 					"path": "productDetail",
 					"title": "产品详情",
@@ -437,6 +433,10 @@
 				}, {
 					"path": "assertList",
 					"title": "我的资产",
+					"foot": false
+				}, {
+					"path": "tranderPassword",
+					"title": "修改交易密码说明",
 					"foot": false
 				}
 			]
