@@ -235,32 +235,32 @@
 				let maxInvest = this.detail.investMaxAmount; //最大金额
 				let minInvest = this.detail.investMinAmount; //起投金额
 				let investAscendingAmount = this.detail.investAscendingAmount; //递增金额
-				if(this.investMoney) {} else {
+				if(this.investMoney!="") {} else {
 					this.$toask("请输入购买金额");
 					return;
 				};
 
-				if(this.investMoney > accountBalance) {
+				if(parseFloat(this.investMoney) > accountBalance) {
 					this.$toask("账户余额不足");
 					return;
 				};
 
-				if(this.investMoney < minInvest) {
-					this.$toask("够买金额小于最低起投金额");
-					//					return;
-				};
-
-				if(this.investMoney > maxInvest) {
-					this.$toask("够买金额大于单笔上限");
+				if(parseFloat(this.investMoney) < minInvest) {
+					this.$toask("购买金额小于最低起投金额");
 					return;
 				};
 
-				if(this.investMoney > amountWait) {
-					this.$toask("够买金额大于标的剩余额度");
+				if(parseFloat(this.investMoney) > maxInvest) {
+					this.$toask("购买金额大于单笔上限");
 					return;
 				};
 
-				if(this.investMoney % investAscendingAmount != 0) {
+				if(parseFloat(this.investMoney) > amountWait) {
+					this.$toask("购买金额大于标的剩余额度");
+					return;
+				};
+
+				if(parseFloat(this.investMoney) % investAscendingAmount != 0) {
 					this.$toask("请输入" + investAscendingAmount + "的整数倍");
 					return;
 				};
@@ -279,38 +279,19 @@
 
 				borrowInvest(this.buyItem).then(res => {
 					console.log(res);
+					let params = {
+						"title": "恭喜，购买成功",
+						'sub_title': "您已成功购买了该标的",
+						"btn_text": "继续购买其他标的",
+						"backurl": "/product",
+						"sub_btn_text": "查看我的资产",
+						"sub_backurl": "/product"
+					};
+					this.SET_SUCC_PAGE(params);
+					this.$go('/static/succ');
 				});
+				
 
-//				let params = {
-//					"title": "恭喜，购买成功",
-//					'sub_title': "您已成功购买了该标的",
-//					"btn_text": "继续购买其他标的",
-//					"backurl": "/product",
-//					"sub_btn_text": "查看我的资产",
-//					"sub_backurl": "/product"
-//				};
-//				this.SET_SUCC_PAGE(params);
-//				this.$go('/static/succ');
-
-				//购买
-
-				//					borrowInvest({
-				//						bidNo:this.detail.bidNo,
-				//						payAmount:this.investMoney,
-				//						retUrl:'',
-				//						couponRate:
-				//						receiveNo:
-				//						couponNo:
-				//						autoOpen:
-				//						investAmount:
-				//						annualizedProfit:
-				//						expectedRevenue:
-				//						promiseInviteId:
-				//					}).then(res => {
-				//					});
-
-				//				this.RESET('coupon');
-				//				this.$go('/prod/buySucc')
 			},
 			//全投
 			investAll() {

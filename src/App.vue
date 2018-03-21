@@ -1,6 +1,6 @@
 <template>
-  <div id="app" :style="{paddingTop:$route.meta.back ? '.88rem' : ''}">
-    <back/>
+  <div id="app" :style="{paddingTop:$route.meta.back && !$route.query.forNative ? '.88rem' : ''}">
+    <back v-if="!$route.query.forNative"/>
     <transition :name=" isAppear ? 'fade' : 'router-slid'" mode="out-in">
       <router-view ></router-view>
     </transition>
