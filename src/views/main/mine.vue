@@ -14,7 +14,7 @@
     </div>
     <!--菜单栏-->
     <ul class="item" v-for="i in menu" v-if="menu.length">
-      <li v-for="j in i" class="flex border-notend-b" @click="$go(`/mine/${j.url}`)">
+      <li v-for="j in i" class="flex border-notend-b" @click="$go(j.icon==='join' ? j.url : `/mine/${j.url}`)">
         <img :src="require(`@/assets/main/mine/${j.icon}.png`)" alt="" class="icon">
         <span class="name f32">{{j.name}}</span>
         <span class="f28 color_font-s" v-if="!j.url">敬请期待</span>
