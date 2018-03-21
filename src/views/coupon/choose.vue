@@ -69,7 +69,7 @@
       ...mapMutations([
         'SET_COUPON',
       ]),
-      init(item){
+      init(){
       	const {productNo, investAmount} = this.coupon.params;
       	let pageIndex=this.pageIndex;
       	let useType = this.nav[this.act].type;

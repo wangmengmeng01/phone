@@ -43,16 +43,27 @@
       Coupon,
     },
     created() {
-      this.init(this.nav[0]);
+      this.init();
+    },
+    mounted() {
+      document.body.onscroll = () => {
+        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+          if(this.res.length <= 10)return;
+          if(this.pageIndex < Math.ceil(this.nav[this.act].size / 10)) return;
+          this.pageIndex++;
+          this.init();
+        }
+      }
     },
     methods: {
       ...mapMutations([
         'SET_COUPON',
       ]),
-      init(item){
-        showGiveCouponList({couponType: item.type}).then(res=>{
+      init(){
+        let couponType = this.nav[this.act].type;
+        showGiveCouponList({couponType}).then(res=>{
           this.res = res.couponList
-        }).catch(err=>{
+        }).catch(()=>{
           this.res = []
         })
       },
@@ -60,6 +71,7 @@
         if(this.act===index)return;
         window.scroll(0, 0);
         this.act = index;
+        this.pageIndex = 1; // 切换菜单重置pageIndex
         this.init(i);
       },
       checkedCb(data){
