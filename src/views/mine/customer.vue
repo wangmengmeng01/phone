@@ -12,7 +12,7 @@
         <div class="c">
           <ul>
             <li class="color_font-s f20">{{i.beInviteDate}}成为我的客户</li>
-            <li class="color_font-s f20">{{i.lastInvestDate}}完成最近一笔投资</li>
+            <li class="color_font-s f20" v-if="i.lastInvestDate">{{i.lastInvestDate}}完成最近一笔投资</li>
           </ul>
         </div>
         <span class="color_main f24"><img src="../../assets/common/arrow-right.png" alt=""></span>

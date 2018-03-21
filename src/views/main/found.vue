@@ -29,7 +29,7 @@
       </h3>
       <div class="con">
         <ul>
-          <li class="border-notend-b" v-for="i in item.promise.promiseInviteList" @click="$go('/prod/buyBid',{bidNo:i.bidNo,promiseInviteId:i.promiseInviteId,backTitle:i.productName})">
+          <li class="border-notend-b" v-for="i in item.promise.promiseInviteList" @click="$go('/prod/buyBid',{bidNo:i.bidNo,promiseInviteId:i.promiseInviteId,backTitle:i.productName,inviteAmount:i.inviteAmount})">
             <div class="flex subitem">
               <div class="left">
                 <img src="../../assets/found/luo.png" alt="">
@@ -38,7 +38,7 @@
               <div class="right">
                 <p class="f20 color_font-s">我承诺，理财师{{i.userName}}</p>
                 <h2 class="f48 color_font">赚取<span class="f12 color_font-s">约</span><span class="color_font-red f44">{{i.interest}}</span><span class="f12 color_font-s">元</span>{{i.productName}}收益</h2>
-                <h3 class="f28 color_font"><span class="f20 color_font-s">立投 </span>{{i.bidName}}号<span class="f20 color_font-s"> 剩余可投<{{i.amountWait | thousand}}</span></h3>
+                <h3 class="f28 color_font"><span class="f20 color_font-s">立投 </span>{{i.bidName}}<span class="f20 color_font-s"> 剩余可投<{{i.amountWait | thousand}}</span></h3>
                 <p class="f36">{{i.inviteAmount}}<span class="f20 color_font-s">元</span>{{i.annualizedRate}}%<span class="f20 color_font-s">历史年化</span>{{i.periodLength}}<span class="f20 color_font-s">{{['天','周','月','年'][i.periodUnit-1]}}</span></p>
               </div>
             </div>
@@ -101,6 +101,7 @@
       <!--</div>-->
     <!--</div>-->
     <Gift :data="giftData" v-if="gift_visible"/>
+    <p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>
   </div>
 </template>
 
@@ -128,9 +129,11 @@
     },
     methods: {
       init(){
-        Promise.all([searchGiveCouponList({source:'2'}), getPromiseInviteList(), searchMyManagerUserInfo()]).then(r=>{
-          const [coupon, promise, master] = r;
-          this.item = {coupon, promise, master};
+        Promise.all([searchGiveCouponList({source:'2'}), getPromiseInviteList()]).then(r=>{
+          const [coupon, promise] = r;
+          this.item = {coupon, promise};
+        }).then(()=>{
+          searchMyManagerUserInfo({filter_msg:1}).then(r=>this.item.master=r);
         })
       }
     },
@@ -141,6 +144,7 @@
 
 <style lang="sass" scoped>
   .found
+    min-height: 100vh
     .item
       margin: .4rem .2rem
       background: #fff
@@ -242,4 +246,14 @@
     .raiders
       p
         line-height: .44rem
+  .RiskTips
+    margin: 1.06rem 0 0.98rem
+    height: 0.84rem
+    text-align: center
+    line-height: 0.24rem
+    font-size: 0.24rem
+    color: #B6B2B2
+    i
+      font-style: inherit
+      margin: 0 0.2rem
 </style>

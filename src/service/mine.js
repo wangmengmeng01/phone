@@ -92,9 +92,16 @@ export const searchUserInfo = async (params)=>{
  * 查询理财师信息
  */
 export const searchMyManagerUserInfo = async (params)=>{
+  let filter_msg = true;
+    try{
+      filter_msg = !params.filter_msg
+    }catch (e){}
   return await $http({
     method: 'get',
     api: api.searchMyManagerUserInfo,
     params,
+    options: {
+      filter_msg
+    }
   });
 }
