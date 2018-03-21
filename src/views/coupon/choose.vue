@@ -4,8 +4,8 @@
       <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}({{i.size}})</li>
     </ul>
     <div class="coupon p4" :class="[!res.length?'none':'']">
-      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true"  @checkedCb="checkedCb(i,index)" ref="coupon"/>
-      <div v-if="!res.length" class="nothing f32 color_font">暂无可送优惠券</div>
+      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" :checked="!act"  @checkedCb="checkedCb(i,index)" ref="coupon"/>
+      <div v-if="!res.length" class="nothing f32 color_font">暂无{{nav[act].name}}券</div>
     </div>
     <button class="btn" @click="submit">选取</button>
   </div>
@@ -143,7 +143,8 @@
         const linkType = this.$route.query.linkType;
         // 没有选择的直接返回
         if(!this.couponlist.length){
-          this.$go(this.coupon.backurl,{bidNo,linkType})
+          this.$toask('您没有选择优惠券!');
+          this.$go(this.coupon.backurl,{bidNo,linkType}, false);
           return
         }
         // 优惠券数据存入状态管理中
@@ -171,7 +172,7 @@
               this.$go(this.coupon.backurl,params)
             } else {
               if(r.code === '1000'){
-                this.$go('/login')
+                this.$go('/login',{},false)
               }
               this.$toask(r.message)
             }

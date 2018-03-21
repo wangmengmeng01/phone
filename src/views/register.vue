@@ -19,7 +19,7 @@
     name: 'register',
     data () {
       return {
-        mobile: ''
+        mobile: sessionStorage.mobile || ''
       }
     },
     methods: {
@@ -32,6 +32,7 @@
           this.$toask('手机号格式不正确!');
           return
         }
+        sessionStorage.mobile = this.mobile;
         this.$go('set_pwd',{mobile:this.mobile,view:'register'});
       },
     }

@@ -11,10 +11,11 @@
         </div>
         <div class="c">
           <ul>
-            <li v-for="j in i.list" class="color_font-s f20">{{j}}</li>
+            <li class="color_font-s f20">{{i.beInviteDate}}成为我的客户</li>
+            <li class="color_font-s f20">{{i.lastInvestDate}}完成最近一笔投资</li>
           </ul>
         </div>
-        <span class="color_main f24">查询</span>
+        <span class="color_main f24"><img src="../../assets/common/arrow-right.png" alt=""></span>
       </div>
       <div class="b color_main f28 flex">
         <span @click="send_coupon(i)">赠送优惠</span>
@@ -80,6 +81,10 @@
         width: .96rem
         height: .96rem
         border-radius: 50%
+      span
+        img
+          width: .2rem
+          height: .3rem
       .c
         flex: 1
         padding-left: .3rem

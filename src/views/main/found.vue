@@ -2,7 +2,7 @@
   <div class="found">
     <!--我的礼物-->
     <div class="item mygift" v-if="item.coupon && item.coupon.couponList.length">
-      <h2 class="subtitle f28 color_font-s">理财师 {{item.coupon.couponList[0].name}} 送我的{{item.coupon.couponList.length}}个礼物</h2>
+      <h2 class="subtitle f28 color_font-s">理财师 {{item.master.realName}} 送我的{{item.coupon.couponList.length}}个礼物</h2>
       <h3 class="title color_font flex">我的礼物
         <!--<div class="flex">-->
           <!--<span class="f28 color_main">更多</span>-->
@@ -106,7 +106,7 @@
 
 <script>
   import Gift from '@/components/gift/gift'
-  import { getPromiseInviteList, searchGiveCouponList, getPossibleInviteList } from '@/service'
+  import { getPromiseInviteList, searchGiveCouponList, getPossibleInviteList, searchMyManagerUserInfo } from '@/service'
   export default {
     name: 'found',
     data() {
@@ -128,9 +128,9 @@
     },
     methods: {
       init(){
-        Promise.all([searchGiveCouponList({source:'2'}),getPromiseInviteList()]).then(r=>{
-          const [coupon, promise] = r;
-          this.item = {coupon, promise};
+        Promise.all([searchGiveCouponList({source:'2'}), getPromiseInviteList(), searchMyManagerUserInfo()]).then(r=>{
+          const [coupon, promise, master] = r;
+          this.item = {coupon, promise, master};
         })
       }
     },
