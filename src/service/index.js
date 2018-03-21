@@ -168,7 +168,11 @@ export const quickBinding = (params)=>{
   return $http({
     method: 'post',
     api: api.quickBinding,
-    params
+    params,
+    options: {
+			filter_code: false,
+			filter_msg: false
+		}
   });
 }
 

@@ -143,3 +143,21 @@ export const transactionRecord = async (params)=>{
     params,
   });
 };
+
+// 续投列表
+export const getUserEarningsDetail = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.getUserEarningsDetail,
+    params,
+  });
+};
+
+// 续投开关
+export const continueOpenOperator = async (params)=>{
+  return await $http({
+    method: 'post',
+    api: api.continueOpenOperator,
+    params,
+  });
+};

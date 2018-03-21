@@ -56,81 +56,90 @@
 					"sub_backurl": "/"
             			});
           		  this.$go('/static/succ','',true);
-			};
+			}
 			
 			const retUrl = this.retUrl = location+'?isfromhuifu=1';
-		selectBeforeRecharge().then(res => {
-			this.cardMes = res;
-		});
-
-		accountAcmountInfo().then(res => {
-			this.accountMes = res;
-			this.accountMoney = res.canWithdrawAmount;
-		});
-
-	},
-	methods: {
-		...mapMutations([
-			'RESET',
-			'SET_SUCC_PAGE'
-		]),
-		/*余额全提*/
-		wall() {
-			this.withdrawMoney = this.accountMoney;
-			this.userCashFee();
-		},
-		/*计算手续费*/
-		userCashFee() {
-			userCashFee({
-				transAmount: this.withdrawMoney,
-				cashWay: 'GENERAL',
-			}).then(res => {
-				this.userCashFeeMoney = res.fee;
-				this.actualccountMoney = this.withdrawMoney - this.userCashFeeMoney;
+			selectBeforeRecharge().then(res => {
+				this.cardMes = res;
 			});
-		},
-		onblur() {
-			this.userCashFee();
-		},
-		toCash() {
-			toCash({
-				transAmount: this.withdrawMoney,
-				fee: this.userCashFeeMoney,
-				cashWay: 'GENERAL',
-				retUrl: this.retUrl,
-				receiveNo: ''
-			}).then(res => {
-				// 调用汇付先清除地址栏的参数
-				window.history.replaceState(null, null, this.$route.path);
-				axios({
-					method: 'post',
-					url: location.origin + new URL(res.serviceUrl).pathname,
-					data: res.inMap,
-					transformRequest: [function(data) {
-						let ret = '';
-						for(let it in data) {
-							ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-						}
-						return ret.slice(0, ret.length - 1)
-					}],
-				}).then(r => {
-					if(r.status === 200) {
-						if(r.data) {
-							document.body.innerHTML = r.data;
-							setTimeout(() => {
-								document.form.submit()
-							}, 0)
-						}
-					}
-				})
+
+			accountAcmountInfo().then(res => {
+				this.accountMes = res;
+				this.accountMoney=res.canWithdrawAmount;
 			});
+
 		},
+		methods: {
+			 ...mapMutations([
+		        'RESET',
+		        'SET_SUCC_PAGE'
+		      ]),
+			/*余额全提*/
+			wall(){
+				this.withdrawMoney=this.accountMoney;
+				this.userCashFee();
+			},
+			/*计算手续费*/
+			userCashFee(){
+				userCashFee({
+					transAmount:this.withdrawMoney,
+					cashWay:'GENERAL',
+				}).then(res => {
+					this.userCashFeeMoney=res.fee;
+					this.actualccountMoney=this.withdrawMoney-this.userCashFeeMoney;
+				});
+			},
+			onblur(){
+				this.userCashFee();
+			},
+			toCash(){
+				
+				if(!this.withdrawMoney) {
+					this.$toask('提现金额不能为空');
+					return;
+				}
 
-},
-watch: {
-
-}
-}</script>
+				if(this.withdrawMoney < 100) {
+					this.$toask('提现金额不能小于100元');
+					return;
+				}
+				
+				toCash({
+					transAmount:this.withdrawMoney,
+					cashWay:'GENERAL',
+					retUrl: this.retUrl,
+					receiveNo:''
+				}).then(res => {
+			         // 调用汇付先清除地址栏的参数
+			              window.history.replaceState(null, null, this.$route.path);
+			              axios({
+			                method: 'post',
+			                url: location.origin+ new URL(res.serviceUrl).pathname,
+			                data: res.inMap,
+			                transformRequest: [function (data) {
+			                  let ret = '';
+			                  for (let it in data) {
+			                    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+			                  }
+			                  return ret.slice(0,ret.length-1)
+			                }],
+			              }).then(r=>{
+			                if(r.status === 200){
+			                  if(r.data){
+			                    document.body.innerHTML = r.data;
+			                    setTimeout(()=>{document.form.submit()},0)
+			                  }
+			                }
+			              })
+				});
+			}
+			
+		},
+		watch: {
+			
+		}
+	}
+</script>
 
 <style lang="stylus" scoped>
   i,em{font-style: normal;}

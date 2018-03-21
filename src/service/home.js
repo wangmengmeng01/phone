@@ -66,3 +66,19 @@ export const saveUserManager = async (params)=>{
   });
 }
 
+/**
+ * 加盟上传图片
+ */
+export const uploadFile = async (params)=>{
+  return await $http({
+    method: 'post',
+    api: api.uploadFile,
+    params,
+    options: {
+      filter_code:false,
+      filter_msg:false
+    },
+  });
+}
+
+

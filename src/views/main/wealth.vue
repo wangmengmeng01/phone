@@ -134,7 +134,7 @@
         {
           icon: 'wtradeP',
           name: '改交易密码',
-          url: ''
+          url: '/wealth/tranderPassword'
         },
         {
           icon: 'wEarn',

@@ -6,17 +6,16 @@
       避免资金闲置而损失收益
     </div>
     <ul class="CTCWrap">
-      <li>
+      <li v-for="(i,index) in list">
         <div class="CTCtop">
-          <div class="CTCTleft">中赢宝-1234期</div>
-          <div class="OOWrap" @click="autoRenewBol=!autoRenewBol">
-            <div class="OOButton" v-if="autoRenewBol">关</div>
-            <div class="OOButton on" v-else>开</div>
+          <div class="CTCTleft">{{i.bidName}}</div>
+          <div class="OOWrap" >
+            <div class="OOButton" :class="[i.continueFlag==1?'on':'']" @click="submit(i.investId,i.continueFlag,index)">{{i.continueFlag==1?'开':'关'}}</div>
           </div>
         </div>
         <div class="CTCBottom">
-          <div>续投金额 10,000.00元</div>
-          <div>预计续期时间 2018.10.10</div>
+          <div>续投金额{{i.investAmount|formatNum}}元</div>
+          <div>预计续期时间 {{i.investDueDate}}</div>
         </div>
       </li>
     </ul>
@@ -24,17 +23,53 @@
 </template>
 
 <script>
+  import {getUserEarningsDetail,continueOpenOperator} from '@/service'
   export default {
     name: 'continueInvest',
     data() {
       return{
         autoRenewBol: true, //自动续费
+        item:{
+        	 pageIndex:1,//续投列表分页
+        },
+        list:[],//购买记录
+       
       }
     },
     created() {
+    	
+    		getUserEarningsDetail(this.item).then(res => {
+				console.log(res);
+				this.list=res.list;
+		});
+    	
+    	
     },
     methods: {
-
+			submit(a,b,c){
+				if(b==1){
+					b=2;
+				}else{
+					b=1;
+				}
+				
+				continueOpenOperator({
+					investId:a,
+					isContinue:b,
+				}).then(res => {
+					
+					if(res.isContinue==1){
+						this.list[c].continueFlag=1;
+					}else{
+						this.list[c].continueFlag=2;
+					}
+					
+				});	
+					
+				
+				
+//				
+			}
     },
     watch: {
     }

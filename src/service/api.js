@@ -109,4 +109,10 @@ export default {
 	quickBinding:'account/filter/quickBinding',//换绑银行卡
 	
 	transactionRecord:'account/filter/transactionRecord',//交易记录
+	
+	getUserEarningsDetail:'account/filter/getUserEarningsDetail',//续投列表接口
+	
+	continueOpenOperator:'account/filter/continueOpenOperator',//续投开关
+	
+	uploadFile:'image/filter/uploadFile',//上传图片
 }

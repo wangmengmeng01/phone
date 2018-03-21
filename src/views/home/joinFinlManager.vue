@@ -20,7 +20,7 @@
 				<p class="joinFMdivWord"><span>2</span>身份证反面</p>
 
 				<p class="inputFile">
-					<input type="file" @change="change($event,1)" name="" id="" value="" />
+					<input type="file" @change="change($event,1)" name="fileInput2" id="" value="" />
 					<img v-show="showFalse2" :src="imgUrl2" />
 				</p>
 			</div>
@@ -112,7 +112,7 @@
 </template>
 <script>
 	import { upload } from '@/until'
-	import { searchManagerCheckStatus, saveUserManager } from '@/service'
+	import { searchManagerCheckStatus, saveUserManager ,uploadFile} from '@/service'
 	export default {
 
 		name: 'joinFinlManager',
