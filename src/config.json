@@ -246,13 +246,7 @@
 				}, {
 					"path": "aboutUs",
 					"title": "关于我们",
-					"back": {
-						"background": "#fff"
-					},
-					"filter": false,
-					"foot": {
-						"style": "margin-bottom: 1.1rem"
-					}
+					"filter": true
 				}
 			]
 		}, {

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="head flex"> </div>
-		<div v-for="(i,index) in productList" v-if="i.bidList.length" class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
+		<div v-for="(i,index) in productList" v-if="i.bidList" class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
 			<div v-for="(j,n) in i.bidList" class="productDivDetial ">
 				<div class="pddTitle">
 					<span class="pddTitleBidName">{{j.bidName}}</span>
@@ -37,7 +37,7 @@
 			<div class="productDivTitle" @click="$go('/prod/productList',{productName:i.productName,productNo:i.productNo,productType:i.productType,backTitle:i.productName})">
 				<span>{{i.productName}}</span>
 				<span style="display: none;">我有优惠</span>
-				<span style="color: #8D8D94;">更多 <img src="../../assets/main/home/nextIcon.png" alt="" /></span>
+				<span style="color: #8D8D94;display: none;">更多 <img src="../../assets/main/home/nextIcon.png" alt="" /></span>
 			</div>
 			<div class="productDivTitleTips">
 				<span class="tispImg1">中高风险</span>
@@ -96,21 +96,38 @@
 					productNo: this.$route.query.productNo,
 					pageIndex:1,
 				},
-				productList: '',
+				productList: [],
+				totalPage:0,
+				
 			}
 		},
 		created() {
+			this.init();
+		},
+		mounted() {
+			window.scroll(0, 0);
+			document.body.onscroll = () => {
+				if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+					this.item.pageIndex++;
+					if(this.item.pageIndex > this.totalPage) {
+						return;
+					}
+					this.init();
 
-			//			console.log(this.$route.query);
-
-			getProductBidsList(this.item).then(res => {
-				console.log(res);
-				this.productList = res.productList;
-				//				console.log(this.productList);
-			});
+				}
+			}
 
 		},
-		methods: {}
+		methods: {
+			
+			init(){
+				getProductBidsList(this.item).then(res => {
+					this.productList = this.productList.concat(res.productList);
+					this.totalPage = Math.ceil(res.total / 10);
+				});
+			}
+			
+		}
 	}
 </script>
 

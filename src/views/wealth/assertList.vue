@@ -1,6 +1,6 @@
 <template>
   <div class="wealthMyAssert">
-    <div class="wealthMATop">
+    <div class="wealthMATop" v-show="invesProperty.res.length">
       <div class="wealthMATopB">
         <div class="wealthMATopBL">
           我的资产
@@ -13,7 +13,7 @@
           <div class="wealthMyObjectT">
             <div class="wealthMyObjectTT">{{i.borrowName}} </div>
             <div class="wealthMyObjectTC">{{i.cashStatus=='4'?'已到期':'持有中'}}</div>
-            <div class="wealthMyObjectTB" @click="$go('/prod/productDetail',{bidNo:i.borrowNo,backTitle:i.borrowName})">查看</div>
+            <div class="wealthMyObjectTB" @click="$go('/wealth/productDetail',{bidNo:i.borrowNo,backTitle:'资产详情',cashNo:i.cashNo,bidType:i.borrowType})">查看</div>
           </div>
           <div class="wealthMyObjectC">
             <div class="wealthMyObjectCL">
@@ -41,6 +41,13 @@
         </li>
       </ul>
     </div>
+    
+     <div class="joinListDiv1" v-show="!invesProperty.res.length" style="background-color: #f1f1f9;">
+			<img src="../../assets/main/prod/norecord.png" />
+			<p class="noRecord">暂无记录</p>
+	</div>
+    
+    
   </div>
 </template>
 
@@ -56,19 +63,33 @@
             status: '1',
             pageNum: '1'
           },
-          res:{}
-        }
+          res:[]
+        },
+        totalPage:0,
       }
     },
     created() {
       this.init()
     },
+     mounted() {
+		window.scroll(0, 0);
+		document.body.onscroll = () => {
+			if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+				this.invesProperty.data.pageNum++;
+				if(this.invesProperty.data.pageNum > this.totalPage) {
+					return;
+				}
+				this.init();
+			}
+		}
+
+	},
     methods: {
       init(){
         invesProperty(this.invesProperty.data).then(res=>{
           console.log(res)
-          this.invesProperty.res =res.dataList;
-          console.log(this.invesProperty.res)
+          this.invesProperty.res = this.invesProperty.res.concat(res.dataList);
+          this.totalPage = Math.ceil(res.totalNum / 10);
         });
       }
     },
@@ -155,5 +176,21 @@
           em
             font-size 0.28rem
             color #F41F1F
+.joinListDiv1 {
+	float: left;
+	width: 7.5rem;
+	overflow: hidden;
+}
 
+.joinListDiv1>img {
+	margin: 1.14rem 1.74rem 0.5rem;
+	width: 4.02rem;
+	height: 4.1rem;
+	background-size: 100% 100%;
+} 
+.noRecord {
+		text-align: center;
+		font-size: 0.28rem;
+		color: #8D8D94;
+	}
 </style>

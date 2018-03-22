@@ -29,21 +29,46 @@
 				item: {
 					productNo: this.$route.query.productNo,
 					bidNo: this.$route.query.bidNo,
-					pageIndex: "1"
+					pageIndex: "1",
 				},
-				list: {}, //交易记录
+				list: [], //交易记录
+				totalPage: 0, //总页数
+				
 
 			}
 		},
 		created() {
-			searchBidsInvestList(this.item).then(res => {
-				console.log("交易记录");
-				console.log(res);
-				this.list = res.bidsInvestList;
-
-			});
+			this.init();
 		},
-		methods: {}
+		mounted() {
+			window.scroll(0, 0);
+			document.body.onscroll = () => {
+
+				if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+
+					this.item.pageIndex++;
+					if(this.item.pageIndex > this.totalPage) {
+						return;
+					}
+					this.init();
+
+				}
+			}
+
+		},
+		methods: {
+
+			init() {
+				searchBidsInvestList(this.item).then(res => {
+					console.log("交易记录");
+					console.log(res);
+					this.list = this.list.concat(res.bidsInvestList);
+					this.totalPage = Math.ceil(res.total / 10);
+
+				});
+			}
+
+		}
 	}
 </script>
 

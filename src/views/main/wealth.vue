@@ -34,7 +34,7 @@
       </li>
     </ul>
     <!-- 我的资产 -->
-    <div class="wealthMyAssert">
+    <div class="wealthMyAssert" v-show="invesProperty.res.length">
       <div class="wealthMATop">
         <div class="wealthMATopT">{{invesProperty.res.totalAmount | formatNum}}元</div>
         <div class="wealthMATopB">
@@ -50,7 +50,7 @@
             <div class="wealthMyObjectT">
               <div class="wealthMyObjectTT">{{i.borrowName}} </div>
               <div class="wealthMyObjectTC">{{i.cashStatus=='4'?'已到期':'持有中'}}</div>
-              <div class="wealthMyObjectTB" @click="$go('/prod/productDetail',{bidNo:i.borrowNo,backTitle:i.borrowName})">查看</div>
+              <div class="wealthMyObjectTB" @click="$go('/wealth/productDetail',{bidNo:i.borrowNo,backTitle:'资产详情',cashNo:i.cashNo,bidType:i.borrowType})">查看</div>
             </div>
             <div class="wealthMyObjectC">
               <div class="wealthMyObjectCL">

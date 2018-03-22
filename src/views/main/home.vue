@@ -21,19 +21,19 @@
 
 		<!--关于我们 安全保障 运营数据 理财师加盟-->
 		<div class="indexMessage center">
-			<div class="indexMessageTip">
+			<div class="indexMessageTip"  @click="$go('/home/aboutUs',{id:0,backTitle:'关于我们'})">
 				<p class="aboutUs">
 					<img :src="require('@/assets/main/home/jrwm.png')" alt="">
 				</p>
 				<p>关于我们</p>
 			</div>
-			<div class="indexMessageTip">
+			<div class="indexMessageTip" @click="$go('/home/aboutUs',{id:1,backTitle:'安全保障'})">
 				<p class="safety">
 					<img :src="require('@/assets/main/home/aqbz.png')" alt="">
 				</p>
 				<p>安全保障</p>
 			</div>
-			<div class="indexMessageTip">
+			<div class="indexMessageTip" @click="$go('/home/aboutUs',{id:2,backTitle:'信息披露'})">
 				<p class="operationaData">
 					<img :src="require('@/assets/main/home/yysj.png')" alt="">
 				</p>

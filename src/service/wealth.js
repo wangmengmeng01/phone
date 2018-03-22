@@ -161,3 +161,12 @@ export const continueOpenOperator = async (params)=>{
     params,
   });
 };
+
+// 持有债券详情
+export const investPropertyDetail = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.investPropertyDetail,
+    params,
+  });
+};
