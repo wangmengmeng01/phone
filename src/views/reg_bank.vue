@@ -259,16 +259,17 @@
     height: auto
     background: #fff
     .item
+      & > input
+        flex: 1
       span
-        flex: 1rem
-      span + input
-        flex: 2
+        width: 3rem
       &.bank
-        span
-          /*border: 1px solid red*/
         div
+          position: relative
           flex: 1
-        /*border: 1px solid red*/
+          img
+            right: 0
+            position: absolute
       .arrow
         height: .34rem
       margin-top: .58rem
