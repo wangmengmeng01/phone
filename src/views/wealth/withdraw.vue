@@ -108,7 +108,9 @@
 					transAmount:this.withdrawMoney,
 					cashWay:'GENERAL',
 					retUrl: this.retUrl,
-					receiveNo:''
+					receiveNo:'',
+					fee:this.userCashFeeMoney
+					
 				}).then(res => {
 			         // 调用汇付先清除地址栏的参数
 			              window.history.replaceState(null, null, this.$route.path);

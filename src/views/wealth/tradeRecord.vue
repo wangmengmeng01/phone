@@ -12,7 +12,7 @@
         </div>
       </li>
     </ul>
-    <div class="tradeRecordFooter">上拉加载更多…</div>
+    <!--<div class="tradeRecordFooter">上拉加载更多…</div>-->
     
     <div class="joinListDiv1" v-show="!list.length" style="background-color: #f1f1f9;">
 			<img src="../../assets/main/prod/norecord.png" />
@@ -38,15 +38,32 @@
       }
     },
     created() {
+    	this.init();
+    },
+    mounted() {
+		window.scroll(0, 0);
+		document.body.onscroll = () => {
+			if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+				this.item.pageIndex++;
+				if(this.item.pageIndex > this.totalPage) {
+					return;
+				}
+				this.init();
+			}
+		}
+
+	},
+    methods: {
+		init(){
+			
     		transactionRecord(this.item).then(res => {
-    			
     			console.log(res);
-    			this.list=res.dataList;
+    			this.list = this.list.concat(res.dataList);
+			this.totalPage = Math.ceil(res.total / 10);
 		}); 
     	
-    },
-    methods: {
-
+    
+		}
     },
     watch: {
     }

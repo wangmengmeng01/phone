@@ -126,10 +126,8 @@ export default {
 
 			this.rechargeItem.rechargeAmt = this.rechargeMoney;
 			this.rechargeItem.bankSmsCode = this.rechargeSms;
-			this.rechargeItem.bankSmsSeq = this.smsSeq;
-			if(process.env.NODE_ENV !== 'production') {
-				this.rechargeItem.bankSmsSeq = 'AAAAAAAA';
-			};
+//			this.rechargeItem.bankSmsSeq = this.smsSeq;
+			this.rechargeItem.bankSmsSeq = 'AAAAAAAA';
 			submitUserRecharge(this.rechargeItem).then(res => {
 					let params = {
 						"title": "恭喜，充值成功",

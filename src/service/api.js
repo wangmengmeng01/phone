@@ -115,4 +115,6 @@ export default {
 	continueOpenOperator:'account/filter/continueOpenOperator',//续投开关
 	
 	uploadFile:'image/filter/uploadFile',//上传图片
+	
+	investPropertyDetail:'account/filter/investPropertyDetail',//持有债券详情
 }
