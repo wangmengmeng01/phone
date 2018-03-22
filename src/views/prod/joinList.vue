@@ -3,7 +3,7 @@
 		<div class="joinListDiv" v-show="list.length">
 			<div v-for="(i,index) in list" class="joinCxt" :class="[i>0?'boderTop':'']">
 				<p>
-					<span class="jionName">{{i.userName}}</span>
+					<span class="jionName">{{i.userName|desensitization}}</span>
 					<span class="joinTime">{{i.createTime}}</span>
 				</p>
 				<p>{{i.investAmount|formatNum}}</p>

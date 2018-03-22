@@ -4,7 +4,7 @@
       <img src="../../assets/common/contacts.png">
       <div class="topRight">
         <div class="TRTop"><span>{{cardMes.bankName}}</span><em>快捷支付</em></div>
-        <p>{{cardMes.bankCardNo}}</p>
+        <p>{{cardMes.bankCardNo|hideBankNum}}</p>
       </div>
     </div>
     <div class="rechargeLimit">预计到账时间T+1工作日，节假日顺延</div>

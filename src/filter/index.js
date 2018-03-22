@@ -10,6 +10,17 @@ export function desensitization(val) {
   return str.replace(ruten,'*****');
 }
 
+/**
+ * 银行卡号
+ * @param val 数值
+ * @param start 开始
+ * @param end 结束
+ */
+export function hideBankNum(val) {
+  let str = String(val);
+  let ruten = str.substring(3,12);
+  return str.replace(ruten,'*****');
+}
 
 /**
  * 名字脱敏
