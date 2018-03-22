@@ -5,7 +5,7 @@
         <div class="wealthMATopBL">
           我的资产
         </div>
-        <div class="wealthMATopT">合计{{invesProperty.res.totalAmount | formatNum}}元</div>
+        <div class="wealthMATopT">合计{{totalMoney| formatNum}}元</div>
 
       </div>
       <ul class="wealthMyObject">
@@ -21,11 +21,11 @@
               <em class="bigAmount">{{i.initCashAmount | formatNum
                 }}</em>
             </div>
-            <div class="wealthMyObjectCR">
+            <!--<div class="wealthMyObjectCR">
               <span>昨日收益</span>
               <em>+{{i.yesterdayAmount | formatNum
                 }}</em>
-            </div>
+            </div>-->
           </div>
           <div class="wealthMyObjectB">
             <div class="wealthMyObjectBL">
@@ -66,6 +66,7 @@
           res:[]
         },
         totalPage:0,
+        totalMoney:0,
       }
     },
     created() {
@@ -89,6 +90,7 @@
         invesProperty(this.invesProperty.data).then(res=>{
           console.log(res)
           this.invesProperty.res = this.invesProperty.res.concat(res.dataList);
+          this.totalMoney=res.totalAmount;
           this.totalPage = Math.ceil(res.totalNum / 10);
         });
       }
