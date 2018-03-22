@@ -157,7 +157,7 @@
         // 没有选择的直接返回
         if(!this.couponlist.length){
           this.$toask('您没有选择优惠券!');
-          this.$go(this.coupon.backurl,{bidNo,linkType}, false);
+          this.$go(this.coupon.backurl,{bidNo,linkType}, true);
           return
         }
         // 优惠券数据存入状态管理中
@@ -185,7 +185,7 @@
               this.$go(this.coupon.backurl,params)
             } else {
               if(r.code === '1000'){
-                this.$go('/login',{},false)
+                this.$go('/login','',true)
               }
               this.$toask(r.message)
             }

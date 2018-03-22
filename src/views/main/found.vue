@@ -2,7 +2,7 @@
   <div class="found">
     <!--我的礼物-->
     <div class="item mygift" v-if="item.coupon && item.coupon.couponList.length">
-      <h2 class="subtitle f28 color_font-s">理财师 {{item.master.realName}} 送我的{{item.coupon.couponList.length}}个礼物</h2>
+      <h2 class="subtitle f28 color_font-s">理财师 {{item.master && item.master.realName}} 送我的{{item.coupon.couponList.length}}个礼物</h2>
       <h3 class="title color_font flex">我的礼物
         <!--<div class="flex">-->
           <!--<span class="f28 color_main">更多</span>-->

@@ -43,49 +43,36 @@
       Coupon,
     },
     created() {
-      this.init();
-    },
-    mounted() {
-      document.body.onscroll = () => {
-        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-          if(this.res.length <= 10)return;
-          if(this.pageIndex < Math.ceil(this.nav[this.act].size / 10)) return;
-          this.pageIndex++;
-          this.init();
-        }
-      }
+      this.init(this.nav[0]);
     },
     methods: {
       ...mapMutations([
         'SET_COUPON',
       ]),
-      init(){
-        let couponType = this.nav[this.act].type;
-        showGiveCouponList({couponType}).then(res=>{
+      init(item){
+        showGiveCouponList({couponType: item.type}).then(res=>{
           this.res = res.couponList
-        }).catch(()=>{
+        }).catch(err=>{
           this.res = []
         })
       },
       choose(i,index){
         if(this.act===index)return;
-        window.scroll(0, 0);
         this.act = index;
-        this.pageIndex = 1; // 切换菜单重置pageIndex
         this.init(i);
       },
       checkedCb(data){
         this.couponlist.length
           ? this.couponlist.concat(this.couponlist.filter(t=>{
-            return t.couponNo !== data.couponNo
-          }))
+          return t.couponNo !== data.couponNo
+        }))
           : this.couponlist.push(data)
       },
       submit(){
         this.SET_COUPON({
           data: this.couponlist
         });
-        this.$go(this.coupon.backurl)
+        this.$go(this.coupon.backurl,'',true)
       }
     },
     watch: {
