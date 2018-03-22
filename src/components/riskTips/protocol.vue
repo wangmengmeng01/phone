@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="headerTitle" style="font-size: 0.5rem;text-align: center;">风险提示书</div>
-		<div style="margin-top:1.1rem;padding:0 0.2rem" class="section registerdeal-box bidDeal" v-clock id="bidplancontract">
+		<div style="margin-top:1.1rem;padding:0 0.2rem" class="section registerdeal-box bidDeal" id="bidplancontract">
 			<p class="rsWord">参与网络借贷有风险，在您（贵公司）在做出接受网络借贷信息中介机构服务和出借/借款决策之前，请仔细阅读本风险提示告知书，全面认识网络借贷的风险和特性，认真考虑本服务存在的各项风险因素，并充分考虑自身的风险意识、风险识别能力和风险承受能力，谨慎做出接受服务和出借/借款的决策。在您（贵公司）自愿接受上海中赢金融信息服务有限公司（“网络借贷信息中介机构”）的服务即被认为保证您（贵公司）具有参与网络借贷应当具备的风险意识、风险识别能力和风险承受能力，您（贵公司）自愿承担由此带来的一切后果。</p> <br />
 
 			<p class="rsWord">中赢金融平台是由网络借贷信息中介机构运营的网络借贷信息中介服务平台（网址：www.chinazyjr.com，包括以 APP 以及其他通过电子形式提供的操作环境，以下统称“中赢金融平台”）。根据有关法律法规，网络借贷信息中介机构做出如下风险揭示及声明：

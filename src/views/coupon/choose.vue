@@ -91,7 +91,7 @@
       choose(i,index){
         if(this.act===index)return;
         this.act = index;
-        this.res = {};
+        this.res = [];
         this.pageIndex = 1; // 切换菜单重置pageIndex
         this.init(i);
       },
