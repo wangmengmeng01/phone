@@ -79,13 +79,13 @@
         window.scroll(0,0);
         // 给选择的选项编号，并且存到结果数组中
         this.res.push(['A','B','C','D','E'][index]);
-        
+
          if(this.res.length===this.list.length){
           this.submit();
           return
         }
-        
-        
+
+
         // 判断边界，如果当前的问题列表一个问题，不做操作
         if(this.act===(this.list.length-1)) return;
         // 点击的时候切换当前页面，显示下一个问题
@@ -172,6 +172,8 @@
       .a
         margin-top: .4rem
         li
+          &:last-child
+            border-bottom: none
           &:active
             background: rgba(218, 218, 218, 0.5)
           display: flex

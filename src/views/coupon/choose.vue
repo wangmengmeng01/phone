@@ -4,8 +4,8 @@
       <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}({{i.size}})</li>
     </ul>
     <div class="coupon p4" :class="[!res.length?'none':'']">
-      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" :checked="!act"  @checkedCb="checkedCb(i,index)" ref="coupon"/>
-      <div v-if="!res.length" class="nothing f32 color_font">暂无{{nav[act].name}}券</div>
+      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true"  @checkedCb="checkedCb(i,index)" ref="coupon"/>
+      <div v-if="!res.length" class="nothing f32 color_font">暂无可送优惠券</div>
     </div>
     <button class="btn" @click="submit">选取</button>
   </div>
@@ -34,9 +34,19 @@
           type: '2',
           size: 0
         }],
-        res: {},
+        res: [],
         couponlist: [],
-        pageIndex:1, //分页
+        pageIndex:1,//分页
+      }
+    },
+    mounted() {
+      document.body.onscroll = () => {
+        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+          if(this.res.length <= 10)return;
+          if(this.pageIndex < Math.ceil(this.nav[this.act].size / 10)) return;
+          this.pageIndex++;
+          this.init();
+        }
       }
     },
     components: {
@@ -50,39 +60,28 @@
       ])
     },
     created() {
-    	this.SET_COUPON({
-          data: []
-        });
-      this.init();
-    },
-    mounted() {
-      document.body.onscroll = () => {
-        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-          if(this.res.length <= 10)return;
-          if(this.pageIndex < Math.ceil(this.nav[this.act].size / 10)) return;
-          this.pageIndex++;
-          this.init();
-        }
-      }
+      this.SET_COUPON({
+        data: []
+      });
+      this.init(this.nav[0]);
     },
     methods: {
       ...mapMutations([
         'SET_COUPON',
       ]),
-      init(){
-      	const {productNo, investAmount} = this.coupon.params;
-      	let pageIndex=this.pageIndex;
-      	let useType = this.nav[this.act].type;
+      init(item){
+        const {productNo, investAmount} = this.coupon.params;
+        let pageIndex=this.pageIndex;
         searchCouponList({
-        	productNo,
-        	investAmount,
-        	useType,
-        	pageIndex
+          productNo,
+          investAmount,
+          useType:item.type,
+          pageIndex
         }).then(res=>{
-          this.res = this.res.concat(r.couponList);
+          this.res = this.res.concat(res.couponList);
           this.nav[0].size=res.availableNum;
           this.nav[1].size=res.disabledNum;
-        }).catch(err=>{
+        }).catch(()=>{
           this.res = []
         })
       },
@@ -91,8 +90,8 @@
        */
       choose(i,index){
         if(this.act===index)return;
-        window.scroll(0, 0);
         this.act = index;
+        this.res = {};
         this.pageIndex = 1; // 切换菜单重置pageIndex
         this.init(i);
       },
@@ -156,8 +155,8 @@
         const linkType = this.$route.query.linkType;
         // 没有选择的直接返回
         if(!this.couponlist.length){
-          this.$toask('您没有选择优惠券!');
-          this.$go(this.coupon.backurl,{bidNo,linkType}, true);
+          this.$toask('您没有选择优惠券');
+          this.$go(this.coupon.backurl,{bidNo,linkType});
           return
         }
         // 优惠券数据存入状态管理中
@@ -166,13 +165,13 @@
         });
         // 选取优惠接口编辑
         const couponList = this.couponlist.map(t=>{
-            let {couponNo, type, profitRate, isSameOverlap, isDifferentOverlap, receiveNo} = t;
-           return {couponNo, couponRate:profitRate, isSameOverlap, isDifferentOverlap, receiveNo, couponType:type};
+          let {couponNo, type, profitRate, isSameOverlap, isDifferentOverlap, receiveNo} = t;
+          return {couponNo, couponRate:profitRate, isSameOverlap, isDifferentOverlap, receiveNo, couponType:type};
         });
         // 不知道为什么用封装的不行，传参有问题，只能拿出来单独传了，参数还需要url编码下
         axios.get(`${config.url}${Api.getCouponBenefit}?client=${this.client}&userToken=${this.user.userToken}&couponList=${encodeURIComponent(JSON.stringify(couponList))}`)
           .then( r=> {
-              r = r.data;
+            r = r.data;
             if (r.code === '100') {
               let res = r.result;
               // 参数编辑
@@ -182,10 +181,10 @@
                 ...res
               };
               // 有结果传到backurl中
-              this.$go(this.coupon.backurl,params)
+              this.$go(this.coupon.backurl,params,true)
             } else {
               if(r.code === '1000'){
-                this.$go('/login','',true)
+                this.$go('/login')
               }
               this.$toask(r.message)
             }
