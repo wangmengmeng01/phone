@@ -1,8 +1,10 @@
 import router from "./index";
 import store from "@/store/";
+import native from '@/native'
 
 // 导航守卫
 router.beforeEach((to, from, next) => {
+  native.loading('show'); // 根据loading属性显示loading框
   // 如果url上面有参数，判断是不是header的属性，是的话存到store中
   const query = Object.keys(to.query);
   if (query.length) {
@@ -28,14 +30,17 @@ router.beforeEach((to, from, next) => {
   // 设置title
   document.title = to.meta.title || "理财师";
   if (!!store.state.user.userToken) {
+    native.loading('hide');  // 隐藏loading
     //如果有就直接到首页咯
     next();
   } else {
     if (to.meta.filter) {
+      native.loading('hide');  // 隐藏loading
       // 过滤不需要登录的页面
       next();
     } else {
       //不然就跳转到登录；
+      native.loading('hide');  // 隐藏loading
       next("/login");
 //    next();
     }

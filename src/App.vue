@@ -24,6 +24,10 @@
       back,
       footTip
     },
+//    beforeRouteEnter: (to, from, next) => {
+//        log(to,from,next)
+      // ...
+//    },
     created(){
 //      this.$alert('您确认要退出登录吗？').then(r=>{
 //        log(r)
