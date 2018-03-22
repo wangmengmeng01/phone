@@ -36,7 +36,7 @@
         }],
         res: {},
         couponlist: [],
-        pageIndex:1,//分页
+        pageIndex:1, //分页
       }
     },
     components: {
@@ -53,22 +53,33 @@
     	this.SET_COUPON({
           data: []
         });
-      this.init(this.nav[0]);
+      this.init();
+    },
+    mounted() {
+      document.body.onscroll = () => {
+        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+          if(this.res.length <= 10)return;
+          if(this.pageIndex < Math.ceil(this.nav[this.act].size / 10)) return;
+          this.pageIndex++;
+          this.init();
+        }
+      }
     },
     methods: {
       ...mapMutations([
         'SET_COUPON',
       ]),
-      init(item){
+      init(){
       	const {productNo, investAmount} = this.coupon.params;
       	let pageIndex=this.pageIndex;
+      	let useType = this.nav[this.act].type;
         searchCouponList({
         	productNo,
         	investAmount,
-        	useType:item.type,
+        	useType,
         	pageIndex
         }).then(res=>{
-          this.res = res.couponList;
+          this.res = this.res.concat(r.couponList);
           this.nav[0].size=res.availableNum;
           this.nav[1].size=res.disabledNum;
         }).catch(err=>{
@@ -80,7 +91,9 @@
        */
       choose(i,index){
         if(this.act===index)return;
+        window.scroll(0, 0);
         this.act = index;
+        this.pageIndex = 1; // 切换菜单重置pageIndex
         this.init(i);
       },
       /**

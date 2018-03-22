@@ -41,22 +41,34 @@
       Coupon,
     },
     created() {
-      this.init(this.nav[0]);
+      this.init();
+    },
+    mounted() {
+      document.body.onscroll = () => {
+        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+          if(this.res.length <= 10)return;
+          if(this.pageIndex < Math.ceil(this.nav[this.act].size / 10)) return;
+          this.pageIndex++;
+          this.init();
+        }
+      }
     },
     methods: {
-      init(params){
-        searchUserCouponInfo(params).then(res=>{
-          this.res = res.couponList
+      init(){
+        searchUserCouponInfo(this.nav[this.act]).then(res=>{
+          this.res = res.couponList;
           this.nav[0].size=res.notUsedCount;
           this.nav[1].size=res.usedCount;
           this.nav[2].size=res.expireNotUsedCount;
-        }).catch(err=>{
+        }).catch(()=>{
           this.res = []
         })
       },
       choose(i,index){
         if(this.act===index)return;
+        window.scroll(0, 0);
         this.act = index;
+        this.pageIndex = 1; // 切换菜单重置pageIndex
         this.init(i);
       },
     },
