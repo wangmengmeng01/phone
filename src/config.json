@@ -449,7 +449,11 @@
 					"path": "tranderPassword",
 					"title": "修改交易密码说明",
 					"foot": false
-				}
+				}, {
+          "path": "claims",
+          "title": "现持债权",
+          "foot": false
+        }
 			]
 		}, {
 			"path": "*",
