@@ -12,8 +12,10 @@
     </div>
     <div class="bank item flex phone border-b" @click="linkto">
       <span class="f36 color_font">开户银行</span>
-      <input type="text" placeholder="请选择开户银行" class="f32 color_border color_font" v-model.trim="bankName" readonly>
-      <img src="../assets/common/arrow-right.png" alt="" class="arrow">
+      <div class="flex choose_bank">
+        <input type="text" placeholder="请选择开户银行" class="f32 color_border color_font" v-model.trim="bankName" readonly>
+        <img src="../assets/common/arrow-right.png" alt="" class="arrow">
+      </div>
     </div>
     <div class="bankid item flex phone border-b">
       <span class="f36 color_font">银行卡号</span>
@@ -246,7 +248,6 @@
               }
             }
           })
-
         })
       },
     }
@@ -259,9 +260,15 @@
     background: #fff
     .item
       span
-        flex: 1
-      input
-        flex: 1.5
+        flex: 1rem
+      span + input
+        flex: 2
+      &.bank
+        span
+          /*border: 1px solid red*/
+        div
+          flex: 1
+        /*border: 1px solid red*/
       .arrow
         height: .34rem
       margin-top: .58rem

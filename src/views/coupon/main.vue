@@ -5,7 +5,7 @@
     </ul>
     <div class="coupon p4" :class="[!res.length?'none':'']">
       <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list"/>
-      <div v-if="!res.length" class="nothing f32 color_font">暂无可送优惠券</div>
+      <div v-if="!res.length" class="nothing f32 color_font">暂无{{nav[act].name}}券</div>
     </div>
   </div>
 </template>
@@ -43,16 +43,16 @@
     created() {
       this.init();
     },
-    mounted() {
-      document.body.onscroll = () => {
-        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-          if(this.res.length <= 10)return;
-          if(this.pageIndex < Math.ceil(this.nav[this.act].size / 10)) return;
-          this.pageIndex++;
-          this.init();
-        }
-      }
-    },
+//    mounted() {
+//      document.body.onscroll = () => {
+//        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+//          if(this.res.length <= 10)return;
+//          if(this.pageIndex < Math.ceil(this.nav[this.act].size / 10)) return;
+//          this.pageIndex++;
+//          this.init();
+//        }
+//      }
+//    },
     methods: {
       init(){
         searchUserCouponInfo(this.nav[this.act]).then(res=>{

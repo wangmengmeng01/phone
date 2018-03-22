@@ -225,7 +225,7 @@
 				this.$go('/coupon/choose', {
 					bidNo,
 					linkType: 0,
-				},false)
+				})
 			},
 			submit() {
 				let amountWait = this.detail.amountWait; //标的剩余金额
@@ -288,7 +288,7 @@
 					this.SET_SUCC_PAGE(params);
 					this.$go('/static/succ');
 				});
-				
+
 
 			},
 			//全投

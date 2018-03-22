@@ -21,7 +21,7 @@ export const login = async (params)=>{
     method: 'post',
     api: api.login,
     options: {
-      loading: false
+      loading: params.loading
     },
     params,
   });

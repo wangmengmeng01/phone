@@ -173,6 +173,7 @@
           const {mobile, password} = this.item;
         // 注册之后调用登录接口
           login({
+            loading: true,
             mobile,
             password
           }).then(res=>{

@@ -2,12 +2,10 @@
   <div class="register p4">
     <h2 class="text color-font">快速注册</h2>
     <p class="text2 f28 color_font-s">录入手机号码将作为您的登录账号</p>
-    <div class="item flex phone border-b">
+    <div class="item phone border-b">
       <span class="name f44 color_font">手机号</span>
-      <div class="con flex">
-        <input type="tel" placeholder="请输入手机号" class="f44" v-model.trim="mobile" maxlength="11">
-        <img src="../assets/common/del.png" alt="" class="del" @click="mobile=''">
-      </div>
+      <input type="tel" placeholder="请输入手机号" class="f44" v-model.trim="mobile" maxlength="11">
+      <img src="../assets/common/del.png" alt="" class="del" @click="mobile=''">
     </div>
     <button class="btn" @click="submit">下一步</button>
     <p class="gologin f32 color_main" @click="$go('login',{mobile})">已有账号，去登录</p>
@@ -44,17 +42,26 @@
     height: 100%
     background: #fff
     .item
-      .con
-        width: 5rem
-      span
-        flex: 1
-      .del
+      overflow: hidden
+      .name
+        line-height: .4rem
         height: .4rem
+        display: inline-block
+        width: 2rem
+        float: left
+      .del
+        line-height: .4rem
+        height: .4rem
+        float: right
         opacity: 0
       input
+        line-height: .4rem
+        height: .4rem
+        width: 3rem
+        display: inline-block
+        float: left
         &:focus ~ .del
           opacity: 1
-        flex: 1.5
       margin-top: 1.4rem
       padding-bottom: .3rem
     .text
