@@ -160,15 +160,15 @@
 											backTitle: '确认购买'
 										})
 									} else {
-
+										this.$go('/wealth/riskTest');
 									}
 
 								} else {
-
+									this.$go('/wealth/autoInvest');
 								}
 
 							} else {
-
+								this.$go('/wealth/autoInvest');
 							}
 
 						}

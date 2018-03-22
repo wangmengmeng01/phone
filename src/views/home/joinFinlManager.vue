@@ -71,7 +71,7 @@
 			</div>
 		</div>
 
-		<div class="submission" v-show="!joinBol&&joinBol3">
+		<div class="submission" v-show="false">
 			<p class="submissionTitle1"> <img src="../../assets/main/home/earth@2x.png" /><span>尝试以下功能，开启精彩理财师生涯</span></p>
 
 			<div class="submissionDIV">
@@ -104,7 +104,7 @@
 		<div class="submission" style="height: 5.36rem;" v-show="!joinBol&&joinBol4">
 			<p class="submissionFalseP1">拒绝原因</p>
 			<p class="submissionFalseP2">注册信息与身份证照片不一致</p>
-			<p class="submissionFalseP3">重新提交申请</p>
+			<p class="submissionFalseP3" @click="joinAgain">重新提交申请</p>
 			<p class="submissionFalseP4">您可以根据拒绝原因调整后重新发起申请</p>
 		</div>
 
@@ -119,7 +119,7 @@
 
 		data() {
 			return {
-				checked: false,
+				checked: true,
 				imgUrl: '',
 				imgUrl2: '',
 				showFalse: false,
@@ -137,7 +137,6 @@
 					flag: "",
 				},
 				jionMes: {}
-
 			}
 		},
 		created() {
@@ -158,11 +157,10 @@
 						this.joinBol5 = !this.joinBol5;
 					}
 				} else {
-
 					this.$go('/login');
 				}
 
-			})
+			});
 
 			//			.catch(()=>{
 			//				this.$toask("dddd")
@@ -212,7 +210,25 @@
 					}
 
 				}
-			}
+			},
+			joinAgain(){
+				this.checked=true;
+				this.imgUrl='';
+				this.imgUrl2='';
+				this.showFalse=false;
+				this.showFalse2=false;
+				this.checkBol=false;
+				this.item={};
+				this.joinBol=true;
+				this.joinBol2=false;
+				this.joinBol3=false;
+				this.joinBol4=false;
+				this.joinBol5=false;
+				this.itemJoin.cardNumberFrontFileStream='';
+				this.itemJoin.cardNumberBackFileStream='';
+				this.itemJoin.flag='';
+				this.jionMes='';
+			},
 
 		}
 	}
@@ -505,13 +521,13 @@
 	
 	.joinFMp2>span:nth-child(2) {
 		float: left;
-		width: 1.28rem;
-		margin: 0 1.16rem 0 0.92rem;
+		width: 1.40rem;
+		margin: 0 0.98rem 0 0.84rem;
 	}
 	
 	.joinFMp2>span:nth-child(3) {
 		float: left;
-		width: 1.28rem;
+		width: 1.40rem;
 	}
 	
 	.joinFMdiv {
