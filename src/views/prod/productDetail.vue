@@ -12,7 +12,7 @@
 			</div>
 			<div class="pdtProgress">
 				<p class="pdtGrayLine"></p>
-				<p class="pdtLine" :style="{width:detail.amountScale*6.7+'rem'}"></p>
+				<p class="pdtLine" :style="{width:detail.amountScale*6.7/100+'rem'}"></p>
 				<p class="pdtProgressMes">剩余可投<i>{{detail.amountWait| formatNum}}元</i></p>
 			</div>
 			<p class="pdtBugMes" @click="$go('/prod/joinList',{productNo:detail.productNo,bidNo:detail.bidNo})"><img class="pdtBugMesImg1" src="../../assets/main/prod/people.png" /><span> 已有{{detail.countPeople}}人购买 </span> <img class="pdtBugMesImg2" src="../../assets/main/prod/lnextIcon.png" /></p>
@@ -43,7 +43,7 @@
 					<span>{{detail.interestEndDate}}</span>
 				</p>
 			</div>
-			<span class="pdcRule pdcRule1"> <img src="../../assets/main/prod/Triangle@2x.png"/>{{detail.profitPlan|profitPlan}}</span>
+			<span class="pdcRule pdcRule1"> <img src="../../assets/main/prod/Triangle@2x.png"/>{{profitPlanArr[detail.profitPlan>4?'5':detail.profitPlan]}}</span>
 			<span class="pdcRule"><img src="../../assets/main/prod/Triangle@2x.png"/>购买后不可撤销</span>
 			<span class="pdcRule"><img src="../../assets/main/prod/Triangle@2x.png"/>起息日后30天内不可转让</span>
 			<span class="pdcRule pdcRule2"><img src="../../assets/main/prod/Triangle@2x.png"/>到期后三个交易日内，资金入账到可用余额</span>
@@ -121,6 +121,7 @@
 				},
 				itemStatus: {},
 				detail: {},
+				profitPlanArr:['','等额本息','等额本金','按期付息，到期还本','一次性还款','其他'],
 			}
 		},
 		created() {

@@ -4,22 +4,22 @@
       <img src="../../assets/common/contacts.png">
       <div class="topRight">
         <div class="TRTop"><span>{{cardMes.bankName}}</span><em>快捷支付</em></div>
-        <p>{{cardMes.bankCardNo}}</p>
+        <p>{{cardMes.bankCardNo|hideBankNum}}</p>
       </div>
     </div>
     <div class="bankInfo">
       <div class="border"></div>
       <div class="bankITop">
         <div>持卡人姓名</div>
-        <div>{{cardMes.realName}}</div>
+        <div>{{cardMes.realName|nameDesensitization}}</div>
       </div>
       <div class="bankIBottom">
         <div>手机号</div>
-        <div>{{cardMes.mobile}}</div>
+        <div>{{cardMes.mobile|desensitization}}</div>
       </div>
     </div>
     <div class="bottom">
-      <div class="bottomTop">银行预留手机号<span>{{cardMes.mobile}}</span></div>
+      <div class="bottomTop">银行预留手机号<span>{{cardMes.mobile|desensitization}}</span></div>
       <div class="bottomB">
         <input type="tel"  maxlength="6" oninput="if( ! /^-?\d+\.?\d{0,2}$/.test(this.value)){ var s = this.value;this.value=s.substring(0,s.length-1);}" v-model="rebindSms" placeholder="请输入短信验证码">
         <div class="getCode"   @click="sendMess"  :class="click_code?'disableBtn':''">{{codeText}}</div>

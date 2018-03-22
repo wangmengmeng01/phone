@@ -4,7 +4,7 @@
       <img src="../../assets/common/contacts.png">
       <div class="topRight">
         <div class="TRTop"><span>{{cardMes.bankName}}</span><em>快捷支付</em></div>
-        <p>{{cardMes.bankCardNo}}</p>
+        <p>{{cardMes.bankCardNo|hideBankNum}}</p>
       </div>
     </div>
     <div class="rechargeLimit">单笔限额{{cardMes.singleTransQuota}}元，每日限额{{cardMes.cardDailyTransQuota}}元</div>
@@ -14,7 +14,7 @@
       <div class="centerB"><span>账户余额</span><em>{{cardMes.availableAmount|tofixed2}}元</em></div>
     </div>
     <div class="bottom">
-      <div class="bottomTop">银行预留手机号<span>{{cardMes.mobile}}</span></div>
+      <div class="bottomTop">银行预留手机号<span>{{cardMes.mobile|desensitization}}</span></div>
       <div class="bottomB">
         <input type="tel"   oninput="if( ! /^-?\d+\.?\d{0,2}$/.test(this.value)){ var s = this.value;this.value=s.substring(0,s.length-1);}" maxlength="6"  v-model="rechargeSms" placeholder="请输入短信验证码">
         <div class="getCode"  @click="sendMess"  :class="click_code?'disableBtn':''">{{codeText}}</div>

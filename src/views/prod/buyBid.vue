@@ -73,7 +73,7 @@
 					<img v-if="agreCheckBol" src="../../assets/common/check_succ.png" />
 					<img v-else src="../../assets/common/check_none.png" />
 				</p>
-				<p class="agreement">《投资出借服务协议》《自动投标授权合同》</p>
+				<p class="agreement">  <span @click="loanAgreement">《投资出借服务协议》</span> <span @click="riskTips">《风险提示书》</span> </p>
 			</div>
 
 		</div>
@@ -92,6 +92,8 @@
 </template>
 
 <script>
+	 import loanAgreement from '@/components/loanAgreement'
+	 import riskTips from '@/components/riskTips'
 	import { doConfirmBuyPage, accountAcmountInfo, getExpectedRevenue, searchCouponList, borrowInvest } from '@/service'
 	import { mapGetters, mapMutations } from 'vuex'
 	export default {
@@ -209,7 +211,12 @@
 				'SET_COUPON',
 				'SET_SUCC_PAGE',
 			]),
-
+			  loanAgreement(){
+			        this.$alert({type: 'protocol', content: loanAgreement})
+			      },
+			       riskTips(){
+			        this.$alert({type: 'protocol', content: riskTips})
+			      },
 			choose() {
 				const bidNo = this.item.bidNo;
 				this.SET_COUPON({
