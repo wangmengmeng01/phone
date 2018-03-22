@@ -116,7 +116,7 @@
 			              window.history.replaceState(null, null, this.$route.path);
 			              axios({
 			                method: 'post',
-			                url: location.origin+ new URL(res.serviceUrl).pathname,,
+			                url: location.origin+ new URL(res.serviceUrl).pathname,
 			                data: res.inMap,
 			                transformRequest: [function (data) {
 			                  let ret = '';
