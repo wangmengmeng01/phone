@@ -70,43 +70,43 @@
       			}
       		});
       		//君子签回来
-//    		if(this.$route.query.isJZQ){
-//    			
-//    			querySigningStatus({busiType:'4'}).then(res => {
-//	       			
-//	       			console.log(res);
-//	       			if(res.status=="1"||res.status=="3"){
-//	       				this.autoTenderPlan();
-//	       			}else{
-//	       			}
-//	       		})
-//    			
-//			};
+      		if(this.$route.query.isJZQ){
+      			
+      			querySigningStatus({busiType:'4'}).then(res => {
+	       			
+	       			console.log(res);
+	       			if(res.status=="1"||res.status=="3"){
+	       				this.autoTenderPlan();
+	       			}else{
+	       			}
+	       		})
+      			
+			};
 			//复投回来
-//			if(this.$route.query.isFT){
-//				autoInvestQuary().then(res => {
-//		       		if(res.code == "100") {
-//		       			this.auroBol = false;
-//		       			 this.RESET('succ_page');
-//						 this.SET_SUCC_PAGE({
-//		             		"title": "已授权存管方开启自动投标",
-//							'sub_title': "您现在可以进行计划标的投资了",
-//							"btn_text": "立即投资",
-//							"backurl": "/product",
-//							"sub_btn_text": "暂不",
-//							"sub_backurl": "/"
-//		            			});
-//		          		  this.$go('/static/succ','',true);
-//		       			
-//		       		} else if(res.code == "1210" || res.code == "1000") {
-//		       			this.$go('/login');
-//		       		} else {
-//		       			this.$toask(res.message);
-//		       		}
-//	
-//		       	});
-//				
-//			}
+			if(this.$route.query.isFT){
+				autoInvestQuary().then(res => {
+		       		if(res.code == "100") {
+		       			this.auroBol = false;
+		       			 this.RESET('succ_page');
+						 this.SET_SUCC_PAGE({
+		             		"title": "已授权存管方开启自动投标",
+							'sub_title': "您现在可以进行计划标的投资了",
+							"btn_text": "立即投资",
+							"backurl": "/product",
+							"sub_btn_text": "暂不",
+							"sub_backurl": "/"
+		            			});
+		          		  this.$go('/static/succ','',true);
+		       			
+		       		} else if(res.code == "1210" || res.code == "1000") {
+		       			this.$go('/login');
+		       		} else {
+		       			this.$toask(res.message);
+		       		}
+	
+		       	});
+				
+			}
 			
 
       	},
@@ -137,7 +137,7 @@
 			              window.history.replaceState(null, null, this.$route.path);
 			              axios({
 			                method: 'post',
-			                url:res.serviceUrl
+			                url: res.serviceUrl,
 			                data: res.inMap,
 			                transformRequest: [function (data) {
 			                  let ret = '';
