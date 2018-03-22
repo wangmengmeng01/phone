@@ -82,7 +82,7 @@
               "sub_btn_text": "暂无",
               "sub_backurl": "/"
             });
-            this.$go('/static/fail','',false);
+            this.$go('/static/fail');
           }
 
           // 已开户
@@ -94,7 +94,7 @@
               "sub_btn_text": "暂无",
               "sub_backurl": "/"
             });
-            this.$go('/static/succ','',false);
+            this.$go('/static/succ');
           }
 
           // 待激活
@@ -136,7 +136,7 @@
        */
       linkto(){
         // 把当前的数据传过去，防止写完了点选择银行返回重新填写
-        this.$go('/bank/choose',{backurl:this.$route.path,data: encodeURIComponent(JSON.stringify(this.item))}, false)
+        this.$go('/bank/choose',{backurl:this.$route.path,data: encodeURIComponent(JSON.stringify(this.item))})
       },
       /**
        * 发送短信

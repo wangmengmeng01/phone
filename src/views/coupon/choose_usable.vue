@@ -72,7 +72,7 @@
         this.SET_COUPON({
           data: this.couponlist
         });
-        this.$go(this.coupon.backurl)
+        this.$go(this.coupon.backurl,'',true)
       }
     },
     watch: {

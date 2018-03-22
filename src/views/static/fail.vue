@@ -52,12 +52,12 @@
       backurl(){
         const backurl = this.succ_page.backurl;
         this.RESET('succ_page');
-        this.$go(backurl,'',false);
+        this.$go(backurl,'',true);
       },
       sub_backurl(){
         const sub_backurl = this.succ_page.sub_backurl;
         this.RESET('succ_page');
-        this.$go(sub_backurl,'',false);
+        this.$go(sub_backurl,'',true);
       }
     },
   }
