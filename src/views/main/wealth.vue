@@ -129,141 +129,186 @@
   import {
     wealthIndex,
     invesProperty,
-    getUserStatus
+    getUserStatus,
+    userActivate
   } from '@/service'
-  export default {
-    name: 'wealth',
-    data() {
-  
-      return {
-        totalAmount: 0,
-        menu: [{
-            icon: 'wtradeP',
-            name: '改交易密码',
-            url: '/wealth/tranderPassword'
-          },
-          {
-            icon: 'wEarn',
-            name: '收益明细',
-            url: ''
-          },
-          {
-            icon: "wcontinue",
-            name: '我的续投',
-            url: 'wealth/continueInvest'
-          },
-          {
-            icon: 'wchangeBank',
-            name: '换绑银行卡',
-            url: 'wealth/changeBank'
-          },
-          {
-            icon: 'wtradeRecord',
-            name: '交易记录',
-            url: 'wealth/tradeRecord'
-          },
-          {
-            icon: 'wmyConpun',
-            name: '我的优惠',
-            url: '/coupon'
-          },
-          {
-            icon: 'wautoin',
-            name: '自动投标',
-            url: 'wealth/autoInvest'
-          },
-          {
-            icon: 'wrisktest',
-            name: '风险测评',
-            url: 'wealth/riskTest'
-          },
-          {
-            icon: 'wmyPoint',
-            name: '我的积分',
-            url: ''
-          }
-        ],
-        home: "",
-        invesProperty: {
-          data: {
-            bidType: '2',
-            status: '2',
-            pageNum: '1'
-          },
-          res: {}
-        },
-        getUserS: {
-          "openStatus": true
-        }
-  
-      }
-    },
-    created() {
-      this.init()
-    },
-    methods: {
-      linkto(url) {
-        if (url == "wealth/changeBank") {
-          if (this.getUserS.openStatus == true) {
-            this.$go('/wealth/changeBank')
-          } else {
-            this.$go('/reg_bank')
-          }
-        } else if (url == "wealth/autoInvest") {
-          if (this.getUserS.openStatus == true) {
-            this.$go('/wealth/autoInvest')
-          } else {
-            this.$go('/reg_bank')
-          }
-        } else {
-          this.$go(url)
-  
-        }
-  
-      },
-      tips() {
-        this.$toask("总金额=可用金额+我的合计资产额");
-      },
-      init() {
-        wealthIndex().then(res => {
-          this.home = res;
-        });
-        getUserStatus().then(res => {
-          const info = res.result;
-          console.log(info);
-          switch (parseInt(info.openAccountStatus)) {
-            case 1:
-              this.getUserS.openStatus = false;
-              break;
-  
-          }
-  
-        });
-        invesProperty(this.invesProperty.data).then(res => {
-          console.log(res)
-          this.invesProperty.res = res.dataList.slice(0, 2);
-          this.totalAmount = res.totalAmount;
-          console.log(this.invesProperty.res)
-        });
-      },
-      gowithdraw() {
-        if (this.getUserS.openStatus == true) {
-          this.$go('/wealth/withdraw')
-        } else {
-          this.$go('/reg_bank')
-        }
-      },
-      goRecharge() {
-        if (this.getUserS.openStatus == true) {
-          this.$go('/wealth/recharge')
-        } else {
-          this.$go('/reg_bank')
-        }
-      },
-    },
-    watch: {}
-  }
-</script>
+   import axios from 'axios'
+   export default {
+	name: 'wealth',
+	data() {
+
+		return {
+			totalAmount: 0,
+			menu: [{
+					icon: 'wtradeP',
+					name: '改交易密码',
+					url: '/wealth/tranderPassword'
+				},
+				{
+					icon: 'wEarn',
+					name: '收益明细',
+					url: ''
+				},
+				{
+					icon: "wcontinue",
+					name: '我的续投',
+					url: 'wealth/continueInvest'
+				},
+				{
+					icon: 'wchangeBank',
+					name: '换绑银行卡',
+					url: 'wealth/changeBank'
+				},
+				{
+					icon: 'wtradeRecord',
+					name: '交易记录',
+					url: 'wealth/tradeRecord'
+				},
+				{
+					icon: 'wmyConpun',
+					name: '我的优惠',
+					url: '/coupon'
+				},
+				{
+					icon: 'wautoin',
+					name: '自动投标',
+					url: 'wealth/autoInvest'
+				},
+				{
+					icon: 'wrisktest',
+					name: '风险测评',
+					url: 'wealth/riskTest'
+				},
+				{
+					icon: 'wmyPoint',
+					name: '我的积分',
+					url: ''
+				}
+			],
+			home: "",
+			invesProperty: {
+				data: {
+					bidType: '2',
+					status: '2',
+					pageNum: '1'
+				},
+				res: {}
+			},
+			getUserS: {
+				"openStatus": true
+			},
+			statusInfo: '',
+
+		}
+	},
+	created() {
+		this.init()
+	},
+	methods: {
+		linkto(url) {
+			if(url == "wealth/changeBank") {
+				if(this.getUserS.openStatus == true) {
+					this.TouserActivate('/wealth/changeBank');
+				} else {
+					this.$go('/reg_bank')
+				}
+			} else if(url == "wealth/autoInvest") {
+				if(this.getUserS.openStatus == true) {
+					this.TouserActivate('/wealth/autoInvest');
+				} else {
+					this.$go('/reg_bank')
+				}
+			} else {
+				this.$go(url)
+
+			}
+
+		},
+		tips() {
+			this.$toask("总金额=可用金额+我的合计资产额");
+		},
+		init() {
+			wealthIndex().then(res => {
+				this.home = res;
+			});
+			getUserStatus().then(res => {
+				const info = res.result;
+				this.statusInfo = res.result;
+				console.log(info);
+				switch(parseInt(info.openAccountStatus)) {
+					case 1:
+						this.getUserS.openStatus = false;
+						break;
+
+				}
+
+			});
+			invesProperty(this.invesProperty.data).then(res => {
+				console.log(res)
+				this.invesProperty.res = res.dataList.slice(0, 2);
+				this.totalAmount = res.totalAmount;
+				console.log(this.invesProperty.res)
+			});
+		},
+		gowithdraw() {
+			if(this.getUserS.openStatus == true) {
+				this.TouserActivate('/wealth/withdraw');
+			} else {
+				this.$go('/reg_bank')
+			}
+		},
+
+		TouserActivate(val) {
+
+			let info = this.statusInfo;
+			if(info.openAccountStatus == "1") {
+				//未开户
+				this.$go('/reg_bank');
+			} else if(info.openAccountStatus == "4") {
+				//激活
+
+				userActivate({
+					retUrl: location.origin + location.pathname
+				}).then(res => {
+					axios({
+						method: 'post',
+						url: location.origin + new URL(res.serviceUrl).pathname,
+						data: res.inMap,
+						transformRequest: [function(data) {
+							let ret = '';
+							for(let it in data) {
+								ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+							}
+							return ret.slice(0, ret.length - 1)
+						}],
+					}).then(r => {
+						if(r.status === 200) {
+							if(r.data) {
+								document.body.innerHTML = r.data;
+								setTimeout(() => {
+									document.form.submit()
+								}, 0)
+							}
+						}
+					})
+				})
+
+			} else {
+				this.$go(val);
+			}
+
+		},
+
+		goRecharge() {
+			if(this.getUserS.openStatus == true) {
+				this.TouserActivate('/wealth/recharge');
+			} else {
+				this.$go('/reg_bank')
+			}
+		},
+	},
+	watch: {}
+}</script>
 
 <style lang="stylus" scoped>
   i,em{font-style: normal;}

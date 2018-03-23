@@ -39,7 +39,7 @@
 				</p>
 				<p>信息披露</p>
 			</div>
-			<div class="indexMessageTip" @click="$go('/home/joinFinlManager')">
+			<div class="indexMessageTip" @click="linkPage">
 				<p class="jionFinancial">
 					<img :src="require('@/assets/main/home/jm.png')" alt="">
 				</p>
@@ -194,7 +194,7 @@
 
 <script>
 	import '@/lib/swiper/swiper.css'
-	import { noviceExclusive, recommendProduct, sellsProduct } from '@/service'
+	import { noviceExclusive, recommendProduct, sellsProduct,getUserStatus } from '@/service'
 	export default {
 		name: "home",
 		data() {
@@ -203,27 +203,33 @@
 				newList: {}, //新手
 				recomPro: {}, //推荐
 				hotPro: {}, //热销
+				openStatus:true,
 			};
 		},
 		components: {},
 		created() {
 			noviceExclusive(this.itemNew).then(res => {
-				console.log(res);
 				this.newList = res.productList;
 			});
 
 			recommendProduct(this.itemNew).then(res => {
-				console.log(res);
 				this.recomPro = res.productList;
 			});
 
 			sellsProduct(this.itemNew).then(res => {
-				console.log(res);
 				this.hotPro = res.productList;
 			});
-
+			getUserStatus().then(res => {
+				const info = res.result;
+				switch(parseInt(info.openAccountStatus)) {
+					case 1:
+						this.openStatus = false;
+						break;
+				}
+			});
 		},
 		mounted() {
+			
 			let Swiper = require("@/lib/swiper/swiper").Swiper;
 			/*banner*/
 			var swiper = new Swiper(".swiper-container1", {
@@ -262,7 +268,16 @@
 			});
 
 		},
-		methods: {},
+		methods: {
+			linkPage(){
+				if(this.openStatus){
+					this.$go('/home/joinFinlManager');
+				}else{
+					this.$go('/reg_bank');
+				}
+			}
+			
+		},
 		watch: {}
 	};
 </script>

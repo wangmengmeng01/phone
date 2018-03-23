@@ -66,7 +66,7 @@
 				<p>当前状态</p>
 			</div>
 			<div class="subDivright1">
-				<p>{{jionMes.createdTime}}</p>
+				<p>{{jionMes.updatedTime}}</p>
 				<p>审核时间</p>
 			</div>
 		</div>
@@ -96,7 +96,7 @@
 				<p>当前状态</p>
 			</div>
 			<div class="subDivright1">
-				<p>{{jionMes.createdTime}}</p>
+				<p>{{jionMes.updatedTime}}</p>
 				<p>审核时间</p>
 			</div>
 		</div>
