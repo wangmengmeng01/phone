@@ -317,7 +317,7 @@
 						"btn_text": "继续购买其他标的",
 						"backurl": "/product",
 						"sub_btn_text": "查看我的资产",
-						"sub_backurl": "/product"
+						"sub_backurl": "/wealth"
 					};
 					this.SET_SUCC_PAGE(params);
 					this.$go('/static/succ');

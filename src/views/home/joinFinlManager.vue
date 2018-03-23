@@ -66,7 +66,7 @@
 				<p>当前状态</p>
 			</div>
 			<div class="subDivright1">
-				<p>{{jionMes.createdTime}}</p>
+				<p>{{jionMes.updatedTime}}</p>
 				<p>审核时间</p>
 			</div>
 		</div>
@@ -96,14 +96,16 @@
 				<p>当前状态</p>
 			</div>
 			<div class="subDivright1">
-				<p>{{jionMes.createdTime}}</p>
+				<p>{{jionMes.updatedTime}}</p>
 				<p>审核时间</p>
 			</div>
 		</div>
 	
 		<div class="submission" style="height: 5.36rem;" v-show="!joinBol&&joinBol4">
 			<p class="submissionFalseP1">拒绝原因</p>
-			<p class="submissionFalseP2">注册信息与身份证照片不一致</p>
+			<div class="falseDiv">
+				<p class="submissionFalseP2" v-for="fm in falseMes">{{fm.remark}}</p>
+			</div>
 			<p class="submissionFalseP3" @click="joinAgain">重新提交申请</p>
 			<p class="submissionFalseP4">您可以根据拒绝原因调整后重新发起申请</p>
 		</div>
@@ -143,7 +145,8 @@
 					cardNumberBackFileStream: '',
 					flag: "",
 				},
-				jionMes: {}
+				jionMes: {},
+				falseMes:[],//失败原因
 			}
 		},
 		created() {
@@ -159,6 +162,8 @@
 						this.joinBol3 = !this.joinBol3;
 						this.joinBol5 = !this.joinBol5;
 					} else {
+						
+						this.falseMes=res.result.failContent;
 						this.joinBol4 = !this.joinBol4;
 						this.joinBol5 = !this.joinBol5;
 					}
@@ -206,6 +211,7 @@
 								this.joinBol = !this.joinBol;
 								this.joinBol2 = !this.joinBol2;
 								this.joinBol5 = !this.joinBol5;
+								this.jionMes=res.result;
 							} else if (res.code == "1000") {
 								this.$go('/login');
 							} else {
@@ -253,16 +259,22 @@
 		font-size: 0.28rem;
 		color: #8D8D94;
 		text-align: center;
-		margin: 0.68rem 0 0.4rem;
+		margin: 0.68rem 0 0.15rem;
 	}
-	
+	.falseDiv{
+		height: 2.16rem;
+		font-size: 0.48rem;
+		color: #F41F1F;
+		text-align: center;
+		margin-bottom: 0.2rem;
+	}
 	.submissionFalseP2 {
 		height: 0.48rem;
 		line-height: 0.48rem;
 		font-size: 0.48rem;
 		color: #F41F1F;
 		text-align: center;
-		margin-bottom: 1.2rem;
+		margin-bottom: 0.08rem;
 	}
 	
 	.submissionFalseP3 {

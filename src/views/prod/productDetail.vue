@@ -116,6 +116,7 @@
 		getUserStatus,
 		userActivate
 	} from '@/service'
+	 import axios from 'axios'
 	export default {
 		name: 'productDetail',
 		data() {

@@ -115,45 +115,44 @@ export function formatNum(value) {
 
 }
 export function Totime(val) {
-
-  switch (val) {
-    case 1:
-      return "天";
-      break;
-    case 2:
-      return "周";
-      break;
-    case 3:
-      return "月";
-      break;
-    default:
-      return "年";
-      break;
-  }
+	val=parseInt(val);
+	switch(val) {
+		case 1:
+			return "天";
+			break;
+		case 2:
+			return "周";
+			break;
+		case 3:
+			return "月";
+			break;
+		default:
+			return "年";
+			break;
+	}
 
 }
 export function profitPlan(val) {
-
-  switch (val) {
-    case 1:
-      return "等额本息";
-      break;
-    case 2:
-      return "等额本金";
-      break;
-    case 3:
-      return "按期付息，到期还本";
-      break;
-    case 4:
-      return "一次性还款 ";
-      break;
-    default:
-      return "其他";
-      break;
-  }
+	val=parseInt(val);
+	switch(val) {
+		case 1:
+			return "等额本息";
+			break;
+		case 2:
+			return "等额本金";
+			break;
+		case 3:
+			return "按期付息，到期还本";
+			break;
+		case 4:
+			return "一次性还款 ";
+			break;
+		default:
+			return "其他";
+			break;
+	}
 
 }
-
 export function optype(val) {
 
   switch (val) {
