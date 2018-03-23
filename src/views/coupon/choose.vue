@@ -5,7 +5,7 @@
     </ul>
     <div class="coupon p4" :class="[!res.length?'none':'']">
       <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true" @checkedCb="checkedCb(i,index)" ref="coupon" />
-      <div v-if="!res.length" class="nothing f32 color_font">暂无可送优惠券</div>
+      <div v-if="!res.length" class="nothing f32 color_font"><img src="../../assets/common/nothing_coupon.png" alt=""><p>暂无{{nav[act].name}}券</p></div>
     </div>
     <button class="btn" @click="submit">选取</button>
   </div>
@@ -27,7 +27,7 @@
   import {
     transformRequest
   } from '@/until'
-  
+
   export default {
     name: 'coupon_choose',
     data() {
@@ -245,12 +245,6 @@
       &.none
         padding: 0
         margin: 0
-      .nothing
-        background: #f1f1f9
-        height: 100vh
-        display: flex
-        align-items: center
-        justify-content: center
       margin: auto .2rem
       border-radius: .2rem
       padding-top: .6rem

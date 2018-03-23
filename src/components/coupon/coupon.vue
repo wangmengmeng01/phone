@@ -11,7 +11,7 @@
             <p class="remark f12">{{data.isSameOverlap=='2'?'不':''}}允许同类叠加使用</p>
           </div>
           <div class="right">
-            <h2 class="from f20">来自<span class="f36">{{data.name}}</span>理财师<img src="../../assets/coupon/info.png" alt="" class="info"></h2>
+            <!--<h2 class="from f20">来自<span class="f36">{{data.name}}</span>理财师<img src="../../assets/coupon/info.png" alt="" class="info"></h2>-->
             <p>{{data.remark}}</p>
             <p class="f12">{{data.startDate}}至{{data.endDate}}</p>
           </div>

@@ -18,11 +18,12 @@
         <span class="color_main f24"><img src="../../assets/common/arrow-right.png" alt=""></span>
       </div>
       <div class="b color_main f28 flex">
-        <span @click="send_coupon(i)">赠送优惠</span>
+        <!--<span @click="send_coupon(i)">赠送优惠</span>-->
+        <div></div>
         <a class="color_main" :href="`tel:${i.phone}`">拨打电话</a>
       </div>
     </div>
-    <p v-if="!list.length" class="f36 color_font-s center">暂无数据</p>
+    <div v-if="!list.length" class="nothing f32 color_font"><img src="../../assets/common/nothing_record.png" alt=""><p>暂无数据</p></div>
   </div>
 </template>
 
@@ -48,7 +49,7 @@
     },
     mounted() {
       document.body.onscroll = () => {
-  
+
         if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
           if (this.list.length <= 10) return;
           if (this.pageIndex < Math.ceil(this.total / 10)) return;

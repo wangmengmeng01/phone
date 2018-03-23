@@ -19,7 +19,7 @@
       </div>
     </div>
     <!--履行承诺-->
-    <div class="item promise" v-if="item.promise && item.promise.promiseInviteList.length">
+    <div class="item promise">
       <h2 class="subtitle f28 color_font-s">一诺千金，奋争到底</h2>
       <h3 class="title color_font flex">履行承诺
         <!--<div class="flex">-->
@@ -28,7 +28,7 @@
         <!--</div>-->
       </h3>
       <div class="con">
-        <ul>
+        <ul  v-if="item.promise && item.promise.promiseInviteList.length">
           <li class="border-notend-b" v-for="i in item.promise.promiseInviteList" @click="$go('/prod/buyBid',{bidNo:i.bidNo,promiseInviteId:i.promiseInviteId,backTitle:i.productName,inviteAmount:i.inviteAmount})">
             <div class="flex subitem">
               <div class="left">
@@ -45,6 +45,10 @@
             <p class="flex subitemBtn"><span class="color_main f28 ">现在购买</span></p>
           </li>
         </ul>
+        <div class="nothing_found" v-else>
+          <img src="../../assets/common/nothing_found.png" alt="">
+          <p class="f24">暂无履约记录</p>
+        </div>
       </div>
     </div>
     <!--平台活动-->
@@ -100,7 +104,6 @@
     <!--<p class="color_font-s f32">良机不好错过，抓紧时间去开发客户吧良机不 好错过，抓紧时间去开发客户吧</p>-->
     <!--</div>-->
     <!--</div>-->
-    <div class="nothing" v-if="!(item.coupon && item.coupon.couponList.length) && !(item.promise && item.promise.promiseInviteList.length)"><img src="../../assets/common/none.png" alt=""></div>
     <Gift :data="giftData" v-if="gift_visible" />
     <p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>
   </div>
@@ -128,7 +131,7 @@
     },
     created() {
       document.body.scrollX = (e) => {
-  
+
         log(e)
       }
       this.init();
@@ -143,10 +146,13 @@
             coupon,
             promise
           };
+          this.item.promise.promiseInviteList = []
         }).then(() => {
           searchMyManagerUserInfo({
             filter_msg: 1
-          }).then(r => this.item.master = r);
+          }).then(r => {
+            this.item.master = r
+          });
         })
       }
     },
@@ -200,6 +206,10 @@
             &:last-child
               padding-top: .15rem
     .promise
+      .nothing_found
+        text-align: center
+        img
+          height: 4.86rem
       ul
         li
           padding: .4rem 0

@@ -44,6 +44,15 @@ export function thousand(val) {
   return val
 }
 
+
+/**
+ * 时间格式化
+ * @param val 数值
+ */
+export function date(val) {
+  return new Date(val).toLocaleString().split(' ')[0].replace(/\//g,'-');
+}
+
 /**
  * 性别
  * @param val 数值
