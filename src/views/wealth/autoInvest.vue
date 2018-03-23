@@ -59,7 +59,7 @@
 
 							this.auroBol=false;
 
-      					} 
+      					}
 
       				}
 
@@ -71,16 +71,16 @@
       		});
       		//君子签回来
       		if(this.$route.query.isJZQ){
-      			
+
       			querySigningStatus({busiType:'4'}).then(res => {
-	       			
+
 	       			console.log(res);
 	       			if(res.status=="1"||res.status=="3"){
 	       				this.autoTenderPlan();
 	       			}else{
 	       			}
 	       		})
-      			
+
 			};
 			//复投回来
 			if(this.$route.query.isFT){
@@ -97,17 +97,17 @@
 							"sub_backurl": "/"
 		            			});
 		          		  this.$go('/static/succ','',true);
-		       			
+
 		       		} else if(res.code == "1210" || res.code == "1000") {
 		       			this.$go('/login');
 		       		} else {
 		       			this.$toask(res.message);
 		       		}
-	
+
 		       	});
-				
+
 			}
-			
+
 
       	},
       	methods: {
@@ -118,23 +118,22 @@
 	       //开启复投（先查询君子签状态）
 	       openTenderPlan(){
 	       		querySigningStatus({busiType:'4'}).then(res => {
-	       			
+
 	       			console.log(res);
 	       			if(res.status=="1"||res.status=="3"){
 	       				this.autoTenderPlan();
 	       			}else{
 	       				this.signingContract();
 	       			}
-	       			
+
 	       		})
-	       	
-	       	
+
+
 	       },
 	       //去开启复投
 	       autoTenderPlan(){
 	       	autoTenderPlan({openFlag:'1',retUrl:this.retUrl2}).then(res => {
-			         // 调用汇付先清除地址栏的参数
-			              window.history.replaceState(null, null, this.$route.path);
+			         console.log(location.origin+ new URL(res.serviceUrl).pathname)
 			              axios({
 			                method: 'post',
 			                url: location.origin+ new URL(res.serviceUrl).pathname,
@@ -154,23 +153,23 @@
 			                  }
 			                }
 			              })
-				
-	       		
+
+
 	       		})
-	       	
+
 	       },
 	       //君子签跳转
-	       
+
 	       signingContract(){
 	       	signingContract({busiType:'4',retUrl:this.retUrl}).then(res => {
 	       			console.log(res);
 	       			window.location.href=res.link;
-	       			
+
 	       		})
-	       	
+
 	       },
-	       
-	       
+
+
 
 	       },
 	       watch: {}
@@ -189,7 +188,7 @@
     .OOFont
       color #181818
       font-size 0.36rem
-  .disable    
+  .disable
   	pointer-events: none;
   .OOWrap
     width:1rem;
