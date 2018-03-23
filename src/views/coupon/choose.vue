@@ -178,6 +178,8 @@
               const params = {
                 bidNo,
                 linkType,
+                inviteAmount:this.$route.query.inviteAmount,
+                promiseInviteId:this.$route.query.promiseInviteId,
                 ...res
               };
               // 有结果传到backurl中

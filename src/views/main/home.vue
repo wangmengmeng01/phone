@@ -3,9 +3,9 @@
 		<!-- 轮播图片 -->
 		<div class="swiper-container swiper-container1">
 			<div class="swiper-wrapper swiper-wrapper1">
-				<div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner.png')" alt=""></div>
-				<div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner.png')" alt=""></div>
-				<div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner.png')" alt=""></div>
+				<div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner1.png')" alt=""></div>
+				<div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner3.png')" alt=""></div>
+				<div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner2.png')" alt=""></div>
 			</div>
 			<!-- Add Pagination -->
 			<div class="swiper-pagination"></div>
@@ -27,7 +27,7 @@
 				</p>
 				<p>关于我们</p>
 			</div>
-			<div class="indexMessageTip" @click="$go('/home/aboutUs',{id:1,backTitle:'安全保障'})">
+			<div class="indexMessageTip" @click="$go('/home/aboutUs',{id:1,backTitle:'安全保障',forNative:1})">
 				<p class="safety">
 					<img :src="require('@/assets/main/home/aqbz.png')" alt="">
 				</p>
@@ -231,7 +231,7 @@
 				spaceBetween: 0,
 				centeredSlides: true,
 				autoplay: {
-					delay: 5000,
+					delay: 2000,
 					disableOnInteraction: false
 				},
 				pagination: {

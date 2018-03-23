@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import { autoInvestQuary,querySigningStatus,signingContract,autoTenderPlan,getUserStatus } from '@/service'
+  import { autoInvestQuary,querySigningStatus,signingContract,autoTenderPlan,getUserStatus,userActivate } from '@/service'
   import { mapGetters, mapMutations } from 'vuex'
   import axios from 'axios'
   export default {
@@ -51,7 +51,31 @@
       					this.$go('/reg_bank');
       				} else if(info.openAccountStatus == "4") {
       					//激活
-
+						
+			            userActivate({
+			              retUrl:location.origin+location.pathname
+			              }).then(res=>{
+			              axios({
+			                method: 'post',
+			                url: location.origin+ new URL(res.serviceUrl).pathname,
+			                data: res.inMap,
+			                transformRequest: [function (data) {
+			                  let ret = '';
+			                  for (let it in data) {
+			                    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+			                  }
+			                  return ret.slice(0,ret.length-1)
+			                }],
+			              }).then(r=>{
+			                if(r.status === 200){
+			                  if(r.data){
+			                    document.body.innerHTML = r.data;
+			                    setTimeout(()=>{document.form.submit()},0)
+			                  }
+			                }
+			              })
+			            })
+          
       				} else {
 
       					//复投

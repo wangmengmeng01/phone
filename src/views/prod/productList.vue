@@ -123,7 +123,10 @@
 			init(){
 				getProductBidsList(this.item).then(res => {
 					this.productList = this.productList.concat(res.productList);
-					this.totalPage = Math.ceil(res.total / 10);
+					if(res.total){
+						this.totalPage = Math.ceil(res.total / 10);
+					}
+
 				});
 			}
 			
