@@ -7,7 +7,7 @@
     </div>
     <div class="send p4">
       <h2 class="title f32 color_font flex">送他(她)什么好呢 <span class="f24 color_font-s">可选一个或多个优惠</span></h2>
-      <Coupon v-for="(i,index) in coupon.data" :data="i" :key="index" class="item act" close="true" @closeCb="close" />
+      <Coupon v-for="(i,index) in coupon.data" :data="i" :key="index" class="item act" close="true" @closeCb="close(i)" />
       <div class="item none" @click="choose">
         <img src="../../assets/coupon/none.png" alt="">
       </div>

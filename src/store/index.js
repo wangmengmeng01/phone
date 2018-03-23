@@ -72,7 +72,7 @@ export default new Vuex.Store({
      */
     DEL_COUPON(state, data) {
       state.coupon.data = state.coupon.data.filter(t => {
-        return t.couponNo !== data.couponNo
+        return t.receiveNo !== data.receiveNo
       })
     },
     /**

@@ -66,6 +66,8 @@
       margin-top: .4rem
       background: #fff
       .tel
+        text-align: right
+        width: 1rem
         margin-right: .2rem
       li
 
