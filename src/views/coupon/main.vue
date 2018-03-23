@@ -5,7 +5,7 @@
     </ul>
     <div class="coupon p4" :class="[!res.length?'none':'']">
       <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" />
-      <div v-if="!res.length" class="nothing f32 color_font">暂无{{nav[act].name}}券</div>
+      <div v-if="!res.length" class="nothing f32 color_font"><img src="../../assets/common/nothing_coupon.png" alt=""><p>暂无{{nav[act].name}}券</p></div>
     </div>
   </div>
 </template>
@@ -99,6 +99,8 @@
           display: flex
           align-items: center
           justify-content: center
+          img
+            width: 3.32rem
       border-radius: .2rem
       padding-top: .6rem
       padding-bottom: .3rem

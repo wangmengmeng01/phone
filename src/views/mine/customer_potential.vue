@@ -10,14 +10,14 @@
         <img src="" alt="" class="icon place-img">
         <div class="text">
           <h2 class="f36 color_font">{{i.customerName}}</h2>
-          <p class="f20 color_font-s">{{i.customerPhone}} {{i.createTime}}成为潜在客户</p>
+          <p class="f20 color_font-s">{{i.customerPhone}} {{i.createTime | date}}成为潜在客户</p>
         </div>
       </div>
       <div class="bot">
         <a class="color_main f32" :href="`tel:${i.customerPhone}`">拨打电话</a>
       </div>
     </div>
-    <p class="f36 color_font-s center mt4" v-if="!list.length">暂无潜在客户</p>
+    <div v-if="!list.length" class="nothing f32 color_font"><img src="../../assets/common/nothing_record.png" alt=""><p>暂无潜在客户</p></div>
   </div>
 </template>
 
@@ -58,7 +58,7 @@
           this.total = r.total;
         })
       }
-  
+
     }
   }
 </script>
