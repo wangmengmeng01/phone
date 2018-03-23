@@ -103,16 +103,19 @@
       },
   
       submit() {
-        this.$go('/changeBank2');
+      	
+      	 if (!this.rebindSms) {
+          this.$toask('短信验证码不能为空!');
+          return
+        }
+
         this.SET_BINDCARD({
           "realName": this.cardMes.realName,
           "cardNumber": this.cardMes.cardNumber,
           "orgSmsCode": this.rebindSms,
           "orgSmsSeq": this.smsSeq
-  
         });
-  
-  
+        this.$go('/changeBank2');
       },
   
   

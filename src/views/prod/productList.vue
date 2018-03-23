@@ -10,7 +10,7 @@
 						<span>{{j.lockPeriod}}天锁定</span>
 					</p>
 				</div>
-				<p class="productDivRate">{{j.annualizedRate | tofixed}}%</p>
+				<p class="productDivRate">{{j.annualizedRate}}%<i v-show="j.appendRate>0">+{{j.appendRate}}%</i></p>
 				<p class="productDivWrod">历史年化</p>
 				<img class="productSq" v-show="j.status>4"  src="../../assets/main/prod/sq.png"/>
 				<div class="hotProductDivProgress"  v-show="j.status<=4">
@@ -28,7 +28,7 @@
 				<p class="hotProductDivMessage" :class="[n<=i.bidList.length-2?'bb':'']">
 					<span>起投金额 <i>{{j.investMinAmount}}元</i></span>
 					<span>投资期限 <i>{{j.periodLength}}</i>{{j.periodUnit|Totime}}</span>
-					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName,status:j.status})">购买</span>
+					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName,status:j.status})">{{j.status<=4?'购买':'查看'}}</span>
 				</p>
 			</div>
 	
@@ -45,7 +45,7 @@
 				<span class="">按期派息到期还本</span>
 			</div>
 			<div class="productDivOver">
-				<p>明天10:30</p>
+				<p>明天</p>
 				<p>预计新标上架时间</p>
 				<img src="../../assets/main/prod/sq.png" />
 	
@@ -304,7 +304,12 @@
 		color: #F84740;
 		text-align: left;
 	}
-	
+	.productDivRate >i{
+		font-style: inherit;
+		font-size: 0.36rem;
+		color: #F84740;
+		text-align: left;
+	}
 	.productDivWrod {
 		float: left;
 		width: 6.3rem;

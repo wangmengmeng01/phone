@@ -4,7 +4,7 @@
 		<!--详情头部-->
 		<div class="productDetailTop">
 			<p class="pdtWord">历史年化利率</p>
-			<p class="pdtRate"><i>{{detail.annualizedRate}}</i>%</p>
+			<p class="pdtRate"><i>{{detail.annualizedRate}}</i>% <i style="font-size: 0.36rem;" v-show="detail.appendRate>0">+{{detail.appendRate}}%</i></p>
 			<div class="pdtMessage">
 				<p><span>募集资金(元)</span><span>{{detail.contractAmount | formatNum}}</span></p>
 				<p><span>起投金额(元)</span><span>{{detail.investMinAmount| formatNum}}</span></p>
@@ -45,7 +45,7 @@
 			</div>
 			<span class="pdcRule pdcRule1"> <img src="../../assets/main/prod/Triangle@2x.png"/>{{profitPlanArr[detail.profitPlan>4?'5':detail.profitPlan]}}</span>
 			<span class="pdcRule"><img src="../../assets/main/prod/Triangle@2x.png"/>购买后不可撤销</span>
-			<span class="pdcRule"><img src="../../assets/main/prod/Triangle@2x.png"/>起息日后30天内不可转让</span>
+			<span class="pdcRule"><img src="../../assets/main/prod/Triangle@2x.png"/>起息日后{{detail.lockPeriod}}天内不可转让</span>
 			<span class="pdcRule pdcRule2"><img src="../../assets/main/prod/Triangle@2x.png"/>到期后三个交易日内，资金入账到可用余额</span>
 		</div>
 	
@@ -103,7 +103,7 @@
 		</div>
 	
 		<!--立刻购买-->
-		<div class="productDetailBottom"  :class="status<4?'':'disable'"  @click="getStatus">
+		<div class="productDetailBottom"  :class="statusBol?'':'disable'"  @click="getStatus">
 			立刻购买
 		</div>
 	
@@ -127,11 +127,17 @@
 				itemStatus: {},
 				detail: {},
 				profitPlanArr: ['', '等额本息', '等额本金', '按期付息，到期还本', '一次性还款', '其他'],
-				status:'',
+				statusBol:true,
 			}
 		},
 		created() {
-			this.status=this.$route.query.status;
+			if(this.$route.query.status){
+				if(this.$route.query.status>4){
+					this.statusBol=false;
+				}
+			}
+			
+			
 			searchProductBidsDetail(this.item).then(res => {
 				console.log(res);
 				this.detail = res;
