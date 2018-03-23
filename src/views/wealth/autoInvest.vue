@@ -48,8 +48,8 @@
       }
     },
     created() {
-      const retUrl = this.retUrl = location.origin + '?isJZQ=1';
-      const retUrl2 = this.retUrl2 = location.origin + '?isFT=1';
+      const retUrl = this.retUrl = location.origin + '/wealth/autoInvest?isJZQ=1';
+      const retUrl2 = this.retUrl2 = location.origin + '/wealth/autoInvest?isFT=1';
       getUserStatus(this.itemStatus).then(res => {
         //@click=""
         console.log(res);
