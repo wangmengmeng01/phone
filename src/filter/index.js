@@ -106,7 +106,6 @@ export function formatNum(value) {
 
 }
 export function Totime(val) {
-<<<<<<< HEAD
 	val=parseInt(val);
 	switch(val) {
 		case 1:
@@ -143,47 +142,8 @@ export function profitPlan(val) {
 			return "其他";
 			break;
 	}
-=======
-
-  switch (val) {
-    case 1:
-      return "天";
-      break;
-    case 2:
-      return "周";
-      break;
-    case 3:
-      return "月";
-      break;
-    default:
-      return "年";
-      break;
-  }
 
 }
-export function profitPlan(val) {
-
-  switch (val) {
-    case 1:
-      return "等额本息";
-      break;
-    case 2:
-      return "等额本金";
-      break;
-    case 3:
-      return "按期付息，到期还本";
-      break;
-    case 4:
-      return "一次性还款 ";
-      break;
-    default:
-      return "其他";
-      break;
-  }
->>>>>>> c0aab9f9c8bd024168ea7c6fef4894bd8d82df4d
-
-}
-
 export function optype(val) {
 
   switch (val) {
