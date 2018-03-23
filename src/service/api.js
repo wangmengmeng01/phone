@@ -117,4 +117,6 @@ export default {
 	uploadFile:'image/filter/uploadFile',//上传图片
 	
 	investPropertyDetail:'account/filter/investPropertyDetail',//持有债券详情
+	
+	serchDebtHoldedRecord:'debt/filter/serchDebtHoldedRecord',//持有债券列表
 }

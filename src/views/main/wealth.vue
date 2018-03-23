@@ -4,19 +4,20 @@
       <p>财富</p>
       <div class="wealthA">
         <span>总金额(元)</span>
-        <img src="../../assets/wealth/wealth/tips.png">
+        <img @click="tips" src="../../assets/wealth/wealth/tips.png">
         <div class="status" v-if="getUserS.openStatus">已开通存管账户</div>
         <div class="amount">{{home.totalAmount}}</div>
       </div>
       <div class="wealthEarn">
-        <div class="yesterE">
-          <div>昨日收益(元)</div>
-          <div class="wealthEarnData">{{home.yesterdayAmount}}</div>
-        </div>
-        <div class="totalE">
+      	 <div class="totalE">
           <div>累计收益(元)</div>
           <div class="wealthEarnData">{{home.sumAmount}}</div>
         </div>
+        <!--<div class="yesterE">
+          <div>昨日收益(元)</div>
+          <div class="wealthEarnData">{{home.yesterdayAmount}}</div>
+        </div>-->
+       
         <div class="avalibleE">
           <div>可用余额(元)</div>
           <div class="wealthEarnData">{{home.availableAmount}}</div>
@@ -36,7 +37,7 @@
     <!-- 我的资产 -->
     <div class="wealthMyAssert" v-show="invesProperty.res.length">
       <div class="wealthMATop">
-        <div class="wealthMATopT">{{invesProperty.res.totalAmount | formatNum}}元</div>
+        <div class="wealthMATopT">{{totalAmount | formatNum}}元</div>
         <div class="wealthMATopB">
           <div class="wealthMATopBL">
             我的资产
@@ -58,11 +59,11 @@
                 <em class="bigAmount">{{i.initCashAmount | formatNum
                   }}</em>
               </div>
-              <div class="wealthMyObjectCR">
+              <!--<div class="wealthMyObjectCR">
                 <span>昨日收益</span>
                 <em>+{{i.yesterdayAmount | formatNum
                   }}</em>
-              </div>
+              </div>-->
             </div>
             <div class="wealthMyObjectB">
               <div class="wealthMyObjectBL">
@@ -129,7 +130,9 @@
   export default {
     name: 'wealth',
     data() {
+    		
     return {
+    		totalAmount:0,
       menu:[
         {
           icon: 'wtradeP',
@@ -181,7 +184,7 @@
       invesProperty:{
         data:{
           bidType: '2',
-          status: '1',
+          status: '2',
           pageNum: '1'
         },
         res:{}
@@ -198,6 +201,9 @@
   methods: {
     linkto(url){
       this.$go(url)
+    },
+    tips(){
+    		this.$toask("总金额=可用金额+我的合计资产额");
     },
     init(){
       wealthIndex().then(res=>{
@@ -217,6 +223,7 @@
       invesProperty(this.invesProperty.data).then(res=>{
         console.log(res)
         this.invesProperty.res =res.dataList.slice(0,2);
+        this.totalAmount=res.totalAmount;
         console.log(this.invesProperty.res)
       });
     },
@@ -340,7 +347,7 @@
     overflow hidden
     padding 0 0.4rem
     margin 1rem 0.2rem 0
-    height:8.42rem;
+    /*height:8.42rem;*/
     background:rgba(255,255,255,1);
     box-shadow: 0px 5px 12px 0px rgba(219,219,219,0.5), 5px 0px 4px 0px rgba(219,219,219,0.5)
     border-radius: 0.2rem;

@@ -30,7 +30,7 @@
 				<span>查看详情 <img src="../../assets/common/arrow-right.png"/></span>
 			</p>
 			<div class="pdcIntroduce" >
-				<p @click="$go('/prod/bankDepository')">
+				<p @click="$go('/wealth/claims',{cashNo:item.cashNo})">
 					<img class="pdcIntroduceImg1" src="../../assets/wealth/wealth/xczq.png" />
 					<span>现持债权</span>
 				</p>

@@ -170,3 +170,12 @@ export const investPropertyDetail = async (params)=>{
     params,
   });
 };
+
+// 持有债券列表
+export const serchDebtHoldedRecord = async (params)=>{
+  return await $http({
+    method: 'get',
+    api: api.serchDebtHoldedRecord,
+    params,
+  });
+};
