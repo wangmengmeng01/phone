@@ -27,8 +27,8 @@
 			</p>
 			<div class="buyBidInvest">
 				<i>￥</i>
-				<input type="tel" class="buyBidInput" v-model="investMoney" :placeholder="`${detail.investMinAmount}元起，${detail.investAscendingAmount}元递增`" @blur="inputBlur(0)" oninput="if( ! /^-?\d+\.?\d{0,2}$/.test(this.value)){ var s = this.value;this.value=s.substring(0,s.length-1);}" />
-				<span class="allInvestBtn" @click="investAll">全投</span>
+				<input type="tel" class="buyBidInput" :class="inviteBol?'':'unClick'" v-model="investMoney" :placeholder="`${detail.investMinAmount}元起，${detail.investAscendingAmount}元递增`" @blur="inputBlur(0)" oninput="if( ! /^-?\d+\.?\d{0,2}$/.test(this.value)){ var s = this.value;this.value=s.substring(0,s.length-1);}" />
+				<span class="allInvestBtn" :class="inviteBol?'':'unClick'"  @click="investAll">全投</span>
 			</div>
 			<p class="userAccount">
 				可用余额<i>{{accountBalance.availableAmount}}元</i>
@@ -124,7 +124,9 @@
 					receiveNo: '',
 					couponNo: '',
 					promiseInviteId: '',
-				}
+				},
+				inviteAmount:'',//履行承诺带入购买金额
+				inviteBol:true,//是否金额带入
 			}
 		},
 		computed: {
@@ -134,7 +136,7 @@
 
 		},
 		created() {
-
+			
 			if(this.$route.query.promiseInviteId != undefined || this.$route.query.promiseInviteId != null) {
 				this.promiseInviteId = this.$route.query.promiseInviteId;
 			}
@@ -156,7 +158,7 @@
 				this.buyItem.couponNo = this.$route.query.couponNo;
 				//获取选择的卡券
 
-				console.log(this.coupon.data);
+				console.log(this.coupon.data.length);
 
 				if(this.coupon.data.length) {
 					this.counpBol = false;
@@ -197,6 +199,13 @@
 						data: []
 					});
 				}
+				 if(this.$route.query.inviteAmount){
+				 	this.investMoney=this.$route.query.inviteAmount;
+				 	this.inviteBol=false;
+				 	 this.CouponList();
+				 	 this.inputBlur();
+				 }
+				
 			});
 
 			accountAcmountInfo().then(res => {
@@ -232,6 +241,8 @@
 				this.$go('/coupon/choose', {
 					bidNo,
 					linkType: 0,
+					promiseInviteId:this.promiseInviteId,
+					inviteAmount:this.inviteAmount,
 				})
 			},
 			submit() {
@@ -353,7 +364,7 @@
 
 				this.itemProd.amount = this.investMoney;
 				getExpectedRevenue(this.itemProd).then(res => {
-					this.ExpectedRevenue = (res.amount - this.investMoney).toFixed(2);
+					this.ExpectedRevenue = (parseFloat(res.amount) - this.investMoney).toFixed(2);
 					this.buyItem.expectedRevenue = res.amount;
 				});
 
@@ -755,5 +766,8 @@
 		width: 100%;
 		font-size: 0.20rem;
 		line-height: 0.28rem;
+	}
+	.unClick{
+		pointer-events: none;
 	}
 </style>

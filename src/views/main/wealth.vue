@@ -190,20 +190,36 @@
         res:{}
       },
       getUserS:{
-        "openStatus":true
-      }
+        "openStatus": true
+}
 
-    }
-  },
-  created() {
-      this.init()
-  },
-  methods: {
-    linkto(url){
-      this.$go(url)
-    },
-    tips(){
-    		this.$toask("总金额=可用金额+我的合计资产额");
+}
+},
+created() {
+		this.init()
+	},
+	methods: {
+		linkto(url) {
+			if(url == "wealth/changeBank") {
+				if(this.getUserS.openStatus == true) {
+					this.$go('/wealth/changeBank')
+				} else {
+					this.$go('/reg_bank')
+				}
+			} else if(url == "wealth/autoInvest") {
+				if(this.getUserS.openStatus == true) {
+					this.$go('/wealth/autoInvest')
+				} else {
+					this.$go('/reg_bank')
+				}
+			} else {
+				this.$go(url)
+
+			}
+
+		},
+		tips() {
+			this.$toask("总金额=可用金额+我的合计资产额");
     },
     init(){
       wealthIndex().then(res=>{
@@ -240,7 +256,7 @@
       }else{
         this.$go('/reg_bank')
       }
-    }
+    },
   },
   watch: {
   }
