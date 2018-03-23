@@ -7,11 +7,9 @@
         <div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner3.png')" alt=""></div>
         <div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner2.png')" alt=""></div>
       </div>
-      <!-- Add Pagination -->
       <div class="swiper-pagination"></div>
-      <!-- Add Arrows -->
-      <!-- <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div> -->
+      <!--<div class="swiper-button-next"></div>
+   	  <div class="swiper-button-prev"></div>-->
     </div>
     <!-- 公告 -->
     <div class="indexNotice center">
@@ -47,7 +45,7 @@
       </div>
     </div>
     <!-- 新手专享 -->
-    <div class="new" v-show="newList.length">
+    <div class="new">
       <p class="newTitle">新手专享</p>
       <div class="swiper-container swiper-container2">
         <div class="swiper-wrapper swiper-wrapper2">
@@ -66,9 +64,8 @@
           </div>
         </div>
         <div class="swiper-pagination swiper-pagination2"></div>
-        <!--<div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>-->
       </div>
+    
     </div>
     <!-- 为您推荐 -->
     <div class="recommend" v-show="recomPro.length">
@@ -117,7 +114,7 @@
       <!--热销产品-->
       <div class="hotProductDiv" v-for="(b,index) in hotPro" :class="[!index==0?'hotProductDiv0':'']">
         <p class="hotProductDivTitle"> <img :src="require(`@/assets/main/home/no${index+1}.png`)" /> <span class="hotProductDivTitleBidName">{{b.bidName}}</span> <span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:b.bidNo,backTitle:b.bidName})">购买</span></p>
-        <p class="hotProductDivRate">{{b.annualizedRate}}%</p>
+        <p class="hotProductDivRate">{{b.annualizedRate}}%<i v-show="b.appendRate>0">+{{b.appendRate}}%</i></p>
         <p class="hotProductDivWord">历史年化收益率</p>
         <!--进度条-->
         <div class="hotProductDivProgress">
@@ -219,14 +216,6 @@
       sellsProduct(this.itemNew).then(res => {
         this.hotPro = res.productList;
       });
-      getUserStatus().then(res => {
-        const info = res.result;
-        switch(parseInt(info.openAccountStatus)) {
-          case 1:
-            this.openStatus = false;
-            break;
-        }
-      });
     },
     mounted() {
 
@@ -269,7 +258,15 @@
 
     },
     methods: {
-      linkPage(){
+	      linkPage(){
+	      	getUserStatus().then(res => {
+	        const info = res.result;
+	        switch(parseInt(info.openAccountStatus)) {
+	          case 1:
+	            this.openStatus = false;
+	            break;
+	        }
+	      });
         if(this.openStatus){
           this.$go('/home/joinFinlManager');
         }else{
@@ -677,7 +674,12 @@
     font-size: 1.0rem;
     text-align: center;
   }
-
+	.hotProductDivRate >i{
+		font-style: inherit;
+		font-size: 0.36rem;
+		color: #F84740;
+		text-align: left;
+	}
   .recommendDivWord {
     float: left;
     width: 6.3rem;
