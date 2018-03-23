@@ -146,7 +146,6 @@
             coupon,
             promise
           };
-          this.item.promise.promiseInviteList = []
         }).then(() => {
           searchMyManagerUserInfo({
             filter_msg: 1
