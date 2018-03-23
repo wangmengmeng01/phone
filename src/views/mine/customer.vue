@@ -18,7 +18,7 @@
         <span class="color_main f24"><img src="../../assets/common/arrow-right.png" alt=""></span>
       </div>
       <div class="b color_main f28 flex">
-        <!--<span @click="send_coupon(i)">赠送优惠</span>-->
+        <span @click="send_coupon(i)">赠送优惠</span>
         <div></div>
         <a class="color_main" :href="`tel:${i.phone}`">拨打电话</a>
       </div>
