@@ -103,7 +103,7 @@
 		</div>
 	
 		<!--立刻购买-->
-		<div class="productDetailBottom" @click="getStatus">
+		<div class="productDetailBottom"  :class="status<4?'':'disable'"  @click="getStatus">
 			立刻购买
 		</div>
 	
@@ -127,9 +127,11 @@
 				itemStatus: {},
 				detail: {},
 				profitPlanArr: ['', '等额本息', '等额本金', '按期付息，到期还本', '一次性还款', '其他'],
+				status:'',
 			}
 		},
 		created() {
+			this.status=this.$route.query.status;
 			searchProductBidsDetail(this.item).then(res => {
 				console.log(res);
 				this.detail = res;
@@ -703,5 +705,9 @@
 		text-align: center;
 		background-color: #3299D1;
 		color: #FFFFFF;
+	}
+	.disable {
+		background: #98cceb;
+		pointer-events: none;
 	}
 </style>

@@ -12,7 +12,8 @@
 				</div>
 				<p class="productDivRate">{{j.annualizedRate | tofixed}}%</p>
 				<p class="productDivWrod">历史年化</p>
-				<div class="hotProductDivProgress">
+				<img class="productSq" v-show="j.status>4"  src="../../assets/main/prod/sq.png"/>
+				<div class="hotProductDivProgress"  v-show="j.status<=4">
 					<div class="tipsImg" :style="{left:j.amountScale*5/100+'rem'}" v-if="j.amountScale<=50||j.amountScale==100">
 						<img src="../../assets/main/home/tipsImg.png" /><span>{{j.amountScale| tofixed}}%</span>
 					</div>
@@ -27,7 +28,7 @@
 				<p class="hotProductDivMessage" :class="[n<=i.bidList.length-2?'bb':'']">
 					<span>起投金额 <i>{{j.investMinAmount}}元</i></span>
 					<span>投资期限 <i>{{j.periodLength}}</i>{{j.periodUnit|Totime}}</span>
-					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName})">购买</span>
+					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName,status:j.status})">购买</span>
 				</p>
 			</div>
 	
@@ -244,6 +245,14 @@
 	.productDivDetial {
 		float: left;
 		overflow: hidden;
+		position: relative;
+	}
+	.productSq{
+		position: absolute;
+		right: 0.5rem;
+		top: 0.8rem;
+		width: 1.58rem;
+		height: 1.40rem;
 	}
 	
 	.pddTitle {
