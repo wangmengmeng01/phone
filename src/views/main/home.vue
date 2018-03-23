@@ -11,17 +11,17 @@
 			<div class="swiper-pagination"></div>
 			<!-- Add Arrows -->
 			<!-- <div class="swiper-button-next"></div>
-	    <div class="swiper-button-prev"></div> -->
+    <div class="swiper-button-prev"></div> -->
 		</div>
 		<!-- 公告 -->
 		<div class="indexNotice center">
 			<img :src="require('@/assets/main/home/NEW@2x.png')" alt="">
 			<p class="indexNoticeP">公告ABC123公告ABC123…</p>
 		</div>
-	
+
 		<!--关于我们 安全保障 运营数据 理财师加盟-->
 		<div class="indexMessage center">
-			<div class="indexMessageTip" @click="$go('/home/aboutUs',{id:0,backTitle:'关于我们'})">
+			<div class="indexMessageTip"  @click="$go('/home/aboutUs',{id:0,backTitle:'关于我们'})">
 				<p class="aboutUs">
 					<img :src="require('@/assets/main/home/jrwm.png')" alt="">
 				</p>
@@ -67,7 +67,7 @@
 				</div>
 				<div class="swiper-pagination swiper-pagination2"></div>
 				<!--<div class="swiper-button-next"></div>
-					<div class="swiper-button-prev"></div>-->
+				<div class="swiper-button-prev"></div>-->
 			</div>
 		</div>
 		<!-- 为您推荐 -->
@@ -88,28 +88,28 @@
 			</div>
 			<!-- 月月赢 -->
 			<!--<div class="recommendDiv recommendDiv2">
-					<p class="recommendDivTitle">周周赢</p>
-					<p class="recommendDivRate">10%</p>
-					<p class="recommendDivWord">历史年化收益率</p>
-					<div class="recommendDivBleft">
-						<p>1000元起投</p>
-						<p>锁定28天</p>
-					</div>
-					<div class="recommendDivButton">投资</div>
-				</div>-->
+				<p class="recommendDivTitle">周周赢</p>
+				<p class="recommendDivRate">10%</p>
+				<p class="recommendDivWord">历史年化收益率</p>
+				<div class="recommendDivBleft">
+					<p>1000元起投</p>
+					<p>锁定28天</p>
+				</div>
+				<div class="recommendDivButton">投资</div>
+			</div>-->
 			<!-- 赢计划 -->
 			<!--<div class="recommendDiv recommendDiv3">
-					<p class="recommendDivTitle">周周赢</p>
-					<p class="recommendDivRate">10%</p>
-					<p class="recommendDivWord">历史年化收益率</p>
-					<div class="recommendDivBleft">
-						<p>1000元起投</p>
-						<p>锁定28天</p>
-					</div>
-					<div class="recommendDivButton">投资</div>
-				</div>-->
+				<p class="recommendDivTitle">周周赢</p>
+				<p class="recommendDivRate">10%</p>
+				<p class="recommendDivWord">历史年化收益率</p>
+				<div class="recommendDivBleft">
+					<p>1000元起投</p>
+					<p>锁定28天</p>
+				</div>
+				<div class="recommendDivButton">投资</div>
+			</div>-->
 		</div>
-	
+
 		<!--热销产品-->
 		<div class="hotProduct" v-show="hotPro.length">
 			<p class="recommendTip">畅销排行榜</p>
@@ -128,7 +128,7 @@
 						<p><i>{{b.amountWait|numfixed}}</i>万</p>
 						<p>剩余不到</p>
 					</div>
-	
+
 					<p class="grayLine"></p>
 					<p class="proLine" :style="{width:b.amountScale*4.6/100+'rem'}"></p>
 					<p class="proTip"><i>{{b.countPeople}}</i>人参与</p>
@@ -139,54 +139,54 @@
 					<span>剩余金额 <i>{{b.amountWait|numfixed}}</i>万</span>
 					<!--<span>锁定期限 <i>28天</i></span>-->
 				</p>
-	
+
 			</div>
 			<!--<div class="hotProductDiv">
-					<p class="hotProductDivTitle"> <img src="../../assets/main/home/no2.png" /> <span class="hotProductDivTitleBidName">中赢宝1101</span> <span class="hotProductDivTitleBtn">购买</span></p>
-					<p class="hotProductDivRate">10%</p>
-					<p class="hotProductDivWord">历史年化收益率</p>
-					<div class="hotProductDivProgress">
-						<div class="tipsImg">
-							<img src="../../assets/main/home/tipsImg.png" /><span>48%</span>
-						</div>
-						<div class="redTipsImg">
-							<p><i>5</i>万</p>
-							<p>剩余不到</p>
-						</div>
-	
-						<p class="grayLine"></p>
-						<p class="proLine"></p>
-						<p class="proTip">起投 <i>1000元</i></p>
+				<p class="hotProductDivTitle"> <img src="../../assets/main/home/no2.png" /> <span class="hotProductDivTitleBidName">中赢宝1101</span> <span class="hotProductDivTitleBtn">购买</span></p>
+				<p class="hotProductDivRate">10%</p>
+				<p class="hotProductDivWord">历史年化收益率</p>
+				<div class="hotProductDivProgress">
+					<div class="tipsImg">
+						<img src="../../assets/main/home/tipsImg.png" /><span>48%</span>
 					</div>
-					<p class="hotProductDivMessage">
-						<span>起投金额 <i>1000万</i></span>
-						<span>投资期限 <i>52周 </i></span>
-						<!--<span>锁定期限 <i>28天</i></span>-->
+					<div class="redTipsImg">
+						<p><i>5</i>万</p>
+						<p>剩余不到</p>
+					</div>
+
+					<p class="grayLine"></p>
+					<p class="proLine"></p>
+					<p class="proTip">起投 <i>1000元</i></p>
+				</div>
+				<p class="hotProductDivMessage">
+					<span>起投金额 <i>1000万</i></span>
+					<span>投资期限 <i>52周 </i></span>
+					<!--<span>锁定期限 <i>28天</i></span>-->
 			<!--</p>
-				</div>-->
+			</div>-->
 		</div>
-	
+
 		<!--热门活动-->
 		<div class="hotActivity">
 			<p class="recommendTip">全民参与的活动</p>
 			<p class="recommendTitle" style="margin-bottom: 0.38rem;">热门活动 <span>更多<img src="../../assets/main/home/nextIcon.png"/></span></p>
-	
+
 			<!--活动-->
 			<div class="hotActivityDiv">
 				<img src="../../assets/main/home/activityImg.png" />
 				<p class="hotActivityDivTitle"> <span class="hotActivityDivTitleSpan">情人七夕加薪享不停...</span> <span class="hotProductDivTitleBtn">查看</span></p>
 				<p class="hotActivityDivTime">2017/07/07-2017/09/11</p>
 			</div>
-	
+
 			<!--活动-->
 			<div class="hotActivityDiv">
 				<img src="../../assets/main/home/activityImg.png" />
 				<p class="hotActivityDivTitle"> <span class="hotActivityDivTitleSpan">情人七夕加薪享不停...</span> <span class="hotProductDivTitleBtn">查看</span></p>
 				<p class="hotActivityDivTime">2017/07/07-2017/09/11</p>
 			</div>
-	
+
 		</div>
-	
+
 		<!--风险提示-->
 		<p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>
 	</div>
@@ -194,11 +194,7 @@
 
 <script>
 	import '@/lib/swiper/swiper.css'
-	import {
-		noviceExclusive,
-		recommendProduct,
-		sellsProduct
-	} from '@/service'
+	import { noviceExclusive, recommendProduct, sellsProduct } from '@/service'
 	export default {
 		name: "home",
 		data() {
@@ -215,17 +211,17 @@
 				console.log(res);
 				this.newList = res.productList;
 			});
-	
+
 			recommendProduct(this.itemNew).then(res => {
 				console.log(res);
 				this.recomPro = res.productList;
 			});
-	
+
 			sellsProduct(this.itemNew).then(res => {
 				console.log(res);
 				this.hotPro = res.productList;
 			});
-	
+
 		},
 		mounted() {
 			let Swiper = require("@/lib/swiper/swiper").Swiper;
@@ -246,7 +242,7 @@
 					prevEl: ".swiper-button-prev"
 				}
 			});
-	
+
 			//新手标
 			var swiper2 = new Swiper(".swiper-container2", {
 				spaceBetween: 0,
@@ -264,7 +260,7 @@
 					prevEl: ".swiper-button-prev"
 				}
 			});
-	
+
 		},
 		methods: {},
 		watch: {}
@@ -308,8 +304,6 @@
 		padding: 0;
 		text-align: center;
 	}
-	
-	
 	/*banner轮播*/
 	
 	.indexSwiper {
@@ -363,6 +357,9 @@
 		align-items: center;
 	}
 	
+	
+	
+	
 	.swiper-slide1>img {
 		width: 100%;
 		height: 100%;
@@ -379,8 +376,6 @@
 		height: 0.12rem;
 		border-radius: 0;
 	}
-	
-	
 	/* 公告 */
 	
 	.indexNotice {
@@ -409,8 +404,6 @@
 		line-height: 0.4rem;
 		text-align: left;
 	}
-	
-	
 	/* 关于我们 运营数据 */
 	
 	.indexMessage {
@@ -476,8 +469,6 @@
 		height: 0.66rem;
 		background-size: 100% 100%;
 	}
-	
-	
 	/* 新手专享 */
 	
 	.new {
@@ -566,8 +557,6 @@
 		color: #ffffff;
 		font-size: 0.32rem;
 	}
-	
-	
 	/* 为您推荐 */
 	
 	.recommend {
