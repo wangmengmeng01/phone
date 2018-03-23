@@ -93,14 +93,6 @@
       &.none
         padding: 0
         margin: 0
-        .nothing
-          background: #f1f1f9
-          height: 100vh
-          display: flex
-          align-items: center
-          justify-content: center
-          img
-            width: 3.32rem
       border-radius: .2rem
       padding-top: .6rem
       padding-bottom: .3rem
