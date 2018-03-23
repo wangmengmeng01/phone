@@ -4,7 +4,7 @@ import native from '@/native'
 
 // 导航守卫
 router.beforeEach((to, from, next) => {
-  native.loading('show'); // 根据loading属性显示loading框
+  let loading = native.loading('show'); // 根据loading属性显示loading框
   // 如果url上面有参数，判断是不是header的属性，是的话存到store中
   const query = Object.keys(to.query);
   if (query.length) {
