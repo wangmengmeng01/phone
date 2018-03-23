@@ -1,5 +1,5 @@
 <template>
-  <Fxd-mask  @click.native="cancel" transition="bouncelnDown">
+  <Fxd-mask @click.native="cancel" transition="bouncelnDown">
     <div class="dialog actionsheet">
       <ul>
         <li class="title" @click.stop.prevent>
@@ -7,14 +7,15 @@
         </li>
         <li>
           <a href='tel:4008-678-655'>
-            4008-678-655
-          </a>
+              4008-678-655
+            </a>
         </li>
       </ul>
       <p @click.native="cancel" class="act">取消</p>
     </div>
   </Fxd-mask>
 </template>
+
 <style lang="sass" scoped>
   .actionsheet
     position: fixed
@@ -48,18 +49,19 @@
       margin-top: 10px
 
 </style>
+
 <script>
-    import mask from '@/components/mask';
-    export default{
-        name: 'actionsheet',
-        props: ['msg'],
-        components: {
-            'Fxd-mask':mask,
-        },
-        methods: {
-            cancel(){
-                this.$parent.showActionsheet = false
-            },
-        }
+  import mask from '@/components/mask';
+  export default {
+    name: 'actionsheet',
+    props: ['msg'],
+    components: {
+      'Fxd-mask': mask,
+    },
+    methods: {
+      cancel() {
+        this.$parent.showActionsheet = false
+      },
     }
+  }
 </script>

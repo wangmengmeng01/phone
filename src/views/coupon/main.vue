@@ -4,7 +4,7 @@
       <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}({{i.size}})</li>
     </ul>
     <div class="coupon p4" :class="[!res.length?'none':'']">
-      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list"/>
+      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" />
       <div v-if="!res.length" class="nothing f32 color_font">暂无{{nav[act].name}}券</div>
     </div>
   </div>
@@ -12,7 +12,9 @@
 
 <script>
   import Coupon from '@/components/coupon/coupon'
-  import { searchUserCouponInfo } from '@/service'
+  import {
+    searchUserCouponInfo
+  } from '@/service'
   export default {
     name: 'coupon_main',
     data() {
@@ -23,12 +25,12 @@
           type: '1',
           status: '3',
           size: 0
-        },{
+        }, {
           name: '已使用',
           type: '1',
           status: '4',
           size: 0
-        },{
+        }, {
           name: '过期未使用',
           type: '1',
           status: '6',
@@ -43,37 +45,36 @@
     created() {
       this.init();
     },
-//    mounted() {
-//      document.body.onscroll = () => {
-//        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-//          if(this.res.length <= 10)return;
-//          if(this.pageIndex < Math.ceil(this.nav[this.act].size / 10)) return;
-//          this.pageIndex++;
-//          this.init();
-//        }
-//      }
-//    },
+    //    mounted() {
+    //      document.body.onscroll = () => {
+    //        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+    //          if(this.res.length <= 10)return;
+    //          if(this.pageIndex < Math.ceil(this.nav[this.act].size / 10)) return;
+    //          this.pageIndex++;
+    //          this.init();
+    //        }
+    //      }
+    //    },
     methods: {
-      init(){
-        searchUserCouponInfo(this.nav[this.act]).then(res=>{
+      init() {
+        searchUserCouponInfo(this.nav[this.act]).then(res => {
           this.res = res.couponList;
-          this.nav[0].size=res.notUsedCount;
-          this.nav[1].size=res.usedCount;
-          this.nav[2].size=res.expireNotUsedCount;
-        }).catch(()=>{
+          this.nav[0].size = res.notUsedCount;
+          this.nav[1].size = res.usedCount;
+          this.nav[2].size = res.expireNotUsedCount;
+        }).catch(() => {
           this.res = []
         })
       },
-      choose(i,index){
-        if(this.act===index)return;
+      choose(i, index) {
+        if (this.act === index) return;
         window.scroll(0, 0);
         this.act = index;
         this.pageIndex = 1; // 切换菜单重置pageIndex
         this.init(i);
       },
     },
-    watch: {
-    }
+    watch: {}
   }
 </script>
 

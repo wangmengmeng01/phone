@@ -3,29 +3,29 @@ import Vue from 'vue';
 let time = null;
 let Profile = Vue.extend(require('./loading.vue').default);
 var el;
-class loading{
-    constructor(time){
-        this.time = time || 30000;
+class loading {
+  constructor(time) {
+    this.time = time || 30000;
+  }
+  creat() {
+    this.el = document.createElement('div');
+    document.body.appendChild(this.el);
+    el = this.component = new Profile().$mount(this.el);
+  }
+  open() {
+    if (el) {
+      this.close();
     }
-    creat(){
-        this.el = document.createElement('div');
-        document.body.appendChild(this.el);
-        el = this.component = new Profile().$mount(this.el);
-    }
-    open(){
-        if(el){
-          this.close();
-        }
-        this.creat();
-        this.component.visible = true;
-        time = setTimeout(()=>{
-            this.close();
-        }, this.time)
-    }
-    close(){
-        clearTimeout(time)
-        this.component.visible = false
-    }
+    this.creat();
+    this.component.visible = true;
+    time = setTimeout(() => {
+      this.close();
+    }, this.time)
+  }
+  close() {
+    clearTimeout(time)
+    this.component.visible = false
+  }
 }
 
 export default new loading

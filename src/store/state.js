@@ -1,8 +1,9 @@
-import { middleClone } from '@/until'
+import {
+  middleClone
+} from '@/until'
 
 
-const  root_state ={
-};
+const root_state = {};
 
 export default root_state
 

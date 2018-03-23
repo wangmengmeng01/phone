@@ -9,70 +9,70 @@ import api from './api';
  * 自动复投查询
  */
 
-export const autoInvestQuary = async(params) => {
-	return await $http({
-		method: 'get',
-		api: api.autoInvestQuary,
-		params,
-		options: {
-			filter_code: false,
-			filter_msg: false
-		}
-	});
+export const autoInvestQuary = async (params) => {
+  return await $http({
+    method: 'get',
+    api: api.autoInvestQuary,
+    params,
+    options: {
+      filter_code: false,
+      filter_msg: false
+    }
+  });
 };
 
 // 财富首页
-export const wealthIndex = async(params) => {
-	return await $http({
-		method: 'get',
-		api: api.wealthIndex,
-		params,
-	});
+export const wealthIndex = async (params) => {
+  return await $http({
+    method: 'get',
+    api: api.wealthIndex,
+    params,
+  });
 };
 
 // 财富我的资产
-export const invesProperty = async(params) => {
-	return await $http({
-		method: 'get',
-		api: api.invesProperty,
-		params,
-	});
+export const invesProperty = async (params) => {
+  return await $http({
+    method: 'get',
+    api: api.invesProperty,
+    params,
+  });
 };
 
 // 风险评测
-export const userReskEvaluation = async(params) => {
-	return await $http({
-		method: 'post',
-		api: api.userReskEvaluation,
-		params,
-	});
+export const userReskEvaluation = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.userReskEvaluation,
+    params,
+  });
 };
 
 // 充值前信息查询
-export const selectBeforeRecharge = async(params) => {
-	return await $http({
-		method: 'get',
-		api: api.selectBeforeRecharge,
-		params,
-	});
+export const selectBeforeRecharge = async (params) => {
+  return await $http({
+    method: 'get',
+    api: api.selectBeforeRecharge,
+    params,
+  });
 };
 
 // 充值短信
-export const rechargeSendSmsCode = async(params) => {
-	return await $http({
-		method: 'post',
-		api: api.rechargeSendSmsCode,
-		params,
-		options: {
-			filter_code: false,
-			filter_msg: false
-		}
-	});
+export const rechargeSendSmsCode = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.rechargeSendSmsCode,
+    params,
+    options: {
+      filter_code: false,
+      filter_msg: false
+    }
+  });
 };
 
 
 // 我的优惠
-export const searchUserCouponInfo = async (params)=>{
+export const searchUserCouponInfo = async (params) => {
   return await $http({
     method: 'get',
     api: api.searchUserCouponInfo,
@@ -82,7 +82,7 @@ export const searchUserCouponInfo = async (params)=>{
 
 
 // 充值提交
-export const submitUserRecharge = async (params)=>{
+export const submitUserRecharge = async (params) => {
   return await $http({
     method: 'post',
     api: api.submitUserRecharge,
@@ -91,7 +91,7 @@ export const submitUserRecharge = async (params)=>{
 };
 
 // 取现手续费
-export const userCashFee = async (params)=>{
+export const userCashFee = async (params) => {
   return await $http({
     method: 'post',
     api: api.userCashFee,
@@ -100,7 +100,7 @@ export const userCashFee = async (params)=>{
 };
 
 // 取现
-export const toCash = async (params)=>{
+export const toCash = async (params) => {
   return await $http({
     method: 'post',
     api: api.toCash,
@@ -108,7 +108,7 @@ export const toCash = async (params)=>{
   });
 };
 // 自动复投
-export const autoTenderPlan = async (params)=>{
+export const autoTenderPlan = async (params) => {
   return await $http({
     method: 'post',
     api: api.autoTenderPlan,
@@ -117,7 +117,7 @@ export const autoTenderPlan = async (params)=>{
 };
 
 // 生成合同
-export const signingContract = async (params)=>{
+export const signingContract = async (params) => {
   return await $http({
     method: 'post',
     api: api.signingContract,
@@ -127,7 +127,7 @@ export const signingContract = async (params)=>{
 
 
 // 签约状态
-export const querySigningStatus = async (params)=>{
+export const querySigningStatus = async (params) => {
   return await $http({
     method: 'post',
     api: api.querySigningStatus,
@@ -136,7 +136,7 @@ export const querySigningStatus = async (params)=>{
 };
 
 // 交易记录
-export const transactionRecord = async (params)=>{
+export const transactionRecord = async (params) => {
   return await $http({
     method: 'get',
     api: api.transactionRecord,
@@ -145,7 +145,7 @@ export const transactionRecord = async (params)=>{
 };
 
 // 续投列表
-export const getUserEarningsDetail = async (params)=>{
+export const getUserEarningsDetail = async (params) => {
   return await $http({
     method: 'get',
     api: api.getUserEarningsDetail,
@@ -154,7 +154,7 @@ export const getUserEarningsDetail = async (params)=>{
 };
 
 // 续投开关
-export const continueOpenOperator = async (params)=>{
+export const continueOpenOperator = async (params) => {
   return await $http({
     method: 'post',
     api: api.continueOpenOperator,
@@ -163,7 +163,7 @@ export const continueOpenOperator = async (params)=>{
 };
 
 // 持有债券详情
-export const investPropertyDetail = async (params)=>{
+export const investPropertyDetail = async (params) => {
   return await $http({
     method: 'get',
     api: api.investPropertyDetail,
@@ -172,7 +172,7 @@ export const investPropertyDetail = async (params)=>{
 };
 
 // 持有债券列表
-export const serchDebtHoldedRecord = async (params)=>{
+export const serchDebtHoldedRecord = async (params) => {
   return await $http({
     method: 'get',
     api: api.serchDebtHoldedRecord,

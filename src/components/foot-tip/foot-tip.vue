@@ -8,13 +8,12 @@
 <script>
   export default {
     name: 'foot-tip',
-    computed:{
-      foot(){
+    computed: {
+      foot() {
         return this.$route.meta.foot
       }
     },
-    created(){
-    }
+    created() {}
   }
 </script>
 

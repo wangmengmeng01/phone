@@ -13,22 +13,22 @@
 <script>
   export default {
     name: 'back',
-    computed:{
-      back(){
+    computed: {
+      back() {
         return this.$route.meta.back
       },
-      backTitle(){
+      backTitle() {
         let backTitle = this.$route.query.backTitle;
-        backTitle && (document.title=backTitle);
+        backTitle && (document.title = backTitle);
         return backTitle
       },
-      islogin(){
+      islogin() {
         return this.$route.path.includes('login')
       }
     },
     methods: {
-      backFn(){
-        if(this.islogin){
+      backFn() {
+        if (this.islogin) {
           this.$go('/');
           return
         }
@@ -37,6 +37,7 @@
     },
   }
 </script>
+
 <style lang="sass" scoped>
   .back
     .title

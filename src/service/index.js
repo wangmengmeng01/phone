@@ -1,6 +1,8 @@
 import $http from './http'
 import config from '@/config'
-import { transformRequest } from '@/until'
+import {
+  transformRequest
+} from '@/until'
 import store from '@/store/'
 import api from './api';
 export * from './main'
@@ -16,7 +18,7 @@ export * from './found'
 /**
  * 登录
  */
-export const login = async (params)=>{
+export const login = async (params) => {
   return await $http({
     method: 'post',
     api: api.login,
@@ -32,7 +34,7 @@ export const login = async (params)=>{
 /**
  * 注册
  */
-export const register = (params)=>{
+export const register = (params) => {
   params.token = store.state.token;
   return $http({
     method: 'post',
@@ -47,7 +49,7 @@ export const register = (params)=>{
 /**
  * 忘记密码
  */
-export const forgetPassWord = (params)=>{
+export const forgetPassWord = (params) => {
   params.token = store.state.token;
   return $http({
     method: 'post',
@@ -61,7 +63,7 @@ export const forgetPassWord = (params)=>{
 /**
  * 发送短信
  */
-export const sendSMS = (params)=>{
+export const sendSMS = (params) => {
   params.token = store.state.token;
   return $http({
     method: 'post',
@@ -75,7 +77,7 @@ export const sendSMS = (params)=>{
 /**
  * 发送汇付短信
  */
-export const sendSmsCode = (params)=>{
+export const sendSmsCode = (params) => {
   return $http({
     method: 'post',
     api: api.sendSmsCode,
@@ -88,7 +90,7 @@ export const sendSmsCode = (params)=>{
 /**
  * 获取token
  */
-export const getToken = ()=>{
+export const getToken = () => {
   return $http({
     method: 'post',
     api: api.getToken,
@@ -99,9 +101,9 @@ export const getToken = ()=>{
 /**
  * 获取图形验证码
  */
-export const getValidateImage = ()=>{
-  return new Promise((resolve)=>{
-    getToken().then(r=>{
+export const getValidateImage = () => {
+  return new Promise((resolve) => {
+    getToken().then(r => {
       const params = {
         token: r.token,
         timestamp: +new Date()
@@ -123,7 +125,7 @@ export const getValidateImage = ()=>{
  * 退出登录
  * @param  {String} pid 产品id
  */
-export const logout = (params)=>{
+export const logout = (params) => {
   return $http({
     method: 'get',
     api: api.logout,
@@ -137,7 +139,7 @@ export const logout = (params)=>{
  * 找回密码
  * @param  {String} pid 产品id
  */
-export const findPasswordBack = (params)=>{
+export const findPasswordBack = (params) => {
   return $http({
     method: 'post',
     api: api.findPasswordBack,
@@ -152,7 +154,7 @@ export const findPasswordBack = (params)=>{
  * 银行开户
  * @param  {String} pid 产品id
  */
-export const openAccount = (params)=>{
+export const openAccount = (params) => {
   return $http({
     method: 'post',
     api: api.openAccount,
@@ -164,15 +166,15 @@ export const openAccount = (params)=>{
  * 银行换绑卡
  * @param  {String} pid 产品id
  */
-export const quickBinding = (params)=>{
+export const quickBinding = (params) => {
   return $http({
     method: 'post',
     api: api.quickBinding,
     params,
     options: {
-			filter_code: false,
-			filter_msg: false
-		}
+      filter_code: false,
+      filter_msg: false
+    }
   });
 }
 
@@ -180,7 +182,7 @@ export const quickBinding = (params)=>{
  * 用户激活
  * @param  {String} pid 产品id
  */
-export const userActivate = (params)=>{
+export const userActivate = (params) => {
   return $http({
     method: 'post',
     api: api.userActivate,

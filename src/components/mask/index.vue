@@ -1,12 +1,13 @@
 <template>
-    <div>
-        <div id="mask">
-          <transition :name="transition">
-            <slot v-if="visible"></slot>
-          </transition>
-        </div>
+  <div>
+    <div id="mask">
+      <transition :name="transition">
+        <slot v-if="visible"></slot>
+      </transition>
     </div>
+  </div>
 </template>
+
 <style lang="sass" scoped>
     #mask
         position: fixed
@@ -21,29 +22,29 @@
         max-width: 650px
         margin: auto
 </style>
-<script>
 
-    export default {
-        name: 'fmask',
-        data(){
-          return{
-            visible: false,
-          }
-        },
-        props: {
-          transition: {
-            type: String,
-            default: 'fade'  // 默认淡入淡出
-          }
-        },
-        mounted(){
-          this.$nextTick(()=>{
-            document.getElementById('mask').addEventListener('touchmove',(e)=>{
-              e.stopPropagation();
-//              e.preventDefault();
-            });
-            this.visible = !this.visible;
-          })
-        },
-    }
+<script>
+  export default {
+    name: 'fmask',
+    data() {
+      return {
+        visible: false,
+      }
+    },
+    props: {
+      transition: {
+        type: String,
+        default: 'fade' // 默认淡入淡出
+      }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        document.getElementById('mask').addEventListener('touchmove', (e) => {
+          e.stopPropagation();
+          //              e.preventDefault();
+        });
+        this.visible = !this.visible;
+      })
+    },
+  }
 </script>

@@ -1,15 +1,13 @@
 <template>
   <div class="continueInvest">
     <div class="CITop">
-      为我的资产开启自动续期 <br/>
-      到期后本金将自动购买同款产品 <br>
-      避免资金闲置而损失收益
+      为我的资产开启自动续期 <br/> 到期后本金将自动购买同款产品 <br> 避免资金闲置而损失收益
     </div>
     <ul class="CTCWrap" v-show="list.length">
       <li v-for="(i,index) in list">
         <div class="CTCtop">
           <div class="CTCTleft">{{i.bidName}}</div>
-          <div class="OOWrap" >
+          <div class="OOWrap">
             <div class="OOButton" :class="[i.continueFlag==1?'on':'']" @click="submit(i.investId,i.continueFlag,index)">{{i.continueFlag==1?'开':'关'}}</div>
           </div>
         </div>
@@ -19,78 +17,82 @@
         </div>
       </li>
     </ul>
-    
-     <div class="joinListDiv1" v-show="!list.length" style="background-color: #f1f1f9;">
-			<img src="../../assets/main/prod/norecord.png" />
-			<p class="noRecord">暂无记录</p>
-	</div>
+  
+    <div class="joinListDiv1" v-show="!list.length" style="background-color: #f1f1f9;">
+      <img src="../../assets/main/prod/norecord.png" />
+      <p class="noRecord">暂无记录</p>
+    </div>
   </div>
 </template>
 
 <script>
-  import {getUserEarningsDetail,continueOpenOperator} from '@/service'
+  import {
+    getUserEarningsDetail,
+    continueOpenOperator
+  } from '@/service'
   export default {
-	name: 'continueInvest',
-	data() {
-		return {
-			autoRenewBol: true, //自动续费
-			item: {
-				pageIndex: 1, //续投列表分页
-			},
-			totalPage: 0,
-			list: [], //购买记录
-
-		}
-	},
-	created() {
-		this.init();
-	},
-	mounted() {
-		window.scroll(0, 0);
-		document.body.onscroll = () => {
-			if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-				this.item.pageIndex++;
-				if(this.item.pageIndex > this.totalPage) {
-					return;
-				}
-				this.init();
-			}
-		}
-
-	},
-	methods: {
-		init() {
-			getUserEarningsDetail(this.item).then(res => {
-				console.log(res);
-				this.list = this.list.concat(res.list);
-				this.totalPage = Math.ceil(res.totalCount / 10);
-			});
-		},
-		submit(a, b, c) {
-			if(b == 1) {
-				b = 2;
-			} else {
-				b = 1;
-			}
-
-			continueOpenOperator({
-				investId: a,
-				isContinue: b,
-			}).then(res => {
-
-				if(res.isContinue == 1) {
-					this.list[c].continueFlag = 1;
-				} else {
-					this.list[c].continueFlag = 2;
-				}
-
-			});
-
-			//				
-		}
-	},
-	watch: {}
-}</script>
+    name: 'continueInvest',
+    data() {
+      return {
+        autoRenewBol: true, //自动续费
+        item: {
+          pageIndex: 1, //续投列表分页
+        },
+        totalPage: 0,
+        list: [], //购买记录
+  
+      }
+    },
+    created() {
+      this.init();
+    },
+    mounted() {
+      window.scroll(0, 0);
+      document.body.onscroll = () => {
+        if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+          this.item.pageIndex++;
+          if (this.item.pageIndex > this.totalPage) {
+            return;
+          }
+          this.init();
+        }
+      }
+  
+    },
+    methods: {
+      init() {
+        getUserEarningsDetail(this.item).then(res => {
+          console.log(res);
+          this.list = this.list.concat(res.list);
+          this.totalPage = Math.ceil(res.totalCount / 10);
+        });
+      },
+      submit(a, b, c) {
+        if (b == 1) {
+          b = 2;
+        } else {
+          b = 1;
+        }
+  
+        continueOpenOperator({
+          investId: a,
+          isContinue: b,
+        }).then(res => {
+  
+          if (res.isContinue == 1) {
+            this.list[c].continueFlag = 1;
+          } else {
+            this.list[c].continueFlag = 2;
+          }
+  
+        });
+  
+        //				
+      }
+    },
+    watch: {}
+  }
+</script>
 
 <style lang="stylus" scoped>
   .CITop

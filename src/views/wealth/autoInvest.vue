@@ -21,183 +21,206 @@
 </template>
 
 <script>
-  import { autoInvestQuary,querySigningStatus,signingContract,autoTenderPlan,getUserStatus,userActivate } from '@/service'
-  import { mapGetters, mapMutations } from 'vuex'
+  import {
+    autoInvestQuary,
+    querySigningStatus,
+    signingContract,
+    autoTenderPlan,
+    getUserStatus,
+    userActivate
+  } from '@/service'
+  import {
+    mapGetters,
+    mapMutations
+  } from 'vuex'
   import axios from 'axios'
   export default {
     name: 'autoInvest',
     data() {
-      return{
+      return {
         res: {},
         item: {
-
+  
         },
-        auroBol:true,//复投标识
-        retUrl:'',
-        retUrl2:'',
+        auroBol: true, //复投标识
+        retUrl: '',
+        retUrl2: '',
       }
+    },
+    created() {
+      const retUrl = this.retUrl = location + '?isJZQ=1';
+      const retUrl2 = this.retUrl2 = location + '?isFT=1';
+      getUserStatus(this.itemStatus).then(res => {
+        //@click=""
+        console.log(res);
+        const info = res.result;
+        if (res.code == "100") {
+  
+          if (info.openAccountStatus == "1") {
+            //未开户
+            this.$go('/reg_bank');
+          } else if (info.openAccountStatus == "4") {
+            //激活
+  
+            userActivate({
+              retUrl: location.origin + location.pathname
+            }).then(res => {
+              axios({
+                method: 'post',
+                url: location.origin + new URL(res.serviceUrl).pathname,
+                data: res.inMap,
+                transformRequest: [function(data) {
+                  let ret = '';
+                  for (let it in data) {
+                    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                  }
+                  return ret.slice(0, ret.length - 1)
+                }],
+              }).then(r => {
+                if (r.status === 200) {
+                  if (r.data) {
+                    document.body.innerHTML = r.data;
+                    setTimeout(() => {
+                      document.form.submit()
+                    }, 0)
+                  }
+                }
+              })
+            })
+  
+          } else {
+  
+            //复投
+            if (info.autoBuyBidFlag == "1") {
+  
+              this.auroBol = false;
+  
+            }
+  
+          }
+  
+        } else if (res.code == "1210" || res.code == "1000") {
+          this.$go('/login');
+        } else {
+          this.$toask(res.message);
+        }
+      });
+      //君子签回来
+      //    		if(this.$route.query.isJZQ){
+      //
+      //    			querySigningStatus({busiType:'4'}).then(res => {
+      //
+      //	       			console.log(res);
+      //	       			if(res.status=="1"||res.status=="3"){
+      //	       				this.autoTenderPlan();
+      //	       			}else{
+      //	       			}
+      //	       		})
+      //
+      //			};
+      //复投回来
+      //			if(this.$route.query.isFT){
+      //				autoInvestQuary().then(res => {
+      //		       		if(res.code == "100") {
+      //		       			this.auroBol = false;
+      //		       			 this.RESET('succ_page');
+      //						 this.SET_SUCC_PAGE({
+      //		             		"title": "已授权存管方开启自动投标",
+      //							'sub_title': "您现在可以进行计划标的投资了",
+      //							"btn_text": "立即投资",
+      //							"backurl": "/product",
+      //							"sub_btn_text": "暂不",
+      //							"sub_backurl": "/"
+      //		            			});
+      //		          		  this.$go('/static/succ','',true);
+      //
+      //		       		} else if(res.code == "1210" || res.code == "1000") {
+      //		       			this.$go('/login');
+      //		       		} else {
+      //		       			this.$toask(res.message);
+      //		       		}
+      //
+      //		       	});
+      //
+      //			}
+  
+  
+    },
+    methods: {
+      ...mapMutations([
+        'RESET',
+        'SET_SUCC_PAGE'
+      ]),
+      //开启复投（先查询君子签状态）
+      openTenderPlan() {
+        querySigningStatus({
+          busiType: '4'
+        }).then(res => {
+  
+          console.log(res);
+          if (res.status == "1" || res.status == "3") {
+            this.autoTenderPlan();
+          } else {
+            this.signingContract();
+          }
+  
+        })
+  
+  
       },
-      created() {
-			const retUrl = this.retUrl = location+'?isJZQ=1';
-			const retUrl2 = this.retUrl2 = location+'?isFT=1';
-      		getUserStatus(this.itemStatus).then(res => {
-      			//@click=""
-      			console.log(res);
-      			const info = res.result;
-      			if(res.code == "100") {
-
-      				if(info.openAccountStatus == "1") {
-      					//未开户
-      					this.$go('/reg_bank');
-      				} else if(info.openAccountStatus == "4") {
-      					//激活
-						
-			            userActivate({
-			              retUrl:location.origin+location.pathname
-			              }).then(res=>{
-			              axios({
-			                method: 'post',
-			                url: location.origin+ new URL(res.serviceUrl).pathname,
-			                data: res.inMap,
-			                transformRequest: [function (data) {
-			                  let ret = '';
-			                  for (let it in data) {
-			                    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-			                  }
-			                  return ret.slice(0,ret.length-1)
-			                }],
-			              }).then(r=>{
-			                if(r.status === 200){
-			                  if(r.data){
-			                    document.body.innerHTML = r.data;
-			                    setTimeout(()=>{document.form.submit()},0)
-			                  }
-			                }
-			              })
-			            })
-          
-      				} else {
-
-      					//复投
-      					if(info.autoBuyBidFlag == "1") {
-
-							this.auroBol=false;
-
-      					}
-
-      				}
-
-      			} else if(res.code == "1210" || res.code == "1000") {
-      				this.$go('/login');
-      			} else {
-      				this.$toask(res.message);
-      			}
-      		});
-      		//君子签回来
-//    		if(this.$route.query.isJZQ){
-//
-//    			querySigningStatus({busiType:'4'}).then(res => {
-//
-//	       			console.log(res);
-//	       			if(res.status=="1"||res.status=="3"){
-//	       				this.autoTenderPlan();
-//	       			}else{
-//	       			}
-//	       		})
-//
-//			};
-			//复投回来
-//			if(this.$route.query.isFT){
-//				autoInvestQuary().then(res => {
-//		       		if(res.code == "100") {
-//		       			this.auroBol = false;
-//		       			 this.RESET('succ_page');
-//						 this.SET_SUCC_PAGE({
-//		             		"title": "已授权存管方开启自动投标",
-//							'sub_title': "您现在可以进行计划标的投资了",
-//							"btn_text": "立即投资",
-//							"backurl": "/product",
-//							"sub_btn_text": "暂不",
-//							"sub_backurl": "/"
-//		            			});
-//		          		  this.$go('/static/succ','',true);
-//
-//		       		} else if(res.code == "1210" || res.code == "1000") {
-//		       			this.$go('/login');
-//		       		} else {
-//		       			this.$toask(res.message);
-//		       		}
-//
-//		       	});
-//
-//			}
-
-
-      	},
-      	methods: {
-      		 ...mapMutations([
-		        'RESET',
-		        'SET_SUCC_PAGE'
-		      ]),
-	       //开启复投（先查询君子签状态）
-	       openTenderPlan(){
-	       		querySigningStatus({busiType:'4'}).then(res => {
-
-	       			console.log(res);
-	       			if(res.status=="1"||res.status=="3"){
-	       				this.autoTenderPlan();
-	       			}else{
-	       				this.signingContract();
-	       			}
-
-	       		})
-
-
-	       },
-	       //去开启复投
-	       autoTenderPlan(){
-	       	autoTenderPlan({openFlag:'1',retUrl:this.retUrl2}).then(res => {
-			         console.log(location.origin+ new URL(res.serviceUrl).pathname)
-			              axios({
-			                method: 'post',
-			                url: location.origin+ new URL(res.serviceUrl).pathname,
-			                data: res.inMap,
-			                transformRequest: [function (data) {
-			                  let ret = '';
-			                  for (let it in data) {
-			                    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-			                  }
-			                  return ret.slice(0,ret.length-1)
-			                }],
-			              }).then(r=>{
-			                if(r.status === 200){
-			                  if(r.data){
-			                    document.body.innerHTML = r.data;
-			                    setTimeout(()=>{document.form.submit()},0)
-			                  }
-			                }
-			              })
-
-
-	       		})
-
-	       },
-	       //君子签跳转
-
-	       signingContract(){
-	       	signingContract({busiType:'4',retUrl:this.retUrl}).then(res => {
-	       			console.log(res);
-	       			window.location.href=res.link;
-
-	       		})
-
-	       },
-
-
-
-	       },
-	       watch: {}
-	       }</script>
+      //去开启复投
+      autoTenderPlan() {
+        autoTenderPlan({
+          openFlag: '1',
+          retUrl: this.retUrl2
+        }).then(res => {
+          console.log(location.origin + new URL(res.serviceUrl).pathname)
+          axios({
+            method: 'post',
+            url: location.origin + new URL(res.serviceUrl).pathname,
+            data: res.inMap,
+            transformRequest: [function(data) {
+              let ret = '';
+              for (let it in data) {
+                ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+              }
+              return ret.slice(0, ret.length - 1)
+            }],
+          }).then(r => {
+            if (r.status === 200) {
+              if (r.data) {
+                document.body.innerHTML = r.data;
+                setTimeout(() => {
+                  document.form.submit()
+                }, 0)
+              }
+            }
+          })
+  
+  
+        })
+  
+      },
+      //君子签跳转
+  
+      signingContract() {
+        signingContract({
+          busiType: '4',
+          retUrl: this.retUrl
+        }).then(res => {
+          console.log(res);
+          window.location.href = res.link;
+  
+        })
+  
+      },
+  
+  
+  
+    },
+    watch: {}
+  }
+</script>
 
 <style lang="stylus" scoped>
   .autoInvest

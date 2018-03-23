@@ -10,12 +10,12 @@
 
 <script>
 	export default {
-
+	
 		name: 'buySucc',
-
+	
 		data() {
 			return {
-
+	
 			}
 		}
 	}

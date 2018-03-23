@@ -1,7 +1,7 @@
 <template>
   <div class="claims">
     <ul v-show="list.length">
-      <li  v-for="(i,index) in list" class="item flex">
+      <li v-for="(i,index) in list" class="item flex">
         <div class="left">
           <div class="top">
             <img src="../../assets/wealth/wealth/zq.png" alt="" class="icon">
@@ -23,63 +23,64 @@
         </div>
       </li>
     </ul>
-    
-    	<div class="joinListDiv1" v-show="!list.length" style="background-color: #f1f1f9;float: left;width: 7.5rem;overflow: hidden;">
-			<img style="margin: 1.14rem 1.74rem 0.5rem;width: 4.02rem;height: 4.1rem;background-size: 100% 100%;" src="../../assets/main/prod/norecord.png" />
-			<p class="noRecord" style="text-align: center;font-size: 0.28rem;color: #8D8D94;margin-bottom: 1.0rem;">暂无记录</p>
-	</div>
-    
-    
+  
+    <div class="joinListDiv1" v-show="!list.length" style="background-color: #f1f1f9;float: left;width: 7.5rem;overflow: hidden;">
+      <img style="margin: 1.14rem 1.74rem 0.5rem;width: 4.02rem;height: 4.1rem;background-size: 100% 100%;" src="../../assets/main/prod/norecord.png" />
+      <p class="noRecord" style="text-align: center;font-size: 0.28rem;color: #8D8D94;margin-bottom: 1.0rem;">暂无记录</p>
+    </div>
+  
+  
   </div>
 </template>
 
 <script>
-	 import { serchDebtHoldedRecord } from '@/service'
+  import {
+    serchDebtHoldedRecord
+  } from '@/service'
   export default {
     name: 'claims',
     data() {
-      return{
-      	item:{
-      		cashNo:'',
-      		pageNum:1,
-      	},
-      	list:[],
-      	totalPage:0,
+      return {
+        item: {
+          cashNo: '',
+          pageNum: 1,
+        },
+        list: [],
+        totalPage: 0,
       }
     },
     created() {
-    	  this.item.cashNo= this.$route.query.cashNo;
-     this.init();
-    	
-    	
-    	
+      this.item.cashNo = this.$route.query.cashNo;
+      this.init();
+  
+  
+  
     },
     mounted() {
-			window.scroll(0, 0);
-			document.body.onscroll = () => {
-
-				if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-
-					this.item.pageNum++;
-					if(this.item.pageNum > this.totalPage) {
-						return;
-					}
-					this.init();
-
-				}
-			}
-
-		},
-    methods: {
-	    	init(){
-	    		 serchDebtHoldedRecord(this.item).then(res=>{
-	          this.list = this.list.concat(res.deptHoldedList);
-			  this.totalPage = Math.ceil(res.totalNum / 10);
-	        });
-	    	}
+      window.scroll(0, 0);
+      document.body.onscroll = () => {
+  
+        if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+  
+          this.item.pageNum++;
+          if (this.item.pageNum > this.totalPage) {
+            return;
+          }
+          this.init();
+  
+        }
+      }
+  
     },
-    watch: {
-    }
+    methods: {
+      init() {
+        serchDebtHoldedRecord(this.item).then(res => {
+          this.list = this.list.concat(res.deptHoldedList);
+          this.totalPage = Math.ceil(res.totalNum / 10);
+        });
+      }
+    },
+    watch: {}
   }
 </script>
 

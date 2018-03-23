@@ -21,99 +21,103 @@
     <div class="bottom">
       <div class="bottomTop">银行预留手机号<span>{{cardMes.mobile|desensitization}}</span></div>
       <div class="bottomB">
-        <input type="tel"  maxlength="6" oninput="if( ! /^-?\d+\.?\d{0,2}$/.test(this.value)){ var s = this.value;this.value=s.substring(0,s.length-1);}" v-model="rebindSms" placeholder="请输入短信验证码">
-        <div class="getCode"   @click="sendMess"  :class="click_code?'disableBtn':''">{{codeText}}</div>
+        <input type="tel" maxlength="6" oninput="if( ! /^-?\d+\.?\d{0,2}$/.test(this.value)){ var s = this.value;this.value=s.substring(0,s.length-1);}" v-model="rebindSms" placeholder="请输入短信验证码">
+        <div class="getCode" @click="sendMess" :class="click_code?'disableBtn':''">{{codeText}}</div>
       </div>
     </div>
-     <p class="rebind"  @click="submit" :class="[rebindSms.length==6?'':'disable']">下一步</p>
+    <p class="rebind" @click="submit" :class="[rebindSms.length==6?'':'disable']">下一步</p>
   </div>
 </template>
 
 <script>
-  import { selectBeforeRecharge,rechargeSendSmsCode} from '@/service'
-  import {mapMutations } from 'vuex'
+  import {
+    selectBeforeRecharge,
+    rechargeSendSmsCode
+  } from '@/service'
+  import {
+    mapMutations
+  } from 'vuex'
   export default {
     name: 'changeBank',
     data() {
-      return{
-      	cardMes:'',//银行卡信息
-      	smsSeq: '', //短信校验码
-		itemSms: {
-			busiType: 'rebind',
-			smsTempType: 'O',
-		}, //发送短信参数
-		click_code: false, // 短信按钮能否点击
-		codeText: '获取短信验证码', // 获取验证码提示
-		num: 60, // 验证码倒计时
-		rebindSms:'',//短信验证码
+      return {
+        cardMes: '', //银行卡信息
+        smsSeq: '', //短信校验码
+        itemSms: {
+          busiType: 'rebind',
+          smsTempType: 'O',
+        }, //发送短信参数
+        click_code: false, // 短信按钮能否点击
+        codeText: '获取短信验证码', // 获取验证码提示
+        num: 60, // 验证码倒计时
+        rebindSms: '', //短信验证码
       }
     },
     created() {
-    		selectBeforeRecharge().then(res => {
-			this.cardMes = res;
-			this.itemSms.bankCardNo = res.bankCardNo;
-			this.itemSms.mobile = res.mobile;
-		});    
-		this.RESET('bindCard');
+      selectBeforeRecharge().then(res => {
+        this.cardMes = res;
+        this.itemSms.bankCardNo = res.bankCardNo;
+        this.itemSms.mobile = res.mobile;
+      });
+      this.RESET('bindCard');
     },
     methods: {
-    		 ...mapMutations([
-    		 'RESET',
-	      'SET_BINDCARD',    
-	    ]),
-		sendMess() {
-			this.smsSeq = '';
-			rechargeSendSmsCode(this.itemSms).then(res => {
-				if(res.code == "100") {
-					this.$toask('短信验证码已发送');
-					this.smsSeq = res.result.smsSeq;
-
-					this.countdown();
-
-				} else if(res.code == "1000") {
-					this.$go('/login');
-				} else {
-					this.$toask(res.message);
-				}
-
-			});
-		},
-
-		/**
-		 * 倒计时
-		 */
-		countdown() {
-			this.click_code = !this.click_code;
-			let time = setInterval(() => {
-				this.num--;
-				if(this.num < 0) {
-					clearInterval(time);
-					this.click_code = !this.click_code;
-					this.codeText = '获取短信验证码';
-					this.num = 60;
-					return
-				}
-				this.codeText = `发送(${this.num})`;
-			}, 1000)
-		},    	
-    		
-    		submit(){
-    			this.$go('/changeBank2');
-    			this.SET_BINDCARD({
-    				"realName": this.cardMes.realName,
-				"cardNumber": this.cardMes.cardNumber,
-				"orgSmsCode":  this.rebindSms,
-				"orgSmsSeq":  this.smsSeq
-    				
-    			});
-    			
-    			
-    		},
-    	
-    	
+      ...mapMutations([
+        'RESET',
+        'SET_BINDCARD',
+      ]),
+      sendMess() {
+        this.smsSeq = '';
+        rechargeSendSmsCode(this.itemSms).then(res => {
+          if (res.code == "100") {
+            this.$toask('短信验证码已发送');
+            this.smsSeq = res.result.smsSeq;
+  
+            this.countdown();
+  
+          } else if (res.code == "1000") {
+            this.$go('/login');
+          } else {
+            this.$toask(res.message);
+          }
+  
+        });
+      },
+  
+      /**
+       * 倒计时
+       */
+      countdown() {
+        this.click_code = !this.click_code;
+        let time = setInterval(() => {
+          this.num--;
+          if (this.num < 0) {
+            clearInterval(time);
+            this.click_code = !this.click_code;
+            this.codeText = '获取短信验证码';
+            this.num = 60;
+            return
+          }
+          this.codeText = `发送(${this.num})`;
+        }, 1000)
+      },
+  
+      submit() {
+        this.$go('/changeBank2');
+        this.SET_BINDCARD({
+          "realName": this.cardMes.realName,
+          "cardNumber": this.cardMes.cardNumber,
+          "orgSmsCode": this.rebindSms,
+          "orgSmsSeq": this.smsSeq
+  
+        });
+  
+  
+      },
+  
+  
     },
-    watch: {
-    }
+    watch: {}
   }
 </script>
 

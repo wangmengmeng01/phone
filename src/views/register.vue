@@ -15,23 +15,26 @@
 <script>
   export default {
     name: 'register',
-    data () {
+    data() {
       return {
         mobile: sessionStorage.mobile || ''
       }
     },
     methods: {
-      submit(){
-        if(!this.mobile) {
+      submit() {
+        if (!this.mobile) {
           this.$toask('手机号不能为空!');
           return
         }
-        if(!(/^1\d{10}$/.test(this.mobile))) {
+        if (!(/^1\d{10}$/.test(this.mobile))) {
           this.$toask('手机号格式不正确!');
           return
         }
         sessionStorage.mobile = this.mobile;
-        this.$go('set_pwd',{mobile:this.mobile,view:'register'});
+        this.$go('set_pwd', {
+          mobile: this.mobile,
+          view: 'register'
+        });
       },
     }
   }

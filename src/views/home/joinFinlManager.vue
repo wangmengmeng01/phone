@@ -5,7 +5,7 @@
 			<p class="joinFMp1"><span class="higSpan ml"></span><span></span><span class="boder" :class="[joinBol5?'higSpan':'' ]"></span><span></span><span class="boder" :class="[(joinBol3 || joinBol4 )?'higSpan':'' ]"></span></p>
 			<p class="joinFMp2"><span>上传身份证</span><span>人工审核</span><span>完成加盟</span></p>
 		</div>
-
+	
 		<!--身份信息-->
 		<div class="upDate" v-show="joinBol">
 			<!--上传身份证-->
@@ -18,7 +18,7 @@
 			</div>
 			<div class="joinFMdiv">
 				<p class="joinFMdivWord"><span>2</span>身份证反面</p>
-
+	
 				<p class="inputFile">
 					<input type="file" @change="change($event,1)" name="fileInput2" id="" value="" />
 					<img v-show="showFalse2" :src="imgUrl2" />
@@ -55,12 +55,12 @@
 				<p>预计反馈时间</p>
 			</div>
 		</div>
-
+	
 		<!--加盟成功-->
-
+	
 		<div class="submission" v-show="!joinBol&&joinBol3">
 			<p class="submissionTitle"> <img src="../../assets/main/home/DoubtH@2x.png" /><span>已成功加盟，恭喜您</span></p>
-
+	
 			<div class="subDivleft1">
 				<p>审核通过</p>
 				<p>当前状态</p>
@@ -70,10 +70,10 @@
 				<p>审核时间</p>
 			</div>
 		</div>
-
+	
 		<div class="submission" v-show="false">
 			<p class="submissionTitle1"> <img src="../../assets/main/home/earth@2x.png" /><span>尝试以下功能，开启精彩理财师生涯</span></p>
-
+	
 			<div class="submissionDIV">
 				<p>
 					<img src="../../assets/main/home/gg@2x.png" />
@@ -83,14 +83,14 @@
 					<img src="../../assets/main/home/kh@2x.png" />
 					<span>获取潜在客户</span>
 				</p>
-
+	
 			</div>
-
+	
 		</div>
-
+	
 		<div class="submission" v-show="!joinBol&&joinBol4">
 			<p class="submissionTitle"> <img style="margin-left:0.82rem ;" src="../../assets/main/home/close@2x.png" /><span>对不起，您的加盟申请被拒绝</span></p>
-
+	
 			<div class="subDivleft1">
 				<p>审核通过</p>
 				<p>当前状态</p>
@@ -100,23 +100,30 @@
 				<p>审核时间</p>
 			</div>
 		</div>
-
+	
 		<div class="submission" style="height: 5.36rem;" v-show="!joinBol&&joinBol4">
 			<p class="submissionFalseP1">拒绝原因</p>
 			<p class="submissionFalseP2">注册信息与身份证照片不一致</p>
 			<p class="submissionFalseP3" @click="joinAgain">重新提交申请</p>
 			<p class="submissionFalseP4">您可以根据拒绝原因调整后重新发起申请</p>
 		</div>
-
+	
 	</div>
 </template>
+
 <script>
-	import { upload } from '@/until'
-	import { searchManagerCheckStatus, saveUserManager ,uploadFile} from '@/service'
+	import {
+		upload
+	} from '@/until'
+	import {
+		searchManagerCheckStatus,
+		saveUserManager,
+		uploadFile
+	} from '@/service'
 	export default {
-
+	
 		name: 'joinFinlManager',
-
+	
 		data() {
 			return {
 				checked: true,
@@ -132,7 +139,7 @@
 				joinBol4: false,
 				joinBol5: false,
 				itemJoin: {
-					cardNumberFrontFileStream:'',
+					cardNumberFrontFileStream: '',
 					cardNumberBackFileStream: '',
 					flag: "",
 				},
@@ -140,16 +147,15 @@
 			}
 		},
 		created() {
-
+	
 			searchManagerCheckStatus(this.item).then(res => {
-				if(res.code == "1001") {
-				} else if(res.code == "100") {
+				if (res.code == "1001") {} else if (res.code == "100") {
 					this.joinBol = !this.joinBol;
 					this.jionMes = res.result;
-					if(res.result.status == "1") {
+					if (res.result.status == "1") {
 						this.joinBol2 = !this.joinBol2;
 						this.joinBol5 = !this.joinBol5;
-					} else if(res.result.status == "2") {
+					} else if (res.result.status == "2") {
 						this.joinBol3 = !this.joinBol3;
 						this.joinBol5 = !this.joinBol5;
 					} else {
@@ -159,20 +165,20 @@
 				} else {
 					this.$go('/login');
 				}
-
+	
 			});
-
+	
 			//			.catch(()=>{
 			//				this.$toask("dddd")
 			//				
 			//			});
-
+	
 		},
 		methods: {
 			//图片上传
 			change(e, i) {
 				upload(e).then((res) => {
-					if(!i) {
+					if (!i) {
 						this.imgUrl = "";
 						this.showFalse = true;
 						this.imgUrl = res;
@@ -183,63 +189,63 @@
 					}
 				});
 			},
-
+	
 			join() {
-				if(!this.showFalse || !this.showFalse2) {
+				if (!this.showFalse || !this.showFalse2) {
 					this.$toask("请提交身份证照片");
 				} else {
-					if(!this.checked) {
+					if (!this.checked) {
 						this.$toask("请勾选加盟协议");
 					} else {
-						
-						this.itemJoin.cardNumberFrontFileStream=this.imgUrl.split(",")[1];
-						this.itemJoin.cardNumberBackFileStream=this.imgUrl2.split(",")[1];
-						this.itemJoin.flag=this.checked;
+	
+						this.itemJoin.cardNumberFrontFileStream = this.imgUrl.split(",")[1];
+						this.itemJoin.cardNumberBackFileStream = this.imgUrl2.split(",")[1];
+						this.itemJoin.flag = this.checked;
 						saveUserManager(this.itemJoin).then(res => {
-							if(res.code == "100" || res.code == "1019") {
+							if (res.code == "100" || res.code == "1019") {
 								this.joinBol = !this.joinBol;
 								this.joinBol2 = !this.joinBol2;
-								this.joinBol5=!this.joinBol5;
-							} else if(res.code == "1000") {
+								this.joinBol5 = !this.joinBol5;
+							} else if (res.code == "1000") {
 								this.$go('/login');
 							} else {
 								this.$toask(res.message);
 							}
 						})
-
+	
 					}
-
+	
 				}
 			},
-			joinAgain(){
-				this.checked=true;
-				this.imgUrl='';
-				this.imgUrl2='';
-				this.showFalse=false;
-				this.showFalse2=false;
-				this.checkBol=false;
-				this.item={};
-				this.joinBol=true;
-				this.joinBol2=false;
-				this.joinBol3=false;
-				this.joinBol4=false;
-				this.joinBol5=false;
-				this.itemJoin.cardNumberFrontFileStream='';
-				this.itemJoin.cardNumberBackFileStream='';
-				this.itemJoin.flag='';
-				this.jionMes='';
+			joinAgain() {
+				this.checked = true;
+				this.imgUrl = '';
+				this.imgUrl2 = '';
+				this.showFalse = false;
+				this.showFalse2 = false;
+				this.checkBol = false;
+				this.item = {};
+				this.joinBol = true;
+				this.joinBol2 = false;
+				this.joinBol3 = false;
+				this.joinBol4 = false;
+				this.joinBol5 = false;
+				this.itemJoin.cardNumberFrontFileStream = '';
+				this.itemJoin.cardNumberBackFileStream = '';
+				this.itemJoin.flag = '';
+				this.jionMes = '';
 			},
-
+	
 		}
 	}
 </script>
 
 <style scoped>
 	/*.submission1,
-	.submission2,
-	.submission3 {
-		display: none;
-	}*/
+		.submission2,
+		.submission3 {
+			display: none;
+		}*/
 	
 	.submissionFalseP1 {
 		height: 0.28rem;
@@ -436,18 +442,20 @@
 		text-align: center;
 		color: #8D8D94;
 	}
+	
+	
 	/*<div class="subDivleft">
-				<p>审核中</p>
-				<p>当前状态</p>
-			</div>
-			<div class="subDivcenter">
-				<p>2018.01.01 12:38</p>
-				<p>提交时间</p>
-			</div>
-			<div class="subDivright">
-				<p>3个工作日内</p>
-				<p>预计反馈时间</p>
-			</div>*/
+					<p>审核中</p>
+					<p>当前状态</p>
+				</div>
+				<div class="subDivcenter">
+					<p>2018.01.01 12:38</p>
+					<p>提交时间</p>
+				</div>
+				<div class="subDivright">
+					<p>3个工作日内</p>
+					<p>预计反馈时间</p>
+				</div>*/
 	
 	.joinFM {
 		margin: 0 auto;

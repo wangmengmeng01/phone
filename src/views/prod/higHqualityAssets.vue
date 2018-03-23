@@ -1,6 +1,6 @@
 <template>
 	<div class="higHqualityAssets">
-
+	
 		<div v-for="(i,index) in list" class="hha-div">
 			<p class="hha-div-title f32 color-font ffl">{{i.borrowName}}</p>
 			<p class="f32 hha-div-p1 ffl">
@@ -14,19 +14,22 @@
 				<span class="ffl">项目期限</span>
 			</p>
 		</div>
-
+	
 		<div class="joinListDiv1" v-show="totalPage<=0" style="background-color: #f1f1f9;">
 			<img src="../../assets/main/prod/norecord.png" />
 			<p class="noRecord">暂无记录</p>
 		</div>
-
+	
 	</div>
 </template>
+
 <script>
-	import { standardAndPlanList } from '@/service'
+	import {
+		standardAndPlanList
+	} from '@/service'
 	export default {
 		name: 'higHqualityAssets',
-
+	
 		data() {
 			return {
 				item: {
@@ -42,18 +45,18 @@
 		mounted() {
 			window.scroll(0, 0);
 			document.body.onscroll = () => {
-
-				if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-
+	
+				if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+	
 					this.item.pageIndex++;
-					if(this.item.pageIndex > this.totalPage) {
+					if (this.item.pageIndex > this.totalPage) {
 						return;
 					}
 					this.init();
-
+	
 				}
 			}
-
+	
 		},
 		methods: {
 			init() {
@@ -63,7 +66,7 @@
 					this.totalPage = Math.ceil(res.allCount / 10);
 				});
 			}
-
+	
 		}
 	}
 </script>

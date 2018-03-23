@@ -1,80 +1,85 @@
 <template>
- <div class="main">
+  <div class="main">
     <router-view></router-view>
-   <div class="tab">
-     <ul>
-       <li :key="index" v-for="(i,index) in list" :class="[act===index?'act':'']" @click="link(i,index)">
-         <img :src="require(`@/assets/main/index/${i.url}${act===index?'-act':''}.png`)" alt="">
-         <span>{{i.title}}</span>
-       </li>
-     </ul>
-   </div>
- </div>
+    <div class="tab">
+      <ul>
+        <li :key="index" v-for="(i,index) in list" :class="[act===index?'act':'']" @click="link(i,index)">
+          <img :src="require(`@/assets/main/index/${i.url}${act===index?'-act':''}.png`)" alt="">
+          <span>{{i.title}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
-import { countStationLetterMsg } from '@/service'
-import { mapActions, mapGetters } from 'vuex'
-export default {
-
-  name: 'fmain',
-
-  data () {
-    return {
-      name: '',
-      circle: false,
-      act: 0,
-      list:[{
-        url: 'home',
-        title: '首页',
-        name: 'main-home'
-      },{
-        url: 'product',
-        title: '产品',
-        name: 'main-product'
-      },{
-        url: 'wealth',
-        title: '财富',
-        name: 'main-wealth'
-      },{
-        url: 'found',
-        title: '发现',
-        name: 'main-found'
-      },{
-        url: 'mine',
-        title: '我的',
-        name: 'main-mine'
-      }]
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'header',
-    ])
-  },
-  created(){
-    // 菜单高亮
-    this.act = this.list.findIndex(t=>this.$route.path.includes(t.url));
-  },
-  methods: {
-    link(i,index){
-      if(this.act === index) return;
-      this.$go(i.url);
-      this.act = index;
-    }
-  },
-  watch:{
-    $route(val){
-      for(let i=0,len=this.list.length;i<len;i++){
+  import {
+    countStationLetterMsg
+  } from '@/service'
+  import {
+    mapActions,
+    mapGetters
+  } from 'vuex'
+  export default {
+  
+    name: 'fmain',
+  
+    data() {
+      return {
+        name: '',
+        circle: false,
+        act: 0,
+        list: [{
+          url: 'home',
+          title: '首页',
+          name: 'main-home'
+        }, {
+          url: 'product',
+          title: '产品',
+          name: 'main-product'
+        }, {
+          url: 'wealth',
+          title: '财富',
+          name: 'main-wealth'
+        }, {
+          url: 'found',
+          title: '发现',
+          name: 'main-found'
+        }, {
+          url: 'mine',
+          title: '我的',
+          name: 'main-mine'
+        }]
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'header',
+      ])
+    },
+    created() {
+      // 菜单高亮
+      this.act = this.list.findIndex(t => this.$route.path.includes(t.url));
+    },
+    methods: {
+      link(i, index) {
+        if (this.act === index) return;
+        this.$go(i.url);
+        this.act = index;
+      }
+    },
+    watch: {
+      $route(val) {
+        for (let i = 0, len = this.list.length; i < len; i++) {
           let t = this.list[i];
-        if(val.path.includes(t.url)){
-          this.act = i;
-          break
+          if (val.path.includes(t.url)) {
+            this.act = i;
+            break
+          }
         }
       }
     }
   }
-}
 </script>
 
 <style lang="sass" scoped>

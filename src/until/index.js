@@ -5,12 +5,12 @@
  */
 export const getParameter = (key) => {
   let _location = '';
-     _location =  decodeURIComponent(decodeURIComponent(location.href));
-     _location = _location.replace(/\?/g, '&');
+  _location = decodeURIComponent(decodeURIComponent(location.href));
+  _location = _location.replace(/\?/g, '&');
   let reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)", "i");
-    let r = _location.substr(1).match(reg);
-    if (r != null) return unescape(r[2]);
-    return null;
+  let r = _location.substr(1).match(reg);
+  if (r != null) return unescape(r[2]);
+  return null;
 };
 
 
@@ -18,7 +18,7 @@ export const getParameter = (key) => {
  * 判断是不是微信
  * @return {[type]} [description]
  */
-export const isWeiXin = ()=> {
+export const isWeiXin = () => {
   let ua = window.navigator.userAgent.toLowerCase();
   return ua.match(/MicroMessenger/i) == 'micromessenger';
 };
@@ -26,14 +26,14 @@ export const isWeiXin = ()=> {
 /**
  * 判断是不是ios
  */
-export const isIos = ()=>{
-  return!!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+export const isIos = () => {
+  return !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 }
 
 /**
  * 判断是不是android
  */
-export const isAndroid = ()=>{
+export const isAndroid = () => {
   return navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; //android终端
 }
 
@@ -43,19 +43,19 @@ export const isAndroid = ()=>{
  * @returns {{}}
  */
 export const startDrag = (dom) => {
-  dom.onmousedown = function(ev){
+  dom.onmousedown = function (ev) {
     ev.stopPropagation();
     var oevent = ev || event;
 
     var distanceX = oevent.clientX - dom.offsetLeft;
     var distanceY = oevent.clientY - dom.offsetTop;
 
-    document.onmousemove = function(ev){
+    document.onmousemove = function (ev) {
       var oevent = ev || event;
       dom.style.left = oevent.clientX - distanceX + 'px';
       dom.style.top = oevent.clientY - distanceY + 'px';
     };
-    document.onmouseup = function(){
+    document.onmouseup = function () {
       document.onmousemove = null;
       document.onmouseup = null;
     };
@@ -94,33 +94,33 @@ export const transformRequest = (obj) => {
 
 
 export const compress_img = (imgData, resolve) => {
-    if (!imgData) return;
+  if (!imgData) return;
 
-    let canvas = document.createElement('canvas');
+  let canvas = document.createElement('canvas');
 
-    let img = new Image();
+  let img = new Image();
 
-    img.onload = function () {
+  img.onload = function () {
 
-      img.width = img.width / 5;
+    img.width = img.width / 5;
 
-      img.height = img.height / 5;
+    img.height = img.height / 5;
 
-      let ctx = canvas.getContext("2d");
-      // canvas清屏
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      canvas.width = img.width;
-      canvas.height = img.height;
+    let ctx = canvas.getContext("2d");
+    // canvas清屏
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.width = img.width;
+    canvas.height = img.height;
 
-      //重置canvans宽高 canvas.width = img.width; canvas.height = img.height;
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      // upload(null,img)
-      // canvas.toDataURL("image/jpeg")
-      resolve(canvas.toDataURL("image/jpeg"));
-    };
+    //重置canvans宽高 canvas.width = img.width; canvas.height = img.height;
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    // upload(null,img)
+    // canvas.toDataURL("image/jpeg")
+    resolve(canvas.toDataURL("image/jpeg"));
+  };
 
-    // 记住必须先绑定事件，才能设置src属性，否则img没内容可以画到canvas
-    img.src = imgData;
+  // 记住必须先绑定事件，才能设置src属性，否则img没内容可以画到canvas
+  img.src = imgData;
 }
 
 
@@ -128,18 +128,18 @@ export const compress_img = (imgData, resolve) => {
 
 export const upload = (e) => {
   let file = e.target.files[0];
-  let size = file.size/1024;
+  let size = file.size / 1024;
   // 文件大小,单位为M
-  return new Promise((resolve)=>{
-      let FR = new FileReader();
-        FR.onload = function() {
-          if(size > 1024) {
-            compress_img(this.result, resolve);
-          }else{
-            resolve(this.result)
-          }
-        };
-      //先注册onload，再读取文件内容，否则读取内容是空的
-      FR.readAsDataURL(file);
+  return new Promise((resolve) => {
+    let FR = new FileReader();
+    FR.onload = function () {
+      if (size > 1024) {
+        compress_img(this.result, resolve);
+      } else {
+        resolve(this.result)
+      }
+    };
+    //先注册onload，再读取文件内容，否则读取内容是空的
+    FR.readAsDataURL(file);
   })
 }

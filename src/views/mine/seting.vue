@@ -33,14 +33,14 @@
     name: 'seting',
     data() {
       return {
-        pwdList:[{
+        pwdList: [{
           name: '修改登录密码',
           url: '/forget_pwd'
-        },{
+        }, {
           name: '修改交易密码',
           url: '/wealth/tranderPassword'
         }],
-        infoList:[{
+        infoList: [{
           name: '关于我们',
           url: '/home/aboutUs?id=0&backTitle=关于我们'
         },{
@@ -52,14 +52,10 @@
         }]
       }
     },
-    created() {
-    },
-    components: {
-    },
-    methods: {
-    },
-    watch: {
-    }
+    created() {},
+    components: {},
+    methods: {},
+    watch: {}
   }
 </script>
 

@@ -4,7 +4,7 @@
       <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}</li>
     </ul>
     <div class="coupon">
-      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true" @checkedCb="checkedCb"/>
+      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true" @checkedCb="checkedCb" />
       <div v-if="!res.length" class="none f32 color_font">暂无{{nav[act].name}}券</div>
     </div>
     <button class="btn" @click="submit">选取</button>
@@ -13,8 +13,13 @@
 
 <script>
   import Coupon from '@/components/coupon/coupon'
-  import { mapGetters, mapMutations } from 'vuex'
-  import { showGiveCouponList } from '@/service'
+  import {
+    mapGetters,
+    mapMutations
+  } from 'vuex'
+  import {
+    showGiveCouponList
+  } from '@/service'
   export default {
     name: 'coupon_choose_usable',
     data() {
@@ -23,10 +28,10 @@
         nav: [{
           name: '加息券',
           type: '1',
-        },{
+        }, {
           name: '现金红包',
           type: '2',
-        },{
+        }, {
           name: '红包',
           type: '3',
         }],
@@ -49,34 +54,35 @@
       ...mapMutations([
         'SET_COUPON',
       ]),
-      init(item){
-        showGiveCouponList({couponType: item.type}).then(res=>{
+      init(item) {
+        showGiveCouponList({
+          couponType: item.type
+        }).then(res => {
           this.res = res.couponList
-        }).catch(err=>{
+        }).catch(err => {
           this.res = []
         })
       },
-      choose(i,index){
-        if(this.act===index)return;
+      choose(i, index) {
+        if (this.act === index) return;
         this.act = index;
         this.init(i);
       },
-      checkedCb(data){
-        this.couponlist.length
-          ? this.couponlist.concat(this.couponlist.filter(t=>{
-          return t.couponNo !== data.couponNo
-        }))
-          : this.couponlist.push(data)
+      checkedCb(data) {
+        this.couponlist.length ?
+          this.couponlist.concat(this.couponlist.filter(t => {
+            return t.couponNo !== data.couponNo
+          })) :
+          this.couponlist.push(data)
       },
-      submit(){
+      submit() {
         this.SET_COUPON({
           data: this.couponlist
         });
-        this.$go(this.coupon.backurl,'',true)
+        this.$go(this.coupon.backurl, '', true)
       }
     },
-    watch: {
-    }
+    watch: {}
   }
 </script>
 

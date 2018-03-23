@@ -6,12 +6,12 @@
 
 <script>
   export default {
-
+  
     name: 'found',
-
-    data () {
+  
+    data() {
       return {
-
+  
       }
     }
   }

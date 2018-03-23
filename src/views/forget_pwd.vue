@@ -12,23 +12,26 @@
 <script>
   export default {
     name: 'forget_pwd',
-    data () {
+    data() {
       return {
         mobile: this.$route.query.mobile || sessionStorage.mobile || ''
       }
     },
     methods: {
-      submit(){
-        if(!this.mobile) {
+      submit() {
+        if (!this.mobile) {
           this.$toask('手机号不能为空!');
           return
         }
-        if(!(/^1\d{10}$/.test(this.mobile))) {
+        if (!(/^1\d{10}$/.test(this.mobile))) {
           this.$toask('手机号格式不正确!');
           return
         }
         sessionStorage.mobile = this.mobile;
-        this.$go('set_pwd',{mobile:this.mobile,view:'forget_pwd'});
+        this.$go('set_pwd', {
+          mobile: this.mobile,
+          view: 'forget_pwd'
+        });
       },
     }
   }

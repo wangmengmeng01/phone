@@ -4,7 +4,7 @@ import api from './api';
 /**
  * 获取已有客户
  */
-export const searchExistingCustomers = async (params)=>{
+export const searchExistingCustomers = async (params) => {
   return await $http({
     method: 'get',
     api: api.searchExistingCustomers,
@@ -16,7 +16,7 @@ export const searchExistingCustomers = async (params)=>{
 /**
  * 获取潜在客户
  */
-export const searchPotentialCustomers = async (params)=>{
+export const searchPotentialCustomers = async (params) => {
   return await $http({
     method: 'get',
     api: api.searchPotentialCustomers,
@@ -29,7 +29,7 @@ export const searchPotentialCustomers = async (params)=>{
 /**
  * 赠送优惠
  */
-export const saveGiveCoupon = async (params)=>{
+export const saveGiveCoupon = async (params) => {
   return await $http({
     method: 'post',
     api: api.saveGiveCoupon,
@@ -41,7 +41,7 @@ export const saveGiveCoupon = async (params)=>{
 /**
  * 获取已有客户
  */
-export const getUserBrokerageRecordList = async (params)=>{
+export const getUserBrokerageRecordList = async (params) => {
   return await $http({
     method: 'get',
     api: api.getUserBrokerageRecordList,
@@ -53,7 +53,7 @@ export const getUserBrokerageRecordList = async (params)=>{
 /**
  * 获取历史展业登记
  */
-export const getShowBusinessHistory = async (params)=>{
+export const getShowBusinessHistory = async (params) => {
   return await $http({
     method: 'get',
     api: api.getShowBusinessHistory,
@@ -66,7 +66,7 @@ export const getShowBusinessHistory = async (params)=>{
 /**
  * 查询已有客户信息详情
  */
-export const getExistingCustomers = async (params)=>{
+export const getExistingCustomers = async (params) => {
   return await $http({
     method: 'get',
     api: api.getExistingCustomers,
@@ -78,7 +78,7 @@ export const getExistingCustomers = async (params)=>{
 /**
  * 查询用户信息
  */
-export const searchUserInfo = async (params)=>{
+export const searchUserInfo = async (params) => {
   return await $http({
     method: 'get',
     api: api.searchUserInfo,
@@ -91,11 +91,11 @@ export const searchUserInfo = async (params)=>{
 /**
  * 查询理财师信息
  */
-export const searchMyManagerUserInfo = async (params)=>{
+export const searchMyManagerUserInfo = async (params) => {
   let filter_msg = true;
-    try{
-      filter_msg = !params.filter_msg
-    }catch (e){}
+  try {
+    filter_msg = !params.filter_msg
+  } catch (e) {}
   return await $http({
     method: 'get',
     api: api.searchMyManagerUserInfo,

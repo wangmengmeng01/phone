@@ -3,8 +3,8 @@
     <ul class="tradeRecordContent" v-show="list.length">
       <li v-for="(i,index) in list">
         <div class="top">
-            <div>{{i.typeName}}</div>
-            <div>{{i.optype|optype}}{{i.operationAmount|formatNum}}</div>
+          <div>{{i.typeName}}</div>
+          <div>{{i.optype|optype}}{{i.operationAmount|formatNum}}</div>
         </div>
         <div class="bottom">
           <div>{{i.createTime}}</div>
@@ -13,60 +13,60 @@
       </li>
     </ul>
     <!--<div class="tradeRecordFooter">上拉加载更多…</div>-->
-    
+  
     <div class="joinListDiv1" v-show="!list.length" style="background-color: #f1f1f9;">
-			<img src="../../assets/main/prod/norecord.png" />
-			<p class="noRecord">暂无记录</p>
-	</div>
-    
-    
+      <img src="../../assets/main/prod/norecord.png" />
+      <p class="noRecord">暂无记录</p>
+    </div>
+  
+  
   </div>
 </template>
 
 <script>
-	
-  import {transactionRecord} from '@/service'
+  import {
+    transactionRecord
+  } from '@/service'
   export default {
     name: 'tradeRecord',
     data() {
-      return{
+      return {
         item: {
-			type:'0',
-			pageIndex:1,
+          type: '0',
+          pageIndex: 1,
         },
-        list:[],
+        list: [],
       }
     },
     created() {
-    	this.init();
+      this.init();
     },
     mounted() {
-		window.scroll(0, 0);
-		document.body.onscroll = () => {
-			if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-				this.item.pageIndex++;
-				if(this.item.pageIndex > this.totalPage) {
-					return;
-				}
-				this.init();
-			}
-		}
-
-	},
-    methods: {
-		init(){
-			
-    		transactionRecord(this.item).then(res => {
-    			console.log(res);
-    			this.list = this.list.concat(res.dataList);
-			this.totalPage = Math.ceil(res.total / 10);
-		}); 
-    	
-    
-		}
+      window.scroll(0, 0);
+      document.body.onscroll = () => {
+        if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+          this.item.pageIndex++;
+          if (this.item.pageIndex > this.totalPage) {
+            return;
+          }
+          this.init();
+        }
+      }
+  
     },
-    watch: {
-    }
+    methods: {
+      init() {
+  
+        transactionRecord(this.item).then(res => {
+          console.log(res);
+          this.list = this.list.concat(res.dataList);
+          this.totalPage = Math.ceil(res.total / 10);
+        });
+  
+  
+      }
+    },
+    watch: {}
   }
 </script>
 

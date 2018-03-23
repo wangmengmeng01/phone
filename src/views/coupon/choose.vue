@@ -4,7 +4,7 @@
       <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}({{i.size}})</li>
     </ul>
     <div class="coupon p4" :class="[!res.length?'none':'']">
-      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true"  @checkedCb="checkedCb(i,index)" ref="coupon"/>
+      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true" @checkedCb="checkedCb(i,index)" ref="coupon" />
       <div v-if="!res.length" class="nothing f32 color_font">暂无可送优惠券</div>
     </div>
     <button class="btn" @click="submit">选取</button>
@@ -13,13 +13,21 @@
 
 <script>
   import Coupon from '@/components/coupon/coupon'
-  import { mapGetters, mapMutations } from 'vuex'
-  import { searchCouponList, getCouponBenefit } from '@/service'
+  import {
+    mapGetters,
+    mapMutations
+  } from 'vuex'
+  import {
+    searchCouponList,
+    getCouponBenefit
+  } from '@/service'
   import axios from 'axios'
   import config from '@/config';
   import Api from '@/service/api';
-  import {transformRequest} from '@/until'
-
+  import {
+    transformRequest
+  } from '@/until'
+  
   export default {
     name: 'coupon_choose',
     data() {
@@ -29,21 +37,21 @@
           name: '可用优惠',
           type: '1',
           size: 0
-        },{
+        }, {
           name: '不可用优惠',
           type: '2',
           size: 0
         }],
         res: [],
         couponlist: [],
-        pageIndex:1,//分页
+        pageIndex: 1, //分页
       }
     },
     mounted() {
       document.body.onscroll = () => {
-        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-          if(this.res.length <= 10)return;
-          if(this.pageIndex < Math.ceil(this.nav[this.act].size / 10)) return;
+        if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+          if (this.res.length <= 10) return;
+          if (this.pageIndex < Math.ceil(this.nav[this.act].size / 10)) return;
           this.pageIndex++;
           this.init();
         }
@@ -69,27 +77,30 @@
       ...mapMutations([
         'SET_COUPON',
       ]),
-      init(item){
-        const {productNo, investAmount} = this.coupon.params;
-        let pageIndex=this.pageIndex;
+      init(item) {
+        const {
+          productNo,
+          investAmount
+        } = this.coupon.params;
+        let pageIndex = this.pageIndex;
         searchCouponList({
           productNo,
           investAmount,
-          useType:item.type,
+          useType: item.type,
           pageIndex
-        }).then(res=>{
+        }).then(res => {
           this.res = this.res.concat(res.couponList);
-          this.nav[0].size=res.availableNum;
-          this.nav[1].size=res.disabledNum;
-        }).catch(()=>{
+          this.nav[0].size = res.availableNum;
+          this.nav[1].size = res.disabledNum;
+        }).catch(() => {
           this.res = []
         })
       },
       /**
        * 菜单栏
        */
-      choose(i,index){
-        if(this.act===index)return;
+      choose(i, index) {
+        if (this.act === index) return;
         this.act = index;
         this.res = [];
         this.pageIndex = 1; // 切换菜单重置pageIndex
@@ -98,32 +109,32 @@
       /**
        * 选取勾选框的回调
        */
-      checkedCb(current, index){
+      checkedCb(current, index) {
         // 没有数据直接push
-        if(!this.couponlist.length){
+        if (!this.couponlist.length) {
           this.couponlist.push(current)
           return
         }
         // 判断需不需要删除
-        if(this.isDel(current)) return;
+        if (this.isDel(current)) return;
         // 直接获取最后一个元素做对比
-        let end = this.couponlist[this.couponlist.length-1];
+        let end = this.couponlist[this.couponlist.length - 1];
         // 类型相同做同类对比
-        if(current.type === end.type){
-          this.logic(current, end, index, 'isSameOverlap','此券不允许同类叠加');
+        if (current.type === end.type) {
+          this.logic(current, end, index, 'isSameOverlap', '此券不允许同类叠加');
           return
         }
         // 做异类对比
-        this.logic(current, end, index, 'isDifferentOverlap','此券不允许异类叠加');
+        this.logic(current, end, index, 'isDifferentOverlap', '此券不允许异类叠加');
       },
       /**
        * 判断是否删除元素,
        */
-      isDel(current){
-        let i = this.couponlist.findIndex(t=>t.receiveNo===current.receiveNo);
+      isDel(current) {
+        let i = this.couponlist.findIndex(t => t.receiveNo === current.receiveNo);
         // 元素存在则删除，不存在再继续判断需要不需要添加
-        if(i>-1){
-          this.couponlist.splice(i,1);
+        if (i > -1) {
+          this.couponlist.splice(i, 1);
           return true
         }
         return false
@@ -136,13 +147,13 @@
        * @param attr   判断属性
        * @param msg    提示信息
        */
-      logic(current, end, index, attr,msg){
+      logic(current, end, index, attr, msg) {
         // 首先把当前值和最后一个值组成新的数组
-        let arr =  [...[current],...[end]];
+        let arr = [...[current], ...[end]];
         // 然后获取这个数组里面有没有当前判断类型的数据
-        let hasAttr = arr.filter(t=>t[attr]=='2');
+        let hasAttr = arr.filter(t => t[attr] == '2');
         // 如果没有的话说明，可以直接插入了
-        if(!hasAttr.length) {
+        if (!hasAttr.length) {
           this.couponlist.push(current);
           return
         };
@@ -150,13 +161,16 @@
         this.$refs.coupon[index].check = false;
         this.$toask(msg);
       },
-      submit(){
+      submit() {
         const bidNo = this.$route.query.bidNo;
         const linkType = this.$route.query.linkType;
         // 没有选择的直接返回
-        if(!this.couponlist.length){
+        if (!this.couponlist.length) {
           this.$toask('您没有选择优惠券');
-          this.$go(this.coupon.backurl,{bidNo,linkType});
+          this.$go(this.coupon.backurl, {
+            bidNo,
+            linkType
+          });
           return
         }
         // 优惠券数据存入状态管理中
@@ -164,13 +178,27 @@
           data: this.couponlist
         });
         // 选取优惠接口编辑
-        const couponList = this.couponlist.map(t=>{
-          let {couponNo, type, profitRate, isSameOverlap, isDifferentOverlap, receiveNo} = t;
-          return {couponNo, couponRate:profitRate, isSameOverlap, isDifferentOverlap, receiveNo, couponType:type};
+        const couponList = this.couponlist.map(t => {
+          let {
+            couponNo,
+            type,
+            profitRate,
+            isSameOverlap,
+            isDifferentOverlap,
+            receiveNo
+          } = t;
+          return {
+            couponNo,
+            couponRate: profitRate,
+            isSameOverlap,
+            isDifferentOverlap,
+            receiveNo,
+            couponType: type
+          };
         });
         // 不知道为什么用封装的不行，传参有问题，只能拿出来单独传了，参数还需要url编码下
         axios.get(`${config.url}${Api.getCouponBenefit}?client=${this.client}&userToken=${this.user.userToken}&couponList=${encodeURIComponent(JSON.stringify(couponList))}`)
-          .then( r=> {
+          .then(r => {
             r = r.data;
             if (r.code === '100') {
               let res = r.result;
@@ -178,26 +206,25 @@
               const params = {
                 bidNo,
                 linkType,
-                inviteAmount:this.$route.query.inviteAmount,
-                promiseInviteId:this.$route.query.promiseInviteId,
+                inviteAmount: this.$route.query.inviteAmount,
+                promiseInviteId: this.$route.query.promiseInviteId,
                 ...res
               };
               // 有结果传到backurl中
-              this.$go(this.coupon.backurl,params,true)
+              this.$go(this.coupon.backurl, params, true)
             } else {
-              if(r.code === '1000'){
+              if (r.code === '1000') {
                 this.$go('/login')
               }
               this.$toask(r.message)
             }
           })
-          .catch(function (error) {
+          .catch(function(error) {
             console.log(error);
           });
       }
     },
-    watch: {
-    }
+    watch: {}
   }
 </script>
 

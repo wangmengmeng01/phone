@@ -1,29 +1,30 @@
 <template>
   <fMask v-if="visible" :type="type==='protocol' ? 'protocol' : 'smallToBig'">
     <div class="dialog" :class="[content?'text':'']">
-
+  
       <!--协议弹窗-->
       <div v-if="type==='protocol'" class="alert-protocol">
-         <div v-html="content" class="alert-protocol-con"></div>
+        <div v-html="content" class="alert-protocol-con"></div>
         <p class="alert-btn">
           <span @click='handleAction(0)' class="cancel">我知道了</span>
         </p>
       </div>
-
+  
       <!--普通的弹窗-->
       <div class="alert" v-else>
         <h2>{{title}}</h2>
-        <div v-if="content" class="content" >
+        <div v-if="content" class="content">
           <p v-html="content"></p>
         </div>
         <p class="alert-btn">
-          <span v-if="no"  @click='handleAction(0)' class="cancel">{{no}}</span>
+          <span v-if="no" @click='handleAction(0)' class="cancel">{{no}}</span>
           <span class="submit" @click="handleAction(1)">{{yes}}</span>
         </p>
       </div>
     </div>
   </fMask>
 </template>
+
 <style lang="sass" scoped>
   .dialog
     width: 100%
@@ -108,29 +109,30 @@
           &:active
             background: #ccc
 </style>
+
 <script>
-    import fMask from '@/components/mask';
-    export default{
-        name: 'fxd-alert',
-        data() {
-            return {
-                dialogVisible:false,
-                visible: false,
-                callback:null,
-            }
-        },
-        props: ['title', 'content', 'type', 'yes', 'no', 'protocolType'],
-        components: {
-            fMask,
-        },
-        created(){
-          log(this.type)
-        },
-        methods: {
-            handleAction(type){
-                this.visible = false;
-                this.callback(type);
-            }
-        }
+  import fMask from '@/components/mask';
+  export default {
+    name: 'fxd-alert',
+    data() {
+      return {
+        dialogVisible: false,
+        visible: false,
+        callback: null,
+      }
+    },
+    props: ['title', 'content', 'type', 'yes', 'no', 'protocolType'],
+    components: {
+      fMask,
+    },
+    created() {
+      log(this.type)
+    },
+    methods: {
+      handleAction(type) {
+        this.visible = false;
+        this.callback(type);
+      }
     }
+  }
 </script>

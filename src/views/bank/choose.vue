@@ -10,8 +10,13 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex'
-  import { getBanks } from '@/service'
+  import {
+    mapGetters,
+    mapMutations
+  } from 'vuex'
+  import {
+    getBanks
+  } from '@/service'
   export default {
     name: 'bank_choose',
     data() {
@@ -20,20 +25,28 @@
       }
     },
     created() {
-      getBanks({busiType:1}).then(r=>{
+      getBanks({
+        busiType: 1
+      }).then(r => {
         this.list = r.list
       })
     },
     methods: {
-      choose(item){
-        const {bankName, bankNo} = item;
+      choose(item) {
+        const {
+          bankName,
+          bankNo
+        } = item;
         const backurl = this.$route.query.backurl;
         const data = this.$route.query.data;
-        this.$go(backurl ,{bankName, bankNo,data}, true)
+        this.$go(backurl, {
+          bankName,
+          bankNo,
+          data
+        }, true)
       }
     },
-    watch: {
-    }
+    watch: {}
   }
 </script>
 

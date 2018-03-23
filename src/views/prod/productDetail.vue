@@ -17,7 +17,7 @@
 			</div>
 			<p class="pdtBugMes" @click="$go('/prod/joinList',{productNo:detail.productNo,bidNo:detail.bidNo})"><img class="pdtBugMesImg1" src="../../assets/main/prod/people.png" /><span> 已有{{detail.countPeople}}人购买 </span> <img class="pdtBugMesImg2" src="../../assets/main/prod/lnextIcon.png" /></p>
 		</div>
-
+	
 		<!--交易规则-->
 		<div class="productDetailCenter">
 			<p class="pdcTitle">
@@ -48,10 +48,10 @@
 			<span class="pdcRule"><img src="../../assets/main/prod/Triangle@2x.png"/>起息日后30天内不可转让</span>
 			<span class="pdcRule pdcRule2"><img src="../../assets/main/prod/Triangle@2x.png"/>到期后三个交易日内，资金入账到可用余额</span>
 		</div>
-
+	
 		<!--返佣规则-->
 		<div class="productDetailCenter" style="display: none;">
-
+	
 			<p class="pdcTitle">
 				<span>返佣规则</span>
 				<span>查看详情 <img src="../../assets/common/arrow-right.png"/></span>
@@ -75,15 +75,15 @@
 				<span></span>
 				<span>1.36%</span>
 			</p>
-
+	
 			<span class="pdcRule pdcRule3"><img src="../../assets/main/prod/Triangle@2x.png"/>返佣入账到我的佣金</span>
 			<span class="pdcRule pdcRule4"><img src="../../assets/main/prod/Triangle@2x.png"/>返佣均摊到每个期限单元日上，分次结算</span>
-
+	
 		</div>
-
+	
 		<!--返佣规则-->
 		<div class="productDetailCenter">
-
+	
 			<p class="pdcTitle">
 				<span>产品亮点</span>
 				<span>查看详情 <img src="../../assets/common/arrow-right.png"/></span>
@@ -101,17 +101,21 @@
 					<span>历史100%兑付</span></p>
 			</div>
 		</div>
-
+	
 		<!--立刻购买-->
 		<div class="productDetailBottom" @click="getStatus">
 			立刻购买
 		</div>
-
+	
 	</div>
 </template>
 
 <script>
-	import { searchProductBidsDetail, getUserStatus,userActivate } from '@/service'
+	import {
+		searchProductBidsDetail,
+		getUserStatus,
+		userActivate
+	} from '@/service'
 	export default {
 		name: 'productDetail',
 		data() {
@@ -121,7 +125,7 @@
 				},
 				itemStatus: {},
 				detail: {},
-				profitPlanArr:['','等额本息','等额本金','按期付息，到期还本','一次性还款','其他'],
+				profitPlanArr: ['', '等额本息', '等额本金', '按期付息，到期还本', '一次性还款', '其他'],
 			}
 		},
 		created() {
@@ -131,55 +135,57 @@
 			});
 		},
 		methods: {
-
+	
 			getStatus() {
 				getUserStatus(this.itemStatus).then(res => {
 					//@click=""
 					console.log(res);
 					const info = res.result;
-					if(res.code == "100") {
-
-						if(info.openAccountStatus == "1") {
+					if (res.code == "100") {
+	
+						if (info.openAccountStatus == "1") {
 							//未开户
 							this.$go('/reg_bank');
-						} else if(info.openAccountStatus == "4") {
+						} else if (info.openAccountStatus == "4") {
 							//激活
-							
-				            userActivate({
-				              retUrl:location.origin+location.pathname
-				              }).then(res=>{
-				              axios({
-				                method: 'post',
-				                url: location.origin+ new URL(res.serviceUrl).pathname,
-				                data: res.inMap,
-				                transformRequest: [function (data) {
-				                  let ret = '';
-				                  for (let it in data) {
-				                    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				                  }
-				                  return ret.slice(0,ret.length-1)
-				                }],
-				              }).then(r=>{
-				                if(r.status === 200){
-				                  if(r.data){
-				                    document.body.innerHTML = r.data;
-				                    setTimeout(()=>{document.form.submit()},0)
-				                  }
-				                }
-				              })
-				            })
-          
+	
+							userActivate({
+								retUrl: location.origin + location.pathname
+							}).then(res => {
+								axios({
+									method: 'post',
+									url: location.origin + new URL(res.serviceUrl).pathname,
+									data: res.inMap,
+									transformRequest: [function(data) {
+										let ret = '';
+										for (let it in data) {
+											ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+										}
+										return ret.slice(0, ret.length - 1)
+									}],
+								}).then(r => {
+									if (r.status === 200) {
+										if (r.data) {
+											document.body.innerHTML = r.data;
+											setTimeout(() => {
+												document.form.submit()
+											}, 0)
+										}
+									}
+								})
+							})
+	
 						} else {
-
+	
 							//电子签约
-							if(info.autoBuyBidGrantFlag == "1") {
-
+							if (info.autoBuyBidGrantFlag == "1") {
+	
 								//复投
-								if(info.autoBuyBidFlag == "1") {
-
+								if (info.autoBuyBidFlag == "1") {
+	
 									//风险测评
-
-									if(info.riskRatingFlag == "1") {
+	
+									if (info.riskRatingFlag == "1") {
 										this.$go('/prod/buyBid', {
 											bidNo: this.$route.query.bidNo,
 											backTitle: '确认购买'
@@ -187,26 +193,26 @@
 									} else {
 										this.$go('/wealth/riskTest');
 									}
-
+	
 								} else {
 									this.$go('/wealth/autoInvest');
 								}
-
+	
 							} else {
 								this.$go('/wealth/autoInvest');
 							}
-
+	
 						}
-
-
-
-					} else if(res.code == "1210" || res.code == "1000") {
+	
+	
+	
+					} else if (res.code == "1210" || res.code == "1000") {
 						this.$go('/login');
 					} else {
 						this.$toask(res.message);
 					}
 				})
-
+	
 			}
 		}
 	}

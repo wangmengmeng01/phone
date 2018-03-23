@@ -9,15 +9,15 @@
         <div class="amount">{{home.totalAmount}}</div>
       </div>
       <div class="wealthEarn">
-      	 <div class="totalE">
+        <div class="totalE">
           <div>累计收益(元)</div>
           <div class="wealthEarnData">{{home.sumAmount}}</div>
         </div>
         <!--<div class="yesterE">
-          <div>昨日收益(元)</div>
-          <div class="wealthEarnData">{{home.yesterdayAmount}}</div>
-        </div>-->
-       
+            <div>昨日收益(元)</div>
+            <div class="wealthEarnData">{{home.yesterdayAmount}}</div>
+          </div>-->
+  
         <div class="avalibleE">
           <div>可用余额(元)</div>
           <div class="wealthEarnData">{{home.availableAmount}}</div>
@@ -57,13 +57,13 @@
               <div class="wealthMyObjectCL">
                 <span>持有金额</span>
                 <em class="bigAmount">{{i.initCashAmount | formatNum
-                  }}</em>
+                    }}</em>
               </div>
               <!--<div class="wealthMyObjectCR">
-                <span>昨日收益</span>
-                <em>+{{i.yesterdayAmount | formatNum
-                  }}</em>
-              </div>-->
+                  <span>昨日收益</span>
+                  <em>+{{i.yesterdayAmount | formatNum
+                    }}</em>
+                </div>-->
             </div>
             <div class="wealthMyObjectB">
               <div class="wealthMyObjectBL">
@@ -73,7 +73,7 @@
               <div class="wealthMyObjectBR">
                 <span>持有收益</span>
                 <em>+{{i.holdAmount | formatNum
-                  }}</em>
+                    }}</em>
               </div>
             </div>
           </li>
@@ -121,145 +121,147 @@
         <div class="recommendDivButton">投资</div>
       </div>
     </div>
-
+  
   </div>
 </template>
 
 <script>
-  import { wealthIndex,invesProperty,getUserStatus } from '@/service'
+  import {
+    wealthIndex,
+    invesProperty,
+    getUserStatus
+  } from '@/service'
   export default {
     name: 'wealth',
     data() {
-    		
-    return {
-    		totalAmount:0,
-      menu:[
-        {
-          icon: 'wtradeP',
-          name: '改交易密码',
-          url: '/wealth/tranderPassword'
+  
+      return {
+        totalAmount: 0,
+        menu: [{
+            icon: 'wtradeP',
+            name: '改交易密码',
+            url: '/wealth/tranderPassword'
+          },
+          {
+            icon: 'wEarn',
+            name: '收益明细',
+            url: ''
+          },
+          {
+            icon: "wcontinue",
+            name: '我的续投',
+            url: 'wealth/continueInvest'
+          },
+          {
+            icon: 'wchangeBank',
+            name: '换绑银行卡',
+            url: 'wealth/changeBank'
+          },
+          {
+            icon: 'wtradeRecord',
+            name: '交易记录',
+            url: 'wealth/tradeRecord'
+          },
+          {
+            icon: 'wmyConpun',
+            name: '我的优惠',
+            url: '/coupon'
+          },
+          {
+            icon: 'wautoin',
+            name: '自动投标',
+            url: 'wealth/autoInvest'
+          },
+          {
+            icon: 'wrisktest',
+            name: '风险测评',
+            url: 'wealth/riskTest'
+          },
+          {
+            icon: 'wmyPoint',
+            name: '我的积分',
+            url: ''
+          }
+        ],
+        home: "",
+        invesProperty: {
+          data: {
+            bidType: '2',
+            status: '2',
+            pageNum: '1'
+          },
+          res: {}
         },
-        {
-          icon: 'wEarn',
-          name: '收益明细',
-          url: ''
-        },
-        {
-          icon: "wcontinue",
-          name: '我的续投',
-          url: 'wealth/continueInvest'
-        },
-        {
-          icon: 'wchangeBank',
-          name: '换绑银行卡',
-          url: 'wealth/changeBank'
-        },
-        {
-          icon: 'wtradeRecord',
-          name: '交易记录',
-          url: 'wealth/tradeRecord'
-        },
-        {
-          icon: 'wmyConpun',
-          name: '我的优惠',
-          url: '/coupon'
-        },
-        {
-          icon: 'wautoin',
-          name: '自动投标',
-          url: 'wealth/autoInvest'
-        },
-        {
-          icon: 'wrisktest',
-          name: '风险测评',
-          url: 'wealth/riskTest'
-        },
-        {
-          icon: 'wmyPoint',
-          name: '我的积分',
-          url: ''
+        getUserS: {
+          "openStatus": true
         }
-      ],
-      home:"",
-      invesProperty:{
-        data:{
-          bidType: '2',
-          status: '2',
-          pageNum: '1'
-        },
-        res:{}
+  
+      }
+    },
+    created() {
+      this.init()
+    },
+    methods: {
+      linkto(url) {
+        if (url == "wealth/changeBank") {
+          if (this.getUserS.openStatus == true) {
+            this.$go('/wealth/changeBank')
+          } else {
+            this.$go('/reg_bank')
+          }
+        } else if (url == "wealth/autoInvest") {
+          if (this.getUserS.openStatus == true) {
+            this.$go('/wealth/autoInvest')
+          } else {
+            this.$go('/reg_bank')
+          }
+        } else {
+          this.$go(url)
+  
+        }
+  
       },
-      getUserS:{
-        "openStatus": true
-}
-
-}
-},
-created() {
-		this.init()
-	},
-	methods: {
-		linkto(url) {
-			if(url == "wealth/changeBank") {
-				if(this.getUserS.openStatus == true) {
-					this.$go('/wealth/changeBank')
-				} else {
-					this.$go('/reg_bank')
-				}
-			} else if(url == "wealth/autoInvest") {
-				if(this.getUserS.openStatus == true) {
-					this.$go('/wealth/autoInvest')
-				} else {
-					this.$go('/reg_bank')
-				}
-			} else {
-				this.$go(url)
-
-			}
-
-		},
-		tips() {
-			this.$toask("总金额=可用金额+我的合计资产额");
-    },
-    init(){
-      wealthIndex().then(res=>{
-        this.home =res;
-      });
-      getUserStatus().then(res=>{
-        const info=res.result;
-        console.log(info);
-        switch (parseInt(info.openAccountStatus)){
-          case 1:
-            this.getUserS.openStatus=false;
-            break;
-
+      tips() {
+        this.$toask("总金额=可用金额+我的合计资产额");
+      },
+      init() {
+        wealthIndex().then(res => {
+          this.home = res;
+        });
+        getUserStatus().then(res => {
+          const info = res.result;
+          console.log(info);
+          switch (parseInt(info.openAccountStatus)) {
+            case 1:
+              this.getUserS.openStatus = false;
+              break;
+  
+          }
+  
+        });
+        invesProperty(this.invesProperty.data).then(res => {
+          console.log(res)
+          this.invesProperty.res = res.dataList.slice(0, 2);
+          this.totalAmount = res.totalAmount;
+          console.log(this.invesProperty.res)
+        });
+      },
+      gowithdraw() {
+        if (this.getUserS.openStatus == true) {
+          this.$go('/wealth/withdraw')
+        } else {
+          this.$go('/reg_bank')
         }
-
-      });
-      invesProperty(this.invesProperty.data).then(res=>{
-        console.log(res)
-        this.invesProperty.res =res.dataList.slice(0,2);
-        this.totalAmount=res.totalAmount;
-        console.log(this.invesProperty.res)
-      });
+      },
+      goRecharge() {
+        if (this.getUserS.openStatus == true) {
+          this.$go('/wealth/recharge')
+        } else {
+          this.$go('/reg_bank')
+        }
+      },
     },
-    gowithdraw(){
-      if(this.getUserS.openStatus==true){
-        this.$go('/wealth/withdraw')
-      }else{
-        this.$go('/reg_bank')
-      }
-    },
-    goRecharge(){
-      if(this.getUserS.openStatus==true){
-        this.$go('/wealth/recharge')
-      }else{
-        this.$go('/reg_bank')
-      }
-    },
-  },
-  watch: {
-  }
+    watch: {}
   }
 </script>
 

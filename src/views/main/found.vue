@@ -5,8 +5,8 @@
       <h2 class="subtitle f28 color_font-s">理财师 <span v-if="item.master">{{item.master.realName}}</span> 送我的{{item.coupon.couponList.length}}个礼物</h2>
       <h3 class="title color_font flex">我的礼物
         <!--<div class="flex">-->
-          <!--<span class="f28 color_main">更多</span>-->
-          <!--<img src="../../assets/common/arrow-right.png" alt="">-->
+        <!--<span class="f28 color_main">更多</span>-->
+        <!--<img src="../../assets/common/arrow-right.png" alt="">-->
         <!--</div>-->
       </h3>
       <div class="con">
@@ -21,10 +21,10 @@
     <!--履行承诺-->
     <div class="item promise" v-if="item.promise && item.promise.promiseInviteList.length">
       <h2 class="subtitle f28 color_font-s">一诺千金，奋争到底</h2>
-      <h3  class="title color_font flex">履行承诺
+      <h3 class="title color_font flex">履行承诺
         <!--<div class="flex">-->
-          <!--<span class="f28 color_main">更多</span>-->
-          <!--<img src="../../assets/common/arrow-right.png" alt="">-->
+        <!--<span class="f28 color_main">更多</span>-->
+        <!--<img src="../../assets/common/arrow-right.png" alt="">-->
         <!--</div>-->
       </h3>
       <div class="con">
@@ -49,66 +49,71 @@
     </div>
     <!--平台活动-->
     <!--<div class="item act">-->
-      <!--<h2 class="subtitle f28 color_font-s">更多优惠等你参与</h2>-->
-      <!--<h3  class="title color_font flex">平台活动-->
-        <!--<div class="flex">-->
-          <!--<span class="f28 color_main">更多</span>-->
-          <!--<img src="../../assets/common/arrow-right.png" alt="">-->
-        <!--</div>-->
-      <!--</h3>-->
-      <!--<div class="con">-->
-        <!--<ul>-->
-          <!--<li class="flex">-->
-            <!--<img src="../../assets/found/new.png" alt="" class="left">-->
-            <!--<div class="right">-->
-              <!--<h2 class="flex subitemBtn color_font f32">一项新手专项的活动<span class="color_main">去捧场</span></h2>-->
-              <!--<p class="f20 color_font-s">这项活动的介绍这项活动的介绍这项活动的介绍这项活动 的介绍</p>-->
-            <!--</div>-->
-          <!--</li>-->
-        <!--</ul>-->
-      <!--</div>-->
+    <!--<h2 class="subtitle f28 color_font-s">更多优惠等你参与</h2>-->
+    <!--<h3  class="title color_font flex">平台活动-->
+    <!--<div class="flex">-->
+    <!--<span class="f28 color_main">更多</span>-->
+    <!--<img src="../../assets/common/arrow-right.png" alt="">-->
+    <!--</div>-->
+    <!--</h3>-->
+    <!--<div class="con">-->
+    <!--<ul>-->
+    <!--<li class="flex">-->
+    <!--<img src="../../assets/found/new.png" alt="" class="left">-->
+    <!--<div class="right">-->
+    <!--<h2 class="flex subitemBtn color_font f32">一项新手专项的活动<span class="color_main">去捧场</span></h2>-->
+    <!--<p class="f20 color_font-s">这项活动的介绍这项活动的介绍这项活动的介绍这项活动 的介绍</p>-->
+    <!--</div>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
     <!--</div>-->
     <!--展业良机-->
     <!--<div class="item opportunity">-->
-      <!--<h2 class="subtitle f28 color_font-s">良机不好错过，抓紧时间去开发客户吧</h2>-->
-      <!--<h3 class="title color_font flex">展业良机-->
-        <!--<div class="flex">-->
-          <!--<span class="f28 color_main">更多</span>-->
-          <!--<img src="../../assets/common/arrow-right.png" alt="">-->
-        <!--</div>-->
-      <!--</h3>-->
-      <!--<div class="con">-->
-        <!--<ul>-->
-          <!--<li class="flex">-->
-            <!--<div class="left">-->
-              <!--<img src="/" alt="" class="place-img">-->
-              <!--<p class="color_font-s f20">张先生</p>-->
-            <!--</div>-->
-            <!--<div class="right">-->
-              <!--<h2 class="flex"><span class="f52 color_font">10+万在投</span><span class="color_main f28">查看</span></h2>-->
-              <!--<h3 class="flex"><span class="f32 color_font">3-6天内到期</span><p class="color_font-s f32">预计佣金 <span class="color_font-red">300+</span>元</p></h3>-->
-            <!--</div>-->
-          <!--</li>-->
-        <!--</ul>-->
-      <!--</div>-->
+    <!--<h2 class="subtitle f28 color_font-s">良机不好错过，抓紧时间去开发客户吧</h2>-->
+    <!--<h3 class="title color_font flex">展业良机-->
+    <!--<div class="flex">-->
+    <!--<span class="f28 color_main">更多</span>-->
+    <!--<img src="../../assets/common/arrow-right.png" alt="">-->
+    <!--</div>-->
+    <!--</h3>-->
+    <!--<div class="con">-->
+    <!--<ul>-->
+    <!--<li class="flex">-->
+    <!--<div class="left">-->
+    <!--<img src="/" alt="" class="place-img">-->
+    <!--<p class="color_font-s f20">张先生</p>-->
+    <!--</div>-->
+    <!--<div class="right">-->
+    <!--<h2 class="flex"><span class="f52 color_font">10+万在投</span><span class="color_main f28">查看</span></h2>-->
+    <!--<h3 class="flex"><span class="f32 color_font">3-6天内到期</span><p class="color_font-s f32">预计佣金 <span class="color_font-red">300+</span>元</p></h3>-->
+    <!--</div>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
     <!--</div>-->
     <!--展业攻略-->
     <!--<div class="item raiders">-->
-      <!--<h2 class="subtitle f28 color_font-s">告诉你如何有效拓展自己的业务</h2>-->
-      <!--<h3 class="title color_font">展业攻略</h3>-->
-      <!--<div class="con">-->
-        <!--<p class="color_font-s f32">良机不好错过，抓紧时间去开发客户吧良机不 好错过，抓紧时间去开发客户吧</p>-->
-      <!--</div>-->
+    <!--<h2 class="subtitle f28 color_font-s">告诉你如何有效拓展自己的业务</h2>-->
+    <!--<h3 class="title color_font">展业攻略</h3>-->
+    <!--<div class="con">-->
+    <!--<p class="color_font-s f32">良机不好错过，抓紧时间去开发客户吧良机不 好错过，抓紧时间去开发客户吧</p>-->
     <!--</div>-->
-    <div class="nothing" v-if="!item.coupon && !item.promise"><img src="../../assets/common/none.png" alt=""></div>
-    <Gift :data="giftData" v-if="gift_visible"/>
+    <!--</div>-->
+    <div class="nothing" v-if="!(item.coupon && item.coupon.couponList.length) && !(item.promise && item.promise.promiseInviteList.length)"><img src="../../assets/common/none.png" alt=""></div>
+    <Gift :data="giftData" v-if="gift_visible" />
     <p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>
   </div>
 </template>
 
 <script>
   import Gift from '@/components/gift/gift'
-  import { getPromiseInviteList, searchGiveCouponList, getPossibleInviteList, searchMyManagerUserInfo } from '@/service'
+  import {
+    getPromiseInviteList,
+    searchGiveCouponList,
+    getPossibleInviteList,
+    searchMyManagerUserInfo
+  } from '@/service'
   export default {
     name: 'found',
     data() {
@@ -123,23 +128,29 @@
     },
     created() {
       document.body.scrollX = (e) => {
-
-       log(e)
+  
+        log(e)
       }
       this.init();
     },
     methods: {
-      init(){
-        Promise.all([searchGiveCouponList({source:'2'}), getPromiseInviteList()]).then(r=>{
+      init() {
+        Promise.all([searchGiveCouponList({
+          source: '2'
+        }), getPromiseInviteList()]).then(r => {
           const [coupon, promise] = r;
-          this.item = {coupon, promise};
-        }).then(()=>{
-          searchMyManagerUserInfo({filter_msg:1}).then(r=>this.item.master=r);
+          this.item = {
+            coupon,
+            promise
+          };
+        }).then(() => {
+          searchMyManagerUserInfo({
+            filter_msg: 1
+          }).then(r => this.item.master = r);
         })
       }
     },
-    watch: {
-    }
+    watch: {}
   }
 </script>
 
