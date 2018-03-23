@@ -136,7 +136,7 @@
 			         console.log(location.origin+ new URL(res.serviceUrl).pathname)
 			              axios({
 			                method: 'post',
-			                url: res.serviceUrl,
+			                url: location.origin+ new URL(res.serviceUrl).pathname,
 			                data: res.inMap,
 			                transformRequest: [function (data) {
 			                  let ret = '';
