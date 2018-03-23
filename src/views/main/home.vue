@@ -51,9 +51,8 @@
 			<p class="newTitle">新手专享</p>
 			<div class="swiper-container swiper-container2">
 				<div class="swiper-wrapper swiper-wrapper2">
-					<div class="swiper-slide" v-for="i in newList">
+					<div class="swiper-slide swiper-slide2" v-for="i in newList">
 						<div class="newBidDiv">
-
 							<p class="newBidName">{{i.bidName}}</p>
 							<p class="newBidRate">{{i.annualizedRate}}%</p>
 							<p class="newBidRate2">年化收益率</p>
@@ -358,6 +357,9 @@
 		align-items: center;
 	}
 	
+	
+	
+	
 	.swiper-slide1>img {
 		width: 100%;
 		height: 100%;
@@ -515,7 +517,7 @@
 	
 	.newBidRate2 {
 		float: left;
-		width: 7rem;
+		width: 7.1rem;
 		height: 0.28rem;
 		line-height: 0.28rem;
 		color: #999999;
