@@ -19,7 +19,7 @@
       <div class="bottomB"><span>手续费</span><em>{{userCashFeeMoney|formatNum}}元</em></div>
       <div class="bottomB"><span>实际到账</span><em>{{actualccountMoney|formatNum}}元</em></div>
     </div>
-    <p class="rechargeBtn" :class="[withdrawMoney.length ?'':'disable']" @click="toCash" >下一步</p>
+    <p class="rechargeBtn" :class="[(withdrawMoney.length || withdrawBol) ?'':'disable']" @click="toCash" >下一步</p>
   </div>
 </template>
 
@@ -35,6 +35,7 @@
 				accountMes:{},//账户金额
 				accountMoney:0,//可提现金额
 				withdrawMoney:'',//提现金额
+				withdrawBol:false,//是否全选
 				userCashFeeMoney:0,//提现手续费
 				actualccountMoney:0,//实际到账回调地址
 				retUrl: location.origin+location.pathname,//返回地址
@@ -78,6 +79,7 @@
 			wall(){
 				this.withdrawMoney=this.accountMoney;
 				this.userCashFee();
+				this.withdrawBol=true;
 			},
 			/*计算手续费*/
 			userCashFee(){
