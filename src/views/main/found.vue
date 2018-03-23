@@ -100,6 +100,7 @@
         <!--<p class="color_font-s f32">良机不好错过，抓紧时间去开发客户吧良机不 好错过，抓紧时间去开发客户吧</p>-->
       <!--</div>-->
     <!--</div>-->
+    <div class="nothing" v-if="!item.coupon && !item.promise"><img src="../../assets/common/none.png" alt=""></div>
     <Gift :data="giftData" v-if="gift_visible"/>
     <p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>
   </div>
