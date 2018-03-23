@@ -58,7 +58,7 @@
 							<p class="newBidRate2">年化收益率</p>
 							<p class="newBidword">
 								<span>期限<i>{{i.periodLength}}</i>{{i.periodUnit|Totime}}</span>
-								<span>剩余不到<i>{{i.amountWait/10000+1|tofixed}}</i>万元</span>
+								<span>剩余不到<i>{{Math.ceil(i.amountWait/10000)}}</i>万元</span>
 								<span><i>{{i.investMinAmount}}</i>元起投</span>
 							</p>
 							<p class="newBtn" @click="$go('/prod/productDetail',{bidNo:i.bidNo,backTitle:i.bidName})">立即投资</p>

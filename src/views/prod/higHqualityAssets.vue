@@ -6,7 +6,7 @@
 			<p class="f32 hha-div-p1 ffl">
 				<span class="ffl">{{i.annualizedRate}}%</span>
 				<span class="ffl">＜{{i.contractAmount/10000|tofixed}}万</span>
-				<span class="ffl">{{i.periodLength}}{{i.periodLength|Totime}}</span>
+				<span class="ffl">{{i.periodLength}}{{i.periodUnit|Totime}}</span>
 			</p>
 			<p class="f24 color_font-s hha-div-p2 ffl" :class="index<list.length-1?'bb':''">
 				<span class="ffl">历史年化</span>

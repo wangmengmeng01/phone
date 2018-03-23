@@ -7,7 +7,7 @@
       </li>
     </ul>
     <ul class="item">
-      <li v-for="i in infoList" class="m4 flex border-notend-b">
+      <li v-for="i in infoList"  @click="$go(i.url)" class="m4 flex border-notend-b">
         <span class="f32 color_font">{{i.name}}</span>
         <img src="../../assets/common/arrow-right.png" alt="">
       </li>
@@ -38,17 +38,17 @@
           url: '/forget_pwd'
         },{
           name: '修改交易密码',
-          url: ''
+          url: '/wealth/tranderPassword'
         }],
         infoList:[{
           name: '关于我们',
-          url: ''
+          url: '/home/aboutUs?id=0&backTitle=关于我们'
         },{
           name: '安全保障',
-          url: ''
+          url: '/home/aboutUs?id=1&backTitle=安全保障&forNative=1'
         },{
           name: '信息披露',
-          url: ''
+          url: '/home/aboutUs?id=2&backTitle=信息披露'
         }]
       }
     },

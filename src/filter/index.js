@@ -106,7 +106,7 @@ export function formatNum(value) {
 
 }
 export function Totime(val) {
-
+	val=parseInt(val);
 	switch(val) {
 		case 1:
 			return "天";
@@ -124,7 +124,7 @@ export function Totime(val) {
 
 }
 export function profitPlan(val) {
-	
+	val=parseInt(val);
 	switch(val) {
 		case 1:
 			return "等额本息";
