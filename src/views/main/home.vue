@@ -116,7 +116,7 @@
       <p class="recommendTitle" style="margin-bottom: 0.26rem;display: none;">热销产品 <span>更多<img src="../../assets/main/home/nextIcon.png"/></span></p>
       <!--热销产品-->
       <div class="hotProductDiv" v-for="(b,index) in hotPro" :class="[!index==0?'hotProductDiv0':'']">
-        <p class="hotProductDivTitle"> <img :src="require(`@/assets/main/home/no${index+1}.png`)" /> <span class="hotProductDivTitleBidName">中赢宝1101</span> <span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:b.bidNo,backTitle:b.bidName})">购买</span></p>
+        <p class="hotProductDivTitle"> <img :src="require(`@/assets/main/home/no${index+1}.png`)" /> <span class="hotProductDivTitleBidName">{{b.bidName}}</span> <span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:b.bidNo,backTitle:b.bidName})">购买</span></p>
         <p class="hotProductDivRate">{{b.annualizedRate}}%</p>
         <p class="hotProductDivWord">历史年化收益率</p>
         <!--进度条-->
