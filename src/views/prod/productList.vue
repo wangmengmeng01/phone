@@ -16,7 +16,7 @@
 					<div class="tipsImg" :style="{left:j.amountScale*5/100+'rem'}" v-if="j.amountScale<=50||j.amountScale==100">
 						<img src="../../assets/main/home/tipsImg.png" /><span>{{j.amountScale| tofixed}}%</span>
 					</div>
-					<div class="redTipsImg"  :style="{left:j.amountScale*5/100+'rem'}" v-else>
+					<div class="redTipsImg" :style="{left:j.amountScale*5/100+'rem'}" v-else>
 						<p><i>{{j.amountWait|numfixed}}</i>万</p>
 						<p>剩余不到</p>
 					</div>
@@ -30,7 +30,7 @@
 					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName})">购买</span>
 				</p>
 			</div>
-
+	
 		</div>
 		<!--售罄状态-->
 		<div v-else class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
@@ -47,46 +47,48 @@
 				<p>明天10:30</p>
 				<p>预计新标上架时间</p>
 				<img src="../../assets/main/prod/sq.png" />
-
+	
 			</div>
 		</div>
 		<!--<div v-else class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
-			<div class="productDivDetial">
-				<div class="pddTitle">
-					<span class="pddTitleBidName">月月赢-12M500G号</span>
-					<p class="pddTitleTips">
-						<span>佣金1.5%</span>
-						<span>3天锁定</span>
+				<div class="productDivDetial">
+					<div class="pddTitle">
+						<span class="pddTitleBidName">月月赢-12M500G号</span>
+						<p class="pddTitleTips">
+							<span>佣金1.5%</span>
+							<span>3天锁定</span>
+						</p>
+					</div>
+					<p class="productDivRate">10%</p>
+					<p class="productDivWrod">历史年化</p>
+					<div class="hotProductDivProgress">
+						<div class="tipsImg">
+							<img src="../../assets/main/home/tipsImg.png" /><span>48%</span>
+						</div>
+						<div class="redTipsImg">
+							<p><i>5</i>万</p>
+							<p>剩余不到</p>
+						</div>
+						<p class="grayLine"></p>
+						<p class="proLine"></p>
+						<p class="proTip"><i>120</i>人参与</p>
+					</div>
+					<p class="hotProductDivMessage">
+						<span>累计销售 <i>1000万</i></span>
+						<span>累计收益 <i>102万</i></span>
+						<span class="hotProductDivTitleBtn">购买</span>
 					</p>
 				</div>
-				<p class="productDivRate">10%</p>
-				<p class="productDivWrod">历史年化</p>
-				<div class="hotProductDivProgress">
-					<div class="tipsImg">
-						<img src="../../assets/main/home/tipsImg.png" /><span>48%</span>
-					</div>
-					<div class="redTipsImg">
-						<p><i>5</i>万</p>
-						<p>剩余不到</p>
-					</div>
-					<p class="grayLine"></p>
-					<p class="proLine"></p>
-					<p class="proTip"><i>120</i>人参与</p>
-				</div>
-				<p class="hotProductDivMessage">
-					<span>累计销售 <i>1000万</i></span>
-					<span>累计收益 <i>102万</i></span>
-					<span class="hotProductDivTitleBtn">购买</span>
-				</p>
-			</div>
-
-		</div>-->
-
+	
+			</div>-->
+	
 	</div>
 </template>
 
 <script>
-	import { getProductBidsList } from '@/service'
+	import {
+		getProductBidsList
+	} from '@/service'
 	export default {
 		name: 'productList',
 		data() {
@@ -94,11 +96,11 @@
 				item: {
 					userToken: "",
 					productNo: this.$route.query.productNo,
-					pageIndex:1,
+					pageIndex: 1,
 				},
 				productList: [],
-				totalPage:0,
-				
+				totalPage: 0,
+	
 			}
 		},
 		created() {
@@ -107,29 +109,29 @@
 		mounted() {
 			window.scroll(0, 0);
 			document.body.onscroll = () => {
-				if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+				if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
 					this.item.pageIndex++;
-					if(this.item.pageIndex > this.totalPage) {
+					if (this.item.pageIndex > this.totalPage) {
 						return;
 					}
 					this.init();
-
+	
 				}
 			}
-
+	
 		},
 		methods: {
-			
-			init(){
+	
+			init() {
 				getProductBidsList(this.item).then(res => {
 					this.productList = this.productList.concat(res.productList);
-					if(res.total){
+					if (res.total) {
 						this.totalPage = Math.ceil(res.total / 10);
 					}
-
+	
 				});
 			}
-			
+	
 		}
 	}
 </script>
@@ -401,7 +403,7 @@
 	
 	.hotProductDivMessage {
 		float: left;
-		padding: 0.28rem 0 0.44rem ;
+		padding: 0.28rem 0 0.44rem;
 		margin: 0 0.4rem;
 		height: 0.48rem;
 		width: 6.3rem;

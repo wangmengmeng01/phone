@@ -30,19 +30,19 @@ router.beforeEach((to, from, next) => {
   // 设置title
   document.title = to.meta.title || "理财师";
   if (!!store.state.user.userToken) {
-    native.loading('hide');  // 隐藏loading
+    native.loading('hide'); // 隐藏loading
     //如果有就直接到首页咯
     next();
   } else {
     if (to.meta.filter) {
-      native.loading('hide');  // 隐藏loading
+      native.loading('hide'); // 隐藏loading
       // 过滤不需要登录的页面
       next();
     } else {
       //不然就跳转到登录；
-      native.loading('hide');  // 隐藏loading
+      native.loading('hide'); // 隐藏loading
       next("/login");
-//    next();
+      //    next();
     }
   }
 });

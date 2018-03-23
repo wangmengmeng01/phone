@@ -1,12 +1,13 @@
 <template>
     <transition name="mint-indicator">
-      <div id="loading" class="loading" @click="preventDefault" v-if="visible" >
-          <div class="loading-outline" >
-              <img :src="imgUrl" alt="" >
-          </div>
-      </div>
+        <div id="loading" class="loading" @click="preventDefault" v-if="visible">
+            <div class="loading-outline">
+                <img :src="imgUrl" alt="">
+            </div>
+        </div>
     </transition>
 </template>
+
 <style lang="sass" scoped>
   .mint-indicator-enter,.mint-indicator-leave-active
     opacity: 0
@@ -33,22 +34,23 @@
         transform: scale(.7)
         padding: .3rem
 </style>
+
 <script>
-    let num = 1;//默认第一张图片，因为总共是4张
-    let time1 = null;//Interval定时器
-    let time2 = null;//Timeout定时器
-    let time3 = null;//AnimationFrame
-    export default{
+    let num = 1; //默认第一张图片，因为总共是4张
+    let time1 = null; //Interval定时器
+    let time2 = null; //Timeout定时器
+    let time3 = null; //AnimationFrame
+    export default {
         name: 'fxd-loading',
         props: ['msg'],
-        data(){
-            return{
-                visible:false,
-                imgUrl:'',
+        data() {
+            return {
+                visible: false,
+                imgUrl: '',
             }
         },
         mounted() {
-            (function() {//兼容requestAnimationFrame，cancelAnimationFrame不支持的浏览器
+            (function() { //兼容requestAnimationFrame，cancelAnimationFrame不支持的浏览器
                 var lastTime = 0;
                 var vendors = ['ms', 'moz', 'webkit', 'o'];
                 for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
@@ -68,34 +70,34 @@
                     clearTimeout(id);
                 };
             }());
-
-            time3 = requestAnimationFrame(this.step);//默认Interval是从1秒后才开始工作的，所以这里开始就强制加载一次
-            time1 = setInterval(()=>{//定时每秒循环一次
+    
+            time3 = requestAnimationFrame(this.step); //默认Interval是从1秒后才开始工作的，所以这里开始就强制加载一次
+            time1 = setInterval(() => { //定时每秒循环一次
                 time3 = requestAnimationFrame(this.step);
-            },1000)
+            }, 1000)
         },
-        beforeDestroy(){//卸载清除
+        beforeDestroy() { //卸载清除
             this.cancel();
         },
-        methods:{
-            preventDefault(e){//阻止冒泡
+        methods: {
+            preventDefault(e) { //阻止冒泡
                 e.preventDefault()
             },
-            cancel(){//取消几个定时器和AnimationFrame
+            cancel() { //取消几个定时器和AnimationFrame
                 clearInterval(time1);
                 clearTimeout(time2);
                 cancelAnimationFrame(time3);
             },
-            step(){
-                this.imgUrl = require(`@/assets/loading/${num}.png`);//加载几个图片
+            step() {
+                this.imgUrl = require(`@/assets/loading/${num}.png`); //加载几个图片
                 num++;
-                if (num < 5) {//加载到第四个之后再从第一个重头再来
-                    time2 = setTimeout(()=>{
+                if (num < 5) { //加载到第四个之后再从第一个重头再来
+                    time2 = setTimeout(() => {
                         time3 = requestAnimationFrame(this.step);
-                    },400)//每个图片间隔4秒和安卓一致
+                    }, 400) //每个图片间隔4秒和安卓一致
                     return
                 }
-                num=1;
+                num = 1;
             },
         },
     }

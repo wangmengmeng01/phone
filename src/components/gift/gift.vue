@@ -1,5 +1,5 @@
 <template>
-  <Fxd-mask  @click.native="cancel" transition="smallToBig">
+  <Fxd-mask @click.native="cancel" transition="smallToBig">
     <div class="gift">
       <div class="con-margin">
         <div class="con">
@@ -15,6 +15,7 @@
     </div>
   </Fxd-mask>
 </template>
+
 <style lang="sass" scoped>
   .gift
     height: 100vh
@@ -65,34 +66,43 @@
     .btn2
       color: #fff
 </style>
+
 <script>
-  import { searchCouponReceiveDetails } from '@/service'
+  import {
+    searchCouponReceiveDetails
+  } from '@/service'
   import mask from '@/components/mask'
-    export default{
-        name: 'gift',
-        props: ['data'],
-        data(){
-          return{
-            visible: false
-          }
-        },
-        created(){
-          const {receiveNo, couponNo} = this.data;
-          if(receiveNo && couponNo){
-          const couponList = this.$parent.item.coupon.couponList;
-            searchCouponReceiveDetails({receiveNo,couponNo}).then(()=>{
-              const index = couponList.findIndex(t=>t.couponNo===couponNo);
-              index!==-1 && couponList.splice(index,1)
-            })
-          }
-        },
-        components: {
-            'Fxd-mask':mask,
-        },
-        methods: {
-            cancel(){
-                this.$parent.gift_visible = false
-            },
-        }
+  export default {
+    name: 'gift',
+    props: ['data'],
+    data() {
+      return {
+        visible: false
+      }
+    },
+    created() {
+      const {
+        receiveNo,
+        couponNo
+      } = this.data;
+      if (receiveNo && couponNo) {
+        const couponList = this.$parent.item.coupon.couponList;
+        searchCouponReceiveDetails({
+          receiveNo,
+          couponNo
+        }).then(() => {
+          const index = couponList.findIndex(t => t.couponNo === couponNo);
+          index !== -1 && couponList.splice(index, 1)
+        })
+      }
+    },
+    components: {
+      'Fxd-mask': mask,
+    },
+    methods: {
+      cancel() {
+        this.$parent.gift_visible = false
+      },
     }
+  }
 </script>

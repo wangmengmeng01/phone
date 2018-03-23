@@ -7,7 +7,9 @@
           <h2 class="f36 flex"><span>{{item.realName}}</span><span v-if="(item.position=='1')||(item.position=='2')" class="status color_main"><img src="../../assets/main/mine/status_yellow.png" alt=""><i class="f12">{{['一般理财师','大区经理'][parseInt(item.position)-1]}}</i></span></h2>
           <p class="f24">{{item.department}}</p>
           <p class="f32 color_font-s">{{item.beInviteDate}} 成为我的理财师</p>
-          <p class="img flex"><a class="color_font-s flex f44" :href="`tel:${item.mobile}`"><img src="../../assets/main/mine/phone.png" alt="">{{item.mobile}}</a></p>
+          <p class="img flex">
+            <a class="color_font-s flex f44" :href="`tel:${item.mobile}`"><img src="../../assets/main/mine/phone.png" alt="">{{item.mobile}}</a>
+          </p>
         </div>
       </div>
       <button class="f36 btn"><a :href="`tel:${item.mobile}`">拨打电话</a></button>
@@ -17,7 +19,9 @@
 </template>
 
 <script>
-  import { searchMyManagerUserInfo } from '@/service'
+  import {
+    searchMyManagerUserInfo
+  } from '@/service'
   export default {
     name: 'master',
     data() {
@@ -29,12 +33,11 @@
       this.init();
     },
     methods: {
-      init(){
-        searchMyManagerUserInfo().then(r=>this.item = r);
+      init() {
+        searchMyManagerUserInfo().then(r => this.item = r);
       }
     },
-    watch: {
-    }
+    watch: {}
   }
 </script>
 

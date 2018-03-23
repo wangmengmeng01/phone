@@ -9,7 +9,7 @@ export default {
   coupon: state => state.coupon,
 
   succ_page: state => state.succ_page,
-  
+
   bindCard: state => state.bindCard,
 
 }

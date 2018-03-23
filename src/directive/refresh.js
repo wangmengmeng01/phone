@@ -4,9 +4,9 @@
 import Vue from 'vue'
 
 Vue.directive('refresh', {
-  bind (el, binding, vnode) {
+  bind(el, binding, vnode) {
     let Profile = Vue.extend(require('@/components/refresh').default);
     new Profile().$mount(el);
-    log(el,binding,vnode)
+    log(el, binding, vnode)
   }
 });

@@ -4,7 +4,7 @@ import api from './api';
 /**
  * 产品页
  */
-export const productSearchBidsList = async (params)=>{
+export const productSearchBidsList = async (params) => {
   return await $http({
     method: 'get',
     api: api.productSearchBidsList,
@@ -16,7 +16,7 @@ export const productSearchBidsList = async (params)=>{
 /**
  * 产品列表页
  */
-export const getProductBidsList = async (params)=>{
+export const getProductBidsList = async (params) => {
   return await $http({
     method: 'get',
     api: api.getProductBidsList,
@@ -27,7 +27,7 @@ export const getProductBidsList = async (params)=>{
 /**
  * 产品详情页
  */
-export const searchProductBidsDetail = async (params)=>{
+export const searchProductBidsDetail = async (params) => {
   return await $http({
     method: 'get',
     api: api.searchProductBidsDetail,
@@ -38,7 +38,7 @@ export const searchProductBidsDetail = async (params)=>{
 /**
  * 确认购买页
  */
-export const doConfirmBuyPage = async (params)=>{
+export const doConfirmBuyPage = async (params) => {
   return await $http({
     method: 'get',
     api: api.doConfirmBuyPage,
@@ -48,14 +48,14 @@ export const doConfirmBuyPage = async (params)=>{
 /**
  * 获取用户状态
  */
-export const getUserStatus = async (params)=>{
+export const getUserStatus = async (params) => {
   return await $http({
     method: 'get',
     api: api.getUserStatus,
     params,
     options: {
-      filter_code:false,
-      filter_msg:false
+      filter_code: false,
+      filter_msg: false
     }
   });
 }
@@ -63,7 +63,7 @@ export const getUserStatus = async (params)=>{
 /**
  * 获取用户各种金额
  */
-export const accountAcmountInfo = async (params)=>{
+export const accountAcmountInfo = async (params) => {
   return await $http({
     method: 'get',
     api: api.accountAcmountInfo,
@@ -75,7 +75,7 @@ export const accountAcmountInfo = async (params)=>{
 /**
  * 计算收益
  */
-export const getExpectedRevenue = async (params)=>{
+export const getExpectedRevenue = async (params) => {
   return await $http({
     method: 'post',
     api: api.getExpectedRevenue,
@@ -87,7 +87,7 @@ export const getExpectedRevenue = async (params)=>{
 /**
  * 购买
  */
-export const borrowInvest = async (params)=>{
+export const borrowInvest = async (params) => {
   return await $http({
     method: 'post',
     api: api.borrowInvest,
@@ -98,7 +98,7 @@ export const borrowInvest = async (params)=>{
 /**
  * 查询可用卡券数目
  */
-export const searchCouponList = async (params)=>{
+export const searchCouponList = async (params) => {
   return await $http({
     method: 'get',
     api: api.searchCouponList,
@@ -109,7 +109,7 @@ export const searchCouponList = async (params)=>{
 /**
  * 购买记录
  */
-export const searchBidsInvestList = async (params)=>{
+export const searchBidsInvestList = async (params) => {
   return await $http({
     method: 'get',
     api: api.searchBidsInvestList,
@@ -119,11 +119,10 @@ export const searchBidsInvestList = async (params)=>{
 /**
  * 严选优质列表
  */
-export const standardAndPlanList = async (params)=>{
+export const standardAndPlanList = async (params) => {
   return await $http({
     method: 'get',
     api: api.standardAndPlanList,
     params,
   });
 }
-

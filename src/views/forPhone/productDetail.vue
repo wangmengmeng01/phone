@@ -1,5 +1,5 @@
 <template>
-	<div class="productDetail"  @click="$go('downLoad')">
+	<div class="productDetail" @click="$go('downLoad')">
 		<!--详情页-->
 		<!--详情头部-->
 		<div class="productDetailTop">
@@ -17,7 +17,7 @@
 			</div>
 			<p class="pdtBugMes" @click="$go('/prod/joinList')"><img class="pdtBugMesImg1" src="../../assets/main/prod/people.png" /><span> 已有{{detail.countPeople}}人购买 </span> <img class="pdtBugMesImg2" src="../../assets/main/prod/lnextIcon.png" /></p>
 		</div>
-
+	
 		<!--交易规则-->
 		<div class="productDetailCenter">
 			<p class="pdcTitle">
@@ -48,10 +48,10 @@
 			<span class="pdcRule"><img src="../../assets/main/prod/Triangle@2x.png"/>起息日后30天内不可转让</span>
 			<span class="pdcRule pdcRule2"><img src="../../assets/main/prod/Triangle@2x.png"/>到期后三个交易日内，资金入账到可用余额</span>
 		</div>
-
+	
 		<!--返佣规则-->
 		<div class="productDetailCenter" style="display: none;">
-
+	
 			<p class="pdcTitle">
 				<span>返佣规则</span>
 				<span>查看详情 <img src="../../assets/common/arrow-right.png"/></span>
@@ -75,15 +75,15 @@
 				<span></span>
 				<span>1.36%</span>
 			</p>
-
+	
 			<span class="pdcRule pdcRule3"><img src="../../assets/main/prod/Triangle@2x.png"/>返佣入账到我的佣金</span>
 			<span class="pdcRule pdcRule4"><img src="../../assets/main/prod/Triangle@2x.png"/>返佣均摊到每个期限单元日上，分次结算</span>
-
+	
 		</div>
-
+	
 		<!--返佣规则-->
 		<div class="productDetailCenter">
-
+	
 			<p class="pdcTitle">
 				<span>产品亮点</span>
 				<span>查看详情 <img src="../../assets/common/arrow-right.png"/></span>
@@ -101,17 +101,20 @@
 					<span>历史100%兑付</span></p>
 			</div>
 		</div>
-
+	
 		<!--立刻购买-->
 		<div class="productDetailBottom">
 			立刻购买
 		</div>
-
+	
 	</div>
 </template>
 
 <script>
-	import { searchProductBidsDetail, getUserStatus } from '@/service'
+	import {
+		searchProductBidsDetail,
+		getUserStatus
+	} from '@/service'
 	export default {
 		name: 'productDetail',
 		data() {
@@ -130,58 +133,58 @@
 			});
 		},
 		methods: {
-
+	
 			getStatus() {
 				getUserStatus(this.itemStatus).then(res => {
 					//@click=""
 					console.log(res);
 					const info = res.result;
-					if(res.code == "100") {
-
-						if(info.openAccountStatus == "1") {
+					if (res.code == "100") {
+	
+						if (info.openAccountStatus == "1") {
 							//未开户
 							this.$go('/reg_bank');
-						} else if(info.openAccountStatus == "4") {
+						} else if (info.openAccountStatus == "4") {
 							//激活
-
+	
 						} else {
-
+	
 							//电子签约
-							if(info.autoBuyBidGrantFlag == "1") {
-
+							if (info.autoBuyBidGrantFlag == "1") {
+	
 								//复投
-								if(info.autoBuyBidFlag == "1") {
-
+								if (info.autoBuyBidFlag == "1") {
+	
 									//风险测评
-
-									if(info.riskRatingFlag == "1") {
+	
+									if (info.riskRatingFlag == "1") {
 										this.$go('/prod/buyBid', {
 											bidNo: this.$route.query.bidNo,
 											backTitle: '确认购买'
 										})
 									} else {
-
+	
 									}
-
+	
 								} else {
-
+	
 								}
-
+	
 							} else {
-
+	
 							}
-
+	
 						}
-
-
-
-					} else if(res.code == "1210" || res.code == "1000") {
+	
+	
+	
+					} else if (res.code == "1210" || res.code == "1000") {
 						this.$go('/login');
 					} else {
 						this.$toask(res.message);
 					}
 				})
-
+	
 			}
 		}
 	}

@@ -6,12 +6,12 @@
 
 <script>
   export default {
-
+  
     name: 'main-mine',
-
-    data () {
+  
+    data() {
       return {
-
+  
       }
     }
   }

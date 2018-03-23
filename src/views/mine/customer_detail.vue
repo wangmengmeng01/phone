@@ -9,7 +9,7 @@
       <h2 class="title f32 color_font">客户投资背景</h2>
       <ul>
         <li>
-          <h2 class="f28 color_font">{{['男','女','未确定'][item.sex-1] || '--'}}  {{item.age+'岁' || '--'}}</h2>
+          <h2 class="f28 color_font">{{['男','女','未确定'][item.sex-1] || '--'}} {{item.age+'岁' || '--'}}</h2>
           <p class="f24 color_font-s">性别&年龄</p>
         </li>
         <li>
@@ -59,16 +59,18 @@
       </ul>
     </div>
     <!--<div class="introduction">-->
-
+  
     <!--</div>-->
     <!--<div class="record">-->
-
+  
     <!--</div>-->
   </div>
 </template>
 
 <script>
-  import { getExistingCustomers } from '@/service'
+  import {
+    getExistingCustomers
+  } from '@/service'
   export default {
     name: 'customer_detail',
     data() {
@@ -80,9 +82,11 @@
       this.init()
     },
     methods: {
-      init(){
+      init() {
         const userCode = this.$route.query.userCode;
-        getExistingCustomers({userCode}).then(r=>this.item = r);
+        getExistingCustomers({
+          userCode
+        }).then(r => this.item = r);
       }
     }
   }

@@ -19,7 +19,7 @@
       </div>
       <div class="b color_main f28 flex">
         <span @click="send_coupon(i)">赠送优惠</span>
-        <a  class="color_main" :href="`tel:${i.phone}`">拨打电话</a>
+        <a class="color_main" :href="`tel:${i.phone}`">拨打电话</a>
       </div>
     </div>
     <p v-if="!list.length" class="f36 color_font-s center">暂无数据</p>
@@ -27,8 +27,12 @@
 </template>
 
 <script>
-  import { mapMutations } from 'vuex'
-  import { searchExistingCustomers } from '@/service'
+  import {
+    mapMutations
+  } from 'vuex'
+  import {
+    searchExistingCustomers
+  } from '@/service'
   export default {
     name: 'customer',
     data() {
@@ -44,10 +48,10 @@
     },
     mounted() {
       document.body.onscroll = () => {
-
-        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-          if(this.list.length <= 10)return;
-          if(this.pageIndex < Math.ceil(this.total / 10)) return;
+  
+        if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+          if (this.list.length <= 10) return;
+          if (this.pageIndex < Math.ceil(this.total / 10)) return;
           this.pageIndex++;
           this.init();
         }
@@ -58,16 +62,21 @@
         'RESET',
         'SET_COUPON',
       ]),
-      init(){
-        searchExistingCustomers({pageIndex: this.pageIndex}).then(r=>{
+      init() {
+        searchExistingCustomers({
+          pageIndex: this.pageIndex
+        }).then(r => {
           this.list = this.list.concat(r.list);
           this.total = r.total;
         })
       },
-      send_coupon(item){
-        const {userCode, realName} = item;
+      send_coupon(item) {
+        const {
+          userCode,
+          realName
+        } = item;
         this.SET_COUPON({
-          params:{
+          params: {
             userCode,
             realName
           }

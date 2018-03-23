@@ -4,10 +4,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import { middleClone } from '@/until'
+import {
+  middleClone
+} from '@/until'
 import getters from './getters'
 
-const root_state = require('@/config.json').state;  // 本身的state，给重置用
+const root_state = require('@/config.json').state; // 本身的state，给重置用
 
 const state = middleClone(root_state); // 复制的state直接用
 
@@ -15,7 +17,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state,
   getters,
-  mutations: {  // 同步调用
+  mutations: { // 同步调用
     /**
      * 设置用户信息
      * @param state
@@ -25,7 +27,7 @@ export default new Vuex.Store({
     SET_USER(state, data) {
       state.user = data;
     },
-     /**
+    /**
      * 换绑卡
      * @param state
      * @param data
@@ -59,8 +61,8 @@ export default new Vuex.Store({
      * @constructor
      */
     SET_COUPON(state, data) {
-      state.coupon = Object.assign({},state.coupon, data);
-      state.coupon.receiveNoList = state.coupon.data.map(t=>t.receiveNo)
+      state.coupon = Object.assign({}, state.coupon, data);
+      state.coupon.receiveNoList = state.coupon.data.map(t => t.receiveNo)
     },
     /**
      * 处理优惠券
@@ -69,7 +71,7 @@ export default new Vuex.Store({
      * @constructor
      */
     DEL_COUPON(state, data) {
-      state.coupon.data = state.coupon.data.filter(t=>{
+      state.coupon.data = state.coupon.data.filter(t => {
         return t.couponNo !== data.couponNo
       })
     },
@@ -96,24 +98,29 @@ export default new Vuex.Store({
      * @param state
      * @constructor
      */
-    RESET(state, obj){
-      if(obj){
-        Object.assign(state[obj],root_state[obj])
-      }else{
+    RESET(state, obj) {
+      if (obj) {
+        Object.assign(state[obj], root_state[obj])
+      } else {
         sessionStorage.clear();
         localStorage.clear();
-        Object.assign(state,root_state)
+        Object.assign(state, root_state)
       }
     }
   },
-  actions: {  // 异步调用
-    set_user({ commit }, data) {
+  actions: { // 异步调用
+    set_user({
+      commit
+    }, data) {
       commit('SET_USER', data)
     },
-    set_user_info({ commit }, data) {
+    set_user_info({
+      commit
+    }, data) {
       commit('SET_USER_INFO', data)
     },
   },
-  plugins: [createPersistedState({ storage: window.sessionStorage })] // 此插件会将stare同步到session中
+  plugins: [createPersistedState({
+    storage: window.sessionStorage
+  })] // 此插件会将stare同步到session中
 })
-

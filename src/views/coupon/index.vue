@@ -6,12 +6,12 @@
 
 <script>
   export default {
-
+  
     name: 'coupon',
-
-    data () {
+  
+    data() {
       return {
-
+  
       }
     }
   }

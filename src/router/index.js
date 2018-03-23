@@ -46,7 +46,7 @@ const dealRoutes = (arr, child = false) => {
       // 子组件需要加上父组件的路径，如果是父组件需要加上index的路由，不知道为什么这个自动生成的时候没有默认找index，太懒了
       let url = t.component || t.path; // 如果没有component属性则是用path来代替
       let component = () =>
-        import(`@/views/${child ? child + "/" : ""}${
+        import (`@/views/${child ? child + "/" : ""}${
           !child && t.children ? url + "/index" : url
         }`);
 
@@ -80,12 +80,13 @@ const dealRoutes = (arr, child = false) => {
     }
   });
   return child // 子组件只需要返回重组数组
-    ? newArr
-    : {
-        mode: "history",
-        scrollBehavior,
-        routes: newArr
-      };
+    ?
+    newArr :
+    {
+      mode: "history",
+      scrollBehavior,
+      routes: newArr
+    };
 };
 // console.log(dealRoutes(routes))
 export default new Router(dealRoutes(routes));

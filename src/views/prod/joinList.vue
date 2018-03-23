@@ -8,22 +8,24 @@
 				</p>
 				<p>{{i.investAmount|formatNum}}</p>
 			</div>
-
+	
 		</div>
-
+	
 		<div class="joinListDiv1" v-show="!list.length" style="background-color: #f1f1f9;">
 			<img src="../../assets/main/prod/norecord.png" />
 			<p class="noRecord">暂无记录</p>
 		</div>
-
+	
 	</div>
 </template>
 
 <script>
-	import { searchBidsInvestList } from '@/service'
+	import {
+		searchBidsInvestList
+	} from '@/service'
 	export default {
 		name: 'jionList',
-
+	
 		data() {
 			return {
 				item: {
@@ -33,8 +35,8 @@
 				},
 				list: [], //交易记录
 				totalPage: 0, //总页数
-				
-
+	
+	
 			}
 		},
 		created() {
@@ -43,31 +45,31 @@
 		mounted() {
 			window.scroll(0, 0);
 			document.body.onscroll = () => {
-
-				if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-
+	
+				if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+	
 					this.item.pageIndex++;
-					if(this.item.pageIndex > this.totalPage) {
+					if (this.item.pageIndex > this.totalPage) {
 						return;
 					}
 					this.init();
-
+	
 				}
 			}
-
+	
 		},
 		methods: {
-
+	
 			init() {
 				searchBidsInvestList(this.item).then(res => {
 					console.log("交易记录");
 					console.log(res);
 					this.list = this.list.concat(res.bidsInvestList);
 					this.totalPage = Math.ceil(res.total / 10);
-
+	
 				});
 			}
-
+	
 		}
 	}
 </script>

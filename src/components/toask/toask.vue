@@ -1,11 +1,12 @@
 <template>
     <transition name="mint-toast-pop">
-          <div class="dialog toast" v-if='visible'>
-              <p>{{message}}</p>
-          </div>
+        <div class="dialog toast" v-if='visible'>
+            <p>{{message}}</p>
+        </div>
     </transition>
 </template>
-<style lang="sass"  scoped>
+
+<style lang="sass" scoped>
   .mint-toast-pop-enter, .mint-toast-pop-leave-active
     opacity: 0
   .dialog
@@ -26,8 +27,9 @@
       background: rgba(000,000,000,.8)
       color: #fff
 </style>
+
 <script>
-    export default{
+    export default {
         name: 'toast',
         props: ['message'],
         data() {

@@ -33,33 +33,29 @@
     name: 'seting',
     data() {
       return {
-        pwdList:[{
+        pwdList: [{
           name: '修改登录密码',
           url: '/forget_pwd'
-        },{
+        }, {
           name: '修改交易密码',
           url: ''
         }],
-        infoList:[{
+        infoList: [{
           name: '关于我们',
           url: ''
-        },{
+        }, {
           name: '安全保障',
           url: ''
-        },{
+        }, {
           name: '信息披露',
           url: ''
         }]
       }
     },
-    created() {
-    },
-    components: {
-    },
-    methods: {
-    },
-    watch: {
-    }
+    created() {},
+    components: {},
+    methods: {},
+    watch: {}
   }
 </script>
 

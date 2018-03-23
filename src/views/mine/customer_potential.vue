@@ -22,7 +22,10 @@
 </template>
 
 <script>
-  import { searchPotentialCustomers, getShowBusinessHistory } from '@/service'
+  import {
+    searchPotentialCustomers,
+    getShowBusinessHistory
+  } from '@/service'
   export default {
     name: 'customer_potential',
     data() {
@@ -38,9 +41,9 @@
     },
     mounted() {
       document.body.onscroll = () => {
-        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-          if(this.list.length <= 10)return;
-          if(this.pageIndex < Math.ceil(this.total / 10)) return;
+        if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+          if (this.list.length <= 10) return;
+          if (this.pageIndex < Math.ceil(this.total / 10)) return;
           this.pageIndex++;
           this.init();
         }
@@ -48,12 +51,14 @@
     },
     methods: {
       init() {
-        searchPotentialCustomers({pageIndex:this.pageIndex}).then(r=>{
+        searchPotentialCustomers({
+          pageIndex: this.pageIndex
+        }).then(r => {
           this.list = this.list.concat(r.customerList);
           this.total = r.total;
         })
       }
-
+  
     }
   }
 </script>

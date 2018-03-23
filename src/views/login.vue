@@ -13,7 +13,7 @@
       <div class="flex con">
         <input :type="[checked?'password':'text']" placeholder="请输入登录密码" class="f44" v-model.trim="passWord">
         <img :src="require(`@/assets/common/${checked?'eyes':'eyebrow'}.png`)" alt="" class="eyes" @click="checked=!checked">
-       </div>
+      </div>
     </div>
     <button class="btn" @click="submit">{{text}}</button>
     <p class="link flex f32 color_font-s">
@@ -24,19 +24,24 @@
 </template>
 
 <script>
-  import { mapActions, mapMutations } from 'vuex'
-  import { login } from '@/service'
+  import {
+    mapActions,
+    mapMutations
+  } from 'vuex'
+  import {
+    login
+  } from '@/service'
   export default {
     name: 'login',
-    data () {
+    data() {
       return {
-        checked: true,                                              // 密码框的类型显示隐藏
+        checked: true, // 密码框的类型显示隐藏
         text: '登录', // 登录按钮文字提示
         item: {
           mobile: this.$route.query.mobile || '',
-          password: '',//加密密码
+          password: '', //加密密码
         },
-        passWord:'',//未加密密码
+        passWord: '', //未加密密码
       }
     },
     created() {
@@ -53,35 +58,35 @@
       /**
        * 提交
        */
-      submit(){
-        if(!this.item.mobile) {
+      submit() {
+        if (!this.item.mobile) {
           this.$toask('手机号不能为空!');
           return
         }
-        if(!this.passWord) {
+        if (!this.passWord) {
           this.$toask('登录密码不能为空!');
           return
         }
-        if(!(/^1\d{10}$/.test(this.item.mobile))) {
+        if (!(/^1\d{10}$/.test(this.item.mobile))) {
           this.$toask('手机号格式不正确!');
           return
         }
-        if(!(/\w{6,12}$/.test(this.passWord))) {
+        if (!(/\w{6,12}$/.test(this.passWord))) {
           this.$toask('密码格式不正确!');
           return
         }
         this.text = '登录中...';
-        let CryptoJS= require('@/lib/aes');
+        let CryptoJS = require('@/lib/aes');
         this.item.password = CryptoJS.aes(this.passWord);
         // 登录
-        login(this.item).then(res=>{
+        login(this.item).then(res => {
           // 成功的话把返回的数据放到缓存中
           this.set_user(res);
           this.$go('/')
-        }).catch(()=>{
-            //失败的话提示
-            this.passWord = '';
-            this.text = '重新登录';
+        }).catch(() => {
+          //失败的话提示
+          this.passWord = '';
+          this.text = '重新登录';
         })
       },
     }

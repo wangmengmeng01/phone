@@ -6,7 +6,7 @@
           我的资产
         </div>
         <div class="wealthMATopT">合计{{totalMoney| formatNum}}元</div>
-
+  
       </div>
       <ul class="wealthMyObject">
         <li v-for="(i) in invesProperty.res">
@@ -19,13 +19,13 @@
             <div class="wealthMyObjectCL">
               <span>持有金额</span>
               <em class="bigAmount">{{i.initCashAmount | formatNum
-                }}</em>
+                  }}</em>
             </div>
             <!--<div class="wealthMyObjectCR">
-              <span>昨日收益</span>
-              <em>+{{i.yesterdayAmount | formatNum
-                }}</em>
-            </div>-->
+                <span>昨日收益</span>
+                <em>+{{i.yesterdayAmount | formatNum
+                  }}</em>
+              </div>-->
           </div>
           <div class="wealthMyObjectB">
             <div class="wealthMyObjectBL">
@@ -35,68 +35,69 @@
             <div class="wealthMyObjectBR">
               <span>持有收益</span>
               <em>+{{i.holdAmount | formatNum
-                }}</em>
+                  }}</em>
             </div>
           </div>
         </li>
       </ul>
     </div>
-    
-     <div class="joinListDiv1" v-show="!invesProperty.res.length" style="background-color: #f1f1f9;">
-			<img src="../../assets/main/prod/norecord.png" />
-			<p class="noRecord">暂无记录</p>
-	</div>
-    
-    
+  
+    <div class="joinListDiv1" v-show="!invesProperty.res.length" style="background-color: #f1f1f9;">
+      <img src="../../assets/main/prod/norecord.png" />
+      <p class="noRecord">暂无记录</p>
+    </div>
+  
+  
   </div>
 </template>
 
 <script>
-  import { invesProperty } from '@/service'
+  import {
+    invesProperty
+  } from '@/service'
   export default {
     name: 'changeBank',
     data() {
-      return{
-        invesProperty:{
-          data:{
+      return {
+        invesProperty: {
+          data: {
             bidType: '2',
             status: '1',
             pageNum: '1'
           },
-          res:[]
+          res: []
         },
-        totalPage:0,
-        totalMoney:0,
+        totalPage: 0,
+        totalMoney: 0,
       }
     },
     created() {
       this.init()
     },
-     mounted() {
-		window.scroll(0, 0);
-		document.body.onscroll = () => {
-			if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-				this.invesProperty.data.pageNum++;
-				if(this.invesProperty.data.pageNum > this.totalPage) {
-					return;
-				}
-				this.init();
-			}
-		}
-
-	},
+    mounted() {
+      window.scroll(0, 0);
+      document.body.onscroll = () => {
+        if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+          this.invesProperty.data.pageNum++;
+          if (this.invesProperty.data.pageNum > this.totalPage) {
+            return;
+          }
+          this.init();
+        }
+      }
+  
+    },
     methods: {
-      init(){
-        invesProperty(this.invesProperty.data).then(res=>{
+      init() {
+        invesProperty(this.invesProperty.data).then(res => {
           console.log(res)
           this.invesProperty.res = this.invesProperty.res.concat(res.dataList);
-          this.totalMoney=res.totalAmount;
+          this.totalMoney = res.totalAmount;
           this.totalPage = Math.ceil(res.totalNum / 10);
         });
       }
     },
-    watch: {
-    }
+    watch: {}
   }
 </script>
 

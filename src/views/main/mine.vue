@@ -5,12 +5,12 @@
       <div class="msg">
         <h2 class="f44 flex"><span>{{item.userName | nameDesensitization}}</span><span v-if="(item.position=='1')||(item.position=='2')" class="status"><img src="../../assets/main/mine/status_yellow.png" alt=""><i class="f12">{{['一般理财师','大区经理'][parseInt(item.position)-1]}}</i></span></h2>
         <p class="f24">{{item.pic}}</p>
-        <p class="f24">手机号  {{item.mobile | desensitization}}</p>
+        <p class="f24">手机号 {{item.mobile | desensitization}}</p>
       </div>
       <span class="qrcode flex">
-        <img src="../../assets/main/mine/qrcode.png" alt="" class="qrcode_icon">
-        <img src="../../assets/common/arrow-transparent-right.png" alt="" class="arrow-transparent">
-      </span>
+          <img src="../../assets/main/mine/qrcode.png" alt="" class="qrcode_icon">
+          <img src="../../assets/common/arrow-transparent-right.png" alt="" class="arrow-transparent">
+        </span>
     </div>
     <!--菜单栏-->
     <ul class="item" v-for="i in menu" v-if="menu.length">
@@ -26,84 +26,96 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import { searchUserInfo } from '@/service'
+  import {
+    mapActions
+  } from 'vuex'
+  import {
+    searchUserInfo
+  } from '@/service'
   export default {
     name: 'mine',
     data() {
       return {
         head: require('@/assets/main/mine/head.png'),
         item: {},
-        menu:[],
-       menu_normal:[[
-//           {
-//           icon: 'sweep',
-//           name: '扫一扫添加客户',
-//           url: 'qrcode'
-//         },
-         {
-           icon: 'mine',
-           name: '我的理财师',
-           url: 'master'
-         },{
-           icon: 'join',
-           name: '我要加盟的理财师',
-           url: '/home/joinFinlManager'
-         }],[{
-         icon: 'seting',
-         name: '设置',
-         url: 'seting'
-       }]],
-      menu_manage: [[
-//          {
-//        icon: 'sweep',
-//        name: '扫一扫添加客户',
-//        url: 'qrcode'
-//      },{
-//        icon: 'sweep',
-//        name: '扫一扫添加理财师',
-//         url: 'qrcode'
-//      },
-        {
-        icon: 'mine',
-        name: '我的理财师',
-         url: 'master'
-      }],[{
-        icon: 'have',
-        name: '已有客户',
-         url: 'customer'
-      },{
-        icon: 'customer',
-        name: '潜在客户',
-         url: 'customer_potential'
-      }],
-//        [{
-//        icon: 'advertisement',
-//        name: '广告卓信产品记录',
-//         url: ''
-//      },{
-//        icon: 'advertisement',
-//        name: '针对客户展业记录',
-//         url: ''
-//      },{
-//        icon: 'share',
-//        name: '邀约客户投资记录',
-//         url: ''
-//      },{
-//        icon: 'discount',
-//        name: '赠送客户优惠记录',
-//         url: ''
-//      }],
-//        [{
-//        icon: 'commission',
-//        name: '我的佣金',
-//         url: ''
-//      }],
-        [{
-        icon: 'seting',
-        name: '设置',
-         url: 'seting'
-      }]]
+        menu: [],
+        menu_normal: [
+          [
+            //           {
+            //           icon: 'sweep',
+            //           name: '扫一扫添加客户',
+            //           url: 'qrcode'
+            //         },
+            {
+              icon: 'mine',
+              name: '我的理财师',
+              url: 'master'
+            }, {
+              icon: 'join',
+              name: '我要加盟的理财师',
+              url: '/home/joinFinlManager'
+            }
+          ],
+          [{
+            icon: 'seting',
+            name: '设置',
+            url: 'seting'
+          }]
+        ],
+        menu_manage: [
+          [
+            //          {
+            //        icon: 'sweep',
+            //        name: '扫一扫添加客户',
+            //        url: 'qrcode'
+            //      },{
+            //        icon: 'sweep',
+            //        name: '扫一扫添加理财师',
+            //         url: 'qrcode'
+            //      },
+            {
+              icon: 'mine',
+              name: '我的理财师',
+              url: 'master'
+            }
+          ],
+          [{
+            icon: 'have',
+            name: '已有客户',
+            url: 'customer'
+          }, {
+            icon: 'customer',
+            name: '潜在客户',
+            url: 'customer_potential'
+          }],
+          //        [{
+          //        icon: 'advertisement',
+          //        name: '广告卓信产品记录',
+          //         url: ''
+          //      },{
+          //        icon: 'advertisement',
+          //        name: '针对客户展业记录',
+          //         url: ''
+          //      },{
+          //        icon: 'share',
+          //        name: '邀约客户投资记录',
+          //         url: ''
+          //      },{
+          //        icon: 'discount',
+          //        name: '赠送客户优惠记录',
+          //         url: ''
+          //      }],
+          //        [{
+          //        icon: 'commission',
+          //        name: '我的佣金',
+          //         url: ''
+          //      }],
+          [{
+            icon: 'seting',
+            name: '设置',
+            url: 'seting'
+          }]
+        ]
       }
     },
     created() {
@@ -113,16 +125,15 @@
       ...mapActions([
         'set_user_info',
       ]),
-      init(){
-        searchUserInfo().then(r=>{
+      init() {
+        searchUserInfo().then(r => {
           this.item = r;
           this.menu = r.flag === 1 ? this.menu_manage : this.menu_normal;
           this.set_user_info(r);
         })
       }
     },
-    watch: {
-    }
+    watch: {}
   }
 </script>
 

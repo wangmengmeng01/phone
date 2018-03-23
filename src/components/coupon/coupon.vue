@@ -37,14 +37,14 @@
     },
     props: ['data', 'checked', 'close'],
     methods: {
-      checkedFn(){
-        if(!this.checked)return;
-        this.check =! this.check;
+      checkedFn() {
+        if (!this.checked) return;
+        this.check = !this.check;
         let res = this.check ? this.data : [];
         this.$emit('checkedCb', res)
       },
-      closeFn(){
-        this.visibility =! this.visibility;
+      closeFn() {
+        this.visibility = !this.visibility;
         this.$emit('closeCb', this.data)
       }
     },

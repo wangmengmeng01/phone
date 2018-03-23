@@ -34,17 +34,25 @@
 </template>
 
 <script>
-  import { mapActions, mapMutations } from 'vuex'
-  import { sendSmsCode, openAccount, getUserStatus, userActivate } from '@/service'
+  import {
+    mapActions,
+    mapMutations
+  } from 'vuex'
+  import {
+    sendSmsCode,
+    openAccount,
+    getUserStatus,
+    userActivate
+  } from '@/service'
   import axios from 'axios'
   export default {
     name: 'reg_bank',
-    data () {
+    data() {
       return {
         codeText: '获取短信验证码',
         num: 60,
         click_code: false,
-        bankName: '',                       // 银行卡名
+        bankName: '', // 银行卡名
         item: {
           realName: '',
           idno: '',
@@ -62,20 +70,25 @@
       // 开始清楚成功页面的缓存
       this.RESET('succ_page');
       // 获取从选择银行卡页面返回的数据
-      const {data, bankName, bankNo, MerPriv} = this.$route.query;
+      const {
+        data,
+        bankName,
+        bankNo,
+        MerPriv
+      } = this.$route.query;
       // 如果有的话重新赋值
-      if(data){
+      if (data) {
         this.item = JSON.parse(decodeURIComponent(data));
         this.bankName = bankName;
         this.item.bankNo = bankNo;
       }
-      const retUrl = this.item.retUrl = location.origin+location.pathname;
+      const retUrl = this.item.retUrl = location.origin + location.pathname;
       // 表示从汇付返回的判断是否开户成功
-      if(MerPriv){
-        getUserStatus().then(r=>{
-           r = r.result;
+      if (MerPriv) {
+        getUserStatus().then(r => {
+          r = r.result;
           // 未开户
-          if(r.openAccountStatus=='1'){
+          if (r.openAccountStatus == '1') {
             this.SET_SUCC_PAGE({
               "title": "开户失败",
               "sub_title": "请检查您所录入的开户信息",
@@ -86,9 +99,9 @@
             });
             this.$go('/static/fail');
           }
-
+  
           // 已开户
-          if(r.openAccountStatus=='3'){
+          if (r.openAccountStatus == '3') {
             this.SET_SUCC_PAGE({
               "title": "恭喜，开通银行存管账户成功",
               "btn_text": "立即充值",
@@ -98,28 +111,30 @@
             });
             this.$go('/static/succ');
           }
-
+  
           // 待激活
-          if(r.openAccountStatus=='4'){
+          if (r.openAccountStatus == '4') {
             userActivate({
               retUrl
-              }).then(res=>{
+            }).then(res => {
               axios({
                 method: 'post',
-                url: location.origin+ new URL(res.serviceUrl).pathname,
+                url: location.origin + new URL(res.serviceUrl).pathname,
                 data: res.inMap,
-                transformRequest: [function (data) {
+                transformRequest: [function(data) {
                   let ret = '';
                   for (let it in data) {
                     ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
                   }
-                  return ret.slice(0,ret.length-1)
+                  return ret.slice(0, ret.length - 1)
                 }],
-              }).then(r=>{
-                if(r.status === 200){
-                  if(r.data){
+              }).then(r => {
+                if (r.status === 200) {
+                  if (r.data) {
                     document.body.innerHTML = r.data;
-                    setTimeout(()=>{document.form.submit()},0)
+                    setTimeout(() => {
+                      document.form.submit()
+                    }, 0)
                   }
                 }
               })
@@ -136,23 +151,26 @@
       /**
        * 跳转选择银行
        */
-      linkto(){
+      linkto() {
         // 把当前的数据传过去，防止写完了点选择银行返回重新填写
-        this.$go('/bank/choose',{backurl:this.$route.path,data: encodeURIComponent(JSON.stringify(this.item))})
+        this.$go('/bank/choose', {
+          backurl: this.$route.path,
+          data: encodeURIComponent(JSON.stringify(this.item))
+        })
       },
       /**
        * 发送短信
        */
-      sendCode(){
-        if(!this.item.mobile){
+      sendCode() {
+        if (!this.item.mobile) {
           this.$toask('手机号码不能为空!');
           return
         }
-        if(!(/^1\d{10}$/.test(this.item.mobile))) {
+        if (!(/^1\d{10}$/.test(this.item.mobile))) {
           this.$toask('手机号格式不正确!');
           return
         }
-        if(!this.item.bankCardNo){
+        if (!this.item.bankCardNo) {
           this.$toask('银行卡号不能为空!');
           return
         }
@@ -162,7 +180,7 @@
           bankCardNo: this.item.bankCardNo,
           busiType: 'user_register'
         };
-        sendSmsCode(params).then(r=>{
+        sendSmsCode(params).then(r => {
           this.item.smsSeq = r.smsSeq = 'AAAAAAAA';
           // 倒计时
           this.countdown()
@@ -171,11 +189,11 @@
       /**
        * 倒计时
        */
-      countdown(){
+      countdown() {
         this.click_code = !this.click_code;
-        let time = setInterval(()=>{
+        let time = setInterval(() => {
           this.num--;
-          if(this.num<0){
+          if (this.num < 0) {
             clearInterval(time);
             this.click_code = !this.click_code;
             this.codeText = '获取短信验证码';
@@ -183,68 +201,70 @@
             return
           }
           this.codeText = `发送(${this.num})`;
-        },1000)
+        }, 1000)
       },
       /**
        * 提交
        */
-      submit(){
-        if(!this.item.realName){
+      submit() {
+        if (!this.item.realName) {
           this.$toask('姓名不能为空!');
           return
         }
-        if(!this.item.idno){
+        if (!this.item.idno) {
           this.$toask('身份证号不能为空!');
           return
         }
-        if(!(/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(this.item.idno))) {
+        if (!(/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/.test(this.item.idno))) {
           this.$toask('身份证号码格式不正确!');
           return
         }
-        if(!this.item.bankNo){
+        if (!this.item.bankNo) {
           this.$toask('请选择开户银行!');
           return
         }
-        if(!this.item.bankCardNo){
+        if (!this.item.bankCardNo) {
           this.$toask('银行卡号不能为空!');
           return
         }
-        if(!(/^\d{16,30}$/.test(this.item.bankCardNo))) {
+        if (!(/^\d{16,30}$/.test(this.item.bankCardNo))) {
           this.$toask('银行卡号格式不正确!');
           return
         }
-        if(!this.item.mobile){
+        if (!this.item.mobile) {
           this.$toask('银行预留手机号不能为空!');
           return
         }
-        if(!(/^1\d{10}$/.test(this.item.mobile))) {
+        if (!(/^1\d{10}$/.test(this.item.mobile))) {
           this.$toask('手机号格式不正确!');
           return
         }
-        if(!this.item.smsCode){
+        if (!this.item.smsCode) {
           this.$toask('短信验证码不能为空!');
           return
         }
-        this.item.retUrl = location.origin+location.pathname;
+        this.item.retUrl = location.origin + location.pathname;
         // 开户
-        openAccount(this.item).then(res=>{
+        openAccount(this.item).then(res => {
           // 调用汇付先清除地址栏的参数
           axios({
             method: 'post',
-            url: location.origin+ new URL(res.serviceUrl).pathname,
+            url: location.origin + new URL(res.serviceUrl).pathname,
             data: res.inMap,
-            transformRequest: [function (data) {
+            transformRequest: [function(data) {
               let ret = '';
               for (let it in data) {
                 ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
               }
-              return ret.slice(0,ret.length-1)
+              return ret.slice(0, ret.length - 1)
             }],
-          }).then(r=>{
-            if(r.status === 200){
-              if(r.data){
+          }).then(r => {
+            if (r.status === 200) {
+              if (r.data) {
                 document.body.innerHTML = r.data;
-                setTimeout(()=>{document.form.submit()},0)
+                setTimeout(() => {
+                  document.form.submit()
+                }, 0)
               }
             }
           })

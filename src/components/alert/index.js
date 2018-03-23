@@ -5,17 +5,21 @@
 import Vue from 'vue';
 
 let msgQueue = [];
-let currentMsg=null;
+let currentMsg = null;
 let el;
 let Profile = Vue.extend(require('./alert.vue').default);
-class alert{
-  constructor(arg){
-    let title, content, type, yes ,no;
-    typeof arg === 'object'
-      ?
-        {title, content, type, yes, no}  = arg
-      :
-        title = arg;
+class alert {
+  constructor(arg) {
+    let title, content, type, yes, no;
+    typeof arg === 'object' ?
+      {
+        title,
+        content,
+        type,
+        yes,
+        no
+      } = arg :
+      title = arg;
     this.callback = defaultCallback;
     this.content = content;
     this.component = null;
@@ -25,16 +29,16 @@ class alert{
     this.el = null;
     this.no = no;
     this.init();
-    return new Promise((resolve, reject)=>{ // eslint-disable-line
-        msgQueue.push({
-            resolve,
-            reject
-        });
-        currentMsg = msgQueue.shift();
-        this.callback = defaultCallback;
+    return new Promise((resolve, reject) => { // eslint-disable-line
+      msgQueue.push({
+        resolve,
+        reject
+      });
+      currentMsg = msgQueue.shift();
+      this.callback = defaultCallback;
     });
   }
-  creat(){
+  creat() {
     el = this.el = document.createElement('div');
     document.body.appendChild(this.el);
     this.component = new Profile().$mount(this.el);
@@ -46,16 +50,16 @@ class alert{
     this.component.no = this.no || '取消';
     this.show();
   }
-  show(){
-    if(el){
+  show() {
+    if (el) {
       this.close();
     }
     this.component.visible = true;
   }
-  close(){
+  close() {
     this.component.visible = false
   }
-  init(){
+  init() {
     this.creat();
   }
 }

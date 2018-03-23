@@ -18,9 +18,9 @@
 			</div>
 			<div class="pdtProgress">
 				<p class="pdtGrayLine"></p>
-				<p class="pdtLine" ></p>
+				<p class="pdtLine"></p>
 			</div>
-			<p class="pptime m1" ><span>起息日</span><span>到期日</span></p>
+			<p class="pptime m1"><span>起息日</span><span>到期日</span></p>
 			<p class="pptime m2"><span>{{list.interestStartDate}}</span><span>{{list.interestEndDate}}</span></p>
 		</div>
 		<!--返佣规则-->
@@ -29,7 +29,7 @@
 				<span>P2P信息穿透</span>
 				<span>查看详情 <img src="../../assets/common/arrow-right.png"/></span>
 			</p>
-			<div class="pdcIntroduce" >
+			<div class="pdcIntroduce">
 				<p @click="$go('/wealth/claims',{cashNo:item.cashNo})">
 					<img class="pdcIntroduceImg1" src="../../assets/wealth/wealth/xczq.png" />
 					<span>现持债权</span>
@@ -41,7 +41,7 @@
 		</div>
 		<!--返佣规则-->
 		<div class="productDetailCenter">
-
+	
 			<p class="pdcTitle">
 				<span>产品亮点</span>
 				<span>查看详情 <img src="../../assets/common/arrow-right.png"/></span>
@@ -59,47 +59,51 @@
 					<span>历史100%兑付</span></p>
 			</div>
 		</div>
-
+	
 	</div>
 </template>
 
 <script>
-	 import loanAgreement from '@/components/loanAgreement'
-  import { investPropertyDetail } from '@/service'
-  export default {
-    name: 'changeBank',
-    data() {
-      return{
-      	item:{
-      		cashNo:'',
-      		bidNo:'',
-      		bidType:'',
-      	},
-      	list:{},
-      	profitPlanArr:['','等额本息','等额本金','按期付息，到期还本','一次性还款','其他'],
-      }
-    },
-    created() {
-   	  this.item.cashNo= this.$route.query.cashNo;
-   	  this.item.bidNo= this.$route.query.bidNo;
-   	  this.item.bidType= this.$route.query.bidType;
-      investPropertyDetail(this.item).then(res=>{
-          console.log(res);
-          this.list=res;
-        });
-    },
-    methods: {
-     loanAgreement(){
-			        this.$alert({type: 'protocol', content: loanAgreement})
-			      }
-    },
-    watch: {
-    }
-  }
+	import loanAgreement from '@/components/loanAgreement'
+	import {
+		investPropertyDetail
+	} from '@/service'
+	export default {
+		name: 'changeBank',
+		data() {
+			return {
+				item: {
+					cashNo: '',
+					bidNo: '',
+					bidType: '',
+				},
+				list: {},
+				profitPlanArr: ['', '等额本息', '等额本金', '按期付息，到期还本', '一次性还款', '其他'],
+			}
+		},
+		created() {
+			this.item.cashNo = this.$route.query.cashNo;
+			this.item.bidNo = this.$route.query.bidNo;
+			this.item.bidType = this.$route.query.bidType;
+			investPropertyDetail(this.item).then(res => {
+				console.log(res);
+				this.list = res;
+			});
+		},
+		methods: {
+			loanAgreement() {
+				this.$alert({
+					type: 'protocol',
+					content: loanAgreement
+				})
+			}
+		},
+		watch: {}
+	}
 </script>
 
 <style scoped>
-	.pptime{
+	.pptime {
 		float: left;
 		height: 0.34rem;
 		line-height: 0.34rem;
@@ -107,24 +111,29 @@
 		font-size: 0.24rem;
 		overflow: hidden;
 	}
-	.pptime>span:nth-child(1){
+	
+	.pptime>span:nth-child(1) {
 		width: 3.35rem;
 		height: 0.34rem;
 		float: left;
 		text-align: left;
 	}
-	.pptime>span:nth-child(2){
+	
+	.pptime>span:nth-child(2) {
 		width: 3.35rem;
 		height: 0.34rem;
 		float: right;
 		text-align: right;
 	}
-	.m1{
+	
+	.m1 {
 		margin: 0.18rem 0 0.08rem;
 	}
-	.m2{
+	
+	.m2 {
 		margin-bottom: 0.68rem;
 	}
+	
 	.productDetailTop {
 		margin: 0 auto;
 		padding: 0;
@@ -135,50 +144,54 @@
 		color: #FFFFFF;
 		overflow: hidden;
 	}
-.proBidMes{
-	width: 6.7rem;
-	height: 0.98rem;
-	background:rgba(237,236,242,1);
-	border-radius: 8px ; 
-	overflow: hidden;
-}	
-.proBidMes>span:nth-child(1){
-	margin: 0.12rem 0.2rem 0.02rem;
-	width: 2.95rem;
-	float: left;
-	font-size: 0.28rem;
-	color: #181818;
-	line-height: 0.4rem;
-	text-align: left;
-}
-.proBidMes>span:nth-child(2){
-	margin: 0.12rem 0.2rem 0.02rem;
-	width: 2.95rem;
-	float: right;
-	font-size: 0.28rem;
-	color: #181818;
-	line-height: 0.4rem;
-	text-align: right;
-}
-.proBidMes>span:nth-child(3){
-	margin: 0 0.2rem 0.16rem;
-	width: 2.95rem;
-	float: left;
-	font-size: 0.20rem;
-	color: #8D8D94;
-	line-height: 0.28rem;
-	text-align: left;
-}
-.proBidMes>span:nth-child(4){
-	margin: 0 0.2rem 0.16rem;
-	width: 2.95rem;
-	float: right;
-	font-size: 0.20rem;
-	color: #8D8D94;
-	line-height: 0.28rem;
-	text-align: right;
-}
 	
+	.proBidMes {
+		width: 6.7rem;
+		height: 0.98rem;
+		background: rgba(237, 236, 242, 1);
+		border-radius: 8px;
+		overflow: hidden;
+	}
+	
+	.proBidMes>span:nth-child(1) {
+		margin: 0.12rem 0.2rem 0.02rem;
+		width: 2.95rem;
+		float: left;
+		font-size: 0.28rem;
+		color: #181818;
+		line-height: 0.4rem;
+		text-align: left;
+	}
+	
+	.proBidMes>span:nth-child(2) {
+		margin: 0.12rem 0.2rem 0.02rem;
+		width: 2.95rem;
+		float: right;
+		font-size: 0.28rem;
+		color: #181818;
+		line-height: 0.4rem;
+		text-align: right;
+	}
+	
+	.proBidMes>span:nth-child(3) {
+		margin: 0 0.2rem 0.16rem;
+		width: 2.95rem;
+		float: left;
+		font-size: 0.20rem;
+		color: #8D8D94;
+		line-height: 0.28rem;
+		text-align: left;
+	}
+	
+	.proBidMes>span:nth-child(4) {
+		margin: 0 0.2rem 0.16rem;
+		width: 2.95rem;
+		float: right;
+		font-size: 0.20rem;
+		color: #8D8D94;
+		line-height: 0.28rem;
+		text-align: right;
+	}
 	
 	.pdtWord {
 		float: left;

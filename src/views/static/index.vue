@@ -6,16 +6,17 @@
 
 <script>
   export default {
-
+  
     name: 'status',
-
-    data () {
+  
+    data() {
       return {
-
+  
       }
     }
   }
 </script>
 
 <style lang="css" scoped>
+  
 </style>

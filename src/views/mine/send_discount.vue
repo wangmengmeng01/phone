@@ -2,12 +2,12 @@
   <div class="send_discount">
     <div class="customer p4 center">
       <h2 class="title f32 color_font">送给这位客户</h2>
-      <img src="/" alt="" class="place-img" >
+      <img src="/" alt="" class="place-img">
       <p class="name center f28 color_font-s">{{coupon.params.realName}}</p>
     </div>
     <div class="send p4">
       <h2 class="title f32 color_font flex">送他(她)什么好呢 <span class="f24 color_font-s">可选一个或多个优惠</span></h2>
-      <Coupon v-for="(i,index) in coupon.data" :data="i" :key="index" class="item act" close="true" @closeCb="close"/>
+      <Coupon v-for="(i,index) in coupon.data" :data="i" :key="index" class="item act" close="true" @closeCb="close" />
       <div class="item none" @click="choose">
         <img src="../../assets/coupon/none.png" alt="">
       </div>
@@ -18,8 +18,13 @@
 
 <script>
   import Coupon from '@/components/coupon/coupon'
-  import { saveGiveCoupon } from '@/service'
-  import { mapGetters, mapMutations } from 'vuex'
+  import {
+    saveGiveCoupon
+  } from '@/service'
+  import {
+    mapGetters,
+    mapMutations
+  } from 'vuex'
   export default {
     name: 'send_discount',
     computed: {
@@ -37,18 +42,20 @@
         'DEL_COUPON',
         'SET_SUCC_PAGE'
       ]),
-      choose(){
-        this.SET_COUPON({backurl: this.$route.path});
+      choose() {
+        this.SET_COUPON({
+          backurl: this.$route.path
+        });
         this.$go('/coupon/choose_usable')
       },
-      close(data){
+      close(data) {
         this.DEL_COUPON(data);
       },
-      submit(){
+      submit() {
         saveGiveCoupon({
           giveUserCode: this.coupon.params.userCode,
           receiveNoList: this.coupon.receiveNoList
-        }).then(()=>{
+        }).then(() => {
           this.RESET('coupon');
           this.SET_SUCC_PAGE({
             "title": "赠送客户优惠成功",

@@ -13,7 +13,7 @@
 				<!--<span class="tispImg">中高风险</span>-->
 				<span class="">{{profitPlanArr[i.profitPlan>4?'5':i.profitPlan]}}</span>
 			</div>
-
+	
 			<div v-for="(j,n) in i.bidList" class="productDivDetial ">
 				<div class="pddTitle">
 					<span class="pddTitleBidName">{{j.bidName}}</span>
@@ -42,37 +42,37 @@
 					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName})">购买</span>
 				</p>
 			</div>
-
+	
 			<!--<div class="productDivDetial">
-				<div class="pddTitle">
-					<span class="pddTitleBidName">月月赢-12M500G号</span>
-					<p class="pddTitleTips">
-						<span>佣金1.5%</span>
-						<span>30天锁定</span>
+					<div class="pddTitle">
+						<span class="pddTitleBidName">月月赢-12M500G号</span>
+						<p class="pddTitleTips">
+							<span>佣金1.5%</span>
+							<span>30天锁定</span>
+						</p>
+					</div>
+					<p class="productDivRate">10%</p>
+					<p class="productDivWrod">历史年化</p>
+					<div class="hotProductDivProgress">
+						<div class="tipsImg">
+							<img src="../../assets/main/home/tipsImg.png" /><span>48%</span>
+						</div>
+						<div class="redTipsImg">
+							<p><i>5</i>万</p>
+							<p>剩余不到</p>
+						</div>
+						<p class="grayLine"></p>
+						<p class="proLine"></p>
+						<p class="proTip"><i>120</i>人参与</p>
+					</div>
+					<p class="hotProductDivMessage">
+						<span>累计销售 <i>1000万</i></span>
+						<span>累计收益 <i>102万</i></span>
+						<span class="hotProductDivTitleBtn">购买</span>
 					</p>
-				</div>
-				<p class="productDivRate">10%</p>
-				<p class="productDivWrod">历史年化</p>
-				<div class="hotProductDivProgress">
-					<div class="tipsImg">
-						<img src="../../assets/main/home/tipsImg.png" /><span>48%</span>
-					</div>
-					<div class="redTipsImg">
-						<p><i>5</i>万</p>
-						<p>剩余不到</p>
-					</div>
-					<p class="grayLine"></p>
-					<p class="proLine"></p>
-					<p class="proTip"><i>120</i>人参与</p>
-				</div>
-				<p class="hotProductDivMessage">
-					<span>累计销售 <i>1000万</i></span>
-					<span>累计收益 <i>102万</i></span>
-					<span class="hotProductDivTitleBtn">购买</span>
-				</p>
-			</div>-->
+				</div>-->
 		</div>
-
+	
 		<!--售罄状态-->
 		<div v-else class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
 			<div class="productDivTitle" @click="$go('/prod/productList',{productName:i.productName,productNo:i.productNo,productType:i.productType,backTitle:i.productName})">
@@ -88,17 +88,19 @@
 				<p>明天10:30</p>
 				<p>预计新标上架时间</p>
 				<img src="../../assets/main/prod/sq.png" />
-
+	
 			</div>
 		</div>
-
+	
 		<!--风险提示-->
 		<!--<p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>-->
 	</div>
 </template>
 
 <script>
-	import { productSearchBidsList } from '@/service'
+	import {
+		productSearchBidsList
+	} from '@/service'
 	export default {
 		name: 'product',
 		data() {
@@ -108,7 +110,7 @@
 					userToken: "",
 				},
 				productList: '',
-				profitPlanArr:['','等额本息','等额本金','按期付息，到期还本','一次性还款','其他'],
+				profitPlanArr: ['', '等额本息', '等额本金', '按期付息，到期还本', '一次性还款', '其他'],
 			}
 		},
 		created() {
@@ -116,7 +118,7 @@
 				this.productList = res.productList;
 				console.log(this.productList);
 			});
-
+	
 		},
 		methods: {},
 		watch: {}
@@ -243,7 +245,7 @@
 		color: #8D8D94;
 	}
 	
-	.productDivTitleTips>span{
+	.productDivTitleTips>span {
 		float: left;
 		margin-left: 0.12rem;
 		line-height: 0.44rem;

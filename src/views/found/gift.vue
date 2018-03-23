@@ -24,8 +24,13 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex'
-  import { searchGiveCouponList } from '@/service'
+  import {
+    mapGetters,
+    mapMutations
+  } from 'vuex'
+  import {
+    searchGiveCouponList
+  } from '@/service'
   export default {
     name: 'gift_choose',
     data() {
@@ -35,11 +40,11 @@
           name: '未领取',
           type: '1',
           size: 2
-        },{
+        }, {
           name: '已领取',
           type: '2',
           size: 10
-        },{
+        }, {
           name: '过期未领取',
           type: '2',
           size: 10
@@ -57,25 +62,26 @@
       this.init(this.nav[0]);
     },
     methods: {
-      init(item){
-        searchGiveCouponList({source: '2'}).then(res=>{
+      init(item) {
+        searchGiveCouponList({
+          source: '2'
+        }).then(res => {
           this.res = res.couponList
-        }).catch(err=>{
+        }).catch(err => {
           this.res = []
         })
       },
-      choose(i,index){
-
+      choose(i, index) {
+  
       },
-      checkedCb(data){
-
+      checkedCb(data) {
+  
       },
-      submit(){
-
+      submit() {
+  
       }
     },
-    watch: {
-    }
+    watch: {}
   }
 </script>
 

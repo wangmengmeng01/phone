@@ -11,7 +11,9 @@
     <div class="withdrawTips">该时间为平台预估时间，具体以实际到账时间为准</div>
     <div class="center">
       <div class="centerTop">提现金额</div>
-      <div class="centerC"><span>¥</span><input type="text" @blur="onblur" oninput="if( ! /^-?\d+\.?\d{0,2}$/.test(this.value)){ var s = this.value;this.value=s.substring(0,s.length-1);}" v-model="withdrawMoney" placeholder="100元起"><div class="wall" @click="wall">全提</div></div>
+      <div class="centerC"><span>¥</span><input type="text" @blur="onblur" oninput="if( ! /^-?\d+\.?\d{0,2}$/.test(this.value)){ var s = this.value;this.value=s.substring(0,s.length-1);}" v-model="withdrawMoney" placeholder="100元起">
+        <div class="wall" @click="wall">全提</div>
+      </div>
       <div class="centerB"><span>账户余额</span><em>{{cardMes.availableAmount|formatNum}}元</em></div>
       <div class="centerB"><span>可提现余额</span><em>{{accountMes.canWithdrawAmount|formatNum}}元</em></div>
     </div>
@@ -19,130 +21,140 @@
       <div class="bottomB"><span>手续费</span><em>{{userCashFeeMoney|formatNum}}元</em></div>
       <div class="bottomB"><span>实际到账</span><em>{{actualccountMoney|formatNum}}元</em></div>
     </div>
-    <p class="rechargeBtn" :class="[(withdrawMoney.length || withdrawBol) ?'':'disable']" @click="toCash" >下一步</p>
+    <p class="rechargeBtn" :class="[(withdrawMoney.length || withdrawBol) ?'':'disable']" @click="toCash">下一步</p>
   </div>
 </template>
 
 <script>
-	import { selectBeforeRecharge, accountAcmountInfo ,userCashFee,toCash} from '@/service'
-	import { mapGetters, mapMutations } from 'vuex'
-	import axios from 'axios'
-	export default {
-		name: 'withdraw',
-		data() {
-			return {
-				cardMes: {}, //银行卡信息
-				accountMes:{},//账户金额
-				accountMoney:0,//可提现金额
-				withdrawMoney:'',//提现金额
-				withdrawBol:false,//是否全选
-				userCashFeeMoney:0,//提现手续费
-				actualccountMoney:0,//实际到账回调地址
-				retUrl: location.origin+location.pathname,//返回地址
-				formItem:'',
-
-			}
-		},
-		created() {
-			
-			if(this.$route.query.isfromhuifu){
-			// 开始清楚成功页面的缓存
-     		 this.RESET('succ_page');
-			 this.SET_SUCC_PAGE({
-             		"title": "提现已发起",
-					'sub_title': "系统已收到您所发起的提现，将尽快处理",
-					"btn_text": "完成",
-					"backurl": "/wealth",
-					"sub_btn_text": "",
-					"sub_backurl": "/"
-            			});
-          		  this.$go('/static/succ','',true);
-			}
-			
-			const retUrl = this.retUrl = location+'?isfromhuifu=1';
-			selectBeforeRecharge().then(res => {
-				this.cardMes = res;
-			});
-
-			accountAcmountInfo().then(res => {
-				this.accountMes = res;
-				this.accountMoney=res.canWithdrawAmount;
-			});
-
-		},
-		methods: {
-			 ...mapMutations([
-		        'RESET',
-		        'SET_SUCC_PAGE'
-		      ]),
-			/*余额全提*/
-			wall(){
-				this.withdrawMoney=this.accountMoney;
-				this.userCashFee();
-				this.withdrawBol=true;
-			},
-			/*计算手续费*/
-			userCashFee(){
-				userCashFee({
-					transAmount:this.withdrawMoney,
-					cashWay:'GENERAL',
-				}).then(res => {
-					this.userCashFeeMoney=res.fee;
-					this.actualccountMoney=this.withdrawMoney-this.userCashFeeMoney;
-				});
-			},
-			onblur(){
-				this.userCashFee();
-			},
-			toCash(){
-				
-				if(!this.withdrawMoney) {
-					this.$toask('提现金额不能为空');
-					return;
-				}
-
-				if(this.withdrawMoney < 100) {
-					this.$toask('提现金额不能小于100元');
-					return;
-				}
-				
-				toCash({
-					transAmount:this.withdrawMoney,
-					cashWay:'GENERAL',
-					retUrl: this.retUrl,
-					receiveNo:'',
-					fee:this.userCashFeeMoney
-					
-				}).then(res => {
-			         // 调用汇付先清除地址栏的参数
-			              window.history.replaceState(null, null, this.$route.path);
-			              axios({
-			                method: 'post',
-			                url: location.origin+ new URL(res.serviceUrl).pathname,
-			                data: res.inMap,
-			                transformRequest: [function (data) {
-			                  let ret = '';
-			                  for (let it in data) {
-			                    ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-			                  }
-			                  return ret.slice(0,ret.length-1)
-			                }],
-			              }).then(r=>{
-			                if(r.status === 200){
-			                  if(r.data){
-			                    document.body.innerHTML = r.data;
-			                    setTimeout(()=>{document.form.submit()},0)
-			                  }
-			                }
-			              })
-				});
-			}
-			
-		},
-		watch: {
-			
-		}
-	}
+  import {
+    selectBeforeRecharge,
+    accountAcmountInfo,
+    userCashFee,
+    toCash
+  } from '@/service'
+  import {
+    mapGetters,
+    mapMutations
+  } from 'vuex'
+  import axios from 'axios'
+  export default {
+    name: 'withdraw',
+    data() {
+      return {
+        cardMes: {}, //银行卡信息
+        accountMes: {}, //账户金额
+        accountMoney: 0, //可提现金额
+        withdrawMoney: '', //提现金额
+        withdrawBol: false, //是否全选
+        userCashFeeMoney: 0, //提现手续费
+        actualccountMoney: 0, //实际到账回调地址
+        retUrl: location.origin + location.pathname, //返回地址
+        formItem: '',
+  
+      }
+    },
+    created() {
+  
+      if (this.$route.query.isfromhuifu) {
+        // 开始清楚成功页面的缓存
+        this.RESET('succ_page');
+        this.SET_SUCC_PAGE({
+          "title": "提现已发起",
+          'sub_title': "系统已收到您所发起的提现，将尽快处理",
+          "btn_text": "完成",
+          "backurl": "/wealth",
+          "sub_btn_text": "",
+          "sub_backurl": "/"
+        });
+        this.$go('/static/succ', '', true);
+      }
+  
+      const retUrl = this.retUrl = location + '?isfromhuifu=1';
+      selectBeforeRecharge().then(res => {
+        this.cardMes = res;
+      });
+  
+      accountAcmountInfo().then(res => {
+        this.accountMes = res;
+        this.accountMoney = res.canWithdrawAmount;
+      });
+  
+    },
+    methods: {
+      ...mapMutations([
+        'RESET',
+        'SET_SUCC_PAGE'
+      ]),
+      /*余额全提*/
+      wall() {
+        this.withdrawMoney = this.accountMoney;
+        this.userCashFee();
+        this.withdrawBol = true;
+      },
+      /*计算手续费*/
+      userCashFee() {
+        userCashFee({
+          transAmount: this.withdrawMoney,
+          cashWay: 'GENERAL',
+        }).then(res => {
+          this.userCashFeeMoney = res.fee;
+          this.actualccountMoney = this.withdrawMoney - this.userCashFeeMoney;
+        });
+      },
+      onblur() {
+        this.userCashFee();
+      },
+      toCash() {
+  
+        if (!this.withdrawMoney) {
+          this.$toask('提现金额不能为空');
+          return;
+        }
+  
+        if (this.withdrawMoney < 100) {
+          this.$toask('提现金额不能小于100元');
+          return;
+        }
+  
+        toCash({
+          transAmount: this.withdrawMoney,
+          cashWay: 'GENERAL',
+          retUrl: this.retUrl,
+          receiveNo: '',
+          fee: this.userCashFeeMoney
+  
+        }).then(res => {
+          // 调用汇付先清除地址栏的参数
+          window.history.replaceState(null, null, this.$route.path);
+          axios({
+            method: 'post',
+            url: location.origin + new URL(res.serviceUrl).pathname,
+            data: res.inMap,
+            transformRequest: [function(data) {
+              let ret = '';
+              for (let it in data) {
+                ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+              }
+              return ret.slice(0, ret.length - 1)
+            }],
+          }).then(r => {
+            if (r.status === 200) {
+              if (r.data) {
+                document.body.innerHTML = r.data;
+                setTimeout(() => {
+                  document.form.submit()
+                }, 0)
+              }
+            }
+          })
+        });
+      }
+  
+    },
+    watch: {
+  
+    }
+  }
 </script>
 
 <style lang="stylus" scoped>

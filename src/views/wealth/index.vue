@@ -6,12 +6,12 @@
 
 <script>
   export default {
-
+  
     name: 'wealth-index',
-
-    data () {
+  
+    data() {
       return {
-
+  
       }
     }
   }
