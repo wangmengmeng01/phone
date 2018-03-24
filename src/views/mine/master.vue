@@ -12,7 +12,7 @@
           </p>
         </div>
       </div>
-      <button class="f36 btn"><a :href="`tel:${item.mobile}`">拨打电话</a></button>
+      <a class="f36 btn" :href="`tel:${item.mobile}`">拨打电话</a>
     </div>
     <p v-if="!item.mobile" class="f36 color_font-s center none">暂无</p>
   </div>
@@ -95,7 +95,7 @@
           img
             width: .72rem
             padding-right: .1rem
-    button
+    .btn
       border-radius: .36rem
       font-size: .36rem
       width: 4.8rem
@@ -103,8 +103,7 @@
       line-height: .72rem
       text-align: center
       margin: auto
-      a
-        color: #fff
+      color: #fff
   .none
     padding-top: 5rem
 </style>
