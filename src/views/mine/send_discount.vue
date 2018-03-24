@@ -61,9 +61,7 @@
             "title": "赠送客户优惠成功",
             "sub_title": "优惠已存入客户为的优惠中",
             "btn_text": "继续赠送其他客户",
-            "sub_btn_text": "查看赠送记录",
             "sub_backurl": "/mine/customer",
-            "backurl": "/mine/customer"
           });
           this.$go('/static/succ');
         })
