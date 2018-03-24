@@ -20,7 +20,7 @@
       <div class="b color_main f28 flex">
         <span @click="send_coupon(i)">赠送优惠</span>
         <div></div>
-        <a class="color_main" :href="`tel:${i.phone}`">拨打电话</a>
+        <a class="color_main" :href="`tel:${i.mobile}`">拨打电话</a>
       </div>
     </div>
     <div v-if="!list.length" class="nothing f32 color_font"><img src="../../assets/common/nothing_record.png" alt=""><p>暂无数据</p></div>

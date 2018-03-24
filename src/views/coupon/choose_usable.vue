@@ -4,7 +4,7 @@
       <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}</li>
     </ul>
     <div class="coupon">
-      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true" @checkedCb="checkedCb(i, index)" ref="coupon"/>
+      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true" @checkedCb="checkedCb(i, index)" ref="coupon" type="mine"/>
       <div v-if="!res.length" class="nothing f32 color_font"><img src="../../assets/common/nothing_coupon.png" alt=""><p>暂无{{nav[act].name}}券</p></div>
     </div>
     <button class="btn" @click="submit">选取</button>

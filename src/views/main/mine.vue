@@ -3,9 +3,9 @@
     <div class="head flex" @click="$go('/mine/qrcode')">
       <img :src="item.pic || head" alt="" class="head_icon">
       <div class="msg">
-        <h2 class="f44 flex"><span>{{item.userName | nameDesensitization}}</span><span v-if="(item.position=='1')||(item.position=='2')" class="status"><img src="../../assets/main/mine/status_yellow.png" alt=""><i class="f16">{{['一般理财师','大区经理'][parseInt(item.position)-1]}}</i></span></h2>
+        <h2 class="f44 flex"><span v-if="item.userName">{{item.userName | nameDesensitization}}</span><span v-if="(item.position=='1')||(item.position=='2')" class="status"><img src="../../assets/main/mine/status_yellow.png" alt=""><i class="f16">{{['一般理财师','大区经理'][parseInt(item.position)-1]}}</i></span></h2>
         <p class="f24">{{item.pic}}</p>
-        <p class="f24">手机号 {{item.mobile | desensitization}}</p>
+        <p class="f24" v-if="item.mobile">手机号 {{item.mobile | desensitization}}</p>
       </div>
       <span class="qrcode flex">
           <img src="../../assets/main/mine/qrcode.png" alt="" class="qrcode_icon">
