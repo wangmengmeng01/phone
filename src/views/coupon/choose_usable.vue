@@ -4,7 +4,7 @@
       <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}</li>
     </ul>
     <div class="coupon">
-      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true" @checkedCb="checkedCb" />
+      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true" @checkedCb="checkedCb(i, index)" ref="coupon" type="mine"/>
       <div v-if="!res.length" class="nothing f32 color_font"><img src="../../assets/common/nothing_coupon.png" alt=""><p>暂无{{nav[act].name}}券</p></div>
     </div>
     <button class="btn" @click="submit">选取</button>
@@ -70,12 +70,26 @@
         this.act = index;
         this.init(i);
       },
-      checkedCb(data) {
-        this.couponlist.length ?
-          this.couponlist.concat(this.couponlist.filter(t => {
-            return t.couponNo !== data.couponNo
-          })) :
-          this.couponlist.push(data)
+      checkedCb(data, index) {
+        // 没有数据直接push
+        if (!this.couponlist.length) {
+          this.couponlist.push(data);
+          return
+        }
+        // 判断需不需要删除
+        if (!this.isDel(data, index)) {
+          this.couponlist.push(data);
+        }
+      },
+      isDel(current, index) {
+        let i = this.couponlist.findIndex(t => t.receiveNo === current.receiveNo);
+        // 元素存在则删除，不存在再继续判断需要不需要添加
+        if (i > -1) {
+          this.couponlist.splice(i, 1);
+          this.$refs.coupon[index].check = false;
+          return true
+        }
+        return false
       },
       submit() {
         this.SET_COUPON({
