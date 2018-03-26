@@ -47,7 +47,8 @@
 				<p>当前状态</p>
 			</div>
 			<div class="subDivcenter">
-				<p>{{jionMes.createdTime}}</p>
+				<p v-if="showBol">{{joinTime.split(":")[0]}}:{{joinTime.split(":")[1]}}</p>
+				<p v-else>{{jionMes.createdTime}}</p>
 				<p>提交时间</p>
 			</div>
 			<div class="subDivright">
@@ -146,6 +147,8 @@
 					flag: "",
 				},
 				jionMes: {},
+				joinTime:'',//加入时间
+				showBol:true,//显示加入时间
 				falseMes:[],//失败原因
 			}
 		},
@@ -155,6 +158,7 @@
 				if (res.code == "1001") {} else if (res.code == "100") {
 					this.joinBol = !this.joinBol;
 					this.jionMes = res.result;
+					this.showBol=false;
 					if (res.result.status == "1") {
 						this.joinBol2 = !this.joinBol2;
 						this.joinBol5 = !this.joinBol5;
@@ -212,6 +216,8 @@
 								this.joinBol2 = !this.joinBol2;
 								this.joinBol5 = !this.joinBol5;
 								this.jionMes=res.result;
+								this.joinTime=res.result.createDate;
+								console.log(this.joinTime);
 							} else if (res.code == "1000") {
 								this.$go('/login');
 							} else {
@@ -240,6 +246,8 @@
 				this.itemJoin.cardNumberBackFileStream = '';
 				this.itemJoin.flag = '';
 				this.jionMes = '';
+				this.joinTime="";
+				this.showBol=true;
 			},
 	
 		}

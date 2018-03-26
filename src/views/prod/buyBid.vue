@@ -320,7 +320,7 @@
 						"sub_backurl": "/wealth"
 					};
 					this.SET_SUCC_PAGE(params);
-					this.$go('/static/succ');
+//					this.$go('/static/succ');
 				});
 	
 	

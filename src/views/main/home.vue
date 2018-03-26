@@ -261,17 +261,13 @@
 	      linkPage(){
 	      	getUserStatus().then(res => {
 	        const info = res.result;
-	        switch(parseInt(info.openAccountStatus)) {
-	          case 1:
-	            this.openStatus = false;
-	            break;
-	        }
+	          if(info.openAccountStatus=="3"){
+		          this.$go('/home/joinFinlManager');
+		        }else{
+		          this.$go('/reg_bank');
+		        }
 	      });
-        if(this.openStatus){
-          this.$go('/home/joinFinlManager');
-        }else{
-          this.$go('/reg_bank');
-        }
+       
       }
 
     },
