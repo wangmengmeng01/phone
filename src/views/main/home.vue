@@ -52,7 +52,7 @@
           <div class="swiper-slide swiper-slide2" v-for="i in newList">
             <div class="newBidDiv">
               <p class="newBidName">{{i.bidName}}</p>
-              <p class="newBidRate">{{i.annualizedRate}}%</p>
+              <p class="newBidRate">{{i.annualizedRate}}%<i v-show="i.appendRate>0">+{{i.appendRate}}%</i></p>
               <p class="newBidRate2">年化收益率</p>
               <p class="newBidword">
                 <span>期限<i>{{i.periodLength}}</i>{{i.periodUnit|Totime}}</span>
@@ -679,7 +679,7 @@
     font-size: 1.0rem;
     text-align: center;
   }
-	.hotProductDivRate >i{
+	.hotProductDivRate >i,.newBidRate>i{
 		font-style: inherit;
 		font-size: 0.36rem;
 		color: #F84740;
