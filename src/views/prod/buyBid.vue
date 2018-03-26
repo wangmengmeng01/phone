@@ -148,7 +148,7 @@
 		created() {
 	
 			if (this.$route.query.promiseInviteId != undefined || this.$route.query.promiseInviteId != null) {
-				this.promiseInviteId = this.$route.query.promiseInviteId;
+				this.buyItem.promiseInviteId = this.$route.query.promiseInviteId;
 			}
 			//从卡券页面 返回来   记录一些状态
 			if (this.$route.query.linkType == "0") {
@@ -257,8 +257,8 @@
 				this.$go('/coupon/choose', {
 					bidNo,
 					linkType: 0,
-					promiseInviteId: this.promiseInviteId,
-					inviteAmount: this.inviteAmount,
+					promiseInviteId: this.buyItem.promiseInviteId,
+					inviteAmount: this.investMoney,
 				})
 			},
 			submit() {
@@ -320,7 +320,7 @@
 						"sub_backurl": "/wealth"
 					};
 					this.SET_SUCC_PAGE(params);
-//					this.$go('/static/succ');
+					this.$go('/static/succ');
 				});
 	
 	

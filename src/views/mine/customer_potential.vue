@@ -42,9 +42,8 @@
     mounted() {
       document.body.onscroll = () => {
         if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-          if (this.list.length <= 10) return;
-          if (this.pageIndex < Math.ceil(this.total / 10)) return;
           this.pageIndex++;
+          if (this.pageIndex > Math.ceil(this.total / 10)) return;
           this.init();
         }
       }
