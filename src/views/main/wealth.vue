@@ -407,7 +407,7 @@
     display flex
     .hideDiv
       opacity: 0
-     pointer-events: none
+      pointer-events: none
     li
       flex 33.3%
       text-align center
