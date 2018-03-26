@@ -181,7 +181,7 @@
           busiType: 'user_register'
         };
         sendSmsCode(params).then(r => {
-          this.item.smsSeq = r.smsSeq = 'AAAAAAAA';
+          this.item.smsSeq = r.smsSeq;
           // 倒计时
           this.countdown()
         })

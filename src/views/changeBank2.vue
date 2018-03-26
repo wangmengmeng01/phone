@@ -194,10 +194,10 @@
         //      this.item.retUrl = location.origin+location.pathname;
         //		if(process.env.NODE_ENV !== 'production') {
   
-        this.item.smsSeq = 'AAAAAAAA';
-        this.item.smsCode = '666666';
-        this.item.orgSmsCode = '666666';
-        this.item.orgSmsSeq = 'AAAAAAAA';
+//      this.item.smsSeq = 'AAAAAAAA';
+//      this.item.smsCode = '666666';
+//      this.item.orgSmsCode = '666666';
+//      this.item.orgSmsSeq = 'AAAAAAAA';
         //		};
   
   
