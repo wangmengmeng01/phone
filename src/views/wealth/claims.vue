@@ -60,7 +60,7 @@
       window.scroll(0, 0);
       document.body.onscroll = () => {
   
-        if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+        if ((document.documentElement.scrollTop || document.body.scrollTop) >= document.body.scrollHeight - document.documentElement.clientHeight) {
   
           this.item.pageNum++;
           if (this.item.pageNum > this.totalPage) {

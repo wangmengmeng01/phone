@@ -77,7 +77,7 @@
     mounted() {
       window.scroll(0, 0);
       document.body.onscroll = () => {
-        if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+        if ((document.documentElement.scrollTop || document.body.scrollTop) >= document.body.scrollHeight - document.documentElement.clientHeight) {
           this.invesProperty.data.pageNum++;
           if (this.invesProperty.data.pageNum > this.totalPage) {
             return;

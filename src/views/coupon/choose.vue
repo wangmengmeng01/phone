@@ -49,7 +49,7 @@
     },
     mounted() {
       document.body.onscroll = () => {
-        if (document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
+        if ((document.documentElement.scrollTop || document.body.scrollTop) >= document.body.scrollHeight - document.documentElement.clientHeight) {
           if (this.res.length <= 10) return;
           if (this.pageIndex < Math.ceil(this.nav[this.act].size / 10)) return;
           this.pageIndex++;

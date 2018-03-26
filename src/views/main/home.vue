@@ -260,12 +260,21 @@
     methods: {
 	      linkPage(){
 	      	getUserStatus().then(res => {
-	        const info = res.result;
-	          if(info.openAccountStatus=="3"){
-		          this.$go('/home/joinFinlManager');
-		        }else{
-		          this.$go('/reg_bank');
-		        }
+	      		
+	      		if(res.code == "100"){
+	      				  const info = res.result;
+				          if(info.openAccountStatus=="3"){
+					          this.$go('/home/joinFinlManager');
+					        }else{
+					          this.$go('/reg_bank');
+					        }
+	      			
+	      		} else if (res.code == "1210" || res.code == "1000") {
+						this.$go('/login');
+					} else {
+						this.$toask(res.message);
+					}
+	        
 	      });
        
       }

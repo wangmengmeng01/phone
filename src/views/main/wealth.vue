@@ -29,9 +29,9 @@
       <div class="recharge" @click="goRecharge()"><img src="../../assets/wealth/wealth/recharge.png" alt="">充值</div>
     </div>
     <ul class="wealthContent">
-      <li v-for="i in menu" @click="linkto(i.url)">
+      <li v-for="(i,index) in menu" @click="linkto(i.url)"  :class="index>6?'hideDiv':''">
         <img :src="require(`@/assets/wealth/wealth/${i.icon}.png`)" alt="" class="icon">
-        <div class="wealthCName">{{i.name}}</div>
+        <div class="wealthCName" >{{i.name}}</div>
       </li>
     </ul>
     <!-- 我的资产 -->
@@ -144,11 +144,11 @@
 					name: '改交易密码',
 					url: '/wealth/tranderPassword'
 				},
-				{
-					icon: 'wEarn',
-					name: '收益明细',
-					url: ''
-				},
+//				{
+//					icon: 'wEarn',
+//					name: '收益明细',
+//					url: ''
+//				},
 				{
 					icon: "wcontinue",
 					name: '我的续投',
@@ -179,6 +179,12 @@
 					name: '风险测评',
 					url: 'wealth/riskTest'
 				},
+				{
+					icon: 'wmyPoint',
+					name: '我的积分',
+					url: ''
+				},
+				
 				{
 					icon: 'wmyPoint',
 					name: '我的积分',
@@ -399,6 +405,9 @@
     font-size 0.32rem
     flex-wrap wrap
     display flex
+    .hideDiv
+      opacity: 0
+     pointer-events: none
     li
       flex 33.3%
       text-align center
