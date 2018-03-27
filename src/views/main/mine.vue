@@ -21,7 +21,7 @@
         <img src="../../assets/common/arrow-right.png" alt="" class="arrow">
       </li>
     </ul>
-    <p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>
+    <!--<p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>-->
   </div>
 </template>
 

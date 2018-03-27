@@ -105,7 +105,7 @@
     <!--</div>-->
     <!--</div>-->
     <Gift :data="giftData" v-if="gift_visible" />
-    <p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>
+    <!--<p class="RiskTips">————<i>出借有风险，选择需谨慎</i>————</p>-->
   </div>
 </template>
 
