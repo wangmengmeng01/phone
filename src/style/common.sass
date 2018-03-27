@@ -160,3 +160,14 @@ $color_font-s: #8D8D94                // 小号字体色调
 .smallToBig-enter, .smallToBig-leave-active
   opacity: 0
   transform: scale(0.5)
+
+
+
+@media only screen and (device-width: 375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) 
+  body
+    padding-top: constant(safe-area-inset-top);   //为导航栏+状态栏的高度 88px            
+    padding-left: constant(safe-area-inset-left);   //如果未竖屏时为0                
+    padding-right: constant(safe-area-inset-right); //如果未竖屏时为0                
+    padding-bottom: constant(safe-area-inset-bottom);//为底下圆弧的高度 34px  
+
+
