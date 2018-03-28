@@ -252,6 +252,7 @@
     }, {
       "path": "joinList",
       "filter": true,
+       "foot": false,
       "title": "加入记录"
     }, {
       "path": "productDetail",

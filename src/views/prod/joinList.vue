@@ -101,7 +101,7 @@
 	}
 	
 	.joinListDiv1>img {
-		margin: 1.14rem 1.74rem 0.5rem;
+		margin: 1.14rem 1.48rem 0.5rem 2.0rem;
 		width: 4.02rem;
 		height: 4.1rem;
 		background-size: 100% 100%;

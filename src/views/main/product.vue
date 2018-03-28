@@ -14,15 +14,15 @@
 				<span class="">{{profitPlanArr[i.profitPlan>4?'5':i.profitPlan]}}</span>
 			</div>
 	
-			<div v-for="(j,n) in i.bidList" class="productDivDetial ">
+			<div v-for="(j,n) in i.bidList" class="productDivDetial "  @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName})">
 				<div class="pddTitle">
 					<span class="pddTitleBidName">{{j.bidName}}</span>
 					<p class="pddTitleTips">
 						<span v-show="j.brokerageRate">佣金{{j.brokerageRate}}%</span>
-						<span>{{j.lockPeriod}}天锁定</span>
+						<span>{{(j.lockPeriod<=j.periodLength)?j.lockPeriod+'天锁定':'不可转让'}}</span>
 					</p>
 				</div>
-				<p class="productDivRate">{{j.annualizedRate}}%   <i v-show="j.appendRate>0">+{{j.appendRate}}%</i></p>
+				<p class="productDivRate">{{j.annualizedRate}}%   <i v-show="j.appendRate>0">+{{j.appendRate|tofixed2}}%</i></p>
 				<p class="productDivWrod">历史年化</p>
 				<div class="hotProductDivProgress">
 					<div class="tipsImg" :style="{left:j.amountScale*5/100+'rem'}" v-if="j.amountScale<=50||j.amountScale==100">
@@ -38,8 +38,8 @@
 				</div>
 				<p class="hotProductDivMessage" :class="[n<=i.bidList.length-2?'bb':'']">
 					<span>起投金额 <i>{{j.investMinAmount}}元</i></span>
-					<span>投资期限 <i>{{j.periodLength}}{{j.periodUnit|Totime}} </i></span>
-					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName})">购买</span>
+					<span>投资期限 <i>{{j.periodLength}}</i>{{j.periodUnit|Totime}}</span>
+					<span class="hotProductDivTitleBtn">购买</span>
 				</p>
 			</div>
 	
@@ -204,7 +204,7 @@
 		float: right;
 		line-height: 0.52rem;
 		text-align: center;
-		color: #3EB7F9;
+		color: #8D8D94;
 		font-size: 0.28rem;
 		overflow: hidden;
 	}
@@ -247,7 +247,7 @@
 	
 	.productDivTitleTips>span {
 		float: left;
-		margin-left: 0.12rem;
+		/*margin-left: 0.12rem;*/
 		line-height: 0.44rem;
 		text-align: left;
 		font-size: 0.28rem;
@@ -434,7 +434,7 @@
 	
 	.hotProductDivMessage>span:nth-child(1) {
 		float: left;
-		width: 2.0rem;
+		width: 2.2rem;
 		text-align: left;
 	}
 	
@@ -456,18 +456,14 @@
 		font-size: 0.24rem;
 	}
 	
-	.hotProductDivMessage>span:nth-child(1) i {
+	.hotProductDivMessage>span  i {
 		color: #000000;
 		font-style: inherit;
-	}
-	
-	.hotProductDivMessage>span:nth-child(2) i {
-		color: #F84740;
-		font-style: inherit;
+		font-size: 0.28rem;
 	}
 	
 	.bb {
-		border-bottom: 4px solid #CDCED3;
+		border-bottom: 1px solid #CDCED3;
 	}
 	
 	.productDivOver {
