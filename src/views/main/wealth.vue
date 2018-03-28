@@ -6,12 +6,12 @@
         <span>总金额(元)</span>
         <img @click="tips" src="../../assets/wealth/wealth/tips.png">
         <div class="status" v-if="getUserS.openStatus">已开通存管账户</div>
-        <div class="amount">{{home.totalAmount}}</div>
+        <div class="amount">{{home.totalAmount|formatNum}}</div>
       </div>
       <div class="wealthEarn">
         <div class="totalE">
           <div>累计收益(元)</div>
-          <div class="wealthEarnData">{{home.sumAmount}}</div>
+          <div class="wealthEarnData">{{home.sumAmount|formatNum}}</div>
         </div>
         <!--<div class="yesterE">
             <div>昨日收益(元)</div>
@@ -20,7 +20,7 @@
   
         <div class="avalibleE">
           <div>可用余额(元)</div>
-          <div class="wealthEarnData">{{home.availableAmount}}</div>
+          <div class="wealthEarnData">{{home.availableAmount|formatNum}}</div>
         </div>
       </div>
     </div>
@@ -156,7 +156,7 @@
 				},
 				{
 					icon: 'wchangeBank',
-					name: '换绑银行卡',
+					name: '我的银行卡',
 					url: 'wealth/changeBank'
 				},
 				{

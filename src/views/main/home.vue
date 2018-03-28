@@ -45,7 +45,7 @@
       </div>
     </div>
     <!-- 新手专享 -->
-    <div class="new">
+    <div class="new" v-show="newList.length">
       <p class="newTitle">新手专享</p>
       <div class="swiper-container swiper-container2">
         <div class="swiper-wrapper swiper-wrapper2">
@@ -63,7 +63,7 @@
             </div>
           </div>
         </div>
-        <div class="swiper-pagination swiper-pagination2"></div>
+        <!--<div class="swiper-pagination swiper-pagination2"></div>-->
       </div>
     
     </div>
@@ -72,8 +72,8 @@
       <p class="recommendTip">最新热标</p>
       <p class="recommendTitle">为您推荐 </p>
       <!--周周赢  -->
-      <div class="recommendDiv" v-for="(a,index) in recomPro" :class="[index==0?'recommendDiv1':(index==1?'recommendDiv2':'recommendDiv3')]">
-        <img v-show="!index" src="../../assets/main/home/bkImg.png" />
+      <div class="recommendDiv"  v-for="(a,index) in recomPro" :class="[index==0?'recommendDiv1':(index==1?'recommendDiv2':'recommendDiv3')]" @click="$go('/prod/productList',{productName:a.productName,productNo:a.productNo,productType:a.productType,backTitle:a.productName})">
+        <!--<img v-show="!index" src="../../assets/main/home/bkImg.png" />-->
         <p class="recommendDivTitle f48">{{a.productName}}</p>
         <p class="recommendDivRate f100">{{a.annualizedRate}}%</p>
         <p class="recommendDivWord">历史年化收益率</p>
@@ -81,7 +81,7 @@
           <p>1000元起投</p>
           <p>锁定28天</p>
         </div>
-        <div class="recommendDivButton" @click="$go('/prod/productList',{productName:a.productName,productNo:a.productNo,productType:a.productType,backTitle:a.productName})">投资</div>
+        <!--<div class="recommendDivButton" @click="$go('/prod/productList',{productName:a.productName,productNo:a.productNo,productType:a.productType,backTitle:a.productName})">投资</div>-->
       </div>
       <!-- 月月赢 -->
       <!--<div class="recommendDiv recommendDiv2">
@@ -239,22 +239,22 @@
       });
 
       //新手标
-      var swiper2 = new Swiper(".swiper-container2", {
-        spaceBetween: 0,
-        centeredSlides: true,
-        //				    autoplay: {
-        //				      delay: 1000,
-        //				      disableOnInteraction: false
-        //				    },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }
-      });
+//    var swiper2 = new Swiper(".swiper-container2", {
+//      spaceBetween: 0,
+//      centeredSlides: true,
+//      //				    autoplay: {
+//      //				      delay: 1000,
+//      //				      disableOnInteraction: false
+//      //				    },
+//      pagination: {
+//        el: ".swiper-pagination",
+//        clickable: true
+//      },
+//      navigation: {
+//        nextEl: ".swiper-button-next",
+//        prevEl: ".swiper-button-prev"
+//      }
+//    });
 
     },
     methods: {
@@ -750,7 +750,7 @@
 
   .hotProductDiv0 {
     box-sizing: border-box;
-    border-bottom: 4px solid #CDCED3;
+    border-bottom: 1px solid #CDCED3;
   }
 
   .hotProductDivTitle {

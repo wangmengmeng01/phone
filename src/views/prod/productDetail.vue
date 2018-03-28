@@ -3,11 +3,11 @@
 		<!--详情页-->
 		<!--详情头部-->
 		<div class="productDetailTop">
-			<p class="pdtWord">历史年化利率</p>
+			<p class="pdtWord">历史年化</p>
 			<p class="pdtRate"><i>{{detail.annualizedRate}}</i>% <i style="font-size: 0.36rem;" v-show="detail.appendRate>0">+{{detail.appendRate}}%</i></p>
 			<div class="pdtMessage">
 				<p><span>募集资金(元)</span><span>{{detail.contractAmount | formatNum}}</span></p>
-				<p><span>起投金额(元)</span><span>{{detail.investMinAmount| formatNum}}</span></p>
+				<p><span>起投金额(元)</span><span>{{detail.investMinAmount}}</span></p>
 				<p><span>项目期限</span><span>{{detail.periodLength}}{{detail.periodUnit | Totime}}</span></p>
 			</div>
 			<div class="pdtProgress">
@@ -351,6 +351,7 @@
 		line-height: 0.56rem;
 		font-size: 0.24rem;
 		margin-left: 0.76rem;
+		color: #8D8D94;
 	}
 	
 	.pdtProgressMes>i {

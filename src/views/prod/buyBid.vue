@@ -10,10 +10,10 @@
 			<p class="buyBidTopMes">
 				<span>{{rate}}<i class="i1">%</i></span>
 				<span>{{detail.periodLength}}<i class="i2">{{detail.periodUnit | Totime}}</i></span>
-				<span>{{detail.amountWait| formatNum}}<i class="i2">元</i></span>
+				<span>{{detail.amountWait}}<i class="i2">元</i></span>
 			</p>
 			<p class="buyBidTopWord">
-				<span>历史年化收益率</span>
+				<span>历史年化</span>
 				<span>项目期限</span>
 				<span>剩余可投</span>
 			</p>
@@ -41,7 +41,7 @@
 			<div class="pdcTitle">
 				<span>到期后自动续费</span>
 				<p class="autoRenewBtn" @click="autoRenewBol=!autoRenewBol">
-					<span v-show="autoRenewBol">关</span>
+					<span v-show="autoRenewBol"  >关</span>
 					<span v-show="!autoRenewBol">开</span>
 				</p>
 			</div>
@@ -66,7 +66,7 @@
 		<div class="buyBidCenter">
 			<div class="pdcTitle">
 				<span>已阅读同意</span>
-				<span> <img src="../../assets/main/home/nextIcon.png" alt="" /></span>
+				<!--<span> <img src="../../assets/main/home/nextIcon.png" alt="" /></span>-->
 			</div>
 	
 			<div class="checkAgreement">
@@ -84,7 +84,7 @@
 			<div class="buyBidBottomLeft">
 				<p><span>{{rate+appendRate}}%</span><span>历史年化</span></p>
 				<p><span>¥{{ExpectedRevenue}}</span><span>预期收益</span></p>
-				<p><span>¥{{investMoney}}</span><span>实付款</span></p>
+				<p><span>¥{{investMoney||0.00}}</span><span>实付款</span></p>
 			</div>
 			<p class="buyBidBottomRight" :class="agreCheckBol?'':'disable'" @click="submit">确认购买</p>
 		</div>
@@ -559,7 +559,7 @@
 		height: 0.80rem;
 		padding: 0.56rem 0 0.18rem;
 		overflow: hidden;
-		border-bottom: 0.04rem solid #CDCED3;
+		border-bottom: 1px solid #CDCED3;
 	}
 	
 	.buyBidInvest>i {
@@ -630,7 +630,7 @@
 		left: 0;
 		top: 0;
 		border-radius: 0.32rem;
-		background-color: #3299D1;
+		background-color: #8D8D94;
 		font-size: 0.28rem;
 		text-align: center;
 		line-height: 0.52rem;
@@ -709,7 +709,7 @@
 		font-size: 0.22rem;
 		line-height: 0.34rem;
 		text-align: left;
-		color: #181818;
+		color: #3299D1;
 	}
 	
 	.buyBidBottom {

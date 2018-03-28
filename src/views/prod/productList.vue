@@ -2,7 +2,7 @@
 	<div>
 		<div class="head flex"> </div>
 		<div v-for="(i,index) in productList" v-if="i.bidList" class="productDiv" :class="[index==0?'productDiv1':'productDiv2']">
-			<div v-for="(j,n) in i.bidList" class="productDivDetial ">
+			<div v-for="(j,n) in i.bidList" class="productDivDetial " @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName,status:j.status})">
 				<div class="pddTitle">
 					<span class="pddTitleBidName">{{j.bidName}}</span>
 					<p class="pddTitleTips">
@@ -28,7 +28,7 @@
 				<p class="hotProductDivMessage" :class="[n<=i.bidList.length-2?'bb':'']">
 					<span>起投金额 <i>{{j.investMinAmount}}元</i></span>
 					<span>投资期限 <i>{{j.periodLength}}</i>{{j.periodUnit|Totime}}</span>
-					<span class="hotProductDivTitleBtn" @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName,status:j.status})">{{j.status<=4?'购买':'查看'}}</span>
+					<span class="hotProductDivTitleBtn" :id="j.status<=4?'':'blackColor'"  >{{j.status<=4?'购买':'查看'}}</span>
 				</p>
 			</div>
 	
@@ -451,7 +451,9 @@
 		color: #3299D1;
 		font-size: 0.24rem;
 	}
-	
+	#blackColor{
+		color: #8D8D94;
+	}
 	.hotProductDivMessage>span:nth-child(1) i {
 		color: #000000;
 		font-style: inherit;
@@ -463,7 +465,7 @@
 	}
 	
 	.bb {
-		border-bottom: 4px solid #CDCED3;
+		border-bottom: 1px solid #CDCED3;
 	}
 	
 	.productDivOver {
