@@ -7,7 +7,7 @@
 					<span class="pddTitleBidName">{{j.bidName}}</span>
 					<p class="pddTitleTips">
 						<span v-show="j.brokerageRate">佣金{{j.brokerageRate}}%</span>
-						<span>{{j.lockPeriod}}天锁定</span>
+						<span>{{(j.lockPeriod<=j.periodLength)?j.lockPeriod+'天锁定':'不可转让'}}</span>
 					</p>
 				</div>
 				<p class="productDivRate">{{j.annualizedRate}}%<i v-show="j.appendRate>0">+{{j.appendRate}}%</i></p>

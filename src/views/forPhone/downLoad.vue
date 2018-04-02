@@ -3,13 +3,13 @@
 		<div class="downLoadBG">
 			<p class="f48 color-font">理财师APP</p>
 			<p class="f36 color-font">安全投资、便捷加盟、高效拓客</p>
-	
+
 			<p class="f36 andriodLink"><img src="../../assets/main/forPhone/android.png" /><span>安卓下载</span>
-	
-				<a href="https://zw-web.chinazyjr.com/img/app-debug.apk"></a>
+
+				<a @click="downLoad"></a>
 			</p>
 			<p class="f36"> <img src="../../assets/main/forPhone/ios.png" /><span>IOS下载</span></p>
-	
+
 			<div class="tips">
 				<div id="pp">因IOS版APP目前正在上架中，故暂时提供50个内测名额，请按如下操作： </div>
 				<div id="pp">1、联系您的理财师，确认是否还有可用名额 </div>
@@ -22,14 +22,31 @@
 </template>
 
 <script>
+	import { isWeiXin,isIos} from '../../until';
 	export default {
-	
+
 		name: 'downLoad',
-	
+
 		data() {
 			return {
-	
+
 			}
+		},
+		methods: {
+
+			downLoad() {
+				if(isWeiXin()) { // 如果是微信提示从浏览器打开
+					this.$toask("请从浏览器打开");
+				}else{
+					if(isIos()){
+					this.$toask("iOS版本正在上架中");
+					}else{
+						window.location.href="https://zw-web.chinazyjr.com/img/app-debug.apk";
+					}
+
+				}
+			}
+
 		}
 	}
 </script>

@@ -192,6 +192,8 @@
 <script>
   import '@/lib/swiper/swiper.css'
   import { noviceExclusive, recommendProduct, sellsProduct,getUserStatus } from '@/service'
+  const Swiper = require("@/lib/swiper/swiper").Swiper;
+  
   export default {
     name: "home",
     data() {
@@ -219,7 +221,6 @@
     },
     mounted() {
 
-      let Swiper = require("@/lib/swiper/swiper").Swiper;
       /*banner*/
       var swiper = new Swiper(".swiper-container1", {
         spaceBetween: 0,

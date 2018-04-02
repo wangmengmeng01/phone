@@ -13,9 +13,9 @@
 </template>
 
 <script>
-  import {
-    countStationLetterMsg
-  } from '@/service'
+//import {
+//  countStationLetterMsg
+//} from '@/service'
   import {
     mapActions,
     mapGetters
