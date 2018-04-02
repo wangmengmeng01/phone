@@ -3,6 +3,7 @@
     <!-- 轮播图片 -->
     <div class="swiper-container swiper-container1">
       <div class="swiper-wrapper swiper-wrapper1">
+      	<div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner4.png')" alt=""></div>
         <div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner1.png')" alt=""></div>
         <div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner3.png')" alt=""></div>
         <div class="swiper-slide swiper-slide1"><img :src="require('@/assets/main/home/banner2.png')" alt=""></div>
