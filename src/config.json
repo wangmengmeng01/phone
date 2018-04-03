@@ -153,6 +153,10 @@
       "title": "我的二维码",
       "foot": false
     }, {
+      "path": "addUser",
+      "title": "添加客户",
+      "foot": false
+    }, {
       "path": "master",
       "title": "我的理财师",
       "foot": false

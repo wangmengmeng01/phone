@@ -101,7 +101,57 @@ export const searchMyManagerUserInfo = async (params) => {
     api: api.searchMyManagerUserInfo,
     params,
     options: {
-      filter_msg
+      filter_msg:false
     }
   });
 }
+/**
+ * 获取token
+ */
+export const getZwToken = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.getZwToken,
+    params,
+  });
+}
+
+
+/**
+ * 发送短信
+ */
+export const sendMessage = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.sendMessage,
+    params,
+    options: {
+      filter_code: false,
+      filter_msg: false
+    }
+  });
+}
+
+/**
+ * 添加理财师
+ */
+export const updateManagerUserForM = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.updateManagerUserForM,
+    params,
+  });
+}
+
+/**
+ * 添加客户
+ */
+export const updateUserForM = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.updateUserForM,
+    params,
+  });
+}
+
+

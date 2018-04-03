@@ -80,6 +80,11 @@
             }
           ],
           [{
+            icon: 'customer',
+            name: '添加客户',
+            url: 'addUser'
+          },
+          {
             icon: 'have',
             name: '已有客户',
             url: 'customer'
