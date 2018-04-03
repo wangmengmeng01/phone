@@ -52,7 +52,7 @@
               url: 'master'
             }, {
               icon: 'join',
-              name: '我要加盟的理财师',
+              name: '我要加盟理财师',
               url: '/home/joinFinlManager'
             }
           ],
