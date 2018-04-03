@@ -101,7 +101,7 @@ export const searchMyManagerUserInfo = async (params) => {
     api: api.searchMyManagerUserInfo,
     params,
     options: {
-      filter_msg
+      filter_msg:false
     }
   });
 }

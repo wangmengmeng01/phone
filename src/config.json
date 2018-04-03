@@ -35,10 +35,10 @@
     "redirect": "/wealth/riskTest"
   }, {
     "path": "login",
-    "title": "登录",
+    "title": "登录/注册",
     "filter": true,
     "back": {
-      "title": false
+      "title": true
     },
     "foot": {
       "type": "main",

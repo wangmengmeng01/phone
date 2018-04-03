@@ -1,25 +1,31 @@
 <template>
   <div class="login p4" @keyup.enter="submit">
     <img src="../assets/user/logo.png" class="logo">
+    <p class="color_main f28 loginp">银行存管账户，为您的资金保驾护航</p>
+    
+    <p class="f28 color_font-99 left">手机号</p>
     <div class="item flex phone border-b">
-      <span class="name f44 color-font">手机号</span>
       <div class="flex con">
-        <input type="tel" placeholder="请输入手机号" class="f44" v-model.trim="item.mobile" maxlength="11">
+        <input type="tel" placeholder="请输入手机号"  onkeydown="if(value.length==3||value.length==8){value+=' '}" class="f32" v-model.trim="item.mobile" maxlength="13">
         <img src="../assets/common/del.png" alt="" class="del" @click="item.mobile=''">
       </div>
     </div>
-    <div class="item flex password border-b">
+    <button class="btn" :class="item.mobile.length>0?'':'dis'" @click="submit">{{text}}</button>
+    
+    <!--<div class="item flex password border-b">
       <span class="name f44 color-font">密码</span>
       <div class="flex con">
         <input :type="[checked?'password':'text']" placeholder="请输入登录密码" class="f44" v-model.trim="passWord">
         <img :src="require(`@/assets/common/${checked?'eyes':'eyebrow'}.png`)" alt="" class="eyes" @click="checked=!checked">
       </div>
     </div>
-    <button class="btn" @click="submit">{{text}}</button>
+    
+    
+   
     <p class="link flex f32 color_font-s">
       <span class="forgetpwd" @click="$go('forget_pwd',{mobile: item.mobile})">忘记密码？</span>
       <span class="reg" @click="$go('register')">快速注册</span>
-    </p>
+    </p>-->
   </div>
 </template>
 
@@ -60,7 +66,7 @@
        */
       submit() {
         if (!this.item.mobile) {
-          this.$toask('手机号不能为空!');
+          this.$toask('手机号不能为空!',"","90%","red");
           return
         }
         if (!this.passWord) {
@@ -98,24 +104,29 @@
   background: #fff
   text-align: center
   height: 100%
+  .loginp
+   margin-bottom: 0.86rem
   .logo
-    width: 1.48rem
-    margin: 1.2rem 0
+    width: 3.84rem
+    height: 2.46rem
+    margin: 1.52rem 0 0.2rem
   .item
     text-align: left
+    height: .72rem
+    line-height: .72rem
     .con
-      width: 5rem
+      width: 6.5rem
     span
       flex: 1
     .del
-      height: .4rem
+      height: .28rem
       opacity: 0
     input
       display: inline-block
       max-width: 4rem
+      color: #363636
       &:focus ~ .del
         opacity: 1
-    padding-bottom: .3rem
     .eyes
       height: .18rem
   .phone

@@ -1,7 +1,7 @@
 <template>
     <transition name="mint-toast-pop">
-        <div class="dialog toast" v-if='visible'>
-            <p>{{message}}</p>
+        <div class="dialog toast"  :style="{bottom:position}" v-if='visible'>
+            <p  :style="{background:bgc}">{{message}}</p>
         </div>
     </transition>
 </template>
@@ -31,7 +31,7 @@
 <script>
     export default {
         name: 'toast',
-        props: ['message'],
+        props: ['message','position','bgc'],
         data() {
             return {
                 visible: false

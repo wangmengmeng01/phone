@@ -7,11 +7,13 @@ let Profile = Vue.extend(require('./toask.vue').default);
 var el;
 class toask {
   constructor(arg) {
-    let [msg, time] = arg;
+    let [msg, time,position,bgc] = arg;
     this.component = null;
     this.el = null;
     this.msg = msg;
     this.time = time || 2000;
+    this.position= position ||"28%";
+    this.bgc= bgc || null;
     this.init();
   }
   creat() {
@@ -19,6 +21,8 @@ class toask {
     document.body.appendChild(this.el);
     this.component = new Profile().$mount(this.el);
     this.component.message = this.msg;
+    this.component.position = this.position;
+    this.component.bgc = this.bgc;
     this.show();
   }
   show() {

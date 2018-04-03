@@ -27,6 +27,6 @@ let _config;
 if (process.env.NODE_ENV === 'production') {
   _config = pro;
 } else {
-  _config = pro;
+  _config = stage;
 }
 export default _config

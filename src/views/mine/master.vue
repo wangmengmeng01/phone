@@ -14,7 +14,23 @@
       </div>
       <a class="f36 btn" :href="`tel:${item.mobile}`">拨打电话</a>
     </div>
-    <p v-if="!item.mobile" class="f36 color_font-s center none">暂无</p>
+    
+    <div  v-if="!item.mobile" class="addMaster">
+    	 <p class="addMasterPhone  f48 color-font center"></p>
+    	 <div class="addMaster-div">
+    	 	<span class="f36 color-font addMaster-div-span">请输入理财师手机号码:</span>
+    	 	<input type="tel" class="f36 color-font" maxlength="11" name="addMasterPhone" value="" placeholder="请输入理财师的手机号码" />
+    	 </div>
+    	 <div class="addMaster-div">
+    	 	<input type="tel" class="f36 color-font" maxlength="6" name="addMasterPhone" value="" placeholder="请输入短信验证码" />
+    	 	<span class="sendBtn f28 center">发送短信验证码</span>
+    	 </div>
+    	 
+    	 <button class="btn f36">确认添加理财师</button>
+    	 	
+    </div>
+    
+   
   </div>
 </template>
 
@@ -45,6 +61,36 @@
   .qrcode
     height: 100%
     background: #fff
+    .addMaster
+     padding-top: .2rem
+     &-div 
+      margin: .5rem .4rem
+      overflow: hidden
+      border-bottom: 1px solid #8D8D94
+      position: relative
+      .addMaster-div-span
+       float: left
+       display: block
+       width: 6.7rem 
+       text-align: left
+       height: 1rem
+       line-height: 1rem
+      input
+       float: left
+       width: 6.7rem
+       height: 1rem
+       line-height: 1rem
+      .sendBtn
+       position: absolute 
+       right: 0
+       top: 0.24rem
+       width: 2.46rem
+       color: #3299D1
+       height: 0.52rem
+       line-height: 0.52rem
+       background: rgba(240,240,248,1)
+       border-radius: 32px
+       
     a
       text-decoration: none
     .code
