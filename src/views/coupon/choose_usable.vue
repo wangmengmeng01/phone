@@ -1,14 +1,19 @@
 <template>
   <div class="coupon_choose_usable">
-    <ul class="nav f32">
-      <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}</li>
+    <ul class="nav f32 color_font-99">
+      <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}({{i.count}})</li>
     </ul>
+    
+    
+    
     <div class="coupon">
       <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true" @checkedCb="checkedCb(i, index)" ref="coupon" type="mine"/>
-      <div v-if="!res.length" class="nothing f32 color_font"><img src="../../assets/common/nothing_coupon.png" alt=""><p>暂无{{nav[act].name}}券</p></div>
+      <div v-if="!res.length" class="nothing f28 color_font-99"><img style="margin: 4.8rem 2.74rem .6rem;padding: 0; width:1.42rem; height: .98rem; background-size: 100% 100%;" src="../../assets/main/mine/zwjl.png" alt=""><p>暂无可送优惠</p></div>
     </div>
-    <button class="btn" @click="submit">选取</button>
+    <button class="finish" @click="submit">完成</button>
   </div>
+  
+  
 </template>
 
 <script>
@@ -28,17 +33,27 @@
         nav: [{
           name: '加息券',
           type: '1',
+          count: 0
         },
-//          {
-//          name: '现金红包',
-//          type: '2',
-//        }, {
-//          name: '红包',
-//          type: '3',
-//        }
+            {
+            name: '返现券',
+            type: '3',
+            count: 0
+          }, {
+            name: '折扣券',
+            type: '2',
+            count: 0
+          }
         ],
         res: {},
-        couponlist: []
+        couponlist: [],
+        pageIndex:1,//分页
+        total:0,//总页数
+        num:{ 
+        		name: '加息券',
+            type: '1',
+            count: 0
+        		},//当前选择按钮
       }
     },
     computed: {
@@ -50,25 +65,62 @@
       Coupon,
     },
     created() {
+    	 this.SET_COUPON({
+        data: []
+      });
       this.init(this.nav[0]);
+    },
+    mounted() {
+      document.body.onscroll = () => {
+        if ((document.documentElement.scrollTop || document.body.scrollTop) >= document.body.scrollHeight - document.documentElement.clientHeight) {
+         this.item.pageIndex++;
+		if (this.item.pageIndex > this.totalPage) {
+			return;
+		}
+          console.log(this.num);
+          this.init(this.num);
+        }
+      }
     },
     methods: {
       ...mapMutations([
         'SET_COUPON',
       ]),
       init(item) {
+      	this.SET_COUPON({
+          data: []
+        });
         showGiveCouponList({
-          couponType: item.type
+          couponType: item.type,
+          pageIndex:this.pageIndex,
         }).then(res => {
-          this.res = res.couponList
+          this.res = res.couponList;
+//        this.res = this.res.concat(res.couponList);
+          console.log( this.res);
+          this.nav[0].count=res.raiseCount;
+          this.nav[1].count=res.cashbackCount;
+          this.nav[2].count=res.deductibleCount;
+          
+          if(item.type==1){
+          	this.total= Math.ceil(res.raiseCount / 10);
+          }else if(item.type==3){
+          	this.total= Math.ceil(res.cashbackCount / 10);
+          }else{
+          	this.total= Math.ceil(res.deductibleCount / 10);
+          };
+          
         }).catch(err => {
           this.res = []
         })
       },
       choose(i, index) {
+      	this.res={};
+      	this.pageIndex=1;
+      	this.total=0;
         if (this.act === index) return;
         this.act = index;
         this.init(i);
+        this.num= i;
       },
       checkedCb(data, index) {
         // 没有数据直接push
@@ -107,36 +159,45 @@
     height: 100%
     padding-top: .2rem
     .nav
-      height: 100%
       position: fixed
+      z-index: 100
       left: 0
-      top: 1.08rem
+      top: .88rem
       bottom: 0
-      width: 2rem
+      padding: 0 .46rem
+      width: 6.58rem
+      height: .8rem
+      line-height: .8rem
       background: #fff
+      display: flex
+      justify-content: space-between
       li
-        height: .96rem
-        line-height: .96rem
+        height: .8rem
+        line-height: .8rem
+        width: 1.6rem
         &.act
-          background: #f1f1f9
+          color: #208AFF 
+          border-bottom: 2px solid #208AFF 
+          box-sizing: border-box
         text-align: center
-        flex: 1
     .coupon
       .none
         height: 100vh
         display: flex
         align-items: center
         justify-content: center
-      padding-bottom: 1.1rem
-      padding-left: 2.2rem
+      margin: 0 .3rem
+      padding: 1.0rem  0  1.1rem
       flex: 1
       .coupon_list
         margin-bottom: .2rem
-    .btn
+    .finish
       position: fixed
-      left: 0
-      right: 0
-      bottom: 0
-      font-size: .36rem
-      border-radius: 0
+      top: 0
+      right: 0.3rem
+      font-size: .34rem
+      color: #208AFF
+      z-index: 100
+      height: .88rem
+      line-height: .88rem
 </style>

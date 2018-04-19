@@ -86,6 +86,16 @@ export const searchUserInfo = async (params) => {
   });
 }
 
+/**
+ * 展业登记
+ */
+export const showBusinessRecord = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.showBusinessRecord,
+    params,
+  });
+}
 
 
 /**

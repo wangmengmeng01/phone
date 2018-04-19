@@ -21,6 +21,8 @@
           <span class="submit" @click="handleAction(1)">{{yes}}</span>
         </p>
       </div>
+      
+      
     </div>
   </fMask>
 </template>
@@ -34,24 +36,29 @@
     align-items: center
     .alert
       height: auto
+      width: 5.64rem
       background: #fff
       z-index: 101
       overflow: hidden
       border-radius: .1rem
       line-height: .44rem
-      padding: .2rem
+      /*padding: .2rem*/
       h2
-        font-size: .32rem
+        font-size: .34rem
         text-align: center
-        padding: .3rem
+        padding: .44rem 0
         font-weight: normal
-        border-bottom: 1px solid #EBEBEB
-        .content
-          border: 1px solid #EBEBEB
-          padding: .04rem
-          line-height: 2
-          overflow: auto
-          max-height: calc(100vh - .16rem)
+        color: #333333
+      .content
+       padding: 0 0 .34rem 0
+       line-height: .44rem
+       height: .88rem
+       overflow: auto
+       max-height: calc(100vh - .16rem)
+       text-align: center
+       p
+        font-size: .28rem
+        color: #666666
       .alert-btn
         font-size: .3rem
         position: relative
@@ -66,8 +73,14 @@
           &:nth-child(2)
             height: 100%
             border-left: 1px solid #EBEBEB
-        .submit, .cancel
-          color: #00aaee
+        .submit
+          color: #ffffff
+          background: #208AFF 
+          /*border-radius: 0 0 0 .16rem*/
+        .cancel
+          color: #666666
+          background: #F8F8F8
+          border-radius: 0 0 0 .16rem
     .alert-protocol
       padding: .2rem .3rem
       padding-bottom: 1.2rem
@@ -78,6 +91,7 @@
       background: #fff
       overflow: auto
       width: 90%
+      border-radius: .16rem
       &-con
         line-height: 2
       &:after
@@ -91,13 +105,14 @@
         width: 90%
         height: .15rem
         background: #fff
+        display: none
       .alert-btn
         border-bottom-left-radius: .1rem
         border-bottom-right-radius: .1rem
-        color: #00a8ef
+        color: #ffffff
         line-height: 1rem
         box-shadow: -1px 0px .2rem 0px #ccc
-        background: #fff
+        background: #208aff
         position: fixed
         bottom: 5%
         left: 5%
@@ -126,7 +141,7 @@
       fMask,
     },
     created() {
-      log(this.type)
+//    log(this.type)
     },
     methods: {
       handleAction(type) {

@@ -2,6 +2,8 @@ export default {
 
   login: 'user/login', // 登录
 
+  isRegister: 'user/isRegister',//是否注册
+
   register: 'user/register', // 注册
 
   forgetPassWord: 'user/forgetPassWord', // 忘记密码
@@ -119,4 +121,10 @@ export default {
   investPropertyDetail: 'account/filter/investPropertyDetail', //持有债券详情
 
   serchDebtHoldedRecord: 'debt/filter/serchDebtHoldedRecord', //持有债券列表
+  
+  invesPropertyCustomer:'account/filter/invesPropertyCustomer',//理财师客户资产
+  
+  getProductList:'product/getProductList',//推荐产品列表
+  
+  showBusinessRecord:'home/filter/showBusinessRecord',//展业登记
 }

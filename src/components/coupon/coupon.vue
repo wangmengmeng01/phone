@@ -1,13 +1,15 @@
 <template>
   <transition name="bouncelnRight" mode="out-in">
-    <div class="coupon-item" v-if="visibility && data" @click="checkedFn">
+    <div class="coupon-item" v-if="visibility && data" :class="ruleshowBol?'cc':''" style="box-shadow:  0 0 12px 0 rgba(0,0,0,0.06)">
       <img :src="require(`@/assets/coupon/${['voucher','cash','red','dis'][parseInt(data.couponType || data.type)-1]}.png`)" alt="" class="bg">
-      <img src="../../assets/common/close_circle.png" alt="" class="close" v-if="close" @click="closeFn">
-      <div class="con">
-        <div class="top f20">
+      <img src="../../assets/common/delete.png" alt="" class="close" v-if="close" @click="closeFn">
+     
+     <div class="con" @click="checkedFn">
+        <!--<div class="top f20">
           <div class="left">
-            <h2 class="profitRate f20">+<span class="f36">{{data.profitRate}}</span>%</h2>
-            <p class="couponName f36">{{data.couponName}}</p>
+            <h2 class="profitRate f60"><span class="f60">{{data.profitRate}}</span>%</h2>
+            <p class="couponName f32">{{data.couponName}}</p>
+            <p class="remark f12">{{data.isSameOverlap=='2'?'不':''}}允许同类叠加使用</p>
             <p class="remark f12">{{data.isSameOverlap=='2'?'不':''}}允许同类叠加使用</p>
           </div>
           <div class="right">
@@ -15,12 +17,36 @@
             <p>{{data.remark}}</p>
             <p class="f12">{{data.startDate}}至{{data.endDate}}</p>
           </div>
-        </div>
-        <div class="bottom f20 color_font-s">
+        </div>-->
+        <!--<div class="bottom f20 color_font-s">
           <p>适用于{{data.productName}}</p>
           <img :src="require(`@/assets/coupon/check_${check?'succ':'none'}.png`)" alt="" class="check" v-if="checked">
+        </div>-->
+        <div class="conDiv1">
+        		<span class="f48 conDivp1" style="width: 1.94rem;">{{data.profitRate}}%</span>
+        		<p class="f28 conDivp2"  v-if="type !== 'mine'">来源：{{data.name}}</p>
         </div>
+        <div class="conDiv2">
+        		<p class="f28 conDivp1" style="width: 1.94rem;">---{{data.couponName}}---</p>
+        		<p class="f28 conDivp2">有效期：{{data.startDate}}—{{data.endDate}}</p>
+        </div>
+        <img :src="require(`@/assets/coupon/check_${check?'succ':'none'}.png`)" alt="" class="check" v-show="check" v-if="checked">
       </div>
+      <div class="conRule"  @click="ruleshowBol=!ruleshowBol"  :class="ruleshowBol?'hh':''">
+      	<p class="conRule_p f28">
+      		<span class="color_font-36">使用规则</span>
+      		<span class="color_font-99">展开 <img v-if="!ruleshowBol" src="../../assets/coupon/iconDown.png"/> <img v-else src="../../assets/coupon/iconUp.png"/></span>
+      	</p>
+      	  <transition name="bouncelnTop" mode="out-in">
+      	<div class="conRuleDiv f24"  v-show="ruleshowBol">
+      		<p>适用产品：{{data.productName}}</p>
+      		<p>使用条件：投资满{{data.maxAmount}}元可用</p>
+      		<!--<p>注：满足条件时{{data.isSameOverlap=='2'?'不':''}}可与其他卡券叠加使用</p>-->
+      	</div>
+      	 </transition>
+      </div>
+      
+      
     </div>
   </transition>
 </template>
@@ -32,7 +58,8 @@
       return {
         visibility: true,
         bg: '',
-        check: false
+        check: false,
+        ruleshowBol:false,
       }
     },
     props: ['data', 'checked', 'close', 'type'],
@@ -53,75 +80,120 @@
 
 <style lang="sass" scoped>
   .bouncelnRight-enter-active, .bouncelnRight-leave-active
-    transition: all .2s
+    transition: all .5s
   .bouncelnRight-enter, .bouncelnRight-leave-active
     opacity: 0
     transform: translateX(100%)
+  .bouncelnTop-enter-active, .bouncelnTop-leave-active
+    transition: all .5s
+  .bouncelnTop-enter, .bouncelnTop-leave-active
+    opacity: 0
+    transform: translateY(-100%)
+
   .coupon-item
     position: relative
-    height: 3.16rem
-    width: 100%
+    height: 2.82rem
+    border-radius: 0.12rem 0.12rem .12rem .12rem
+    .hh
+     height: 2.0rem 
+    .conRule
+      position: absolute
+      top: 2.02rem
+      left: 0	
+      width: 6.86rem
+      /*height: 2.8rem*/
+      overflow: hidden
+      border-radius: 0 0 .12rem .12rem
+      background-color: #fff
+      overflow: hidden
+      .conRuleDiv
+       float: left
+       width: 6.50rem
+       height: 1.17rem
+       margin: 0 .18rem
+       border-top: 1px solid #ececec
+       color: #666666
+       line-height: .24rem
+       p:nth-child(1)
+        text-align: left
+        margin: .28rem 0
+       p:nth-child(2)
+        text-align: left
+        margin: 0 0 .22rem
+       p:nth-child(3)
+        margin: .66rem 0 .22rem;
+        text-align: center
+      span:nth-child(1)
+       float: left
+       line-height: .8rem
+       margin-left: .22rem
+      span:nth-child(2)
+       float: right
+       line-height: .8rem
+       img
+        width: .24rem
+        height: .14rem
+        margin: 0 .17rem
     .close
-      transform: translate(50%, -50%)
-      width: .56rem
-      height: .56rem
+      width: .52rem
+      height: .52rem
       z-index: 1
       position: absolute
-      right: 0
-      top: 0
+      right: .2rem
+      top: 0.12rem
     .bg
       top: 0
       bottom: 0
       left: 0
       right: 0
       position: absolute
-      height: 100%
-      width: 100%
+      height: 2.02rem
+      width: 6.86rem
+
     .con
       position: absolute
       top: 0
       left: 0
-      width: 100%
-      height: 100%
-      .top
-        border-bottom: 1px dashed #181818
-        height: calc(2.2rem - 1px)
-        color: #fff
+      height: 2.02rem
+      width: 6.86rem
+      color: #fff
+      img
+       width: 1.22rem
+       height: 1.1rem
+       position: absolute
+       right: -1px
+       top: 0
+      .conDiv1
+       margin: .46rem 0 .40rem
+       line-height: .44rem
+       overflow: hidden
+       .conDivp1
+        float: left
         display: flex
-        justify-content: space-between
-        .left
-          display: flex
-          flex-direction: column
-          justify-content: space-between
-          align-items: center
-          padding: .4rem 0
-          flex: 1
-        .right
-          padding-left: .2rem
-          padding-top: .4rem
-          padding-bottom: .4rem
-          border-left: 1px dashed #fff
-          justify-content: space-between
-          display: flex
-          flex-direction: column
-          flex: 1.2
-          .from
-            display: flex
-            align-items: center
-            padding-bottom: .2rem
-            span
-              padding: 0 .1rem
-            .info
-              padding-left: .1rem
-              width: .36rem
-      .bottom
+        justify-content: center
+       .conDivp2
+        float: left
+        width: 4.56rem
+        padding-left: .32rem
+        text-align: left
+      .conDiv2
+       margin: 0 0 .44rem
+       line-height: .28rem
+       overflow: hidden
+       .conDivp1
+        float: left
         display: flex
-        justify-content: space-between
-        padding: .2rem
-        height: .96rem
-        line-height: .28rem
-        img
-          padding-left: .2rem
-          width: .38rem
-          height: .38rem
+        justify-content: center
+       .conDivp2
+        float: left
+        width: 4.56rem
+        padding-left: .32rem
+        text-align: left
+  .cc
+   height: 4.02rem
+      
+      
+      
+      
+      
 </style>

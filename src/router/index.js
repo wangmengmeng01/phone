@@ -51,6 +51,7 @@ const dealRoutes = (arr, child = false) => {
         }`);
 
       let title = t.title; // 标题
+      let bg = typeof t.bg === 'boolean' ? t.bg : t.bg || true; // 背景色
       let back = typeof t.back === 'boolean' ? t.back : t.back || true; // 顶部返回
       let foot = typeof t.foot === 'boolean' ? t.foot : t.foot || true; // 底部风险提示
       let filter = !!t.filter; // 是否过滤
@@ -67,7 +68,8 @@ const dealRoutes = (arr, child = false) => {
           title,
           filter,
           back,
-          foot
+          foot,
+          bg
         }
       };
       // 有子组件的做递归处理，并且删除父组件的name和meta属性

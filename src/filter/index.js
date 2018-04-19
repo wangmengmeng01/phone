@@ -89,7 +89,7 @@ export function formatNum(value) {
       }
       count++;
     }
-    str = newStr + ".00"; //自动补小数点后两位
+    str = newStr; //自动补小数点后两位
     return str;
   } else {
     for (var i = str.indexOf(".") - 1; i >= 0; i--) {
@@ -115,7 +115,7 @@ export function Totime(val) {
       return "周";
       break;
     case 3:
-      return "月";
+      return "个月";
       break;
     default:
       return "年";

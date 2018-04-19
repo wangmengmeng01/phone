@@ -1,6 +1,6 @@
 <template>
-  <div class="qrcode">
-    <div v-if="item.mobile">
+  <div class="master">
+    <!--<div v-if="item.mobile">
       <div class="head flex">
         <img :src="item.icon" alt="" class="head_icon place-img">
         <div class="msg">
@@ -29,7 +29,40 @@
     	 <button class="btn f36">确认添加理财师</button>
     	 	
     </div>
+    -->
     
+    <!-- 我的理财师-->
+   <div class="master-mess" v-if="item.mobile">
+   		<div class="master-mess-top">
+   			<img src="../../assets/main/mine/lcs.png"/>
+   			<p class="f36 center master-mess-top-p1">{{item.realName}}</p>
+   			<p class="f28 center master-mess-top-p2">{{item.beInviteDate}}成为我的理财师</p>
+   		</div>
+   		<div class="master-mess-mess f30">
+   			<p class="color_font-99">公司</p>
+   			<p class="color_font-36">中赢卓信财富投资管理(北京)有限公司-闵行分公司</p>
+   		</div>
+   		<div class="master-mess-mess f30">
+   			<p class="color_font-99">头衔</p>
+   			<p class="color_font-36">{{item.position}}</p>
+   		</div>
+   		<div class="master-mess-mess f30">
+   			<p class="color_font-99" id="line">电话</p>
+   			<p class="color_font-36" id="line">{{item.mobile|desensitization}}</p>
+   			<a :href="`tel:${item.mobile}`"><img src="../../assets/main/mine/call.png"/></a>
+
+   		</div>
+   </div>
+   <!--暂无理财师-->
+   <div class="master-none" v-if="!item.mobile">
+   		<img src="../../assets/main/mine/zwkh.png"/>
+   		<p class="f28">暂无理财师</p>
+   		<div class="btn master-none-btn">
+   			添加理财师
+   		</div>
+   </div>
+   
+   
    
   </div>
 </template>
@@ -50,106 +83,90 @@
     },
     methods: {
       init() {
-        searchMyManagerUserInfo().then(r => this.item = r);
+        searchMyManagerUserInfo().then(r => {
+        	this.item = r
+        });
       }
     },
     watch: {}
   }
 </script>
 
-<style lang="sass" scoped>
-  .qrcode
-    height: 100%
-    background: #fff
-    .addMaster
-     padding-top: .2rem
-     &-div 
-      margin: .5rem .4rem
-      overflow: hidden
-      border-bottom: 1px solid #8D8D94
-      position: relative
-      .addMaster-div-span
-       float: left
-       display: block
-       width: 6.7rem 
-       text-align: left
-       height: 1rem
-       line-height: 1rem
-      input
-       float: left
-       width: 6.7rem
-       height: 1rem
-       line-height: 1rem
-      .sendBtn
-       position: absolute 
-       right: 0
-       top: 0.24rem
-       width: 2.46rem
-       color: #3299D1
-       height: 0.52rem
-       line-height: 0.52rem
-       background: rgba(240,240,248,1)
-       border-radius: 32px
-       
-    a
-      text-decoration: none
-    .code
-      text-align: center
-      #code
-        margin: 1rem auto .4rem
-        width: 3.8rem
-        height: 3.8rem
-    .head
-      background: #fff
-      padding: .76rem .4rem .6rem
-      align-items: flex-start
-      .head_icon
-        width: 1.16rem
-        height: 1.16rem
-      .msg
-        flex: 1
-        padding-left: .4rem
-        h2
-          justify-content: flex-start
-          .status
-            left: .1rem
-            position: relative
-            height: .38rem
-            line-height: .38rem
-            width: 1.54rem
-            display: flex
-            align-items: center
-            justify-content: center
-            i
-              padding-left: .2rem
-              position: relative
-              z-index: 1
-              font-style: normal
-            img
-              height: 100%
-              width: 100%
-              left: 0
-              top: 0
-              position: absolute
-        p
-          margin-top: .1rem
-          line-height: .34rem
-          &.img
-            margin-top: 2.7rem
-          &.flex
-            justify-content: flex-start
-          img
-            width: .72rem
-            padding-right: .1rem
-    .btn
-      border-radius: .36rem
-      font-size: .36rem
-      width: 4.8rem
-      height: .72rem
-      line-height: .72rem
-      text-align: center
-      margin: auto
-      color: #fff
-  .none
-    padding-top: 5rem
+<style lang="scss" scoped>
+ .master{
+ 	margin: 0 auto;
+ 	padding: 0;
+ 	width: 7.5rem;
+ 	&-mess{
+ 		width: 7.5rem;
+ 		&-top{
+ 			width: 7.5rem;
+ 			height: 3.9rem;
+ 			background: #207CFF;
+ 			img{
+ 				margin: .88rem 3.15rem .18rem;
+ 				width: 1.2rem;
+ 				height: 1.2rem;
+ 				background-size: 100% 100%;
+ 			}
+ 			&-p1{
+ 				color: #FFFFFF;
+ 				margin-bottom: .24rem;
+ 				line-height: .36rem;
+ 			}
+ 			&-p2{
+ 				color: #C6E1FF;
+ 				line-height: .28rem;
+ 			}
+ 		}
+ 		&-mess{
+ 			margin: .52rem .3rem 0;
+ 			width: 6.9rem;
+ 			overflow: hidden;
+ 			p:nth-child(1){
+ 				float: left;
+ 				width: .84rem;
+ 				line-height:.44rem ;
+ 				text-align: left;
+ 			}
+ 			p:nth-child(2){
+ 				float: left;
+ 				max-width: 6.06rem;
+ 				line-height: .44rem;
+ 			}
+ 			a{
+ 					float: right;
+	 				width: .6rem;
+	 				height: .6rem;
+ 				img{
+	 				width: .6rem;
+	 				height: .6rem;
+	 				background-size: 100% 100%;
+ 				}	
+ 			}
+ 			
+ 			#line{
+ 				line-height: .6rem;
+ 			}
+ 		}
+ 	}
+ 	&-none{
+ 		width: 7.5rem;
+ 		img{
+ 			margin: 3.28rem 2.3rem 0;
+ 			width: 2.9rem;
+ 			height: 2.26rem;
+ 			background-size: 100% 100%;
+ 		}
+ 		>p{
+ 			margin: .5rem 0 .58rem;
+ 			color: #666666;
+ 			text-align: center;
+ 		}
+ 		&-btn{
+ 			width: 4.8rem;
+ 			margin: 0 1.35rem;
+ 		}
+ 	}
+ }
 </style>

@@ -7,7 +7,7 @@ export const duxin = {
 };
 
 export const dev = {
-  url: 'http://192.168.7.110:8506/zw/api/',
+  url: 'http://192.168.7.110:8506/api/',
 };
 
 export const test = {

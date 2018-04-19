@@ -44,6 +44,18 @@
       "type": "main",
       "style": "padding-bottom: 1rem"
     }
+  },
+   {
+    "path": "next",
+    "title": "登录",
+    "filter": true,
+    "back": {
+      "title": true
+    },
+    "foot": {
+      "type": "main",
+      "style": "padding-bottom: 1rem"
+    }
   }, {
     "path": "register",
     "title": "注册",
@@ -70,8 +82,7 @@
     "filter": true,
     "foot": false,
     "back": {
-      "showTip": true,
-      "title": false
+      "title": true
     }
   }, {
     "path": "reg_bank",
@@ -100,19 +111,16 @@
       "title": "首页",
       "filter": true,
       "back": false,
-       "foot": {
-        "style": "padding-bottom: 1.5rem"
-      }
+      "foot": false
     }, {
       "path": "product",
       "title": "产品",
       "filter": true,
       "back": {
-        "icon": false,
-        "background": "main"
+        "icon": false
       },
       "foot": {
-        "style": "padding-bottom: 1.5rem"
+        "style": "padding-bottom: 1.5rem;background-color: #f6f5f5"
       }
     }, {
       "path": "wealth",
@@ -133,13 +141,10 @@
       }
     }, {
       "path": "mine",
-      "title": "我的",
-       "foot": {
-        "style": "padding-bottom: 1.5rem"
-      },
+      "title": "人脉",
+       "foot": false,
       "back": {
-        "icon": false,
-        "background": "main"
+        "icon": false
       }
     }]
   }, {
@@ -152,17 +157,38 @@
       "path": "qrcode",
       "title": "我的二维码",
       "foot": false
+    },{
+      "path": "gift",
+      "title": "我的礼物",
+      "foot": false
+    },{
+      "path": "give_record",
+      "title": "赠送记录",
+      "foot": false
+    },{
+      "path": "my_promise",
+      "title": "履约承诺",
+      "foot": false
     }, {
       "path": "master",
       "title": "我的理财师",
       "foot": false
     }, {
       "path": "customer",
-      "title": "已有客户",
+      "title": "我的客户",
       "foot": false
     }, {
+      "path": "InfoRegister",
+      "title": "展业登记",
+      "foot": false
+    },{
+      "path": "InfoRegisterList",
+      "title": "展业记录",
+      "foot": false,
+      "bg":false
+    },{
       "path": "customer_detail",
-      "title": "已有客户详情",
+      "title": "客户详情",
       "foot": false
     }, {
       "path": "customer_potential",
@@ -194,8 +220,9 @@
       "foot": false
     }, {
       "path": "choose_usable",
-      "title": "选择可送优惠",
-      "foot": false
+      "title": "选择优惠",
+      "foot": false,
+      "bg":false
     }]
   }, {
     "path": "found",
@@ -234,9 +261,7 @@
         "background": "#fff"
       },
       "filter": false,
-      "foot": {
-        "style": "margin-bottom: 1.1rem"
-      }
+      "foot": false
     }, {
       "path": "aboutUs",
       "title": "",
@@ -248,28 +273,26 @@
     "children": [{
       "path": "productList",
       "title": "产品列表页",
-      "filter": true
+      "filter": true,
+       "foot": false
     }, {
       "path": "joinList",
       "filter": true,
        "foot": false,
       "title": "加入记录"
-    }, {
+    },{
+      "path": "calculation",
+      "filter": false,
+       "foot": false,
+       "title": "收益计算器"
+    },{
       "path": "productDetail",
       "title": "产品详情",
       "filter": true,
-      "back": {
-        "background": "main"
-      },
-      "foot": {
-        "style": "margin-bottom: 1.1rem"
-      }
+      "foot": false
     }, {
       "path": "buyBid",
       "title": "确认购买",
-      "back": {
-        "background": "main"
-      },
       "foot": {
         "style": "margin-bottom: 1.1rem"
       }
@@ -283,15 +306,18 @@
     }, {
       "path": "higHqualityAssets",
       "filter": true,
-      "title": "严选优质资产"
+      "title": "严选优质资产",
+      "foot":false
     }, {
       "path": "bankDepository",
       "filter": true,
-      "title": "资金银行存管"
+      "title": "资金银行存管",
+      "foot":false
     }, {
       "path": "Honour",
       "filter": true,
-      "title": "100%历史兑付"
+      "title": "100%历史兑付",
+      "foot":false
     }]
   }, {
     "path": "static",

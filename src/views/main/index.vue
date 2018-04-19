@@ -110,10 +110,10 @@
           align-items: center
           justify-content: center
           img
-            width: .52rem
+            width: .48rem
           span
             margin-top: .07rem
             font-size: .2rem
           &.act
-            color: #00a8ef
+            color: #208AFF 
 </style>

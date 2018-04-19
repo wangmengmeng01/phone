@@ -9,7 +9,7 @@ $color_font-red: #F84740              // 字体醒目红色
 $color_font-purple: #CA8EFF           // 字体醒目紫色
 $color_font-s: #8D8D94                // 小号字体色调
 $color_font-99: #999999                // 小号字体色调
-
+$color_font-36: #363636
 
 /**功能公共部分样式**/
 // 颜色
@@ -30,6 +30,8 @@ $color_font-99: #999999                // 小号字体色调
       color: $color_font-s
     &-99
       color: $color_font-99
+    &-36
+      color: $color_font-36
 // 边框
 .border
   &-notend-b:not(:last-child)
@@ -67,7 +69,8 @@ $color_font-99: #999999                // 小号字体色调
   font-size: .48rem
 .f52
   font-size: .52rem
-
+.f60
+  font-size: .60rem
 
 // 外边框通用样式
 .p4
@@ -99,7 +102,7 @@ $color_font-99: #999999                // 小号字体色调
 
 
 .nothing
-  background: #f1f1f9
+  background: #f6f5f5
   height: 50vh
   text-align: center
   img
@@ -174,4 +177,12 @@ $color_font-99: #999999                // 小号字体色调
     padding-right: constant(safe-area-inset-right); //如果未竖屏时为0                
     padding-bottom: constant(safe-area-inset-bottom);//为底下圆弧的高度 34px  
 
+
+@-webkit-keyframes roll 
+    0%
+       -webkit-transform: rotate(0deg);
+    50%
+       -webkit-transform: rotate(180deg);
+    100%
+       -webkit-transform: rotate(360deg);
 

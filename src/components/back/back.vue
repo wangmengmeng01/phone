@@ -50,6 +50,7 @@
     right: 0
     background: transparent
     color: #181818
+    border-bottom: 1px solid rgba(0,0,0,0.03)
     .tip
       padding-left: .1rem
     &-icon

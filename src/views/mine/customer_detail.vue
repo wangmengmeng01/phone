@@ -1,6 +1,6 @@
 <template>
   <div class="customer_detail">
-    <div class="head center">
+    <!--<div class="head center">
       <img class="icon place-img" src="/" alt="">
       <h2 class="name f28 color_font">{{item.userName}}</h2>
       <p class="text f24 color_font-s">{{item.beInviteDate}} 成为我的客户</p>
@@ -57,29 +57,113 @@
           <p class="f24 color_font-s">年收入</p>
         </li>
       </ul>
-    </div>
+    </div>-->
     <!--<div class="introduction">-->
   
     <!--</div>-->
     <!--<div class="record">-->
   
     <!--</div>-->
+    
+    
+    <div class="customer_detail-top">
+    		<img src="../../assets/main/mine/userImg.png"/>
+    		<p class="f36 center customer_detail-top-p1"><span>{{item.userName}}</span><span>{{item.mobile}}</span></p>
+    		<p class="f28 center customer_detail-top-p2">{{item.beInviteDate}}成为我的客户</p>
+    </div>
+    
+    <div class="customer_detail-record borderB">
+    			<p @click="$go('InfoRegisterList')">
+    				<img src="../../assets/main/mine/zy.png"/>
+    				<span class="f28 color_font-36">展业记录</span>
+    			</p>
+    			<p>
+    				<img src="../../assets/main/mine/yy.png"/>
+    				<span class="f28 color_font-36">邀约记录</span>
+    			</p>
+    			<p>
+    				<img src="../../assets/main/mine/zs.png"/>
+    				<span class="f28 color_font-36">赠送记录</span>
+    			</p>
+    </div>
+    
+    <div class="customer_detail-mess borderB">
+    			<p class="f28">
+    				<span class="color_font-99 customer_detail-mess-span1">性别</span>
+    				<span class="color_font-36  customer_detail-mess-span2">{{['男','女','未确定'][item.sex-1] || '--'}}</span>
+    				<span class="color_font-99 customer_detail-mess-span1">投资次数</span>
+    				<span class="color_font-36  customer_detail-mess-span3">{{item.investCount+'次' || '--'}}</span>
+    			</p>
+    			<p class="f28">
+    				<span class="color_font-99  customer_detail-mess-span1">年龄</span>
+    				<span class="color_font-36 customer_detail-mess-span2">{{item.age+'岁' || '--'}}</span>
+    				<span class="color_font-99  customer_detail-mess-span1">单笔最高</span>
+    				<span class="color_font-36 customer_detail-mess-span3">{{item.investAmount || '--'}}元</span>
+    			</p>
+    			<p class="f28">
+    				<span class="color_font-99  customer_detail-mess-span1">风险偏好</span>
+    				<span class="color_font-36 customer_detail-mess-span2">{{['激进型','进取型','稳健型','谨慎型','保守型'][item.endurance-1] || '--'}}</span>
+    			</p>
+    </div>
+    
+    <div class="customer_detail-list">
+    		<p class="customer_detail-list-title f32">客户资产 <span class="f28 color_font-99">更多</span></p>
+    		
+    		
+    		<div class="customer_detail-list-detail borderB" v-for="(i,index) in AssetsItem" v-show="index<=2">
+    			<p class="f28 customer_detail-list-detail-p">{{i.borrowName}} <span class="f28 customer_detail-list-detail-p-span">持有中</span></p>
+    			<div class="customer_detail-list-detail-div">
+    				<p><span class="f36">{{i.initCashAmount}}</span><span class="f24">投资金额(元)</span></p>
+    				<p><span class="f24"><i class="f36">{{i.interestEndDate}}</i>天</span><span class="f24">到期天数</span></p>
+    				<p><span class="f36">+{{i.holdAmount}}</span><span class="f24">持有收益(元)</span></p>
+    			</div>
+    		</div>
+    		
+    		
+    		<!--<div class="customer_detail-list-detail borderB">
+    			<p class="f28 customer_detail-list-detail-p">周周赢20180402-02期 <span class="f28 customer_detail-list-detail-p-span dis">持有中</span></p>
+    			<div class="customer_detail-list-detail-div">
+    				<p><span class="f36">40,000.00</span><span class="f24">投资金额(元)</span></p>
+    				<p><span class="f24"><i class="f36">12</i>天</span><span class="f24">到期天数</span></p>
+    				<p><span class="f36">+60.00</span><span class="f24">持有收益(元)</span></p>
+    			</div>
+    		</div>
+    		<div class="customer_detail-list-detail borderB">
+    			<p class="f28 customer_detail-list-detail-p">周周赢20180402-02期 <span class="f28 customer_detail-list-detail-p-span dis">持有中</span></p>
+    			<div class="customer_detail-list-detail-div">
+    				<p><span class="f36">40,000.00</span><span class="f24">投资金额(元)</span></p>
+    				<p><span class="f24"><i class="f36">12</i>天</span><span class="f24">到期天数</span></p>
+    				<p><span class="f36">+60.00</span><span class="f24">持有收益(元)</span></p>
+    			</div>
+    		</div>
+    		-->
+    		
+    </div>
+    
+    
+    
+    
+    
   </div>
 </template>
 
 <script>
   import {
-    getExistingCustomers
+    getExistingCustomers,
+    invesPropertyCustomer
   } from '@/service'
   export default {
     name: 'customer_detail',
     data() {
       return {
         item: {},
+        AssetsItem:{},
+        
       }
     },
     created() {
-      this.init()
+      this.init();
+      this.customerAssets();
     },
     methods: {
       init() {
@@ -87,44 +171,199 @@
         getExistingCustomers({
           userCode
         }).then(r => this.item = r);
+      },
+       customerAssets() {
+        const userCode = this.$route.query.userCode;
+        invesPropertyCustomer({
+          userCode,
+          bidType:2,
+          status:2,
+          pageNum:1,
+        }).then(r => this.AssetsItem = r.dataList);
       }
     }
   }
 </script>
 
-<style lang="sass" scoped>
-  .customer_detail
-    padding: .42rem
-    height: 100%
-    .head
-      background: #fff
-      padding: .4rem 0 .58rem
-      .icon
-        height: 1.48rem
-        width: 1.48rem
-        border-radius: 50%
-      .name
-        padding: .18rem 0
-    .title
-      line-height: 1rem
-    .bg
-      margin-top: .4rem
-      background: #fff
-    ul
-      padding: .38rem 0
-      display: flex
-      flex-wrap: wrap
-      li
-        text-align: center
-        flex: 33.33%
-        box-sizing: border-box
-        padding-bottom: .38rem
-        border-top: 1px solid #CDCED3
-        border-left: 1px solid #CDCED3
-        &:nth-child(1), &:nth-child(2), &:nth-child(3)
-          border-top: none
-        &:nth-child(1), &:nth-child(4), &:nth-child(7), &:nth-child(10)
-          border-left: none
-        h2
-          line-height: .8rem
+<style lang="scss" scoped>
+  .customer_detail{
+  	margin: 0 auto;
+  	padding: 0;
+  	width: 7.5rem;
+  	.borderB{
+  		border-bottom: 1px solid #E5E5E5;
+  	}
+  	&-top{
+  		width: 7.5rem;
+  		height: 3.24rem;
+  		background: #208AFF;
+  		color: #FFF6E0;
+  		img{
+  			margin: .48rem 3.15rem 0;
+  			width: 1.2rem;
+  			height: 1.2rem;
+  			background-size: 100% 100%;
+  		}
+  		&-p1{
+  			margin: .2rem 0 .24rem;
+  			line-height: .36rem;
+  			span{
+  			margin-left: .2rem;
+  			}
+  		}
+  		&-p2{
+  			color: #C6E1FF;
+  		}
+  	}
+  	
+  	&-record{
+  		margin: 0 .3rem;
+  		padding: 0 .48rem;
+  		width: 5.92rem;
+  		display: flex;
+  		justify-content: space-between;
+  		p{
+  			width: 1.2rem;
+  			overflow: hidden;
+  			img{
+  				float: left;
+  				margin: .6rem .38rem .22rem;
+  				width: .44rem;
+  				height: .44rem;
+  				background-size: 100% 100%;
+  			}
+  			span{
+  				float: left;
+  				width: 1.2rem;
+  				text-align: center;
+  				margin-bottom: .6rem;
+  			}
+  		}
+  	}
+  	
+  	&-mess{
+  		margin: 0 .3rem;
+  		padding: .28rem 0 .6rem;
+  		width: 6.9rem;
+  		p{
+  			margin: .32rem 0 0 0;
+  			line-height: .28rem;
+  			overflow: hidden;
+  			text-align: left;
+  		}
+  		&-span1{
+  			float: left;
+  			width: 1.92rem;
+  		}
+  		&-span2{
+  			float: left;
+  			width: 1.78rem;
+  		}
+  		&-span3{
+  			float: left;
+  			width: 1.28rem;
+  		}
+  	}
+  	&-list{
+  		margin: 0 .3rem;
+  		width: 6.9rem;
+  		&-title{
+  			margin-top: .6rem;
+  			line-height: .32rem;
+  			overflow: hidden;
+  			font-weight: 500;
+  			span{
+  				float: right;
+  				font-weight: normal;
+  			}
+  		}
+  		&-detail{
+  			&-p{
+  				margin: .32rem 0 .18rem;
+  				width: 6.9rem;
+  				line-height: .4rem;
+  				&-span{
+  					margin-left: .16rem;
+  					width: .96rem ;
+  					height: .4rem;
+  					line-height: .4rem;
+  					padding: 0.03rem .12rem;
+  					text-align: center;
+  					border: 1px solid #208AFF;
+					border-radius: 3px;
+					color: #208AFF ;
+  				}
+  				.dis{
+  					color: #999999;
+  					border: 1px solid #999999;
+  				}
+  			}
+  			
+  			&-div{
+  				overflow: hidden;
+  				p:nth-child(1){
+  					float: left;
+  					width: 3.06rem;
+  					overflow: hidden;
+  					span:nth-child(1){
+  						text-align: left;
+  						display: block;
+  						margin-bottom: .32rem;
+  						line-height: .32rem;
+  						color: #FF5513;
+  					}
+  					span:nth-child(2){
+  						text-align: left;
+  						display: block;
+  						margin-bottom: .4rem;
+  						line-height: .24rem;
+  					}
+  				}
+  				p:nth-child(2){
+  					float: left;
+  					width: 2.22rem;
+  					overflow: hidden;
+  					span:nth-child(1){
+  						text-align: left;
+  						display: block;
+  						margin-bottom: .32rem;
+  						line-height: .32rem;
+  						color: #3F3F3F;
+  						i{
+  							font-style: inherit;
+  							color: #363636;
+  						}
+  					}
+  					span:nth-child(2){
+  						text-align: left;
+  						display: block;
+  						margin-bottom: .4rem;
+  						line-height: .24rem;
+  					}
+  				}
+  				p:nth-child(3){
+  					float: left;
+  					width: 1.4rem;
+  					overflow: hidden;
+  					span:nth-child(1){
+  						text-align: left;
+  						display: block;
+  						margin-bottom: .32rem;
+  						line-height: .32rem;
+  						color: #FAC151;
+  					}
+  					span:nth-child(2){
+  						text-align: left;
+  						display: block;
+  						margin-bottom: .4rem;
+  						line-height: .24rem;
+  					}
+  				}
+  			}
+  		}
+  	}
+  	
+  }
+   
+   
 </style>

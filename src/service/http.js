@@ -101,7 +101,7 @@ class http {
     if (r.code === '100') { // 0才会resole
       resole(r.result)
     } else { // 其他reject
-      if (r.code === '1000') {
+      if (r.code === '1000'||r.code === '1218') {
         self.$go('/login')
       }
       this.$reject(reject, r.message)

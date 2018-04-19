@@ -29,6 +29,20 @@ export const login = async (params) => {
   });
 }
 
+/**
+ * 是否登录
+ */
+export const isRegister = async (params) => {
+  return await $http({
+    method: 'get',
+    api: api.isRegister,
+    options: {
+      loading: false,
+      filter_msg: false
+    },
+    params,
+  });
+}
 
 
 /**

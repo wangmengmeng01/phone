@@ -1,7 +1,7 @@
 <template>
-    <transition name="mint-toast-pop">
+    <transition name="mint-toast-pop"  mode="out-in">
         <div class="dialog toast"  :style="{bottom:position}" v-if='visible'>
-            <p  :style="{background:bgc}">{{message}}</p>
+            <p  :style="{background:bgc,color:wordColor}">{{message}}</p>
         </div>
     </transition>
 </template>
@@ -11,7 +11,8 @@
     opacity: 0
   .dialog
     max-width: 650px
-    font-size: 18px
+    height: 70px
+    font-size: 12px
     z-index: 101
     width: 100%
     position: fixed
@@ -22,8 +23,8 @@
     left: 50%
     transform: translateX(-50%)
     p
-      padding: 15px
-      border-radius: 5px
+      padding: 8px 25px
+      border-radius: 100px
       background: rgba(000,000,000,.8)
       color: #fff
 </style>
@@ -31,7 +32,7 @@
 <script>
     export default {
         name: 'toast',
-        props: ['message','position','bgc'],
+        props: ['message','position','bgc','wordColor'],
         data() {
             return {
                 visible: false

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :style="{paddingTop:$route.meta.back && !$route.query.forNative ? '.88rem' : ''}">
+  <div id="app" :style="{paddingTop:$route.meta.back && !$route.query.forNative ? '.88rem' : ''}" :class="$route.meta.bg?'ff':'gg'">
     <back v-if="!$route.query.forNative" />
     <transition :name=" isAppear ? 'fade' : 'router-slid'" mode="out-in">
       <router-view></router-view>
@@ -62,5 +62,5 @@
   }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 </style>

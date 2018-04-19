@@ -25,6 +25,16 @@ export const getProductBidsList = async (params) => {
 }
 
 /**
+ * 推荐产品列表页
+ */
+export const getProductList = async (params) => {
+  return await $http({
+    method: 'get',
+    api: api.getProductList,
+    params,
+  });
+}
+/**
  * 产品详情页
  */
 export const searchProductBidsDetail = async (params) => {
@@ -80,6 +90,9 @@ export const getExpectedRevenue = async (params) => {
     method: 'post',
     api: api.getExpectedRevenue,
     params,
+    options: {
+      loading: params.loading
+    },
   });
 }
 
@@ -103,6 +116,9 @@ export const searchCouponList = async (params) => {
     method: 'get',
     api: api.searchCouponList,
     params,
+    options: {
+      loading: params.loading
+    },
   });
 }
 
