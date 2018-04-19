@@ -14,7 +14,7 @@
     </div>
     <!--菜单栏-->
     <ul class="item" v-for="i in menu" v-if="menu.length">
-      <li v-for="j in i" class="flex border-notend-b" @click="$go(j.icon==='join' ? j.url : `/mine/${j.url}`)">
+      <li v-for="j in i" class="flex border-notend-b" @click="$go(j.icon==='join' ? (nextBol?j.url:'/reg_bank') : `/mine/${j.url}`)">
         <img :src="require(`@/assets/main/mine/${j.icon}.png`)" alt="" class="icon">
         <span class="name f32">{{j.name}}</span>
         <span class="f28 color_font-s" v-if="!j.url">敬请期待</span>
@@ -30,7 +30,7 @@
     mapActions
   } from 'vuex'
   import {
-    searchUserInfo
+    searchUserInfo,getUserStatus
   } from '@/service'
   export default {
     name: 'mine',
@@ -39,6 +39,7 @@
         head: require('@/assets/main/mine/head.png'),
         item: {},
         menu: [],
+        nextBol:false,
         menu_normal: [
           [
             //           {
@@ -124,7 +125,27 @@
       }
     },
     created() {
-      this.init()
+      this.init();
+      
+	      	getUserStatus().then(res => {
+	      		
+	      		if(res.code == "100"){
+	      				  const info = res.result;
+				          if(info.openAccountStatus=="3"){
+					         this.nextBol=true;
+					        }else{
+					          this.nextBol=false;
+					        }
+	      			
+	      		} else if (res.code == "1210" || res.code == "1000") {
+						this.$go('/login');
+					} else {
+						this.$toask(res.message);
+					}
+	        
+	      });
+       
+      
     },
     methods: {
       ...mapActions([
