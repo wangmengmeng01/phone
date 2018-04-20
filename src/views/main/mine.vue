@@ -4,7 +4,7 @@
 		<div class="mine-top">
 			<div class="mine-top-user">
 				<img v-if="!isManage" src="../../assets/main/mine/tx.png" />
-				<img v-else src="../../assets/main/mine/lcs.png"/>
+				<img v-else src="../../assets/main/mine/lcs.png" />
 				<p class="f28 color_font-36 mine-top-user-p1">
 					{{item.userName | nameDesensitization}}<span v-show="item.position">{{item.mobile | desensitization}}</span></p>
 			</div>
@@ -16,13 +16,13 @@
 				<p class="mine-top-mes-p1">团队经理</p>
 				<p class="mine-top-mes-p2">中赢卓信财富投资管理(北京)有限公司{{item.department}}</p>
 			</div>
-			
+
 		</div>
 		<!--礼物-->
 		<div class="mine-gift">
-			<p class="mine-title f36 color_font-36" @click="$go('/mine/gift')">我的礼物<i>待领取(<em>{{giftList.unreceivedCount}}</em>)</i> <span v-show="giftList.couponList!=''" class="f28 color_font-99">更多</span></p>
+			<p class="mine-title f36 color_font-36" @click="$go('/mine/gift',{rollType:1})">我的礼物<i>待领取(<em>{{giftList.unreceivedCount}}</em>)</i> <span v-show="giftList.couponList!=''" class="f28 color_font-99">更多</span></p>
 			<div class="mine-gift-list" v-if="giftList.couponList!=''">
-				<div v-for="(i,index) in giftList.couponList"  class="mine-gift-list-card">
+				<div v-for="(i,index) in giftList.couponList" class="mine-gift-list-card">
 					<div>
 						<p class="f48">{{i.profitRate}}%</p>
 						<p class="f24">{{i.couponName}}</p>
@@ -32,21 +32,23 @@
 			</div>
 			<div class="mine-gift-none" v-else>
 				<img src="../../assets/main/mine/zw.png" />
-				<p class="f28">求礼物</p>
+				<p v-if="haveMangeBol" @click="$go('/mine/addUser',{backTitle:'添加理财师',isManage:0})" class="f28">求礼物</p>
+				<p v-else class="concatP f28">
+					<a  :href="`tel:${manageMes.mobile}`">求礼物</a>
+				</p>
 			</div>
 		</div>
 		<!--承诺-->
 		<div class="mine-gift">
-			<p class="mine-title f36 color_font-36" @click="$go('/mine/my_promise')">履约承诺<i>待履约(<em>{{promiseList.waitPromiseCount}}</em>)</i><span v-show="promiseList.waitPromiseCount" class="f28 color_font-99">更多</span></p>
+			<p class="mine-title f36 color_font-36" @click="$go('/mine/my_promise',{rollType:1})">履约承诺<i>待履约(<em>{{promiseList.waitPromiseCount}}</em>)</i><span v-show="promiseList.waitPromiseCount" class="f28 color_font-99">更多</span></p>
 
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
-					
-					
-					<div class="swiper-slide" style="background-color: #FFFFFF;"  v-for="(a,index)  in  promiseInviteList">
+
+					<div class="swiper-slide" style="background-color: #FFFFFF;" v-for="(a,index)  in  promiseInviteList">
 						<div class="mine-join">
 							<div class="mine-join-div" @click="$go('/prod/buyBid',{bidNo:a.bidNo,promiseInviteId:a.promiseInviteId,backTitle:'确认履约',inviteAmount:a.inviteAmount})">
-								<p class="f28">{{a.productName}}</p>
+								<p class="f28">{{a.bidName}}</p>
 								<p>{{a.annualizedRate}}<i>%</i></p>
 								<p class="f28">
 									<span class="mine-join-div-span1">履约金额(元)</span>
@@ -62,41 +64,30 @@
 								<span><a  :href="`tel:${a.mobile}`"></a> <img src="../../assets/main/mine/xdh.png"/>联系理财师 </span>
 							</p>
 						</div>
-
 					</div>
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
+
 				</div>
 				<div class="swiper-pagination gg" style="background-color: #FFFFFF;"></div>
 				<!--<div class="swiper-button-next"></div>
    	       			<div class="swiper-button-prev"></div>-->
 			</div>
-			
-			
+
 			<div class="mine-gift-none" v-show="!promiseInviteList.length">
 				<img src="../../assets/main/mine/zw.png" />
-				<p class="f28">联系理财师</p>
+				<p  v-if="haveMangeBol" @click="$go('/mine/addUser',{backTitle:'添加理财师',isManage:0})" class="f28">联系理财师</p>
+				<p v-else class="concatP f28">
+					<a  :href="`tel:${manageMes.mobile}`" >联系理财师</a>
+				</p>
 			</div>
 		</div>
 
 		<div class="mine-list">
-			
-			<p v-for="(i,index) in menu" :class="index<menu.length-1?'borderB':''"  @click="$go(`${i.url}`)">
-				<span class="f28 color_font-36">{{i.name}}</span>
+
+			<p v-for="(j,index) in menu" :class="index<menu.length-1?'borderB':''"  @click="$go(j.icon==='join' ? (nextBol?j.url:'/reg_bank') : `/mine/${j.url}`)">
+				<span class="f28 color_font-36">{{j.name}}</span>
 				<img src="../../assets/common/arrow-right.png" />
 			</p>
-			
+
 		</div>
 
 		<!--<div class="head flex" @click="$go('/mine/qrcode')">
@@ -134,7 +125,9 @@
 		searchUserInfo,
 		searchUserCouponInfo,
 		searchCouponReceiveDetails,
-		getPromiseInviteList
+		getPromiseInviteList,
+		searchMyManagerUserInfo,
+		getUserStatus
 	} from '@/service'
 	export default {
 		name: 'mine',
@@ -142,57 +135,79 @@
 			return {
 				item: {},
 				menu: [],
-				isManage:true,//区别理财师，客户
-				giftList:[],//我的礼物
-				promiseItem:{
-					type:1,
-					pageIndex:1,
-				},//履约参数
-				promiseList:{},//履约数据
-				promiseInviteList:[],//履约列表
-				menu_normal: [
-					{
+				haveMangeBol:true,
+				manageMes:{},
+				nextBol:false,
+				isManage: false, //区别理财师，客户
+				giftList: [], //我的礼物
+				promiseItem: {
+					type: 1,
+					pageIndex: 1,
+				}, //履约参数
+				promiseList: {}, //履约数据
+				promiseInviteList: [], //履约列表
+				menu_normal: [{
 						icon: 'mine',
 						name: '我的理财师',
-						url: '/mine/master'
+						url: 'master'
 					}, {
 						icon: 'join',
 						name: '我要加盟的理财师',
 						url: '/home/joinFinlManager'
 					},
 					{
-						icon: 'join',
+						icon: 'invitation',
 						name: '邀请记录',
-						url: '/home/joinFinlManager'
+						url: 'invitation'
 					}
 				],
-				menu_manage: [
-					    {
-							icon: 'mine',
-							name: '我的理财师',
-							url: '/mine/master'
-						},
-						{
-							icon: 'have',
-							name: '我的客户',
-							url: '/mine/customer'
-						}, {
-							icon: 'customer',
-							name: '推广记录',
-							url: '/mine/customer_potential'
-						},
-						{
-							icon: 'customer',
-							name: '邀请好友',
-							url: '/mine/customer_potential'
-						}
-					],
+				menu_manage: [{
+						icon: 'mine',
+						name: '我的理财师',
+						url: 'master'
+					},
+					{
+						icon: 'have',
+						name: '我的客户',
+						url: 'customer?rollType=1'
+					}, {
+						icon: 'customer',
+						name: '推广记录',
+						url: 'extension'
+					},
+					{
+						icon: 'customer',
+						name: '邀请好友',
+						url: 'invitation'
+					}
+				],
 			}
 		},
 		created() {
 			this.init();
 			this.mgGift();
 			this.getPromiseInviteList();
+			searchMyManagerUserInfo().then(r => {
+	       	 	this.manageMes = r;
+	       	 	this.haveMangeBol=!this.haveMangeBol;
+	        });
+	        	getUserStatus().then(res => {
+	      		
+	      		if(res.code == "100"){
+	      				  const info = res.result;
+				          if(info.openAccountStatus=="3"){
+					         this.nextBol=true;
+					        }else{
+					          this.nextBol=false;
+					        }
+	      			
+	      		} else if (res.code == "1210" || res.code == "1000") {
+						this.$go('/login');
+					} else {
+						this.$toask(res.message);
+					}
+	        
+	      });
 		},
 		mounted() {
 
@@ -200,10 +215,10 @@
 			var swiper = new Swiper(".swiper-container", {
 				spaceBetween: 0,
 				centeredSlides: true,
-//				autoplay: {
-//					delay: 2000,
-//					disableOnInteraction: false
-//				},
+				//				autoplay: {
+				//					delay: 2000,
+				//					disableOnInteraction: false
+				//				},
 				pagination: {
 					el: ".swiper-pagination",
 					clickable: true
@@ -213,53 +228,52 @@
 					prevEl: ".swiper-button-prev"
 				}
 			});
-			
+
 		},
 		methods: {
 			...mapActions([
 				'set_user_info',
 			]),
 			//履约
-			getPromiseInviteList(){
+			getPromiseInviteList() {
 				getPromiseInviteList(this.promiseItem).then(res => {
 					this.promiseList = res;
-					this.promiseInviteList=res.promiseInviteList.slice(0,3);
-					console.log(this.promiseInviteList);
+					this.promiseInviteList = res.promiseInviteList.slice(0, 3);
 				});
 			},
 			init() {
 				searchUserInfo().then(r => {
 					this.item = r;
 					this.menu = r.flag === 1 ? this.menu_manage : this.menu_normal;
-					this.isManage=  r.flag === 1 ? true : false;
+					this.isManage = r.flag === 1 ? true : false;
 					this.set_user_info(r);
 				})
 			},
 			//我的礼物
-			mgGift(){
+			mgGift() {
 				searchUserCouponInfo({
-					type:2,
-					status:2,
-					pageIndex:1,
+					type: 2,
+					status: 2,
+					pageIndex: 1,
 				}).then(res => {
-					this.giftList=res;
+					this.giftList = res;
 				})
 			},
 			//领取礼物
-			getGift(index,couponNo,receiveNo){
-				
+			getGift(index, couponNo, receiveNo) {
+
 				searchCouponReceiveDetails({
 					receiveNo,
 					couponNo
 				}).then(res => {
-					this.giftList.unreceivedCount-=1;
-				    this.giftList.couponList.splice(index, 1);
+					this.giftList.unreceivedCount -= 1;
+					this.giftList.couponList.splice(index, 1);
 				});
 			},
-//			deleat(i){
-//				 
-//			}
-			
+			//			deleat(i){
+			//				 
+			//			}
+
 		},
 		watch: {}
 	}
@@ -269,6 +283,7 @@
 	.gg {
 		bottom: 0;
 	}
+	
 	.swiper-container {
 		width: 7.5rem;
 		overflow: hidden;
@@ -308,21 +323,21 @@
 			/*height: 1.56rem;*/
 			background-color: #fff;
 			overflow: hidden;
-			&-mes{
+			&-mes {
 				float: left;
 				margin: 0 .3rem;
 				width: 6.9rem;
 				background-color: #fff;
-				&-p1{
+				&-p1 {
 					margin: 0 0 .3rem 1.2rem;
 					text-align: left;
 				}
-				&-p2{
-					margin: 0  0 .3rem 1.2rem;
+				&-p2 {
+					margin: 0 0 .3rem 1.2rem;
 					text-align: left;
 					width: 4.96rem;
 					overflow: hidden;
-					text-overflow:ellipsis;
+					text-overflow: ellipsis;
 					white-space: nowrap;
 				}
 			}
@@ -347,7 +362,7 @@
 					/*margin: .14rem 0 .18rem;*/
 					text-align: left;
 					line-height: 1.0rem;
-					span{
+					span {
 						margin-left: .2rem;
 					}
 				}
@@ -357,10 +372,9 @@
 					text-align: left;
 					line-height: .28rem;
 					overflow: hidden;
-					text-overflow:ellipsis;
+					text-overflow: ellipsis;
 					white-space: nowrap;
 				}
-				
 			}
 			&-ewm {
 				float: right;
@@ -378,7 +392,6 @@
 					background-size: 100% 100%;
 				}
 			}
-			
 		}
 		&-gift {
 			width: 7.5rem;
@@ -446,6 +459,22 @@
 					color: #208AFF;
 					box-sizing: border-box;
 					border-radius: .56rem;
+				}
+				.concatP{
+					float: right;
+					margin: .48rem 0;
+					width: 1.88rem;
+					height: .56rem;
+					line-height: .56rem;
+					text-align: center;
+					border: 1px solid #208AFF;
+					color: #208AFF;
+					box-sizing: border-box;
+					border-radius: .56rem;
+					a{
+						text-decoration: none;
+						color: #208AFF;
+					}
 				}
 			}
 		}
@@ -531,7 +560,7 @@
 					align-items: center;
 					justify-content: center;
 					position: relative;
-					a{
+					a {
 						position: absolute;
 						z-index: 2;
 						width: 100%;

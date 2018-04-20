@@ -1,6 +1,6 @@
 <template>
-  <div class="wealth">
-    <div class="wealthTop">
+  <div class="wealth pageCenter">
+    <!--<div class="wealthTop">
       <p>财富</p>
       <div class="wealthA">
         <span>总金额(元)</span>
@@ -13,10 +13,6 @@
           <div>累计收益(元)</div>
           <div class="wealthEarnData">{{home.sumAmount|formatNum}}</div>
         </div>
-        <!--<div class="yesterE">
-            <div>昨日收益(元)</div>
-            <div class="wealthEarnData">{{home.yesterdayAmount}}</div>
-          </div>-->
   
         <div class="avalibleE">
           <div>可用余额(元)</div>
@@ -33,95 +29,72 @@
         <img :src="require(`@/assets/wealth/wealth/${i.icon}.png`)" alt="" class="icon">
         <div class="wealthCName" >{{i.name}}</div>
       </li>
-    </ul>
-    <!-- 我的资产 -->
-    <div class="wealthMyAssert" v-show="invesProperty.res.length">
-      <div class="wealthMATop">
-        <div class="wealthMATopT">{{totalAmount | formatNum}}元</div>
-        <div class="wealthMATopB">
-          <div class="wealthMATopBL">
-            我的资产
-          </div>
-          <div class="wealthMATopBR" @click="$go('/wealth/assertList')">
-            更多 <img src="../../assets/common/arrow-right.png" alt="">
-          </div>
-        </div>
-        <ul class="wealthMyObject">
-          <li v-for="(i,index) in invesProperty.res" v-if="index<2">
-            <div class="wealthMyObjectT">
-              <div class="wealthMyObjectTT">{{i.borrowName}} </div>
-              <div class="wealthMyObjectTC">{{i.cashStatus=='4'?'已到期':'持有中'}}</div>
-              <div class="wealthMyObjectTB" @click="$go('/wealth/productDetail',{bidNo:i.borrowNo,backTitle:'资产详情',cashNo:i.cashNo,bidType:i.borrowType})">查看</div>
-            </div>
-            <div class="wealthMyObjectC">
-              <div class="wealthMyObjectCL">
-                <span>持有金额</span>
-                <em class="bigAmount">{{i.initCashAmount | formatNum
-                    }}</em>
-              </div>
-              <!--<div class="wealthMyObjectCR">
-                  <span>昨日收益</span>
-                  <em>+{{i.yesterdayAmount | formatNum
-                    }}</em>
-                </div>-->
-            </div>
-            <div class="wealthMyObjectB">
-              <div class="wealthMyObjectBL">
-                <span>到期天数</span>
-                <i>{{i.interestEndDate}}天</i>
-              </div>
-              <div class="wealthMyObjectBR">
-                <span>持有收益</span>
-                <em>+{{i.holdAmount | formatNum
-                    }}</em>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <!-- 为您推荐 -->
-    <div class="recommend hide">
-      <p class="recommendTip">最新热标</p>
-      <p class="recommendTitle">为您推荐 <span>更多 <img src="../../assets/main/home/nextIcon.png"/></span></p>
-      <!--周周赢  -->
-      <div class="recommendDiv recommendDiv1">
-        <img src="../../assets/main/home/bkImg.png" />
-        <p class="recommendDivTitle f48">周周赢</p>
-        <p class="recommendDivRate f100">10%</p>
-        <p class="recommendDivWord">历史年化收益率</p>
-        <div class="recommendDivBleft">
-          <p>1000元起投</p>
-          <p>锁定28天</p>
-        </div>
-        <div class="recommendDivButton">投资</div>
-      </div>
-      <!-- 月月赢 -->
-      <div class="recommendDiv recommendDiv2">
-        <img src="../../assets/main/home/bkImg.png" />
-        <p class="recommendDivTitle">周周赢</p>
-        <p class="recommendDivRate">10%</p>
-        <p class="recommendDivWord">历史年化收益率</p>
-        <div class="recommendDivBleft">
-          <p>1000元起投</p>
-          <p>锁定28天</p>
-        </div>
-        <div class="recommendDivButton">投资</div>
-      </div>
-      <!-- 赢计划 -->
-      <div class="recommendDiv recommendDiv3">
-        <img src="../../assets/main/home/bkImg.png" />
-        <p class="recommendDivTitle">周周赢</p>
-        <p class="recommendDivRate">10%</p>
-        <p class="recommendDivWord">历史年化收益率</p>
-        <div class="recommendDivBleft">
-          <p>1000元起投</p>
-          <p>锁定28天</p>
-        </div>
-        <div class="recommendDivButton">投资</div>
-      </div>
-    </div>
+    </ul>-->
   
+  	<div class="wealth-top sonDiv f28">
+  		<img src="../../assets/main/mine/lcs.png"/>
+  		<span>赵毅明  185****6666</span>
+  	</div>
+  	<div class="wealth-center sonDiv">
+  		<p class="zzc"><span class="f24 color_font-99">总资产(元)</span> <img src="../../assets/wealth/openEye.png"/></p>
+  		<p class="total color_font-36 f56">{{home.totalAmount|formatNum}}</p>
+  		<div class="wealth-center-div borderB">
+  			<p class="p1">
+  				<span class="f24 span1 color_font-99">累计收益(元) <img src="../../assets/common/arrow-right.png"/></span>
+  				<span class="f40 span2">{{home.sumAmount|formatNum}}</span>
+  			</p>
+  			<p class="p2">
+  				<span class="f24 span1 color_font-99">昨日收益(元) <img src="../../assets/common/arrow-right.png"/></span>
+  				<span class="f40 span2">{{home.yesterdayAmount|formatNum}}</span>
+  			</p>
+  		</div>
+  		
+  		<div class="wealth-center-next f32">
+  			<p class="f28 color_font-99">可用余额(元)</p>
+  			<p class="f28">{{home.availableAmount|formatNum}}</p>
+  			<p @click="gowithdraw()">提现</p>
+  			<p @click="goRecharge()">充值</p>
+  		</div>
+  	</div>
+  	
+  	<div class="wealth-record f28 color_font-99">
+  		<p @click="$go('/wealth/assertList',{rollType:1})">
+  			<img src="../../assets/wealth/wdtz.png"/>
+  			<span>我的投资</span>
+  		</p>
+  		<p @click="$go('/wealth/continueInvest',{rollType:1})">
+  			<img src="../../assets/wealth/wdxt.png"/>
+  			<span>我的续投</span>
+  		</p>
+  		<p @click="$go('/wealth/tradeRecord',{rollType:1})">
+  			<img src="../../assets/wealth/jyjl.png"/>
+  			<span>交易记录</span>
+  		</p>
+  	</div>
+  	
+  
+  	<div class="wealth-list f30 color_font-36 sonDiv">
+  		<p class="borderB " @click="$go('/coupon/main',{rollType:1})"> 
+  			<img class="img1" src="../../assets/wealth/icon-coupon.png"/>
+  			<span>优惠券</span>
+  			<img class="img2" src="../../assets/common/arrow-right.png"/>
+  		</p>
+  		<p class="borderB ">
+  			<img class="img1" src="../../assets/wealth/icon-bank.png"/>
+  			<span>银行卡</span>
+  			<img  class="img2" src="../../assets/common/arrow-right.png"/>
+  		</p>
+  		<p>
+  			<img class="img1" src="../../assets/wealth/icon-risk.png"/>
+  			<span>风险评估</span>
+  			<img  class="img2" src="../../assets/common/arrow-right.png"/>
+  		</p>
+  	</div>
+  	
+  	<div class="wealth-tips sonDiv f26">
+  		开通自动授权投标功能，才能进行投资<span>立即开通</span> <img src="../../assets/wealth/icon-close.png"/>
+  	</div>
+  	
   </div>
 </template>
 
@@ -316,340 +289,195 @@
 	watch: {}
 }</script>
 
-<style lang="stylus" scoped>
-  i,em{font-style: normal;}
-  .hide{
-    display: none;
-  }
-  //背景函数
-  bg(n)
-    background  url("../../assets/wealth/wealth/"+n) no-repeat
-    background-size 100% 100%
-  //圆角兼容
-  border-radius(n)
-    border-radius n
-
-  .wealthTop
-    width 100%
-    height 5.02rem
-    bg "blueBG.png"
-    p
-      text-align center
-      font-size 0.36rem
-      color #FFFFFF
-      padding-top 1.08rem
-    .wealthA
-      color #ffffff
-      font-size 0.28rem
-      text-align center
-      margin-top 0.52rem
-      position relative
-      img
-        width 0.32rem
-        height 0.32rem
-        position absolute
-        left 58%
-        top -0.24rem
-      .status
-        font-size:0.24rem;
-        line-height:0.5rem;
-        width 1.8rem
-        height 0.5rem
-        bg "openCG.png"
-        position absolute
-        right 0
-        top -0.1rem
-      .amount
-        font-size 0.76rem
-        line-height 0.86rem
-        margin-top 0.06rem
-
-  .wealthEarn
-    width 100%
-    display flex
-    font-size 0.24rem
-    color #ffffff
-    margin-top 0.64rem
-    >div
-      flex 1
-      text-align center
-      line-height 0.3rem
-      .wealthEarnData
-        font-size 0.28rem
-        line-height 0.4rem
-  .RWWrap
-    font-size 0.36rem
-    color #3299D1
-    display flex
-    justify-content space-between
-    padding 0.4rem 0.58rem
-    >div
-      width:2.6rem;
-      height:0.96rem;
-      background:rgba(255,255,255,1);
-      border-radius: 0.2rem ;
-      text-align center
-      line-height 0.96rem
-      img
-        vertical-align middle
-        width 0.59rem
-        height 0.36rem
-        margin -0.05rem 0.18rem 0 0
-
-  .wealthContent
-    height:6rem;
-    background:rgba(255,255,255,1);
-    border-radius: 0.2rem;
-    margin:0 0.2rem;
-    color #121212
-    font-size 0.32rem
-    flex-wrap wrap
-    display flex
-    .hideDiv
-      opacity: 0
-      pointer-events: none
-    li
-      flex 33.3%
-      text-align center
-      img
-        margin 0.56rem 0 0.16rem 0
-        width 0.56rem
-        height 0.56rem
-  .wealthMyAssert
-    overflow hidden
-    padding 0 0.4rem
-    margin 1rem 0.2rem 0
-    /*height:8.42rem;*/
-    background:rgba(255,255,255,1);
-    box-shadow: 0px 5px 12px 0px rgba(219,219,219,0.5), 5px 0px 4px 0px rgba(219,219,219,0.5)
-    border-radius: 0.2rem;
-    .wealthMATopT
-      font-size 0.28rem
-      color #8D8D94
-      margin 0.52rem 0 0.14rem 0
-    .wealthMATopB
-      display flex
-      color #121212
-      font-size 0.52rem
-      div
-        flex 1
-        justify-content space-between
-      .wealthMATopBR
-        text-align right
-        color #399DD3
-        font-size 0.32rem
-        line-height 0.52rem
-        img
-          vertical-align middle
-          margin-top -0.05rem
-          width 0.2rem
-          height 0.36rem
-
-  .wealthMyObject
-    li
-      border-bottom 1px solid #CDCED3
-      padding 0 0 0.34rem 0
-    .wealthMyObjectT
-      display: flex
-      justify-content space-between
-      padding 0.62rem 0 0.58rem 0
-      .wealthMyObjectTT
-        font-size 0.4rem
-        color #181818
-        line-height 0.56rem
-        span
-          font-size 0.28rem
-      .wealthMyObjectTC
-        width:0.8rem;
-        height:0.28rem;
-        border-radius: 4px ;
-        font-size:0.2rem;
-        color:rgba(244,31,31,1);
-        line-height:0.28rem;
-        border 1px solid #F41F1F
-        text-align center
-        margin 0.14rem 0
-      .wealthMyObjectTB
-        width:1.32rem;
-        height:0.52rem;
-        background:rgba(240,240,248,1);
-        border-radius: 0.32rem;
-        color #3299D1
-        font-size 0.28rem
-        text-align center
-        line-height 0.52rem
-
-    .wealthMyObjectC,.wealthMyObjectB
-      display flex
-      justify-content space-between
-      color #3F4040
-      font-size 0.2rem
-      div
-        flex 1
-        padding 0 0 0.22rem 0
-        span
-          color #121212
-        i
-          font-size 0.24rem
-          color #121212
-        .bigAmount
-          color #121212
-          font-size 0.36rem
-        &:nth-child(2)
-          text-align right
-          em
-            font-size 0.28rem
-            color #F41F1F
-
-  /* 为您推荐 */
-
-  .recommend {
-    margin: 0 auto;
-    padding: 0;
-    text-align: center;
-    width: 7.1rem;
-    height: 15.42rem;
-    background-color: #fff;
-    border-radius: 0.2rem;
-    overflow: hidden;
-    margin-top: 1rem;
-  }
-
-  .recommendTip {
-    margin: 0.66rem 0 0.04rem 0.4rem;
-    width: 6.7rem;
-    height: 0.4rem;
-    font-size: 0.28rem;
-    text-align: left;
-    line-height: 0.4rem;
-    color: #8d8d94;
-  }
-
-  .recommendTitle {
-    margin: 0 0.4rem 0 0.36rem;
-    width: 6.34rem;
-    height: 0.6rem;
-    line-height: 0.6rem;
-    text-align: left;
-    color: #181818;
-    font-size: 0.48rem;
-    overflow: hidden;
-  }
-
-  .recommendTitle>span {
-    float: right;
-    font-size: 0.28rem;
-    color: #3299d1;
-    overflow: hidden;
-  }
-
-  .recommendTitle span>img {
-    float: right;
-    margin: 0.12rem;
-    width: 0.2rem;
-    height: 0.36rem;
-  }
-
-  .recommendDiv {
-    margin: 0.6rem 0.4rem 0;
-    width: 6.3rem;
-    height: 3.52rem;
-    overflow: hidden;
-    color: #ffffff;
-  }
-
-  .recommendDiv1 {
-    background: url("../../assets/main/home/yellowBg.png");
-    width: 6.3rem;
-    height: 3.52rem;
-    background-size: 100% 100%;
-  }
-
-  .recommendDiv2 {
-    background: url("../../assets/main/home/redBg.png");
-    width: 6.3rem;
-    height: 3.52rem;
-    background-size: 100% 100%;
-  }
-
-  .recommendDiv3 {
-    background: url("../../assets/main/home/blueBg.png");
-    width: 6.3rem;
-    height: 3.52rem;
-    background-size: 100% 100%;
-  }
-
-  .recommendDiv>img {
-    float: right;
-    width: 1.02rem;
-    height: 1.02rem;
-    background-size: 100%;
-  }
-
-  .recommendDivTitle {
-    float: left;
-    margin: 0.20rem 0 0 0.42rem;
-    height: 0.66rem;
-    line-height: 0.66rem;
-    font-size: 0.48rem;
-    width: 2.0rem;
-    text-align: left;
-  }
-
-  .recommendDivRate {
-    float: left;
-    margin-top: 0.12rem;
-    width: 6.3rem;
-    height: 1.0rem;
-    line-height: 1.0rem;
-    font-size: 1.0rem;
-    text-align: center;
-  }
-
-  .recommendDivWord {
-    float: left;
-    width: 6.3rem;
-    margin-top: 0.04rem;
-    height: 0.24em;
-    line-height: 0.24rem;
-    font-size: 0.24rem;
-    text-align: center;
-  }
-
-  .recommendDivBleft {
-    margin: 0.26rem 0 0 0.42rem;
-    float: left;
-    height: 0.8rem;
-    width: 3.5rem;
-    text-align: left;
-  }
-
-  .recommendDivBleft>p:nth-child(1) {
-    height: 0.4rem;
-    line-height: 0.4rem;
-    font-size: 0.28rem;
-  }
-
-  .recommendDivBleft>p:nth-child(2) {
-    margin-top: 0.05rem;
-    height: 0.34rem;
-    line-height: 0.34rem;
-    font-size: 0.24rem;
-  }
-
-  .recommendDivButton {
-    margin: 0.4rem 0.42rem 0 0;
-    float: right;
-    width: 1.32rem;
-    height: 0.52rem;
-    line-height: 0.52rem;
-    text-align: center;
-    font-size: 0.28rem;
-    color: #3299D1;
-    background-color: #F0F0F8;
-    border-radius: 0.28rem;
-  }
-
+<style lang="scss" scoped>
+	.wealth{
+		padding-bottom: 1.0rem;
+		&-top{
+			float: left;
+			color: #FFF;
+			margin: 0;
+			padding: .44rem .3rem .48rem;
+			height: 1.0rem;
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			background:#0C80FE;
+			img{
+				width: 1.0rem;
+				height: 1.0rem;
+				background-size: 100% 100%;
+				margin-right: .22rem;
+			}
+		}
+		&-center{
+			float: left;
+			background-color: #FFFFFF;
+			.zzc{
+				margin-top: .34rem;
+				height: .48rem;
+				display: flex;
+				justify-content: flex-start;
+				align-items: center;
+				img{
+					width: .48rem;
+					height: .48rem;
+					background-size: 100% 100%;
+					margin-left: .34rem;
+				}
+			}
+			.total{
+				margin: .08rem 0 .5rem;
+				font-style: .56rem;
+				line-height: .56rem;
+			}
+			&-div{
+				display: flex;
+				justify-content: flex-start;
+				.p1{
+					width: 3.64rem;
+				}
+				.p2{
+					width: 3.26rem;
+				}
+				
+				.span1{
+					margin: 0 0 .16rem 0;
+					width: 100%;
+					height: .24rem;
+					display: flex;
+					justify-content: flex-start;
+					align-items: center;
+					img{
+						width: .14rem;
+						height: .24rem;
+						background-size: 100% 100%;
+						margin-left: .3rem;
+					}
+					
+				}
+				.span2{
+					margin: 0 0 .46rem 0;
+					width: 100%;
+					height: .40rem;
+					display: flex;
+					justify-content: flex-start;
+					align-items: center;
+					color: #FF5513;
+				}
+			}
+			&-next{
+				margin: .44rem 0 .46rem;
+				height: .32rem;
+				height: .32rem;
+				overflow: hidden;
+				text-align: left;
+				p:nth-child(1){
+					float: left;
+					width: 1.92rem;
+				}
+				p:nth-child(2){
+					float: left;
+					width: 3.04rem;
+					color: #666666;
+				}
+				p:nth-child(3){
+					width: .96rem;
+					float: left;
+					text-align: left;
+					border-right:1px solid  #E5E5E5;
+					color: #0C80FE ;
+				}
+				p:nth-child(4){
+					float: left;
+					width: .96rem;
+					text-align: right;
+					color: #0C80FE ;
+				}
+			}
+		}
+		
+		
+		
+		
+		&-record{
+			float: left;
+			margin: .16rem 0;
+			padding: 0 .7rem;
+			width: 6.1rem;
+			background-color: #FFFFFF;
+			display: flex;
+			justify-content: space-between;
+			p{
+				width: 1.12rem;
+				text-align: center;
+				img{
+					width: .56rem;
+					height: .56rem;
+					background-size: 100% 100%;
+					margin: .3rem .28rem .1rem;
+				}
+				span{
+					margin: 0 0 .32rem;
+					display: block;
+					line-height: .28rem;
+				}
+			}
+		}
+		&-list{
+			background: #FFFFFF;
+			overflow: hidden;
+			p{ 
+				float: left;
+				padding:.26rem 0;
+				height: .48rem;
+				line-height: .48rem;
+				width: 6.9rem;
+				overflow: hidden;
+				.img1{
+					float: left;
+					width: .48rem;
+					height: .48rem;
+					background-size: 100% 100%;
+					margin-right: .32rem;
+				}
+				.img2{
+					float: right;
+					width: .14rem;
+					height: .24rem;
+					background-size: 100% 100%;
+				}
+				
+			}
+			
+		}
+		&-tips{
+			position: fixed;
+			left: 0;
+			right: 0;
+			bottom: 1.0rem;
+			height: .8rem;
+			background: #FFF6E0;
+			color: #FF9616 ;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			span{
+				width: 1.4rem;
+				height: .48rem;
+				line-height: .48rem;
+				text-align: center;
+				background: #FF9000 ;
+				color: #FFFFFF;
+				border-radius: .48rem;
+			}
+			img{
+				width: .4rem;
+				height: .4rem;
+				background-size: 100%;
+			}
+		}
+		
+	}
 
 
 </style>

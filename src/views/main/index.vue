@@ -38,18 +38,25 @@
           title: '产品',
           name: 'main-product'
         }, {
-          url: 'wealth',
-          title: '财富',
-          name: 'main-wealth'
-        }, {
-          url: 'found',
-          title: '发现',
-          name: 'main-found'
-        }, {
           url: 'mine',
-          title: '我的',
+          title: '人脉',
           name: 'main-mine'
-        }]
+        }, {
+          url: 'wealth',
+          title: '我的',
+          name: 'main-wealth'
+        }
+//      {
+//        url: 'found',
+//        title: '发现',
+//        name: 'main-found'
+//      }, {
+//        url: 'mine',
+//        title: '我的',
+//        name: 'main-mine'
+//      }
+        
+        ]
       }
     },
     computed: {

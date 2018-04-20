@@ -6,8 +6,8 @@
 		</div>
 		<div class="promise-list" v-show="promiseInviteList!=''">
 			<div class="promise-div" v-for="(i,index) in promiseInviteList">
-				<div class="promise-div-join" @click="$go('/prod/buyBid',{bidNo:i.bidNo,promiseInviteId:i.promiseInviteId,backTitle:'确认履约',inviteAmount:i.inviteAmount})" :class="checkBol?((i.isSoldOut && i.isNotFunds)?'':'opacity') : 'unClick'">
-					<p class="f28">{{i.bidName}}</p>
+				<div class="promise-div-join">
+					<p class="f28">{{i.productName}}</p>
 					<p>{{i.annualizedRate}}<i>%</i></p>
 					<p class="f28">
 						<span class="promise-div-join-span1">履约金额(元)</span>
@@ -30,8 +30,7 @@
 			</div>
 
 		</div>
-
-		<div class="promise-none" v-show="promiseInviteList==''">
+		<div class="promise-none" v-show="!promiseInviteList==''">
 			<img src="../../assets/main/mine/zwjl.png" />
 			<p class="f28">暂无履约记录</p>
 		</div>
@@ -96,14 +95,14 @@
 			getPromiseInviteList() {
 				getPromiseInviteList(this.promiseItem).then(res => {
 					this.promiseList = res;
-					this.promiseInviteList =this.promiseInviteList.concat(res.promiseInviteList);
+					this.promiseInviteList = res.promiseInviteList;
 					if(this.checkBol) {
 						this.total = Math.ceil(res.waitPromiseCount / 10);
 //						console.log(res.waitPromiseCount);
 					} else {
 						this.total = Math.ceil(res.alreadyPromiseCount / 10);
 					}
-
+					
 				});
 			}
 		},
@@ -118,6 +117,7 @@
 		width: 7.5rem;
 		padding-bottom: 1.5rem;
 		&-none {
+			/*display: none;*/
 			img {
 				margin: 4.02rem 3.04rem .6rem;
 				width: 1.42rem;

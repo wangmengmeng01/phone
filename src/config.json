@@ -1,469 +1,520 @@
 {
-  "version": "1.0",
-  "vconsole": false,
-  "state": {
-    "bindCard": {
-      "realName": "",
-      "cardNumber": "",
-      "orgSmsCode": "",
-      "orgSmsSeq": ""
-    },
-    "succ_page": {
-      "title": "",
-      "sub_title": "",
-      "btn_text": "",
-      "backurl": "",
-      "sub_btn_text": "",
-      "sub_backurl": ""
-    },
-    "token": "",
-    "coupon": {
-      "receiveNoList": [],
-      "data": [],
-      "backurl": "",
-      "params": {}
-    },
-    "user": {},
-    "user_info": {},
-    "client": "2"
-  },
-  "route": [{
-    "path": "/recharge",
-    "redirect": "/wealth/recharge"
-  }, {
-    "path": "/riskTest",
-    "redirect": "/wealth/riskTest"
-  }, {
-    "path": "login",
-    "title": "登录/注册",
-    "filter": true,
-    "back": {
-      "title": true
-    },
-    "foot": {
-      "type": "main",
-      "style": "padding-bottom: 1rem"
-    }
-  },
-   {
-    "path": "next",
-    "title": "登录",
-    "filter": true,
-    "back": {
-      "title": true
-    },
-    "foot": {
-      "type": "main",
-      "style": "padding-bottom: 1rem"
-    }
-  }, {
-    "path": "register",
-    "title": "注册",
-    "filter": true,
-    "foot": {
-      "type": "main",
-      "style": "padding-bottom: 1rem"
-    }
-  }, {
-    "path": "set_pwd",
-    "title": "注册",
-    "filter": true,
-    "foot": {
-      "type": "main",
-      "style": "padding-bottom: 1rem"
-    },
-    "back": {
-      "showTip": true,
-      "title": false
-    }
-  }, {
-    "path": "forget_pwd",
-    "title": "修改登录密码",
-    "filter": true,
-    "foot": false,
-    "back": {
-      "title": true
-    }
-  }, {
-    "path": "reg_bank",
-    "title": "开通银行存管账户",
-    "filter": true,
-    "foot": {
-      "type": "main",
-      "style": "padding-bottom: 1rem;"
-    }
-  }, {
-    "path": "changeBank2",
-    "title": "换绑卡",
-    "filter": true,
-    "foot": {
-      "type": "main",
-      "style": "padding-bottom: 1rem;"
-    }
-  }, {
-    "path": "/",
-    "component": "main",
-    "children": [{
-      "path": "",
-      "redirect": "home"
-    }, {
-      "path": "home",
-      "title": "首页",
-      "filter": true,
-      "back": false,
-      "foot": false
-    }, {
-      "path": "product",
-      "title": "产品",
-      "filter": true,
-      "back": {
-        "icon": false
-      },
-      "foot": {
-        "style": "padding-bottom: 1.5rem;background-color: #f6f5f5"
-      }
-    }, {
-      "path": "wealth",
-      "title": "财富",
-      "back": false,
-      "foot": {
-        "style": "padding-bottom: 1.5rem"
-      }
-    }, {
-      "path": "found",
-      "title": "发现",
-       "foot": {
-        "style": "padding-bottom: 1.5rem"
-      },
-      "back": {
-        "icon": false,
-        "background": "main"
-      }
-    }, {
-      "path": "mine",
-      "title": "人脉",
-       "foot": false,
-      "back": {
-        "icon": false
-      }
-    }]
-  }, {
-    "path": "mine",
-    "component": "mine",
-    "children": [{
-      "path": "",
-      "redirect": "index"
-    }, {
-      "path": "qrcode",
-      "title": "我的二维码",
-      "foot": false
-    },{
-      "path": "gift",
-      "title": "我的礼物",
-      "foot": false
-    },{
-      "path": "give_record",
-      "title": "赠送记录",
-      "foot": false
-    },{
-      "path": "my_promise",
-      "title": "履约承诺",
-      "foot": false
-    }, {
-      "path": "master",
-      "title": "我的理财师",
-      "foot": false
-    }, {
-      "path": "customer",
-      "title": "我的客户",
-      "foot": false
-    }, {
-      "path": "InfoRegister",
-      "title": "展业登记",
-      "foot": false
-    },{
-      "path": "InfoRegisterList",
-      "title": "展业记录",
-      "foot": false,
-      "bg":false
-    },{
-      "path": "customer_detail",
-      "title": "客户详情",
-      "foot": false
-    }, {
-      "path": "customer_potential",
-      "title": "潜在客户",
-      "foot": false
-    }, {
-      "path": "send_discount",
-      "title": "赠送优惠",
-      "foot": false
-    }, {
-      "path": "seting",
-      "title": "个人设置",
-      "foot": false
-    }]
-  }, {
-    "path": "coupon",
-    "component": "coupon",
-    "children": [{
-      "path": "",
-      "redirect": "main",
-      "foot": false
-    }, {
-      "path": "main",
-      "title": "我的优惠",
-      "foot": false
-    }, {
-      "path": "choose",
-      "title": "选择优惠",
-      "foot": false
-    }, {
-      "path": "choose_usable",
-      "title": "选择优惠",
-      "foot": false,
-      "bg":false
-    }]
-  }, {
-    "path": "found",
-    "component": "found",
-    "children": [{
-      "path": "",
-      "redirect": "index",
-      "foot": false
-    }, {
-      "path": "gift",
-      "title": "我收到的礼物",
-      "foot": false
-    }]
-  }, {
-    "path": "bank",
-    "component": "bank",
-    "children": [{
-      "path": "",
-      "redirect": "index"
-    }, {
-      "path": "choose",
-      "title": "选择开户银行",
-      "filter": true,
-      "foot": false
-    }]
-  }, {
-    "path": "home",
-    "component": "home",
-    "children": [{
-      "path": "",
-      "redirect": "index"
-    }, {
-      "path": "joinFinlManager",
-      "title": "我要加盟理财师",
-      "back": {
-        "background": "#fff"
-      },
-      "filter": false,
-      "foot": false
-    }, {
-      "path": "aboutUs",
-      "title": "",
-      "filter": true
-    }]
-  }, {
-    "path": "prod",
-    "component": "prod",
-    "children": [{
-      "path": "productList",
-      "title": "产品列表页",
-      "filter": true,
-       "foot": false
-    }, {
-      "path": "joinList",
-      "filter": true,
-       "foot": false,
-      "title": "加入记录"
-    },{
-      "path": "calculation",
-      "filter": false,
-       "foot": false,
-       "title": "收益计算器"
-    },{
-      "path": "productDetail",
-      "title": "产品详情",
-      "filter": true,
-      "foot": false
-    }, {
-      "path": "buyBid",
-      "title": "确认购买",
-      "foot": {
-        "style": "margin-bottom: 1.1rem"
-      }
-    }, {
-      "path": "buySucc",
-      "back": false,
-      "foot": {
-        "style": "background-color: #fff",
-        "type": "main"
-      }
-    }, {
-      "path": "higHqualityAssets",
-      "filter": true,
-      "title": "严选优质资产",
-      "foot":false
-    }, {
-      "path": "bankDepository",
-      "filter": true,
-      "title": "资金银行存管",
-      "foot":false
-    }, {
-      "path": "Honour",
-      "filter": true,
-      "title": "100%历史兑付",
-      "foot":false
-    }]
-  }, {
-    "path": "static",
-    "component": "static",
-    "children": [{
-      "path": "",
-      "redirect": "succ"
-    }, {
-      "path": "succ",
-      "title": "成功",
-      "filter": true,
-      "back": false,
-      "foot": {
-        "style": "background-color: #fff;margin-top: -3rem"
-      }
-    }, {
-      "path": "fail",
-      "title": "失败",
-      "filter": true,
-      "back": {
-        "title": false
-      },
-      "foot": {
-        "style": "background-color: #fff;margin-top: -3rem"
-      }
-    }, {
-      "path": "protocol",
-      "title": "协议",
-      "filter": true,
-      "back": false,
-      "foot": false
-    }]
-  }, {
-    "path": "forPhone",
-    "component": "forPhone",
-    "children": [{
-      "path": "",
-      "redirect": "downLoad"
-    }, {
-      "path": "downLoad",
-      "title": "APP下载页",
-      "filter": true,
-      "back": false,
-      "foot": false
-    }, {
-      "path": "productDetail",
-      "title": "产品详情",
-      "filter": true,
-      "back": {
-        "background": "main"
-      },
-      "foot": {
-        "style": "margin-bottom: 1.1rem"
-      }
-    }, {
-      "path": "buyBid",
-      "title": "确认购买",
-      "filter": true,
-      "back": {
-        "background": "main"
-      },
-      "foot": {
-        "style": "margin-bottom: 1.1rem"
-      }
-    }, {
-      "path": "bankDepository",
-      "filter": true,
-      "back": false,
-      "title": "资金银行存管"
-    }, {
-      "path": "Honour",
-      "filter": true,
-      "back": false,
-      "title": "100%历史兑付"
-    }]
-  }, {
-    "path": "wealth",
-    "component": "wealth",
-    "children": [{
-      "path": "",
-      "redirect": "index"
-    }, {
-      "path": "recharge",
-      "title": "充值",
-      "foot": {
-        "type": "main",
-        "style": "background:#f1f1f9"
-      }
-    }, {
-      "path": "withdraw",
-      "title": "提现",
-      "foot": {
-        "type": "main",
-        "style": "background:#f1f1f9"
-      }
-    }, {
-      "path": "autoInvest",
-      "title": "自动投标"
-    }, {
-      "path": "riskTest",
-      "title": "风险评测",
-      "filter": true,
-      "foot": false
-    }, {
-      "path": "productDetail",
-      "title": "产品详情",
-      "back": {
-        "background": "main"
-      },
-      "foot": {
-        "style": "margin-bottom: 1.1rem"
-      }
-    }, {
-      "path": "continueInvest",
-      "title": "我的续投",
-      "foot": false,
-      "back": {
-        "background": "main"
-      }
-    }, {
-      "path": "tradeRecord",
-      "title": "交易记录",
-      "foot": false
-    }, {
-      "path": "changeBank",
-      "title": "我的银行卡",
-      "foot": {
-        "type": "main",
-        "style": "background:#f1f1f9"
-      }
-    }, {
-      "path": "assertList",
-      "title": "我的资产",
-      "foot": false
-    }, {
-      "path": "tranderPassword",
-      "title": "修改交易密码说明",
-      "foot": false
-    }, {
-      "path": "claims",
-      "title": "现持债权",
-      "foot": false
-    }]
-  }, {
-    "path": "*",
-    "component": "notfound",
-    "title": "404"
-  }]
+	"version": "1.0",
+	"vconsole": false,
+	"state": {
+		"bindCard": {
+			"realName": "",
+			"cardNumber": "",
+			"orgSmsCode": "",
+			"orgSmsSeq": ""
+		},
+		"succ_page": {
+			"title": "",
+			"sub_title": "",
+			"btn_text": "",
+			"backurl": "",
+			"sub_btn_text": "",
+			"sub_backurl": ""
+		},
+		"token": "",
+		"coupon": {
+			"receiveNoList": [],
+			"data": [],
+			"backurl": "",
+			"params": {}
+		},
+		"user": {},
+		"user_info": {},
+		"client": "2"
+	},
+	"route": [
+		{
+			"path": "/recharge",
+			"redirect": "/wealth/recharge"
+		}, {
+			"path": "/riskTest",
+			"redirect": "/wealth/riskTest"
+		}, {
+			"path": "login",
+			"title": "登录/注册",
+			"filter": true,
+			"back": {
+				"title": true
+			},
+			"foot": {
+				"type": "main",
+				"style": "padding-bottom: 1rem"
+			}
+		}, {
+			"path": "next",
+			"title": "登录",
+			"filter": true,
+			"back": {
+				"title": true
+			},
+			"foot": {
+				"type": "main",
+				"style": "padding-bottom: 1rem"
+			}
+		}, {
+			"path": "register",
+			"title": "注册",
+			"filter": true,
+			"foot": {
+				"type": "main",
+				"style": "padding-bottom: 1rem"
+			}
+		}, {
+			"path": "set_pwd",
+			"title": "注册",
+			"filter": true,
+			"foot": {
+				"type": "main",
+				"style": "padding-bottom: 1rem"
+			},
+			"back": {
+				"showTip": true,
+				"title": false
+			}
+		}, {
+			"path": "forget_pwd",
+			"title": "修改登录密码",
+			"filter": true,
+			"foot": false,
+			"back": {
+				"title": true
+			}
+		}, {
+			"path": "reg_bank",
+			"title": "开通银行存管账户",
+			"filter": true,
+			"foot": {
+				"type": "main",
+				"style": "padding-bottom: 1rem;"
+			}
+		}, {
+			"path": "changeBank2",
+			"title": "换绑卡",
+			"filter": true,
+			"foot": {
+				"type": "main",
+				"style": "padding-bottom: 1rem;"
+			}
+		}, {
+			"path": "/",
+			"component": "main",
+			"children": [
+				{
+					"path": "",
+					"redirect": "home"
+				}, {
+					"path": "home",
+					"title": "首页",
+					"filter": true,
+					"back": false,
+					"foot": false
+				}, {
+					"path": "product",
+					"title": "产品",
+					"filter": true,
+					"back": {
+						"icon": false
+					},
+					"foot": {
+						"style": "padding-bottom: 1.5rem;background-color: #f6f5f5"
+					}
+				}, {
+					"path": "wealth",
+					"title": "我的",
+					"back": {
+						"icon": false,
+						"background": "main"
+					},
+					"foot": false,
+					"bg":false
+				}, {
+					"path": "found",
+					"title": "发现",
+					"foot": {
+						"style": "padding-bottom: 1.5rem"
+					},
+					"back": {
+						"icon": false,
+						"background": "main"
+					}
+				}, {
+					"path": "mine",
+					"title": "人脉",
+					"foot": false,
+					"back": {
+						"icon": false
+					}
+				}
+			]
+		}, {
+			"path": "mine",
+			"component": "mine",
+			"children": [
+				{
+					"path": "",
+					"redirect": "index"
+				}, {
+					"path": "qrcode",
+					"title": "我的二维码",
+					"foot": false
+				}, {
+					"path": "gift",
+					"title": "我的礼物",
+					"foot": false
+				}, {
+					"path": "give_record",
+					"title": "赠送记录",
+					"foot": false
+				}, {
+					"path": "my_promise",
+					"title": "履约承诺",
+					"foot": false
+				}, {
+					"path": "extension",
+					"title": "推广记录",
+					"foot": false
+				},{
+					"path": "addUser",
+					"title": "添加",
+					"foot": false
+				}, {
+					"path": "user_promise",
+					"title": "邀约记录",
+					"foot": false
+				}, {
+					"path": "invitation",
+					"title": "邀请好友",
+					"foot": false
+				}, {
+					"path": "master",
+					"title": "我的理财师",
+					"foot": false
+				}, {
+					"path": "customer",
+					"title": "我的客户",
+					"foot": false
+				}, {
+					"path": "InfoRegister",
+					"title": "展业登记",
+					"foot": false
+				}, {
+					"path": "InfoRegisterList",
+					"title": "展业记录",
+					"foot": false,
+					"bg": false
+				}, {
+					"path": "customer_detail",
+					"title": "客户详情",
+					"foot": false
+				}, {
+					"path": "customer_potential",
+					"title": "潜在客户",
+					"foot": false
+				}, {
+					"path": "send_discount",
+					"title": "赠送优惠",
+					"foot": false
+				}, {
+					"path": "seting",
+					"title": "个人设置",
+					"foot": false
+				}
+			]
+		}, {
+			"path": "coupon",
+			"component": "coupon",
+			"children": [
+				{
+					"path": "",
+					"redirect": "main",
+					"foot": false
+				}, {
+					"path": "main",
+					"title": "我的优惠",
+					"foot": false
+				}, {
+					"path": "choose",
+					"title": "选择优惠",
+					"foot": false
+				}, {
+					"path": "choose_usable",
+					"title": "选择优惠",
+					"foot": false,
+					"bg": false
+				}
+			]
+		}, {
+			"path": "found",
+			"component": "found",
+			"children": [
+				{
+					"path": "",
+					"redirect": "index",
+					"foot": false
+				}, {
+					"path": "gift",
+					"title": "我收到的礼物",
+					"foot": false
+				}
+			]
+		}, {
+			"path": "bank",
+			"component": "bank",
+			"children": [
+				{
+					"path": "",
+					"redirect": "index"
+				}, {
+					"path": "choose",
+					"title": "选择开户银行",
+					"filter": true,
+					"foot": false
+				}
+			]
+		}, {
+			"path": "home",
+			"component": "home",
+			"children": [
+				{
+					"path": "",
+					"redirect": "index"
+				}, {
+					"path": "joinFinlManager",
+					"title": "我要加盟理财师",
+					"back": {
+						"background": "#fff"
+					},
+					"filter": false,
+					"foot": false
+				}, {
+					"path": "aboutUs",
+					"title": "",
+					"filter": true
+				}
+			]
+		}, {
+			"path": "prod",
+			"component": "prod",
+			"children": [
+				{
+					"path": "productList",
+					"title": "产品列表页",
+					"filter": true,
+					"foot": false
+				}, {
+					"path": "joinList",
+					"filter": true,
+					"foot": false,
+					"title": "加入记录"
+				}, {
+					"path": "invite",
+					"filter": true,
+					"foot": false,
+					"title": "定向邀约"
+				}, {
+					"path": "selectUser",
+					"filter": true,
+					"foot": false,
+					"title": "选择客户"
+				}, {
+					"path": "calculation",
+					"filter": false,
+					"foot": false,
+					"title": "收益计算器"
+				}, {
+					"path": "productDetail",
+					"title": "产品详情",
+					"filter": true,
+					"foot": false
+				}, {
+					"path": "buyBid",
+					"title": "确认购买",
+					"foot": {
+						"style": "margin-bottom: 1.1rem"
+					}
+				}, {
+					"path": "buySucc",
+					"back": false,
+					"foot": {
+						"style": "background-color: #fff",
+						"type": "main"
+					}
+				}, {
+					"path": "higHqualityAssets",
+					"filter": true,
+					"title": "严选优质资产",
+					"foot": false
+				}, {
+					"path": "bankDepository",
+					"filter": true,
+					"title": "资金银行存管",
+					"foot": false
+				}, {
+					"path": "Honour",
+					"filter": true,
+					"title": "100%历史兑付",
+					"foot": false
+				}
+			]
+		}, {
+			"path": "static",
+			"component": "static",
+			"children": [
+				{
+					"path": "",
+					"redirect": "succ"
+				}, {
+					"path": "succ",
+					"title": "成功",
+					"filter": true,
+					"back": false,
+					"foot": {
+						"style": "background-color: #fff;margin-top: -3rem"
+					}
+				}, {
+					"path": "fail",
+					"title": "失败",
+					"filter": true,
+					"back": {
+						"title": false
+					},
+					"foot": {
+						"style": "background-color: #fff;margin-top: -3rem"
+					}
+				}, {
+					"path": "protocol",
+					"title": "协议",
+					"filter": true,
+					"back": false,
+					"foot": false
+				}
+			]
+		}, {
+			"path": "forPhone",
+			"component": "forPhone",
+			"children": [
+				{
+					"path": "",
+					"redirect": "downLoad"
+				}, {
+					"path": "downLoad",
+					"title": "APP下载页",
+					"filter": true,
+					"back": false,
+					"foot": false
+				}, {
+					"path": "productDetail",
+					"title": "产品详情",
+					"filter": true,
+					"back": {
+						"background": "main"
+					},
+					"foot": {
+						"style": "margin-bottom: 1.1rem"
+					}
+				}, {
+					"path": "buyBid",
+					"title": "确认购买",
+					"filter": true,
+					"back": {
+						"background": "main"
+					},
+					"foot": {
+						"style": "margin-bottom: 1.1rem"
+					}
+				}, {
+					"path": "bankDepository",
+					"filter": true,
+					"back": false,
+					"title": "资金银行存管"
+				}, {
+					"path": "Honour",
+					"filter": true,
+					"back": false,
+					"title": "100%历史兑付"
+				}
+			]
+		}, {
+			"path": "wealth",
+			"component": "wealth",
+			"children": [
+				{
+					"path": "",
+					"redirect": "index"
+				}, {
+					"path": "recharge",
+					"title": "充值",
+					"foot": {
+						"type": "main",
+						"style": "background:#f1f1f9"
+					}
+				}, {
+					"path": "withdraw",
+					"title": "提现",
+					"foot": {
+						"type": "main",
+						"style": {
+							"background":"#fff",
+							"padding":"0 0 1.4rem"
+						}
+					}
+				}, {
+					"path": "autoInvest",
+					"title": "自动投标"
+				}, {
+					"path": "riskTest",
+					"title": "风险评测",
+					"filter": true,
+					"foot": false
+				}, {
+					"path": "productDetail",
+					"title": "产品详情",
+					"back": {
+						"background": "main"
+					},
+					"foot": {
+						"style": "margin-bottom: 1.1rem"
+					}
+				}, {
+					"path": "continueInvest",
+					"title": "我的续投",
+					"foot": false
+				}, {
+					"path": "tradeRecord",
+					"title": "交易记录",
+					"foot": false,
+					"bg":false
+				}, {
+					"path": "changeBank",
+					"title": "我的银行卡",
+					"foot": {
+						"type": "main",
+						"style": "background:#f1f1f9"
+					}
+				}, {
+					"path": "assertList",
+					"title": "我的投资",
+					"foot": false
+				}, {
+					"path": "tranderPassword",
+					"title": "修改交易密码说明",
+					"foot": false
+				}, {
+					"path": "claims",
+					"title": "现持债权",
+					"foot": false,
+					"bg":false
+				}
+			]
+		}, {
+			"path": "*",
+			"component": "notfound",
+			"title": "404"
+		}
+	]
 }

@@ -3,91 +3,86 @@
 		<!--详情页-->
 		<!--详情头部-->
 		<div class="productDetailTop">
-			<p class="proBidMes">
-				<span>{{list.borrowName}}</span>
-				<span>{{list.status=='4'?'已到期':'持有中'}}</span>
-				<span>{{profitPlanArr[list.profitPlan>4?'5':list.profitPlan]}}</span>
-				<span></span>
-			</p>
-			<p class="pdtWord">资产金额(元)</p>
-			<p class="pdtRate"><i>{{list.initCashAmount}}</i>元</p>
+			<p class="pdtRate"><i>{{detail.annualizedRate|tofixed2}}</i>% <i style="font-size: 0.36rem;" v-show="detail.appendRate>0">+{{detail.appendRate|tofixed2}}%</i></p>
+			<p class="pdtWord">历史年化</p>
 			<div class="pdtMessage">
-				<p><span>历史年化率</span><span>{{list.annualizedRate}}</span></p>
-				<p><span>持有收益(元)</span><span>{{list.yesProfit|formatNum}}</span></p>
-				<p><span>剩余收益(元)</span><span>{{list.waitProfit|formatNum}}</span></p>
+				<p>{{detail.periodLength}}{{detail.periodUnit|Totime}}期限</p>
+				<p>{{detail.investMinAmount|formatNum}}元起投</p>
+				<p>不可转让</p>
 			</div>
 			<div class="pdtProgress">
+				<span class="pdtRate1">{{detail.amountScale}}%</span>
 				<p class="pdtGrayLine"></p>
-				<p class="pdtLine"></p>
+				<p class="pdtLine" :style="{width:detail.amountScale*6/100+'rem'}"></p>
+				<span class="pdtSpan" :style="{left:detail.amountScale*6/100+'rem'}"></span>
+				<!--<p class="pdtProgressMes">剩余可投<i>{{detail.amountWait| formatNum}}元</i></p>-->
 			</div>
-			<p class="pptime m1"><span>起息日</span><span>到期日</span></p>
-			<p class="pptime m2"><span>{{list.interestStartDate}}</span><span>{{list.interestEndDate}}</span></p>
-		</div>
-		<!--返佣规则-->
-		<div class="productDetailCenter">
-			<p class="pdcTitle">
-				<span>P2P信息穿透</span>
-				<span>查看详情 <img src="../../assets/common/arrow-right.png"/></span>
-			</p>
-			<div class="pdcIntroduce">
-				<p @click="$go('/wealth/claims',{cashNo:item.cashNo})">
-					<img class="pdcIntroduceImg1" src="../../assets/wealth/wealth/xczq.png" />
-					<span>现持债权</span>
-				</p>
-				<p @click="loanAgreement" style="margin-left: 2.6rem;">
-					<img class="pdcIntroduceImg2" src="../../assets/wealth/wealth/cjxy.png" />
-					<span>出借协议</span></p>
+			<div class="productDetailMes">
+			    <p>募集金额(元) {{detail.contractAmount| formatNum}}</p>
+				<p>剩余可投(元) {{detail.amountWait| formatNum}}</p>
 			</div>
 		</div>
-		<!--返佣规则-->
-		<div class="productDetailCenter">
+		<div class="productDetailCenter boderB productDetailTips">
+			<p><span>起息日期</span>{{detail.interestStartDate}}</p>
+			<p><span>到期日期</span>{{detail.interestEndDate}}</p>
+			<p><span>还款方式</span>一次性还款</p>
+			<p><span>可否转让</span>不可转让</p>
+		</div>	
 	
-			<p class="pdcTitle">
-				<span>产品亮点</span>
-				<span>查看详情 <img src="../../assets/common/arrow-right.png"/></span>
-			</p>
+		<!--返佣规则-->
+		<div class="productDetailCenter boderB">
 			<div class="pdcIntroduce">
 				<p @click="$go('/prod/bankDepository')">
-					<img class="pdcIntroduceImg1" src="../../assets/main/prod/Group47@2x.png" />
+					<img class="pdcIntroduceImg1" src="../../assets/main/prod/cg.png" />
 					<span>资金银行存管</span>
 				</p>
-				<p @click="$go('/prod/higHqualityAssets')">
-					<img class="pdcIntroduceImg1" src="../../assets/main/prod/Group46@2x.png" />
+				<p @click="$go('/prod/higHqualityAssets',{rollType:1})">
+					<img class="pdcIntroduceImg1" src="../../assets/main/prod/zc.png" />
 					<span>严选优质资产</span></p>
 				<p @click="$go('/prod/Honour')">
-					<img class="pdcIntroduceImg2" src="../../assets/main/prod/Group45@2x.png" />
+					<img class="pdcIntroduceImg2" src="../../assets/main/prod/df.png" />
 					<span>历史100%兑付</span></p>
 			</div>
 		</div>
-	
+		<div class="productDetailCenter">
+		<p class="productDetailCenterP boderB" @click="$go('/wealth/claims')">现持债权 <img src="../../assets/main/home/nextIcon.png"/></p>
+		<p class="productDetailCenterP boderB" @click="loanAgreement">出借协议<img src="../../assets/main/home/nextIcon.png"/></p>
+		<!--<p class="productDetailCenterP boderB">常见问题<img src="../../assets/main/home/nextIcon.png"/></p>-->
+		<p class="productDetailCenterP boderB" @click="riskTips">风险提示<img src="../../assets/main/home/nextIcon.png"/></p>
+		</div>
 	</div>
 </template>
 
 <script>
 	import loanAgreement from '@/components/loanAgreement'
+	import riskTips from '@/components/riskTips'
 	import {
-		investPropertyDetail
+		searchProductBidsDetail,
+		getUserStatus,
+		userActivate
 	} from '@/service'
+	 import axios from 'axios'
 	export default {
-		name: 'changeBank',
+		name: 'productDetail',
 		data() {
 			return {
 				item: {
-					cashNo: '',
-					bidNo: '',
-					bidType: '',
+					bidNo: this.$route.query.bidNo,
 				},
-				list: {},
+				itemStatus: {},
+				detail: {},
 				profitPlanArr: ['', '等额本息', '等额本金', '按期付息，到期还本', '一次性还款', '其他'],
+				statusBol:true,
 			}
 		},
 		created() {
-			this.item.cashNo = this.$route.query.cashNo;
-			this.item.bidNo = this.$route.query.bidNo;
-			this.item.bidType = this.$route.query.bidType;
-			investPropertyDetail(this.item).then(res => {
-				console.log(res);
-				this.list = res;
+			if(this.$route.query.status){
+				if(this.$route.query.status>4){
+					this.statusBol=false;
+				}
+			}
+			searchProductBidsDetail(this.item).then(res => {
+				this.detail = res;
 			});
 		},
 		methods: {
@@ -96,247 +91,255 @@
 					type: 'protocol',
 					content: loanAgreement
 				})
+			},
+			riskTips() {
+				this.$alert({
+					type: 'protocol',
+					content: riskTips
+				})
+			},
+			getStatus() {
+				getUserStatus(this.itemStatus).then(res => {
+					//@click=""
+					console.log(res);
+					const info = res.result;
+					if (res.code == "100") {
+	
+						if (info.openAccountStatus == "1") {
+							//未开户
+							this.$go('/reg_bank');
+						} else if (info.openAccountStatus == "4") {
+							//激活
+	
+							userActivate({
+								retUrl: location.origin + location.pathname
+							}).then(res => {
+								axios({
+									method: 'post',
+									url: location.origin + new URL(res.serviceUrl).pathname,
+									data: res.inMap,
+									transformRequest: [function(data) {
+										let ret = '';
+										for (let it in data) {
+											ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+										}
+										return ret.slice(0, ret.length - 1)
+									}],
+								}).then(r => {
+									if (r.status === 200) {
+										if (r.data) {
+											document.body.innerHTML = r.data;
+											setTimeout(() => {
+												document.form.submit()
+											}, 0)
+										}
+									}
+								})
+							})
+	
+						} else {
+							//电子签约
+							if (info.autoBuyBidGrantFlag == "1") {
+	
+								//复投
+								if (info.autoBuyBidFlag == "1") {
+	
+									//风险测评
+	
+									if (info.riskRatingFlag == "1") {
+										this.$go('/prod/buyBid', {
+											bidNo: this.$route.query.bidNo,
+											backTitle: '确认购买'
+										});
+									} else {
+										this.$go('/wealth/riskTest');
+									}
+	
+								} else {
+									this.$go('/wealth/autoInvest');
+								}
+	
+							} else {
+								this.$go('/wealth/autoInvest');
+							}
+	
+						}
+	
+					} else if (res.code == "1210" || res.code == "1000") {
+						this.$go('/login');
+					} else {
+						this.$toask(res.message);
+					}
+				})
+	
 			}
-		},
-		watch: {}
+		}
 	}
 </script>
 
-<style scoped>
-	.pptime {
-		float: left;
-		height: 0.34rem;
-		line-height: 0.34rem;
-		color: #FFFFFF;
-		font-size: 0.24rem;
-		overflow: hidden;
-	}
-	
-	.pptime>span:nth-child(1) {
-		width: 3.35rem;
-		height: 0.34rem;
-		float: left;
-		text-align: left;
-	}
-	
-	.pptime>span:nth-child(2) {
-		width: 3.35rem;
-		height: 0.34rem;
-		float: right;
-		text-align: right;
-	}
-	
-	.m1 {
-		margin: 0.18rem 0 0.08rem;
-	}
-	
-	.m2 {
-		margin-bottom: 0.68rem;
-	}
-	
+<style lang="scss"  scoped>
 	.productDetailTop {
 		margin: 0 auto;
 		padding: 0;
 		width: 6.7rem;
 		/*height: 3.0rem;*/
-		background-color: #3299D1;
+		background-color: #1E76FD;
 		padding: 0 0.4rem;
 		color: #FFFFFF;
 		overflow: hidden;
 	}
 	
-	.proBidMes {
-		width: 6.7rem;
-		height: 0.98rem;
-		background: rgba(237, 236, 242, 1);
-		border-radius: 8px;
-		overflow: hidden;
-	}
-	
-	.proBidMes>span:nth-child(1) {
-		margin: 0.12rem 0.2rem 0.02rem;
-		width: 2.95rem;
-		float: left;
-		font-size: 0.28rem;
-		color: #181818;
-		line-height: 0.4rem;
-		text-align: left;
-	}
-	
-	.proBidMes>span:nth-child(2) {
-		margin: 0.12rem 0.2rem 0.02rem;
-		width: 2.95rem;
-		float: right;
-		font-size: 0.28rem;
-		color: #181818;
-		line-height: 0.4rem;
-		text-align: right;
-	}
-	
-	.proBidMes>span:nth-child(3) {
-		margin: 0 0.2rem 0.16rem;
-		width: 2.95rem;
-		float: left;
-		font-size: 0.20rem;
-		color: #8D8D94;
-		line-height: 0.28rem;
-		text-align: left;
-	}
-	
-	.proBidMes>span:nth-child(4) {
-		margin: 0 0.2rem 0.16rem;
-		width: 2.95rem;
-		float: right;
-		font-size: 0.20rem;
-		color: #8D8D94;
-		line-height: 0.28rem;
-		text-align: right;
-	}
-	
 	.pdtWord {
 		float: left;
 		width: 6.7rem;
-		margin-top: 0.4rem;
+		margin-bottom: 0.6rem;
 		text-align: center;
-		height: 0.28rem;
-		line-height: 0.28rem;
-		font-size: 0.28rem;
+		height: 0.24rem;
+		line-height: 0.24rem;
+		font-size: 0.24rem;
 	}
 	
-	.pdtRate {
-		float: left;
-		width: 6.7rem;
-		margin: 0.08rem 0 0.44rem;
-		height: 0.76rem;
-		text-align: center;
-		font-size: 0.48rem;
-	}
-	
-	.pdtRate>i {
-		font-style: inherit;
-		font-size: 0.76rem;
-		line-height: 0.76rem;
-	}
 	
 	.pdtMessage {
 		float: left;
 		width: 6.7rem;
-		height: 0.8rem;
+		height: 0.32rem;
 		overflow: hidden;
+		margin-bottom:0.6rem;
+		font-size: 0.24rem;
+		line-height: .32rem;
 	}
 	
 	.pdtMessage>p:nth-child(1) {
 		float: left;
 		text-align: center;
-		width: 1.95rem;
-		height: 0.8rem;
+		width: 2.1rem;
+		height: 0.32rem;
 		overflow: hidden;
 	}
 	
 	.pdtMessage>p:nth-child(2) {
 		float: left;
 		text-align: center;
-		width: 2.8rem;
-		height: 0.8rem;
+		width: 2.5rem;
+		height: 0.32rem;
 		overflow: hidden;
+		border-left:1px solid #FFFFFF ;
+		border-right:1px solid #FFFFFF ;
+		box-sizing: border-box;
 	}
 	
 	.pdtMessage>p:nth-child(3) {
 		float: left;
 		text-align: center;
-		width: 1.95rem;
-		height: 0.8rem;
+		width: 2.1rem;
+		height: 0.32rem;
 		overflow: hidden;
 	}
 	
-	.pdtMessage span:nth-child(1) {
-		float: left;
-		width: 100%;
-		font-size: 0.24rem;
-		height: 0.34rem;
-		line-height: 0.34rem;
-		margin-bottom: 0.02rem;
-	}
-	
-	.pdtMessage span:nth-child(2) {
-		float: left;
-		width: 100%;
-		font-size: 0.32rem;
-		height: 0.44rem;
-		line-height: 0.44rem;
-	}
-	
+
 	.pdtProgress {
 		float: left;
-		margin-top: 0.34rem;
-		width: 6.7rem;
-		height: 0.56rem;
+		margin: 0 0.35rem;
+		width: 6.0rem;
+		height: 0.76rem;
 		position: relative;
 	}
 	
 	.pdtGrayLine {
 		position: absolute;
 		left: 0;
-		top: 0;
-		width: 6.7rem;
-		height: 0.56rem;
-		background: #F0EAF0;
-		border-radius: 0.08rem;
+		bottom: 0.24rem;
+		width: 6.0rem;
+		height: 2px;
+		background: #68A4FF;
 	}
 	
 	.pdtLine {
 		position: absolute;
-		left: 0;
-		top: 0;
 		z-index: 2;
-		width: 6.7rem;
-		height: 0.56rem;
-		background: linear-gradient(to right, #8E9EAB, rgba(142, 158, 181, 0.3));
-		border-radius: 0.08rem 0 0 0.08rem;
-	}
-	
-	.pdtProgressMes {
-		position: absolute;
 		left: 0;
+		bottom: 0.24rem;
+		width: 3.0rem;
+		height: 2px;
+		background: #FFFFFF ;
+	}
+	.pdtSpan{
+		position: absolute;
+		z-index: 3;
+		bottom: 0.21rem;
+		width: 3px;
+		height: 6px;
+		background: #FFFFFF;
+	}
+	.pdtRate1{
+		position: absolute;
+		z-index: 3;
 		top: 0;
-		z-index: 32;
+		right: 0;
+		color: #FFFFFF;
+		font-size: 0.24rem;
+	}
+	.pdtRate {
+		float: left;
 		width: 6.7rem;
-		height: 0.56rem;
-		line-height: 0.56rem;
-		font-size: 0.32rem;
-		/*margin-left: 0.76rem;*/
+		margin: 0.40rem 0 0 0.02rem;
+		height: 0.76rem;
 		text-align: center;
-		color: #181818;
+		font-size: 0.40rem;
 	}
 	
-	.pdtProgressMes>i {
+	.pdtRate>i {
 		font-style: inherit;
-		font-size: 0.36rem;
-		line-height: 0.56rem;
-		color: #F84740;
+		font-size: 0.76rem;
+		line-height: 0.76rem;
+		font-size: .72rem;
+		
 	}
+	.productDetailMes{
+	    margin: 0 0.35rem;
+	    width: 6.0rem;
+	    height: 0.24rem;
+	    font-size: .24rem;
+	    line-height: .24rem;
+	    color: #FFFFFF;
+	    overflow: hidden;
+	    margin-bottom: .4rem;
+	}
+	.productDetailMes p:nth-child(1){
+		float: left;
+		text-align: left;
+	}
+	.productDetailMes p:nth-child(2){
+		float: right;
+		text-align: right;
+	}
+	
 	
 	.pdtBugMes {
 		float: left;
-		margin: 0.18rem 0 0.58rem;
-		width: 6.7rem;
-		height: 0.34rem;
+		width: 7.5rem;
+		height: 0.9rem;
 		text-align: center;
+		overflow: hidden;
+		background-color: #EFF5FF;
 		overflow: hidden;
 	}
 	
 	.pdtBugMes>span {
 		float: left;
 		text-align: center;
-		line-height: 0.34rem;
-		font-size: 0.24rem;
+		height: .9rem;
+		line-height: 0.9rem;
+		font-size: 0.28rem;
+		color: #68A4FF;
 	}
 	
 	.pdtBugMesImg1 {
 		float: left;
-		margin: 0.01rem 0.16rem 0.01rem 2.4rem;
-		width: 0.3rem;
-		height: 0.32rem;
+		margin: 0.24rem 0.12rem 0.22rem 2.4rem;
+		width: 0.44rem;
+		height: 0.44rem;
 		background-size: 100% 100%;
 	}
 	
@@ -351,21 +354,13 @@
 	.productDetailCenter {
 		margin: 0 auto;
 		padding: 0;
-		width: 6.7rem;
+		width: 6.9rem;
 		background-color: #FFFFFF;
-		padding: 0 0.4rem;
-		margin-top: 0.4rem;
+		padding: 0 0.3rem;
 		color: #FFFFFF;
 		overflow: hidden;
 	}
 	
-	.pdcTitle {
-		float: left;
-		width: 6.7rem;
-		height: 0.44rem;
-		overflow: hidden;
-		margin-top: 0.6rem;
-	}
 	
 	.pdcTitle>span:nth-child(1) {
 		float: left;
@@ -375,171 +370,140 @@
 		color: #181818;
 	}
 	
-	.pdcTitle>span:nth-child(2) {
-		float: right;
-		font-size: 0.32rem;
-		line-height: 0.44rem;
-		text-align: right;
-		color: #8D8D94;
-		overflow: hidden;
-		display: none;
-	}
-	
-	.pdcTitle>span:nth-child(2) img {
-		float: right;
-		margin: 0.04rem 0 0.04rem 0.14rem;
-		width: 0.2rem;
-		height: 0.34rem;
-		background-size: 100% 100%;
-	}
-	
 	.pdcTime {
 		float: left;
-		margin-top: 0.64rem;
-		padding: 0 0.48rem;
-		width: 5.76rem;
-		height: 1.44rem;
+		width: 6.9rem;
+		height: 2.0rem;
 		overflow: hidden;
 	}
 	
 	.pdcTimeWord {
 		float: left;
-		width: 5.76rem;
-		height: 0.44rem;
-		font-size: 0.32rem;
+		margin: 0.5rem 0.08rem 0;
+		width: 6.74rem;
+		height: 0.28rem;
+		font-size: 0.24rem;
 		color: #181818;
-		line-height: 0.44rem;
+		line-height: 0.28rem;
 		overflow: hidden;
 	}
 	
 	.pdcTimeWord>span:nth-child(1) {
 		float: left;
-		text-align: left;
-		width: 1.82rem;
-		padding-left: 0.1rem;
+		text-align: center;
+		width: 1.4rem;
 	}
 	
 	.pdcTimeWord>span:nth-child(2) {
 		float: left;
 		text-align: center;
-		width: 1.92rem;
+		width: 1.4rem;
+		margin: 0 1.27rem;
 	}
 	
 	.pdcTimeWord>span:nth-child(3) {
 		float: left;
-		text-align: right;
-		width: 1.72rem;
-		padding-right: 0.2rem;
+		text-align: center;
+		width: 1.4rem;
 	}
 	
 	.pdcTimeProgress {
 		float: left;
-		margin: 0.24rem 0 0.22rem;
-		height: 0.2rem;
-		width: 5.76rem;
+		margin:0 0.7rem;
+		height: 0.44rem;
+		width: 5.5rem;
 		overflow: hidden;
 	}
 	
 	.pdcTimeProgress>span:nth-child(1) {
 		float: left;
-		margin-left: 0.34rem;
 		width: 0.2rem;
 		height: 0.2rem;
-		border-radius: 0.2rem;
-		background-color: #7DE8D8;
+		border-radius: 0.5rem;
+		border: 2px solid #1E76FD;
+		box-sizing: border-box;
+		margin: 0.12rem 0;
+		
 	}
 	
 	.pdcTimeProgress>span:nth-child(2),
 	.pdcTimeProgress>span:nth-child(4) {
 		float: left;
-		margin: 0.04rem 0.2rem;
-		width: 1.8rem;
-		height: 0.12rem;
-		border-radius: 0.2rem;
-		background: linear-gradient(to right, #8E9EAB, #EEF2F3);
+		margin: 0.2rem 0.03rem;
+		width: 2.37rem;
+		height: 1px;
+		background-color: #CCCCCC;
 	}
 	
 	.pdcTimeProgress>span:nth-child(3) {
 		float: left;
 		width: 0.2rem;
 		height: 0.2rem;
-		border-radius: 0.2rem;
-		background-color: #FAB2FF;
+		border-radius: 0.5rem;
+		border: 2px solid #1E76FD;
+		box-sizing: border-box;
+		margin: 0.12rem 0;
 	}
 	
 	.pdcTimeProgress>span:nth-child(5) {
 		float: left;
 		width: 0.2rem;
 		height: 0.2rem;
-		border-radius: 0.2rem;
-		background-color: #FFBBB6;
+		border-radius: 0.5rem;
+		border: 2px solid #1E76FD;
+		box-sizing: border-box;
+		margin: 0.12rem 0;
 	}
 	
 	.pdcTimeT {
 		float: left;
-		height: 0.34rem;
+		margin: 0 0.08rem 0.5rem;
+		width: 6.74rem;
+		height: 0.28rem;
 		font-size: 0.24rem;
-		line-height: 0.34rem;
-		width: 5.76rem;
-		color: #8D8D94;
+		color: #181818;
+		line-height: 0.28rem;
 		overflow: hidden;
 	}
 	
 	.pdcTimeT>span:nth-child(1) {
 		float: left;
-		text-align: left;
-		width: 1.76rem;
-		padding-left: 0.16rem;
+		text-align: center;
+		width: 1.4rem;
 	}
 	
 	.pdcTimeT>span:nth-child(2) {
 		float: left;
 		text-align: center;
-		width: 1.92rem;
+		width: 1.4rem;
+		margin: 0 1.27rem;
 	}
 	
 	.pdcTimeT>span:nth-child(3) {
 		float: left;
-		text-align: right;
-		width: 1.92rem;
+		text-align: center;
+		width: 1.4rem;
 	}
 	
-	.pdcRule {
-		float: left;
-		width: 6.7rem;
-		height: 0.34rem;
-		color: #181818;
-		font-size: 0.24rem;
-		line-height: 0.34rem;
-		text-align: left;
-		overflow: hidden;
-		margin-bottom: 0.08rem;
-	}
-	
-	.pdcRule>img {
-		float: left;
-		margin: 0.05rem 0.2rem 0.05rem 0;
-		width: 0.16rem;
-		height: 0.24rem;
-	}
-	
-	.pdcRule1 {
-		margin-top: 0.82rem;
-		color: #F84740;
-	}
-	
-	.pdcRule2 {
-		margin-bottom: 0.92rem;
-	}
-	
-	.pdcRule3 {
-		margin-top: 0.86rem;
-	}
-	
-	.pdcRule4 {
-		margin-bottom: 0.94rem;
-	}
-	
+.boderB{
+	border-bottom: 1px solid  #ececec;
+}
+.productDetailTips{
+	padding: .21rem .3rem .62rem;
+	width: 6.9rem;
+}
+.productDetailTips p{
+	width: 6.9rem;
+	height: .28rem;
+	font-size: .28rem;
+	line-height: .28rem;
+	color: #666666;
+	margin-top: .4rem;
+}	
+.productDetailTips p>span{
+	margin-right: .64rem;
+	color: #999999;
+}
 	.pdcFyWord {
 		float: left;
 		margin: 0.7rem 0.66rem 0.24rem;
@@ -596,61 +560,48 @@
 	}
 	
 	.pdcIntroduce {
-		float: left;
-		margin: 0.66rem 0 0.86rem;
-		width: 6.7rem;
-		height: 1.44rem;
+		width: 6.9rem;
+		height: 2.25rem;
 		overflow: hidden;
-		color: #181818;
-		font-size: 0.24rem;
+		color: #666666;
+		font-size: 0.28rem;
+		display: flex;
+		justify-content:space-around;
 	}
-	
-	.pdcIntroduce>p:nth-child(1) {
-		float: left;
-		width: 1.45rem;
-		height: 1.44rem;
-		margin-left: 0.4rem;
-		overflow: hidden;
-	}
-	
-	.pdcIntroduce>p:nth-child(2) {
-		float: left;
-		width: 1.45rem;
-		height: 1.44rem;
-		margin: 0 0.74rem;
-		overflow: hidden;
-	}
-	
-	.pdcIntroduce>p:nth-child(3) {
-		float: left;
-		width: 1.6rem;
-		height: 1.44rem;
-		overflow: hidden;
-	}
-	
-	.pdcIntroduce p>span {
-		float: left;
-		width: 1.44rem;
-		margin-top: 0.14rem;
+	.pdcIntroduce p{
 		text-align: center;
-		height: 0.34rem;
-		line-height: 0.34rem;
 	}
-	
-	.pdcIntroduce p>img {
-		float: left;
-		width: 0.96rem;
-		height: 0.96rem;
+	.pdcIntroduce img{
+		margin:  .39rem 0 .26rem;
+		width: .76rem;
+		height: .76rem;
 		background-size: 100% 100%;
 	}
-	
-	.pdcIntroduceImg1 {
-		margin: 0 0.24rem;
+	.pdcIntroduce span{
+		float: left;
+		width: 100%;
+		height: .28rem;
+		font-size: .28rem;
+		line-height: .28rem;
+		color: #666666;
+		text-align: center;
 	}
+.productDetailCenterP{
+	height: 1.1rem;
+	width: 6.9rem;
+	line-height: 1.1rem;
+	color: #666666;
+	font-size: .28rem;
+	overflow: hidden;
+}	
+.productDetailCenterP img{
+	margin-top: .47rem;
+	float: right;
+	width: .14rem;
+	height: .24rem;
+	background-size: 100% 100%;
+}	
 	
-	.pdcIntroduceImg2 {
-		margin: 0 0.32rem;
-	}
 	
 	.productDetailBottom {
 		margin: 0 auto;
@@ -660,12 +611,37 @@
 		right: 0;
 		bottom: 0;
 		width: 7.5rem;
-		height: 1.1rem;
+		height: 1.0rem;
 		overflow: hidden;
-		line-height: 1.1rem;
+		line-height: 1.0rem;
 		font-size: 0.36rem;
 		text-align: center;
-		background-color: #3299D1;
+		background-color: #208AFF;
 		color: #FFFFFF;
+		box-shadow: 0 -1px 3px 0 ;
+		.span{
+			float: left;
+			width: 1.4rem;
+			height: 1.0rem;
+			background-color: #FFFFFF;
+			box-shadow: 0 -1px 3px 0 rgba(32,138,255,0.10);
+			img{
+				margin-top: .28rem;
+				width:.4rem;
+				height: .48rem;
+				background-size: 100% 100%;
+			}
+		}
+		.yy{
+			float: left;
+			width: 2.06rem;
+			height: 1.0rem;
+			text-align: center;
+			background: #69B0FF;
+		}
+	}
+	.disable {
+		background: #e1e1e1;
+		pointer-events: none;
 	}
 </style>

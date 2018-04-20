@@ -61,7 +61,7 @@
       -webkit-flex: 1
     &.main
       color: #fff
-      background: rgb(50,153,209)
+      background: #0C80FE
     &.normal
       background: #fff
 </style>

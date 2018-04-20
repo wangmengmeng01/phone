@@ -1,13 +1,13 @@
 <template>
 	<div class="jionList">
-		
-		<div class="joinListDiv"  v-show="list.length">
-				<p class="joinCxtTitle boderTop">
-					<span>投资人</span>
-					<span>投资时间</span>
-					<span>投资金额(元)</span>
-				</p>
-			<div class="joinCxt boderTop"  v-for="(i,index) in list" >
+
+		<div class="joinListDiv" v-show="list.length">
+			<p class="joinCxtTitle boderTop">
+				<span>投资人</span>
+				<span>投资时间</span>
+				<span>投资金额(元)</span>
+			</p>
+			<div class="joinCxt boderTop" v-for="(i,index) in list">
 				<p>{{i.userName|desensitization}}</p>
 				<p>
 					<span>{{i.createTime.split(" ")[0]}}</span>
@@ -29,7 +29,7 @@
 	} from '@/service'
 	export default {
 		name: 'jionList',
-	
+
 		data() {
 			return {
 				item: {
@@ -47,14 +47,14 @@
 		mounted() {
 			window.scroll(0, 0);
 			document.body.onscroll = () => {
-	
-				if ((document.documentElement.scrollTop || document.body.scrollTop) >= document.body.scrollHeight - document.documentElement.clientHeight) {
-	
+
+				if((document.documentElement.scrollTop || document.body.scrollTop) >= document.body.scrollHeight - document.documentElement.clientHeight) {
+
 					this.item.pageIndex++;
-					if (this.item.pageIndex > this.totalPage) {
+					if(this.item.pageIndex > this.totalPage) {
 						return;
 					}
-					if(this.$route.query.rollType){
+					if(this.$route.query.rollType) {
 						this.init();
 					}
 				}
@@ -65,10 +65,10 @@
 				searchBidsInvestList(this.item).then(res => {
 					this.list = this.list.concat(res.bidsInvestList);
 					this.totalPage = Math.ceil(res.total / 10);
-	
+
 				});
 			}
-	
+
 		}
 	}
 </script>
@@ -120,42 +120,46 @@
 		line-height: 1.44rem;
 		overflow: hidden;
 		display: flex;
-		justify-content:space-between;
+		justify-content: space-between;
 		color: #363636;
 	}
 	
-	.joinCxt p{
+	.joinCxt p {
 		width: 1.6rem;
 		font-size: .28rem;
 		text-align: center;
 	}
-	.joinCxt p>span:nth-child(1){
+	
+	.joinCxt p>span:nth-child(1) {
 		float: left;
 		margin: .42rem 0 .06rem;
 		line-height: .24rem;
 		color: #999999;
 		width: 1.6rem;
 	}
-	.joinCxt p>span:nth-child(2){
+	
+	.joinCxt p>span:nth-child(2) {
 		float: left;
-		margin:.06rem 0 .42rem;
+		margin: .06rem 0 .42rem;
 		line-height: .24rem;
 		color: #999999;
 		width: 1.6rem;
 	}
 	
-	.joinCxtTitle{
+	.joinCxtTitle {
 		width: 6.9rem;
 		display: flex;
-		justify-content:space-between;
+		justify-content: space-between;
 	}
-	.joinCxtTitle span{
+	
+	.joinCxtTitle span {
 		width: 1.6rem;
 		font-size: .28rem;
 		line-height: .9rem;
 		color: #666666;
 		text-align: center;
 	}
+	
 	.boderTop {
 		border-bottom: 1px solid #E5E5E5;
 	}

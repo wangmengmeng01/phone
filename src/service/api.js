@@ -127,4 +127,14 @@ export default {
   getProductList:'product/getProductList',//推荐产品列表
   
   showBusinessRecord:'home/filter/showBusinessRecord',//展业登记
+  
+  searchCouponSendList:'coupon/filter/searchCouponSendList',//赠送记录
+  
+   getZwToken:'user/getZwToken',//获取卓信token
+  
+  sendMessage:'user/filter/sendMessage',//发送短信
+  
+  updateManagerUserForM:'user/filter/updateManagerUserForM',//添加理财师
+  
+  updateUserForM:'user/filter/updateUserForM',//添加客户
 }

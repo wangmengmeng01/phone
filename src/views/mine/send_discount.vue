@@ -67,7 +67,7 @@
         this.SET_COUPON({
           backurl: this.$route.path
         });
-        this.$go('/coupon/choose_usable')
+        this.$go('/coupon/choose_usable',{rollType:1})
       },
       close(data) {
         this.DEL_COUPON(data);

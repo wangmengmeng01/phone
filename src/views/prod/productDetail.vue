@@ -84,9 +84,10 @@
 		</div>
 		<!--立刻购买-->
 		<div v-if="statusBol" class="productDetailBottom" >
-				<span @click="$go('/prod/calculation',{bidNo:detail.bidNo})">  
+				<span class="span" @click="$go('/prod/calculation',{bidNo:detail.bidNo})">  
 					<img src="../../assets/main/prod/calculation.png"/>
 				</span>
+				<span class="yy f32" @click="$go('/prod/invite')">邀约</span>
 			    <p @click="getStatus">立即购买</p>
 		</div>
 		<div v-else class="productDetailBottom disable" >已售罄</div>
@@ -659,7 +660,7 @@
 		background-color: #208AFF;
 		color: #FFFFFF;
 		box-shadow: 0 -1px 3px 0 ;
-		span{
+		.span{
 			float: left;
 			width: 1.4rem;
 			height: 1.0rem;
@@ -671,6 +672,13 @@
 				height: .48rem;
 				background-size: 100% 100%;
 			}
+		}
+		.yy{
+			float: left;
+			width: 2.06rem;
+			height: 1.0rem;
+			text-align: center;
+			background: #69B0FF;
 		}
 	}
 	.disable {

@@ -5,14 +5,14 @@
 			<p :class="checkBol?'':'blueLine'">已领取({{giftList.receivedCount}})</p>
 		</div>
 
-		<div class="gift-list" v-if="giftList.couponList!=''">
+		<div class="gift-list" v-if="couponList!=''">
 			<p class="f28 color_font-36">
 				<span>类型</span>
 				<span v-if="checkBol">收到时间</span>
 				<span v-else>领取时间</span>
 				<span>操作</span>
 			</p>
-			<div v-for="(i,index) in giftList.couponList" class="gift-list-div borderB">
+			<div v-for="(i,index) in couponList" class="gift-list-div borderB">
 				<p class="f32">
 					<span class="colorFont">{{i.profitRate}}%</span>
 					<span>{{i.couponName}}</span>
@@ -49,18 +49,36 @@
 				giftList: [], //礼物列表
 				pageIndex: 1, //分页
 				status: 2, //查询类型
-
+				total:0,
+				couponList:[],
 			}
 		},
 		computed: {},
 		created() {
 			this.mgGift();
 		},
+		mounted() {
+			window.scroll(0, 0);
+			document.body.onscroll = () => {
+
+				if((document.documentElement.scrollTop || document.body.scrollTop) >= document.body.scrollHeight - document.documentElement.clientHeight) {
+
+					this.pageIndex++;
+					if(this.pageIndex > this.total) {
+						return;
+					}
+					if(this.$route.query.rollType) {
+						this.mgGift();
+					}
+				}
+			}
+		},
 		methods: {
 			//选择栏切换
 			selectBtn() {
 				this.pageIndex = 1;
 				this.giftList = [];
+				this.couponList=[];
 				this.checkBol = !this.checkBol;
 				if(!this.checkBol) {
 					this.status = 3;
@@ -77,6 +95,15 @@
 					pageIndex: this.pageIndex,
 				}).then(res => {
 					this.giftList = res;
+					this.couponList=this.couponList.concat(res.couponList);
+					if(!this.checkBol) {
+						this.total = Math.ceil(res.receivedCount / 10);
+					} else {
+						this.total = Math.ceil(res.unreceivedCount / 10);
+//						console.log(res.unreceivedCount);
+					}
+					
+					
 				})
 			},
 			//领取礼物

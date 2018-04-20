@@ -57,7 +57,7 @@
    <div class="master-none" v-if="!item.mobile">
    		<img src="../../assets/main/mine/zwkh.png"/>
    		<p class="f28">暂无理财师</p>
-   		<div class="btn master-none-btn">
+   		<div class="btn master-none-btn"  @click="$go('addUser',{backTitle:'添加理财师',isManage:0})">
    			添加理财师
    		</div>
    </div>

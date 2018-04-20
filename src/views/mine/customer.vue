@@ -83,6 +83,7 @@
 			<p class="f28">暂无客户</p>
 		</div>
 
+		<button class="btn" @click="$go('addUser',{backTitle:'添加客户',isManage:1})">添加新客户</button>
 	</div>
 </template>
 
@@ -101,7 +102,7 @@
 				checkBol: true,
 				total: 0,
 				pageIndex: 1,
-				list: []
+				list: [],
 			}
 		},
 		created() {
@@ -114,7 +115,9 @@
 		        if (this.total <= 10) return;
 		        if (this.pageIndex > Math.ceil(this.total / 10)) return;
 		        this.pageIndex++;
-		        this.init();
+		        if(this.$route.query.rollType) {
+					this.init();
+				}
 		      }
 		    }
 		  },
@@ -145,7 +148,6 @@
 					searchPotentialCustomers({
 						pageIndex: this.pageIndex
 					}).then(r => {
-
 						this.list = this.list.concat(r.customerList);
 						this.total = r.total;
 						console.log(this.list);
@@ -176,6 +178,17 @@
 		margin: 0 auto;
 		padding: 0;
 		width: 7.5rem;
+		padding-bottom: 1.0rem;
+		.btn {
+			position: fixed;
+			margin: 0 auto;
+			padding: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			width: 7.5rem;
+			border-radius: 0;
+		}
 		&-selsectBtn {
 			padding: 0 1.08rem;
 			width: 5.34rem;

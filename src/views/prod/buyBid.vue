@@ -3,7 +3,7 @@
 		<!--<button class="btn returnBack" @click="returnbcak">选取</button>-->
 
 		<!--购买想请-->
-		<div class="buyBid-top" v-if="!isPromiseBol">
+		<div class="buyBid-top" v-if="isPromiseBol">
 			<div class="recommendDiv borderBottom">
 				<p class="recommendDivTitle">{{detail.productName}}{{detail.bidName}}</p>
 				<div class="bidMessage">
@@ -220,13 +220,13 @@
 				counpBol: true, //是否选择优惠券
 				appendRate: 0, //优惠券加息
 				rate: 0, //总利息
-				isPromiseBol: true,
+				isPromiseBol: false,
 				buyItem: {
 					bidNo: this.$route.query.bidNo,
 					retUrl: '',
 					couponRate: '',
 					receiveNo: '',
-					couponNo: '',
+					couponNos: '',
 					promiseInviteId: '',
 				},
 				inviteAmount: '', //履行承诺带入购买金额
@@ -240,11 +240,11 @@
 
 		},
 		created() {
-
-			if(this.$route.query.promiseInviteId != undefined || this.$route.query.promiseInviteId != null) {
+			console.log(this.$route.query.promiseInviteId);
+			if(this.$route.query.promiseInviteId == undefined || this.$route.query.promiseInviteId == null || this.$route.query.promiseInviteId == "") {
+			}else{
 				this.buyItem.promiseInviteId = this.$route.query.promiseInviteId;
-				this.isPromiseBol = false;
-
+				this.isPromiseBol = !this.isPromiseBol;
 			}
 			//从卡券页面 返回来   记录一些状态
 			if(this.$route.query.linkType == "0") {
@@ -259,9 +259,9 @@
 				} else {
 					this.autoRenewBol = false;
 				}
-				this.buyItem.couponRate = this.$route.query.couponRate;
-				this.buyItem.receiveNo = this.$route.query.receiveNo;
-				this.buyItem.couponNo = this.$route.query.couponNo;
+//				this.buyItem.couponRate = this.$route.query.couponRate;
+				this.buyItem.receiveNos = this.$route.query.receiveNo;
+//				this.buyItem.couponNo = this.$route.query.couponNo;
 				//获取选择的卡券
 
 				console.log(this.coupon.data.length);
@@ -437,7 +437,7 @@
 				this.buyItem.annualizedProfit = this.rate + this.appendRate;
 				borrowInvest(this.buyItem).then(res => {
 
-					if(this.isPromiseBol) {
+					if(!this.isPromiseBol) {
 						let params = {
 							"title": "恭喜，购买成功",
 							'sub_title': "您已成功购买" + this.detail.productName + this.detail.bidNo + "期,</br>交易金额为" + this.investMoney + "元",
