@@ -20,7 +20,7 @@
 <style lang="sass" scoped>
   .foot-tip
     text-align: center
-    padding: 1rem 0 .4rem
+    padding: .5rem 0 .4rem
     &.main
       background: #fff
       position: absolute

@@ -148,4 +148,6 @@ export default {
   
   registerForFriend:'user/registerForFriend',//邀请好友注册
   
+  inviteFriend:'user/filter/inviteFriend',//邀请id
+  
 }

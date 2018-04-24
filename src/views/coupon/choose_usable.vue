@@ -180,6 +180,7 @@
           color: #208AFF 
           border-bottom: 2px solid #208AFF 
           box-sizing: border-box
+          pointer-events: none
         text-align: center
     .coupon
       .none

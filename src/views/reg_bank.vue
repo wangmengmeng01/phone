@@ -132,7 +132,7 @@
 							"sub_title": "请检查您所录入的开户信息",
 							"btn_text": "重新提交",
 							"backurl": "/reg_bank",
-							"sub_btn_text": "暂无",
+							"sub_btn_text": "暂不",
 							"sub_backurl": "/"
 						});
 						this.$go('/static/fail');
@@ -144,7 +144,7 @@
 							"title": "恭喜，开通银行存管账户成功",
 							"btn_text": "立即充值",
 							"backurl": "/recharge",
-							"sub_btn_text": "暂无",
+							"sub_btn_text": "暂不",
 							"sub_backurl": "/"
 						});
 						this.$go('/static/succ');

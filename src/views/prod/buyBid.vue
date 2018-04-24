@@ -58,18 +58,18 @@
 				<img @click="add" v-else :class="investMoney<=detail.investMaxAmount?'disable':''" src="../../assets/main/prod/add-h.png" />
 			</div>
 		</div>
-		<div class="buyBid-p1 borderBottom marginB">
+		<div class="buyBid-p1 borderBottom ">
 			<span>可用余额(元)</span>
-			<span>{{accountBalance.availableAmount}}</span>
+			<span>{{accountBalance.availableAmount|formatNum}}</span>
 		</div>
 		<div class="buyBid-p1 borderBottom">
-			<span>预计投资收益(元)</span>
-			<span>{{ExpectedRevenue}}</span>
+			<span>预计收益(元)</span>
+			<span>{{ExpectedRevenue|formatNum}}</span>
 		</div>
 		<div class="buyBid-p1 borderBottom" @click="choose">
 			<span>我的优惠</span>
 			<span v-if="counpBol">{{counpNum}}张可用 <img src="../../assets/common/arrow-right.png"/></span>
-			<span v-else>已选择1张<img src="../../assets/common/arrow-right.png"/></span>
+			<span v-else>已选用1张<img src="../../assets/common/arrow-right.png"/></span>
 		</div>
 		<div class="buyBid-auto borderBottom">
 			<div class="buyBid-auto-div">
@@ -87,7 +87,7 @@
 				<img v-if="agreCheckBol" src="../../assets/common/check_succ.png" />
 				<img v-else src="../../assets/common/check_none.png" />
 			</div>
-			<p class="f28">我已阅读并同意<i @click="loanAgreement">《投资出借服务协议》</i>、<i>《自动投标授权委托书》</i>、<i @click="riskTips">《风险提示书》</i></p>
+			<p class="f28">我已阅读并同意<i @click="loanAgreement">《投资出借服务协议》</i>、<i @click="riskTips">《风险提示书》</i></p>
 		</div>
 
 		<div class="btn buyBid-btn" :class="agreCheckBol?'':'disableBtn'" @click="submit">
@@ -295,12 +295,14 @@
 				};
 				this.rate = res.annualizedRate + res.appendRate;
 				this.buyItem.investAmount = res.investAmount;
-				this.inputBlur(0);
+				
 				//从卡券页面 返回来
 				if(this.$route.query.linkType == "0") {
 					if(this.coupon.params.investAmount) {
 						this.inputBlur(1);
-					};
+					}else{
+						this.inputBlur(0);
+					}
 				} else {
 					this.SET_COUPON({
 						data: []
@@ -311,6 +313,8 @@
 					this.inviteBol = false;
 					this.CouponList();
 					this.inputBlur(1);
+				}else{
+					this.inputBlur(0);
 				}
 
 			});
@@ -399,7 +403,10 @@
 						yes: "立即充值",
 						no: '知道了'
 					}).then(function(b) {
+						if(b){
 						window.location.href = window.location.origin + '/wealth/recharge';
+						}
+
 					});
 					return;
 				};
@@ -768,8 +775,11 @@
 				line-height: 1.1rem;
 				overflow: hidden;
 				span {
-					margin-top: .55rem;
+					float: left;
+					margin-top: .27rem;
 					color: #666666;
+					line-height: .62rem;
+					height: .62rem;
 				}
 				p {
 					float: right;

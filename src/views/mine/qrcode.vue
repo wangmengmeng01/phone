@@ -1,7 +1,7 @@
 <template>
 	<div class="qrcode">
 		<img :src="require(`@/assets/main/mine/${item.flag==1?'lcs':'userImg'}.png`)" alt="" class="head_icon place-img">
-		<p class="qrcode-p1 f28 color_font-36 center">{{item.userName | nameDesensitization}}&nbsp;&nbsp; {{item.mobile | desensitization}}</p>
+		<p class="qrcode-p1 f28 color_font-36 center"><i v-show="item.userName">{{item.userName | nameDesensitization}}</i>&nbsp;&nbsp; {{item.mobile | desensitization}}</p>
 		<p :class="item.flag==1?'':'opcity'" class="qrcode-p2 f30 color_font-99 center">{{item.position}}</p>
 		<div :class="item.flag==1?'':'opcity'" class="qrcode-p3 f30 color_font-99 center">
 			<!--<p>中赢卓信财富投资管理(北京)有限公司</p>-->
@@ -64,6 +64,9 @@
 </script>
 
 <style lang="scss" scoped>
+i{
+	font-style: inherit;
+}
 	.qrcode {
 		margin: 0 auto;
 		padding: 0;

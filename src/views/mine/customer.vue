@@ -34,7 +34,7 @@
 				<div class="customer-User-top" @click="$go('customer_detail',{userCode: i.userCode})">
 					<img src="../../assets/main/mine/userImg.png" />
 					<p class="f32 color_font-36 customer-User-top-p1">
-						<span v-show="i.realName!=''">{{i.realName |nameDesensitization}}</span>
+						<span v-show="i.realName">{{i.realName |nameDesensitization}}</span>
 						<span>{{i.mobile|desensitization}}</span>
 						
 					</p>
@@ -47,7 +47,7 @@
 							<span>拨打电话</span>
 						</a>
 					</p>
-					<p class="customer-User-div-p2 f28" @click="$go('InfoRegister',{userCode: i.userCode,realName:i.realName})">
+					<p class="customer-User-div-p2 f28" @click="$go('InfoRegister',{userCode: i.userCode,realName:i.realName,mobile:i.mobile})">
 						<img src="../../assets/main/mine/zydj.png" />
 						<span>展业登记</span>
 					</p>
@@ -64,7 +64,11 @@
 			<div v-for="i in list" v-if="list.length" class="customer-User borderBottom">
 				<div class="customer-User-top">
 					<img src="../../assets/main/mine/userImg.png" />
-					<p class="f32 color_font-36 customer-User-top-p1">{{i.customerName|nameDesensitization}}</p>
+					<p class="f32 color_font-36 customer-User-top-p1">
+						
+						<span v-show="i.customerName">{{i.customerName|nameDesensitization}}</span>
+						<span>{{i.customerPhone|desensitization}}</span>
+					</p>
 					<p class="f28 color_font-99 customer-User-top-p2">{{i.createTime}}成为我的客户</p>
 				</div>
 				<div class="customer-User-div1">
@@ -74,10 +78,10 @@
 							<span>拨打电话</span>
 						</a>
 					</p>
-					<p class="customer-User-div1-p2 f28">
+					<!--<p class="customer-User-div1-p2 f28">
 						<img src="../../assets/main/mine/dx.png" />
 						<span>短信推送下载APP</span>
-					</p>
+					</p>-->
 				</div>
 			</div>
 		</div>
@@ -163,12 +167,15 @@
 			send_coupon(item) {
 				const {
 					userCode,
-					realName
+					realName,
+					mobile,
+					
 				} = item;
 				this.SET_COUPON({
 					params: {
 						userCode,
-						realName
+						realName,
+						mobile,
 					}
 				});
 				this.$go('send_discount')

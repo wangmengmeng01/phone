@@ -7,7 +7,7 @@
 		<div class="gift-list" v-if="list!=''">
 			<p class="f28 color_font-36">
 				<span>类型</span>
-				<span>赠送时间</span>
+				<span>{{checkBol?'赠送时间':'领取时间'}}</span>
 			</p>
 			<div v-for="(i,index) in list" class="gift-list-div borderB">
 				<p class="f32">

@@ -23,7 +23,7 @@
 				</p>
 			</div>
 			<div class="pdtProgress">
-				<span class="pdtRate1">{{detail.periodLength-detail.remainPeriod}}/{{detail.periodLength}}{{detail.periodUnit|Totime}}</span>
+				<span class="pdtRate1">{{detail.remainPeriod}}/{{detail.periodLength}}周</span>
 				<p class="pdtGrayLine"></p>
 				<p class="pdtLine" :style="{width:(detail.periodLength-detail.remainPeriod)/detail.periodLength*6/100+'rem'}"></p>
 				<span class="pdtSpan" :style="{left:(detail.periodLength-detail.remainPeriod)/detail.periodLength*6/100+'rem'}"></span>

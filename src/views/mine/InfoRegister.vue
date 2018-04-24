@@ -2,7 +2,7 @@
 	<div class="InfoRegister">
 		<div class="InfoRegister-div f28">
 			<span>展业目标</span>
-			<span style="float: right;">{{realName|nameDesensitization}}</span>
+			<span style="float: right;"><i style="font-style: inherit;" v-show="realName != undefined">{{realName|nameDesensitization}}</i>{{mobile|desensitization}}</span>
 		</div>
 		<p class="InfoRegister-p"></p>
 		<div class="InfoRegister-div f28 borderB">
@@ -10,13 +10,13 @@
 			<img src="../../assets/common/arrow-right.png" />
 			<p class="InfoRegister-div-p">
 				<input type="date" name="" id="" value="" v-model="recommendDate" placeholder="请选择" />
-				<span v-show="recommendDate!=null || recommendDate!=''">{{recommendDate}}</span>
+				<span style="color: #363636;" v-show="recommendDate!=null || recommendDate!=''">{{recommendDate}}</span>
 				<span v-show="recommendDate==''">请选择</span>
 			</p>
 		</div>
 		<div class="InfoRegister-div f28">
 			<span>推荐地点</span>
-			<input class="InfoRegister-div-input" type="text" maxlength="17" v-model="address" placeholder="请输入" />
+			<input style="color: #363636;" class="InfoRegister-div-input" type="text" maxlength="15" v-model="address" placeholder="请输入" />
 		</div>
 		<p class="InfoRegister-p"></p>
 		<div class="InfoRegister-div f28 borderB">
@@ -29,14 +29,14 @@
 					</option>
 				</select>
 
-				<span v-show="selectProduct">{{productList[selectProduct].productName}}</span>
+				<span style="color: #363636;" v-show="selectProduct">{{productList[selectProduct].productName}}</span>
 				<span v-show="selectProduct"> </span>
 			</p>
 
 		</div>
 		<div class="InfoRegister-div f28">
 			<span>推荐金额</span>
-			<input class="InfoRegister-div-input" type="tel" name="" v-model.number="amount" id="" value="" placeholder="输入金额" />
+			<input style="color: #363636;" class="InfoRegister-div-input" type="tel" name="" v-model.number="amount" id="" value="" placeholder="输入金额" />
 		</div>
 		<p class="InfoRegister-p"></p>
 		<div class="InfoRegister-div f28">
@@ -48,7 +48,7 @@
 						{{ option.text }}
 					</option>
 				</select>
-				<span v-show="resultType!='0'" style="float: right;">{{ options[resultType].text}}</span>
+				<span  v-show="resultType!='0'" style="float: right;">{{ options[resultType].text}}</span>
 				<span v-show="resultType=='0'" style="float: right;">请选择</span>
 			</p>
 		</div>
@@ -57,7 +57,7 @@
 		<div class="InfoRegister-div f28">
 			<span>备注(选填)</span>
 		</div>
-		<textarea class="InfoRegister-text" placeholder="请输入您认为在展业过程中的关键信息" v-model="remark"></textarea>
+		<textarea style="border: none; outline: none;" class="InfoRegister-text" maxlength="30" placeholder="请输入您认为在展业过程中的关键信息" v-model="remark"></textarea>
 
 		<button class="btn InfoRegister-btn" :class="(recommendDate && address && resultType && selectProduct && amount)?'':'dis'" @click="submit">登记</button>
 	</div>
@@ -95,10 +95,14 @@
 					},
 				],
 				selectProduct: 0, // 比如想要默认选中为 Three 那么就把他设置为C
-				productList: [],
+				productList: [{
+					productNo:'',
+					productName:'',
+				}],
 				amount: 0 || '',
 				remark: "",
 				realName:this.$route.query.realName,
+				mobile:this.$route.query.mobile,
 			}
 		},
 		computed: {},

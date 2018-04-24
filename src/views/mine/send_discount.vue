@@ -18,7 +18,7 @@
     </div>-->
     <div class="send_discount-top f28">
    	 	<span>送给客户</span>
-   	 	<span class="color_font-36">{{coupon.params.realName}}</span>
+   	 	<span class="color_font-36"  > <i style="font-style: inherit;"  v-show="coupon.params.realName != null ||coupon.params.realName!= undefined" >{{coupon.params.realName|nameDesensitization}}</i>{{coupon.params.mobile|desensitization}}</span>
     </div>
     <div class="send_discount-gift">
     		<p class="f28 color_font-36">送Ta礼物<i>(可送多个优惠)</i></p>
@@ -30,7 +30,7 @@
     
     
     
-    <button class="send_discount-btn" :class="[!coupon.data.length?'dis':'']" @click="submit">赠送</button>
+    <button class="send_discount-btn send_discount-button" :class="[!coupon.data.length?'dis':'']" @click="submit">赠送</button>
     
     
     
@@ -97,6 +97,9 @@
   	padding: 0;
   	width: 7.5rem;
   	padding-bottom: 1.3rem;
+  	&-button{
+  		border: none;
+  	}
   	&-top{
   		margin: 0 .3rem;
   		width: 6.9rem;

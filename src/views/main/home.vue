@@ -88,7 +88,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="recommend bottomBorder">
+		<!--<div class="recommend bottomBorder">
 			<p class="newTitle">运营报告 <span>了解详情</span></p>
 			<div class="yybgDiv">
 				<div>
@@ -101,13 +101,13 @@
 				</div>
 			</div>
 			<p class="Timetips f24 color_font-99 center">数据统计截止至2018年2月28日</p>
-		</div>
+		</div>-->
 		<div class="recommend">
-			<p class="xxpl"><img src="../../assets/main/home/xxpl.png" />信息披露</p>
-			<p class="about"><img src="../../assets/main/home/gywm.png" />关于我们</p>
+			<p class="xxpl" @click="$go('/home/aboutUs?id=2&backTitle=信息披露')"><img src="../../assets/main/home/xxpl.png" />信息披露</p>
+			<p class="about" @click="$go('/home/aboutUs?id=0&backTitle=关于我们')"><img src="../../assets/main/home/gywm.png" />关于我们</p>
 		</div>
 		
-		<div class="tips f24 color_font-99">
+		<div class="tips f24 color_font-99" style="padding: 1.0rem  0 1.5rem">
 			——出借有风险，选择需谨慎——
 		</div>
 	</div>

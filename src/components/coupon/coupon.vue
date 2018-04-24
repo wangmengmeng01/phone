@@ -25,10 +25,11 @@
         <div class="conDiv1">
         		<span class="f48 conDivp1" v-show="data.type" style="width: 1.94rem;">{{data.profitRate}}{{data.type==1?'%':'元'}}</span>
         		<span class="f48 conDivp1" v-show="data.couponType" style="width: 1.94rem;">{{data.profitRate}}{{data.couponType==1?'%':'元'}}</span>
-        		<p class="f28 conDivp2"  v-if="type !== 'mine'">来源：{{data.name}}</p>
+        		<p class="f28 conDivp2"  v-if="type !== 'mine'">来源：理财师</p>
+        		
         </div>
         <div class="conDiv2">
-        		<p class="f28 conDivp1" style="width: 1.94rem;">---{{data.couponName}}---</p>
+        		<p class="f28 conDivp1" style="width: 1.94rem;">—{{data.couponName}}—</p>
         		<p class="f28 conDivp2">有效期：{{data.startDate}}—{{data.endDate}}</p>
         </div>
         <img :src="require(`@/assets/coupon/check_${check?'succ':'none'}.png`)" alt="" class="check" v-show="check" v-if="checked">

@@ -14,7 +14,7 @@
 			</p>
 			<div v-for="(i,index) in couponList" class="gift-list-div borderB">
 				<p class="f32">
-					<span class="colorFont">{{i.profitRate}}%</span>
+					<span class="colorFont">{{i.profitRate}}{{i.type==1?'%':'元'}}</span>
 					<span>{{i.couponName}}</span>
 				</p>
 				<p class="f28">
@@ -22,7 +22,7 @@
 					<span>{{checkBol?i.giveTime.split(" ")[1]:i.receiveTime.split(" ")[1]}}</span>
 				</p>
 				<p v-if="checkBol" class="gift-list-div-btn f28" @click="getGift(index,i.couponNo,i.receiveNo)">领取</p>
-				<p v-else class="gift-list-div-btn f28 dis">查看</p>
+				<p v-else class="gift-list-div-btn f28 dis" @click="$go('/coupon/main?rollType=1')">查看</p>
 			</div>
 
 		</div>

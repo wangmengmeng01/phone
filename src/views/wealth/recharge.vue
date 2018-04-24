@@ -26,7 +26,7 @@
     		<p class="f28 p1"> <img class="logo" :src="require(`../../assets/wealth/whiteLogo/${bankNo}.png`)"/> <span>{{cardMes.bankName}}</span> <img class="img1" src="../../assets/wealth/kjzf.png"/></p>
     		<p class="f48 p2 center">{{cardMes.bankCardNo|hideBankNum}}</p>
     </div>
-    <p class="recharge-tips f28">单笔限额{{cardMes.singleTransQuota}}元，每日限额{{cardMes.cardDailyTransQuota}}万元</p>
+    <p class="recharge-tips f28">单笔限额{{cardMes.singleTransQuota/10000}}万元，每日限额{{cardMes.cardDailyTransQuota/10000}}万元</p>
     
     <p class="recharge-div borderB f28 color_font-36">
     		<span class="recharge-div-s1">可用余额(元)</span>
@@ -172,7 +172,7 @@
             'sub_title': "您的资金已充至存管账户",
             "btn_text": "立即投资",
             "backurl": "/product",
-            "sub_btn_text": "暂不",
+            "sub_btn_text": "去账户中心查看",
             "sub_backurl": "/wealth"
           };
           this.SET_SUCC_PAGE(params);

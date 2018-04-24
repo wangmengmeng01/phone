@@ -1,7 +1,7 @@
 <template>
 	<div class="promise">
 		<div class="promise-selsectBtn f28 color_font-99" @click="selectBtn">
-			<p :class="checkBol?'blueLine':''">待履约({{promiseList.waitPromiseCount}})</p>
+			<p :class="checkBol?'blueLine':''">未履约({{promiseList.waitPromiseCount}})</p>
 			<p :class="checkBol?'':'blueLine'">已履约({{promiseList.alreadyPromiseCount}})</p>
 		</div>
 		<div class="promise-list" v-show="promiseInviteList!=''">
@@ -11,16 +11,16 @@
 					<p>{{i.annualizedRate}}<i>%</i></p>
 					<p class="f28">
 						<span class="promise-div-join-span1">履约金额(元)</span>
-						<span class="promise-div-join-span2">{{i.inviteAmount}}</span>
+						<span class="promise-div-join-span2">{{i.inviteAmount|formatNum}}</span>
 					</p>
 					<p class="f28">
 						<span class="promise-div-join-span1">预计收益(元)</span>
-						<span class="promise-div-join-span2">{{i.interest}}</span>
+						<span class="promise-div-join-span2">{{i.interest|formatNum}}</span>
 					</p>
 				</div>
 				<div class="promise-div-p f24">
 					<p class="span1">
-						<span class="color_font-99">邀约时间&nbsp;&nbsp; {{i.createdTime}}</span>
+						<span class="color_font-99">{{checkBol?'邀约时间':'履约时间'}}&nbsp;&nbsp; {{i.createdTime}}</span>
 						<span class="color_font-99">邀约客户&nbsp;&nbsp; <i class="color_font-36">{{i.mobile |desensitization}}({{i.userName|nameDesensitization}})</i></span>
 					</p>
 					<span class="span2"> <a :href="`tel:${i.mobile}`"></a><img src="../../assets/main/mine/xdh.png"/>联系TA </span>
@@ -30,7 +30,7 @@
 			</div>
 
 		</div>
-		<div class="promise-none" v-show="!promiseInviteList==''">
+		<div class="promise-none" v-show="promiseInviteList==''">
 			<img src="../../assets/main/mine/zwjl.png" />
 			<p class="f28">暂无履约记录</p>
 		</div>
@@ -95,7 +95,7 @@
 			getUserManagerPromiseInviteList() {
 				getUserManagerPromiseInviteList(this.promiseItem).then(res => {
 					this.promiseList = res;
-					this.promiseInviteList = res.promiseInviteList;
+					this.promiseInviteList = this.promiseInviteList.concat(res.promiseInviteList) ;
 					if(this.checkBol) {
 						this.total = Math.ceil(res.waitPromiseCount / 10);
 //						console.log(res.waitPromiseCount);
@@ -155,7 +155,7 @@
 			margin: .44rem .3rem 0;
 			width: 6.9rem;
 			/*height: 3.52rem;*/
-			background: url(../../assets/main/mine/lxcn.png) no-repeat 0 0;
+			/*background: url(../../assets/main/mine/lxcn.png) no-repeat 0 0;*/
 			background-size: 100% 100%;
 			box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.06);
 			background-color: #FFFFFF;

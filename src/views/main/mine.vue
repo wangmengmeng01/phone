@@ -26,7 +26,7 @@
 			<div class="mine-gift-list" v-if="giftList.couponList!=''">
 				<div v-for="(i,index) in giftList.couponList" class="mine-gift-list-card">
 					<div>
-						<p class="f48">{{i.profitRate}}%</p>
+						<p class="f48">{{i.profitRate}}{{i.type==1?'%':'元'}}</p>
 						<p class="f24">{{i.couponName}}</p>
 					</div>
 					<p class="f24" @click="getGift(index,i.couponNo,i.receiveNo)">领取</p>
@@ -81,16 +81,16 @@
 				</p>
 			</div>
 		</div>
-
 		<div class="mine-list">
-
-			<p v-for="(j,index) in menu" :class="index<menu.length-1?'borderB':''"  @click="$go(j.icon==='join' ? (nextBol?j.url:'/reg_bank') : `/mine/${j.url}`,{userCode:userCode})">
+			<p v-for="(j,index) in menu" :class="index<menu.length-1?'borderB':''"  @click="$go(j.icon==='join' ? (nextBol?j.url:'/reg_bank') : `/mine/${j.url}`,{userCode:userCode,inviteId:inviteId})">
 				<span class="f28 color_font-36">{{j.name}}</span>
 				<img src="../../assets/common/arrow-right.png" />
 			</p>
-
 		</div>
-
+	
+		<div class="tips f24 color_font-99">
+			——出借有风险，选择需谨慎——
+		</div>
 		<!--<div class="head flex" @click="$go('/mine/qrcode')">
       <img :src="item.pic || head" alt="" class="head_icon">
       <div class="msg">
@@ -128,7 +128,8 @@
 		searchCouponReceiveDetails,
 		getPromiseInviteList,
 		searchMyManagerUserInfo,
-		getUserStatus
+		getUserStatus,
+		inviteFriend
 	} from '@/service'
 	export default {
 		name: 'mine',
@@ -148,13 +149,14 @@
 				promiseList: {}, //履约数据
 				promiseInviteList: [], //履约列表
 				userCode:'',
+				inviteId:'',
 				menu_normal: [{
 						icon: 'mine',
 						name: '我的理财师',
 						url: 'master'
 					}, {
 						icon: 'join',
-						name: '我要加盟理财师',
+						name: '加盟成为理财师',
 						url: '/home/joinFinlManager'
 					},
 					{
@@ -196,6 +198,13 @@
 	       	 	this.manageMes = r;
 	       	 	this.haveMangeBol=!this.haveMangeBol;
 	        });
+	        inviteFriend({
+	        		channel:1
+	        }).then(r => {
+	       	 	this.inviteId = r.inviteId;
+	        });
+	        
+	        
 	        	getUserStatus().then(res => {
 	      		
 	      		if(res.code == "100"){

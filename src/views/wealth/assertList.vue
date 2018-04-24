@@ -51,7 +51,7 @@
 				<div class="div2">
 					<p class="f36 color">{{i.initCashAmount | formatNum}}</p>
 					<p>
-						<span class="f24 color_font-99">投资日期</span>
+						<span class="f24 color_font-99">起息日期</span>
 						<span class="f24 color_font-36">{{i.interestStartDate}}</span>
 					</p>
 				</div>

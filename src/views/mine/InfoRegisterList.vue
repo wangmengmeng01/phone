@@ -10,7 +10,7 @@
 					</p>
 					<p>
 						<span class="f32 span2">{{i.amount|formatNum}}</span>
-						<span class="f24 color_font-99">推荐投资额(元)</span>
+						<span class="f24 color_font-99">推荐金额(元)</span>
 					</p>
 					<p>
 						<span class="f32" :class="i.resultType==1?'span5':(i.resultType==2)?'span4':'span3'">{{i.resultType==1?'无意向':(i.resultType==2)?'有意向':'成交'}}</span>

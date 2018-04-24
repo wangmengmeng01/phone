@@ -5,9 +5,10 @@
 			<div class="recommend"  :class="index>0?'borderTop':''">
 				<p class="newTitle bottomBorder" @click="$go('/prod/productList',{productName:i.productName,productNo:i.productNo,productType:i.productType,backTitle:i.productName,rollType:1})">{{i.productName}} <span class="newTitlespan">{{i.profitPlan|profitPlan}}</span> <span class="more">更多</span></p>
 				
-				<div class="recommendDiv"  v-for="(j,n) in i.bidList"  :class="(i.bidList.length>1 && n<i.bidList.length-1)?'bottomBorder':''"   @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName})">
+				<div class="recommendDiv"  v-for="(j,n) in i.bidList"  :class="(i.bidList.length>1 && n<i.bidList.length-1)?'bottomBorder':''"   @click="$go('/prod/productDetail',{bidNo:j.bidNo,productNo:j.productNo,backTitle:j.bidName,status:j.status})">
+					<img v-show="j.status>4" src="../../assets/main/prod/sq.png"/>
 					<p class="recommendDivTitle">{{j.bidName}}</p>
-					<div class="bidMessage">
+					<div class="bidMessage" :class="j.status<=4?'':'bidOver'">
 						<div>
 							<p class="bidMesRate"><i>{{j.annualizedRate|tofixed2}}</i>% <span v-show="j.appendRate>0">+{{j.appendRate|tofixed2}}%</span></p>
 							<p class="bidMesP f24 color_font-99">历史年化</p>
@@ -69,8 +70,17 @@
 		/*height: 2.52rem;*/
 		overflow: hidden;
 		margin: 0 .3rem;
+		position: relative;
 	}
-	
+	 .recommendDiv img{
+	 	position: absolute;
+	 	top: .8rem;
+	 	right: .3rem;
+	 	width: 1.24rem;
+	 	height: .76rem;
+	 	background-size: 100% 100%;
+	 	opacity: 1;
+	 }
 	.recommendDivTitle {
 		float: left;
 		width: 6.6rem;
@@ -165,4 +175,7 @@
 		margin-top: .2rem;
 	}
 	
+	.bidOver{
+		opacity: 0.5;
+	}
 </style>

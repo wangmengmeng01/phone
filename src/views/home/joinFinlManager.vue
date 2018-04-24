@@ -468,6 +468,7 @@
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: .92rem;
+		
 	}
 	
 	.joinFMdiv {
@@ -480,6 +481,7 @@
 		overflow: hidden;
 		margin-bottom: .44rem;
 		background-color: #f3f7ff;
+		border-radius: 6px;
 	}
 	
 	.inputFile {
@@ -488,6 +490,7 @@
 		height: 2.98rem;
 		overflow: hidden;
 		position: relative;
+		border-radius: 6px;
 	}
 	
 	.inputFile>input {
@@ -499,6 +502,7 @@
 		width: 5.54rem;
 		height: 2.98rem;
 		opacity: 0;
+		
 	}
 	
 	.inputFile>img {
@@ -519,6 +523,7 @@
 		width: 5.54rem;
 		height: 2.98rem;
 		overflow: hidden;
+		border-radius: 6px;
 	}
 	
 	.inputFileiDiv>img {

@@ -121,6 +121,7 @@
 			.act {
 				border-bottom: 2px solid #208AFF;
 				box-sizing: border-box;
+				pointer-events: none;
 			}
 		}
 		.coupon {

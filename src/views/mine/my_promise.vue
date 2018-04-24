@@ -11,15 +11,15 @@
 					<p>{{i.annualizedRate}}<i>%</i></p>
 					<p class="f28">
 						<span class="promise-div-join-span1">履约金额(元)</span>
-						<span class="promise-div-join-span2">{{i.inviteAmount}}</span>
+						<span class="promise-div-join-span2">{{i.inviteAmount|formatNum}}</span>
 					</p>
 					<p class="f28">
 						<span class="promise-div-join-span1">预计收益(元)</span>
-						<span class="promise-div-join-span2">{{i.interest}}</span>
+						<span class="promise-div-join-span2">{{i.interest|formatNum}}</span>
 					</p>
 				</div>
 				<p class="promise-div-p f24">
-					<span class="color_font-99">邀约时间&nbsp;&nbsp; {{i.createdTime}}</span>
+					<span class="color_font-99">{{checkBol?'邀约时间':'履约时间'}}&nbsp;&nbsp; {{i.createdTime}}</span>
 					<span> <a :href="`tel:${i.mobile}`"></a><img src="../../assets/main/mine/xdh.png"/>联系理财师 </span>
 				</p>
 

@@ -206,3 +206,13 @@ export const registerForFriend = async (params) => {
     params,
   });
 }
+/**
+ * 邀请好友注册ID
+ */
+export const inviteFriend = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.inviteFriend,
+    params,
+  });
+}

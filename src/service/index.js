@@ -124,6 +124,7 @@ export const getValidateImage = () => {
       };
       resolve(`${config.url}${api.getValidateImage}?${transformRequest(params)}`);
       store.commit('SET_IMGCODE_TOKEN', r.token);
+      sessionStorage.setItem("token",r.token)
       $http({
         method: 'get',
         api: api.getValidateImage,

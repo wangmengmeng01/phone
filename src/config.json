@@ -116,7 +116,7 @@
 					"foot": false
 				}, {
 					"path": "product",
-					"title": "产品",
+					"title": "投资",
 					"filter": true,
 					"back": {
 						"icon": false
