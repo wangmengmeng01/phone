@@ -35,7 +35,7 @@
           name: 'main-home'
         }, {
           url: 'product',
-          title: '产品',
+          title: '投资',
           name: 'main-product'
         }, {
           url: 'mine',

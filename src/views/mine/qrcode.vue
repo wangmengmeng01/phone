@@ -4,7 +4,7 @@
 		<p class="qrcode-p1 f28 color_font-36 center">{{item.userName | nameDesensitization}}&nbsp;&nbsp; {{item.mobile | desensitization}}</p>
 		<p :class="item.flag==1?'':'opcity'" class="qrcode-p2 f30 color_font-99 center">{{item.position}}</p>
 		<div :class="item.flag==1?'':'opcity'" class="qrcode-p3 f30 color_font-99 center">
-			<p>中赢卓信财富投资管理(北京)有限公司</p>
+			<!--<p>中赢卓信财富投资管理(北京)有限公司</p>-->
 			<p>{{item.department}}</p>
 		</div>
 		<!--<div class="msg">

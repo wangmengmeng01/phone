@@ -142,3 +142,20 @@ export const standardAndPlanList = async (params) => {
     params,
   });
 }
+
+//查询客户
+export const getCustomer = async (params) => {
+  return await $http({
+    method: 'get',
+    api: api.getCustomer,
+    params,
+  });
+}
+//发起邀约
+export const promiseInvite = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.promiseInvite,
+    params,
+  });
+}

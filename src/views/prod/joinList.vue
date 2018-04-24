@@ -8,7 +8,7 @@
 				<span>投资金额(元)</span>
 			</p>
 			<div class="joinCxt boderTop" v-for="(i,index) in list">
-				<p>{{i.userName|desensitization}}</p>
+				<p>{{i.mobile|desensitization}}</p>
 				<p>
 					<span>{{i.createTime.split(" ")[0]}}</span>
 					<span>{{i.createTime.split(" ")[1]}}</span>

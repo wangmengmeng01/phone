@@ -32,7 +32,9 @@
           this.$go('/');
           return
         }
-        this.$router.go(-1)
+        
+        this.$router.go(-1);
+//      location.reload();
       }
     },
   }

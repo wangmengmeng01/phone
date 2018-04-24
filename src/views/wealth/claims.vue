@@ -66,7 +66,7 @@
 		data() {
 			return {
 				item: {
-					cashNo: '',
+					cashNo:this.$route.query.cashNo,
 					pageNum: 1,
 				},
 				list: [],

@@ -89,7 +89,7 @@
       sendCode() {
         // 验证图像验证码
         if (!this.item.imageCode) {
-          this.$toask('图像验证码不能为空!',"","85%","#FFD63D","#FE7C08 ");
+          this.$toask('图形验证码不能为空!',"","85%","#FFD63D","#FE7C08 ");
           return
         }
         

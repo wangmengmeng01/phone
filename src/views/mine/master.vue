@@ -40,7 +40,7 @@
    		</div>
    		<div class="master-mess-mess f30">
    			<p class="color_font-99">公司</p>
-   			<p class="color_font-36">中赢卓信财富投资管理(北京)有限公司-闵行分公司</p>
+   			<p class="color_font-36">{{item.department}}</p>
    		</div>
    		<div class="master-mess-mess f30">
    			<p class="color_font-99">头衔</p>

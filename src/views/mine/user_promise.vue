@@ -18,14 +18,14 @@
 						<span class="promise-div-join-span2">{{i.interest}}</span>
 					</p>
 				</div>
-				<p class="promise-div-p f24">
-					<span class="color_font-99">邀约时间&nbsp;&nbsp; {{i.createdTime}}</span>
-					<span> <a :href="`tel:${i.mobile}`"></a><img src="../../assets/main/mine/xdh.png"/>联系理财师 </span>
-				</p>
+				<div class="promise-div-p f24">
+					<p class="span1">
+						<span class="color_font-99">邀约时间&nbsp;&nbsp; {{i.createdTime}}</span>
+						<span class="color_font-99">邀约客户&nbsp;&nbsp; <i class="color_font-36">{{i.mobile |desensitization}}({{i.userName|nameDesensitization}})</i></span>
+					</p>
+					<span class="span2"> <a :href="`tel:${i.mobile}`"></a><img src="../../assets/main/mine/xdh.png"/>联系TA </span>
+				</div>
 
-				<p v-show=" !i.isSoldOut && checkBol" class="promise-div-tips f24">产品已售罄，等待新产品发布</p>
-
-				<p v-show="i.isSoldOut && !i.isNotFunds && checkBol" class="promise-div-tips f24">产品剩余可投金额不足，等待新产品发布</p>
 
 			</div>
 
@@ -40,7 +40,7 @@
 
 <script>
 	import {
-		getPromiseInviteList
+		getUserManagerPromiseInviteList
 	} from '@/service'
 	export default {
 
@@ -61,7 +61,7 @@
 		},
 		computed: {},
 		created() {
-			this.getPromiseInviteList();
+			this.getUserManagerPromiseInviteList();
 		},
 		mounted() {
 			window.scroll(0, 0);
@@ -74,7 +74,7 @@
 						return;
 					}
 					if(this.$route.query.rollType) {
-						this.getPromiseInviteList();
+						this.getUserManagerPromiseInviteList();
 					}
 				}
 			}
@@ -90,10 +90,10 @@
 				} else {
 					this.promiseItem.type = 1;
 				}
-				this.getPromiseInviteList();
+				this.getUserManagerPromiseInviteList();
 			},
-			getPromiseInviteList() {
-				getPromiseInviteList(this.promiseItem).then(res => {
+			getUserManagerPromiseInviteList() {
+				getUserManagerPromiseInviteList(this.promiseItem).then(res => {
 					this.promiseList = res;
 					this.promiseInviteList = res.promiseInviteList;
 					if(this.checkBol) {
@@ -221,16 +221,30 @@
 			}
 			&-p {
 				margin: 0 .3rem;
-				height: .87rem;
-				line-height: .87rem;
+				height: 1.23rem;
+				line-height: 1.23rem;
 				overflow: hidden;
-				span:nth-child(1) {
+				.span1{
 					float: left;
+					span:nth-child(1){
+						margin: .28rem 0;
+						display: block;
+						line-height: .24rem;
+					}
+					span:nth-child(2){
+						display: block;
+						line-height: .24rem;
+						i{
+							font-style: inherit;
+						}
+					}
 				}
-				span:nth-child(2) {
-					margin: .16rem 0;
+				
+				
+				.span2{
+					margin: .40rem 0;
 					float: right;
-					width: 1.96rem;
+					width: 1.52rem;
 					height: .52rem;
 					line-height: .52rem;
 					text-align: center;

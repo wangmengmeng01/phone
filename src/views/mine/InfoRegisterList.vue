@@ -1,19 +1,19 @@
 <template>
 	<div class="InfoRegisterList">
-		<div v-if="list.length">
-			<div v-for="(i,index) in list" class="InfoRegisterList-list">
-				<p class="InfoRegisterList-list-p f28">{{i.mobile}} &nbsp;&nbsp;({{i.userName}})</p>
+		<div v-if="list.length" style="background-color: #F6F5F5;">
+			<div v-for="(i,index) in list" class="InfoRegisterList-list borderB">
+				<p class="InfoRegisterList-list-p f28">{{i.mobile}} &nbsp;&nbsp;({{i.userName|nameDesensitization}})</p>
 				<div class="InfoRegisterList-list-div borderB">
 					<p>
 						<span class="f32 span1 color_font-36">{{i.productName}}</span>
 						<span class="f24 color_font-99">主推产品</span>
 					</p>
 					<p>
-						<span class="f32 span2">{{i.amount}}</span>
+						<span class="f32 span2">{{i.amount|formatNum}}</span>
 						<span class="f24 color_font-99">推荐投资额(元)</span>
 					</p>
 					<p>
-						<span class="f32 span3">{{i.resultType}}</span>
+						<span class="f32" :class="i.resultType==1?'span5':(i.resultType==2)?'span4':'span3'">{{i.resultType==1?'无意向':(i.resultType==2)?'有意向':'成交'}}</span>
 						<span class="f24 color_font-99">推荐结果</span>
 					</p>
 				</div>
@@ -114,12 +114,12 @@
 			.listMark {
 				margin: 0 0 .4rem 0;
 				float: left;
-				line-height: .28rem;
+				line-height: .30rem;
 				width: 6.9rem;
 				text-align: left;
-				overflow: hidden;
+				/*overflow: hidden;
 				text-overflow: ellipsis;
-				white-space: nowrap;
+				white-space: nowrap;*/
 			}
 			&-p {
 				float: left;
@@ -172,20 +172,20 @@
 			.userMes {
 				float: left;
 				width: 6.9rem;
-				height: 1.0rem;
+				/*height: 1.0rem;*/
 				overflow: hidden;
 				.place {
 					width: 5.02rem;
 					margin: .36rem 0;
 					float: left;
-					height: .28rem;
+					/*height: .28rem;*/
 					line-height: .28rem;
 					text-align: left;
 					display: flex;
 					align-items: center;
-					overflow: hidden;
+					/*overflow: hidden;
 					text-overflow: ellipsis;
-					white-space: nowrap;
+					white-space: nowrap;*/
 					img {
 						width: .24rem;
 						height: .28rem;

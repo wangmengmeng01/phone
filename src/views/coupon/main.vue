@@ -5,7 +5,7 @@
 		</ul>
 		<div class="coupon" :class="[!res.length?'none':'']">
 			<Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" />
-				<div v-if="!res.length" class="center f28 color_font-99"><img style="margin: 4.8rem 2.74rem .6rem;padding: 0; width:1.42rem; height: .98rem; background-size: 100% 100%;" src="../../assets/main/mine/zwjl.png" alt="">
+			<div v-if="!res.length" class="center f28 color_font-99"><img style="margin: 4.8rem 2.74rem .6rem;padding: 0; width:1.42rem; height: .98rem; background-size: 100% 100%;" src="../../assets/main/mine/zwjl.png" alt="">
 				<p>暂无{{nav[act].name}}券</p>
 			</div>
 		</div>
@@ -35,8 +35,9 @@
 					type: '1',
 					status: '6'
 				}],
-				res: {},
+				res: [],
 				pageIndex: 1,
+				total:0,
 			}
 		},
 		components: {
@@ -45,16 +46,21 @@
 		created() {
 			this.init(this.nav[0]);
 		},
-		//    mounted() {
-		//      document.body.onscroll = () => {
-		//        if(document.documentElement.scrollTop >= document.body.scrollHeight - document.documentElement.clientHeight) {
-		//          if(this.res.length <= 10)return;
-		//          if(this.pageIndex < Math.ceil(this.nav[this.act].size / 10)) return;
-		//          this.pageIndex++;
-		//          this.init();
-		//        }
-		//      }
-		//    },
+		mounted() {
+			document.body.onscroll = () => {
+				if((document.documentElement.scrollTop || document.body.scrollTop) >= document.body.scrollHeight - document.documentElement.clientHeight) {
+					this.pageIndex++;
+					if(this.pageIndex > this.total) {
+						return;
+					}
+
+					if(this.$route.query.rollType) {
+						this.init(this.nav[this.act]);
+					}
+
+				}
+			}
+		},
 		methods: {
 			init(item) {
 				searchUserCouponInfo({
@@ -62,20 +68,35 @@
 					status: item.status,
 					pageIndex: this.pageIndex,
 				}).then(res => {
-					this.res = res.couponList;
+					this.res = this.res.concat(res.couponList) ;
+					
 					this.nav[0].size = res.notUsedCount;
 					this.nav[1].size = res.usedCount;
 					this.nav[2].size = res.expireNotUsedCount;
+					
+					if(item.status == 3) {
+						this.total = Math.ceil(res.notUsedCount / 10);
+					} else if(item.status == 4) {
+						this.total = Math.ceil(res.usedCount / 10);
+					} else {
+						this.total = Math.ceil(res.expireNotUsedCount / 10);
+					};
+					
+					
+					
+					
 				}).catch(() => {
 					this.res = []
 				})
 			},
 			choose(i, index) {
+				this.res = [];
 				if(this.act === index) return;
 				window.scroll(0, 0);
 				this.act = index;
 				this.pageIndex = 1; // 切换菜单重置pageIndex
 				this.init(i);
+				console.log(this.act);
 			},
 		},
 		watch: {}
@@ -92,23 +113,22 @@
 			justify-content: space-between;
 			align-items: center;
 			background-color: #fff;
-			border-bottom:1px solid #E5E5E5;
+			border-bottom: 1px solid #E5E5E5;
 			li {
 				width: 1.6rem;
 				line-height: .8rem;
 			}
 			.act {
-				border-bottom: 2px solid  #208AFF;
+				border-bottom: 2px solid #208AFF;
 				box-sizing: border-box;
 			}
 		}
-		
-		.coupon{
+		.coupon {
 			margin: 0.36rem .3rem 0;
 		}
 	}
 	
-	.coupon_list{
+	.coupon_list {
 		margin-bottom: .36rem;
 	}
 </style>

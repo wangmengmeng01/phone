@@ -67,7 +67,7 @@
         	  this.$toask('登录成功!',"1500","85%","#49E897 ","#158A4E");
           // 成功的话把返回的数据放到缓存中
           this.set_user(res);
-          this.$go('/')
+          this.$go('/');
         }).catch(() => {
           //失败的话提示
           this.passWord = '';

@@ -67,7 +67,7 @@
 
 		<div class="customer_detail-top">
 			<img src="../../assets/main/mine/userImg.png" />
-			<p class="f36 center customer_detail-top-p1"><span>{{item.userName}}</span><span>{{item.mobile}}</span></p>
+			<p class="f36 center customer_detail-top-p1"><span>{{item.userName|nameDesensitization}}</span><span>{{item.mobile|desensitization}}</span></p>
 			<p class="f28 center customer_detail-top-p2">{{item.beInviteDate}}成为我的客户</p>
 		</div>
 
@@ -97,7 +97,7 @@
 				<span class="color_font-99  customer_detail-mess-span1">年龄</span>
 				<span class="color_font-36 customer_detail-mess-span2">{{item.age+'岁' || '--'}}</span>
 				<span class="color_font-99  customer_detail-mess-span1">单笔最高</span>
-				<span class="color_font-36 customer_detail-mess-span3">{{item.investAmount || '--'}}元</span>
+				<span class="color_font-36 customer_detail-mess-span3">{{item.investAmount/10000 || '--'}}万元</span>
 			</p>
 			<p class="f28">
 				<span class="color_font-99  customer_detail-mess-span1">风险偏好</span>
@@ -105,14 +105,14 @@
 			</p>
 		</div>
 
-		<div class="customer_detail-list">
-			<p class="customer_detail-list-title f32">客户资产 <span class="f28 color_font-99">更多</span></p>
+		<div class="customer_detail-list"> <!-- v-show="AssetsItem.length"-->
+			<p class="customer_detail-list-title f32"  @click="$go('userAssets',{rollType:1,userCode:userCode})">客户资产 <span class="f28 color_font-99">更多</span></p>
 
 			<div class="customer_detail-list-detail borderB" v-for="(i,index) in AssetsItem" v-show="index<=2">
 				<p class="f28 customer_detail-list-detail-p">{{i.borrowName}} <span class="f28 customer_detail-list-detail-p-span">持有中</span></p>
 				<div class="customer_detail-list-detail-div">
 					<p><span class="f36">{{i.initCashAmount}}</span><span class="f24">投资金额(元)</span></p>
-					<p><span class="f24"><i class="f36">{{i.interestEndDate}}</i>天</span><span class="f24">到期天数</span></p>
+					<p><span class="f24"><i class="f36">{{i.interestEndDate}}</i></span><span class="f24">到期日期</span></p>
 					<p><span class="f36">+{{i.holdAmount}}</span><span class="f24">持有收益(元)</span></p>
 				</div>
 			</div>

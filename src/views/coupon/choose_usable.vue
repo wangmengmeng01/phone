@@ -10,7 +10,7 @@
 				<p>暂无可送优惠</p>
 			</div>
 		</div>
-		<button class="finish" @click="submit">完成</button>
+		<p class="finish" @click="submit">完成</p>
 	</div>
 
 </template>

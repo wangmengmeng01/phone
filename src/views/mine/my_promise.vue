@@ -7,7 +7,7 @@
 		<div class="promise-list" v-show="promiseInviteList!=''">
 			<div class="promise-div" v-for="(i,index) in promiseInviteList">
 				<div class="promise-div-join" @click="$go('/prod/buyBid',{bidNo:i.bidNo,promiseInviteId:i.promiseInviteId,backTitle:'确认履约',inviteAmount:i.inviteAmount})" :class="checkBol?((i.isSoldOut && i.isNotFunds)?'':'opacity') : 'unClick'">
-					<p class="f28">{{i.bidName}}</p>
+					<p class="f28">{{i.productName}}</p>
 					<p>{{i.annualizedRate}}<i>%</i></p>
 					<p class="f28">
 						<span class="promise-div-join-span1">履约金额(元)</span>

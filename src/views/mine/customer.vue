@@ -33,8 +33,12 @@
 			<div v-for="i in list" v-if="list.length" class="customer-User borderBottom">
 				<div class="customer-User-top" @click="$go('customer_detail',{userCode: i.userCode})">
 					<img src="../../assets/main/mine/userImg.png" />
-					<p class="f32 color_font-36 customer-User-top-p1">{{i.realName }}</p>
-					<p class="f28 color_font-99 customer-User-top-p2">2018.01.15成为我的客户</p>
+					<p class="f32 color_font-36 customer-User-top-p1">
+						<span v-show="i.realName!=''">{{i.realName |nameDesensitization}}</span>
+						<span>{{i.mobile|desensitization}}</span>
+						
+					</p>
+					<p class="f28 color_font-99 customer-User-top-p2">{{i.beInviteDate}}成为我的客户</p>
 				</div>
 				<div class="customer-User-div">
 					<p class="customer-User-div-p1 f28">
@@ -43,7 +47,7 @@
 							<span>拨打电话</span>
 						</a>
 					</p>
-					<p class="customer-User-div-p2 f28" @click="$go('InfoRegister',{userCode: i.userCode})">
+					<p class="customer-User-div-p2 f28" @click="$go('InfoRegister',{userCode: i.userCode,realName:i.realName})">
 						<img src="../../assets/main/mine/zydj.png" />
 						<span>展业登记</span>
 					</p>
@@ -60,7 +64,7 @@
 			<div v-for="i in list" v-if="list.length" class="customer-User borderBottom">
 				<div class="customer-User-top">
 					<img src="../../assets/main/mine/userImg.png" />
-					<p class="f32 color_font-36 customer-User-top-p1">{{i.customerName}}</p>
+					<p class="f32 color_font-36 customer-User-top-p1">{{i.customerName|nameDesensitization}}</p>
 					<p class="f28 color_font-99 customer-User-top-p2">{{i.createTime}}成为我的客户</p>
 				</div>
 				<div class="customer-User-div1">
@@ -83,7 +87,7 @@
 			<p class="f28">暂无客户</p>
 		</div>
 
-		<button class="btn" @click="$go('addUser',{backTitle:'添加客户',isManage:1})">添加新客户</button>
+		<button class="btn"  v-if="checkBol"  @click="$go('addUser',{backTitle:'添加客户'})">添加新客户</button>
 	</div>
 </template>
 

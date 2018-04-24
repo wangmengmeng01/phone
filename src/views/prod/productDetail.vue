@@ -8,7 +8,8 @@
 			<div class="pdtMessage">
 				<p>{{detail.periodLength}}{{detail.periodUnit|Totime}}期限</p>
 				<p>{{detail.investMinAmount|formatNum}}元起投</p>
-				<p>不可转让</p>
+				<p v-if="detail.lockPeriod!='9999'">不可转让</p>
+				<p v-else>{{detail.lockPeriod}}天后可转让</p>
 			</div>
 			<div class="pdtProgress">
 				<span class="pdtRate1">{{detail.amountScale}}%</span>
@@ -51,8 +52,8 @@
 		</div>-->
 		
 		<div class="productDetailCenter boderB productDetailTips">
-			<p><span>出借规则</span>100元起，并以100的整数倍递增</p>
-			<p><span>出借上限</span>5,000元</p>
+			<p><span>出借规则</span>{{detail.investMinAmount|formatNum}}元起，并以{{detail.investAscendingAmount|formatNum}}的整数倍递增</p>
+			<p><span>出借上限</span>{{detail.investMaxAmount|formatNum}}元</p>
 			<p><span>起息日期</span>{{detail.interestStartDate}}</p>
 			<p><span>到期日期</span>{{detail.interestEndDate}}</p>
 			<p><span>还款方式</span>一次性还款</p>
@@ -87,10 +88,10 @@
 				<span class="span" @click="$go('/prod/calculation',{bidNo:detail.bidNo})">  
 					<img src="../../assets/main/prod/calculation.png"/>
 				</span>
-				<span class="yy f32" @click="$go('/prod/invite')">邀约</span>
+				<span class="yy f32" @click="$go('/prod/invite',{bidNo:item.bidNo})">邀约</span>
 			    <p @click="getStatus">立即购买</p>
 		</div>
-		<div v-else class="productDetailBottom disable" >已售罄</div>
+		<div v-else class="productDetailBottom disable" style="pointer-events: none;">已售罄</div>
 	</div>
 </template>
 
@@ -358,13 +359,14 @@
 	
 	
 	.pdtBugMes {
+		margin: 0 auto;
+		padding: 0;
 		float: left;
 		width: 7.5rem;
 		height: 0.9rem;
 		text-align: center;
 		overflow: hidden;
 		background-color: #EFF5FF;
-		overflow: hidden;
 	}
 	
 	.pdtBugMes>span {
@@ -648,6 +650,7 @@
 		margin: 0 auto;
 		padding: 0;
 		position: fixed;
+		z-index: 100;
 		left: 0;
 		right: 0;
 		bottom: 0;

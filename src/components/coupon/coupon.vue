@@ -23,7 +23,8 @@
           <img :src="require(`@/assets/coupon/check_${check?'succ':'none'}.png`)" alt="" class="check" v-if="checked">
         </div>-->
         <div class="conDiv1">
-        		<span class="f48 conDivp1" style="width: 1.94rem;">{{data.profitRate}}%</span>
+        		<span class="f48 conDivp1" v-show="data.type" style="width: 1.94rem;">{{data.profitRate}}{{data.type==1?'%':'元'}}</span>
+        		<span class="f48 conDivp1" v-show="data.couponType" style="width: 1.94rem;">{{data.profitRate}}{{data.couponType==1?'%':'元'}}</span>
         		<p class="f28 conDivp2"  v-if="type !== 'mine'">来源：{{data.name}}</p>
         </div>
         <div class="conDiv2">
@@ -32,7 +33,7 @@
         </div>
         <img :src="require(`@/assets/coupon/check_${check?'succ':'none'}.png`)" alt="" class="check" v-show="check" v-if="checked">
       </div>
-      <div class="conRule"  @click="ruleshowBol=!ruleshowBol"  :class="ruleshowBol?'hh':''">
+      <div class="conRule" @click.stop="ruleshowBol=!ruleshowBol"  :class="ruleshowBol?'hh':''">
       	<p class="conRule_p f28">
       		<span class="color_font-36">使用规则</span>
       		<span class="color_font-99">展开 <img v-if="!ruleshowBol" src="../../assets/coupon/iconDown.png"/> <img v-else src="../../assets/coupon/iconUp.png"/></span>

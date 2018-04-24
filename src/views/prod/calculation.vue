@@ -81,10 +81,15 @@
 			//计算收益
 
 			inputBlur() {
-
+				if(this.money > this.detail.amountWait) {
+					this.money = this.detail.amountWait
+				};
+				
 				if(this.money > this.detail.investMaxAmount) {
 					this.money = this.detail.investMaxAmount
 				};
+				
+				
 				if(this.money == "") {
 					this.money = detail.investMinAmount;
 				};

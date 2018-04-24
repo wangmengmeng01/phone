@@ -6,7 +6,9 @@
 				<img v-if="!isManage" src="../../assets/main/mine/tx.png" />
 				<img v-else src="../../assets/main/mine/lcs.png" />
 				<p class="f28 color_font-36 mine-top-user-p1">
-					{{item.userName | nameDesensitization}}<span v-show="item.position">{{item.mobile | desensitization}}</span></p>
+					<span v-show="nextBol">{{item.userName | nameDesensitization}}</span>
+					<span>{{item.mobile | desensitization}}</span>
+				</p>
 			</div>
 			<div class="mine-top-ewm" @click="$go('/mine/qrcode')">
 				<img class="mine-top-ewm-img1" src="../../assets/main/mine/ewm.png" />
@@ -14,13 +16,13 @@
 			</div>
 			<div v-show="isManage" class="mine-top-mes f28 color_font-99">
 				<p class="mine-top-mes-p1">团队经理</p>
-				<p class="mine-top-mes-p2">中赢卓信财富投资管理(北京)有限公司{{item.department}}</p>
+				<p class="mine-top-mes-p2">{{item.department}}</p>
 			</div>
 
 		</div>
 		<!--礼物-->
 		<div class="mine-gift">
-			<p class="mine-title f36 color_font-36" @click="$go('/mine/gift',{rollType:1})">我的礼物<i>待领取(<em>{{giftList.unreceivedCount}}</em>)</i> <span v-show="giftList.couponList!=''" class="f28 color_font-99">更多</span></p>
+			<p class="mine-title f36 color_font-36" >我的礼物<i>待领取(<em>{{giftList.unreceivedCount}}</em>)</i> <span v-show="giftList.couponList!=''" @click="$go('/mine/gift',{rollType:1})" class="f28 color_font-99">更多</span></p>
 			<div class="mine-gift-list" v-if="giftList.couponList!=''">
 				<div v-for="(i,index) in giftList.couponList" class="mine-gift-list-card">
 					<div>
@@ -40,15 +42,14 @@
 		</div>
 		<!--承诺-->
 		<div class="mine-gift">
-			<p class="mine-title f36 color_font-36" @click="$go('/mine/my_promise',{rollType:1})">履约承诺<i>待履约(<em>{{promiseList.waitPromiseCount}}</em>)</i><span v-show="promiseList.waitPromiseCount" class="f28 color_font-99">更多</span></p>
+			<p class="mine-title f36 color_font-36">履约承诺<i>待履约(<em>{{promiseList.waitPromiseCount}}</em>)</i><span v-show="promiseList.waitPromiseCount" @click="$go('/mine/my_promise',{rollType:1})" class="f28 color_font-99">更多</span></p>
 
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
-
 					<div class="swiper-slide" style="background-color: #FFFFFF;" v-for="(a,index)  in  promiseInviteList">
 						<div class="mine-join">
 							<div class="mine-join-div" @click="$go('/prod/buyBid',{bidNo:a.bidNo,promiseInviteId:a.promiseInviteId,backTitle:'确认履约',inviteAmount:a.inviteAmount})">
-								<p class="f28">{{a.bidName}}</p>
+								<p class="f28">{{a.productName}}</p>
 								<p>{{a.annualizedRate}}<i>%</i></p>
 								<p class="f28">
 									<span class="mine-join-div-span1">履约金额(元)</span>
@@ -83,7 +84,7 @@
 
 		<div class="mine-list">
 
-			<p v-for="(j,index) in menu" :class="index<menu.length-1?'borderB':''"  @click="$go(j.icon==='join' ? (nextBol?j.url:'/reg_bank') : `/mine/${j.url}`)">
+			<p v-for="(j,index) in menu" :class="index<menu.length-1?'borderB':''"  @click="$go(j.icon==='join' ? (nextBol?j.url:'/reg_bank') : `/mine/${j.url}`,{userCode:userCode})">
 				<span class="f28 color_font-36">{{j.name}}</span>
 				<img src="../../assets/common/arrow-right.png" />
 			</p>
@@ -146,13 +147,14 @@
 				}, //履约参数
 				promiseList: {}, //履约数据
 				promiseInviteList: [], //履约列表
+				userCode:'',
 				menu_normal: [{
 						icon: 'mine',
 						name: '我的理财师',
 						url: 'master'
 					}, {
 						icon: 'join',
-						name: '我要加盟的理财师',
+						name: '我要加盟理财师',
 						url: '/home/joinFinlManager'
 					},
 					{
@@ -181,6 +183,9 @@
 						url: 'invitation'
 					}
 				],
+				list1:{},
+				list2:{},
+				list3:{},
 			}
 		},
 		created() {
@@ -244,9 +249,12 @@
 			init() {
 				searchUserInfo().then(r => {
 					this.item = r;
+					this.userCode=r.userCode;
+					
 					this.menu = r.flag === 1 ? this.menu_manage : this.menu_normal;
 					this.isManage = r.flag === 1 ? true : false;
 					this.set_user_info(r);
+
 				})
 			},
 			//我的礼物

@@ -90,16 +90,17 @@
 			"filter": true,
 			"foot": {
 				"type": "main",
-				"style": "padding-bottom: 1rem;"
-			}
+				"style": {
+							"background":"#f6f5f5",
+							"padding":"0 0 2.4rem"
+						}
+			},
+			"bg":false
 		}, {
 			"path": "changeBank2",
-			"title": "换绑卡",
+			"title": "绑定新银行卡",
 			"filter": true,
-			"foot": {
-				"type": "main",
-				"style": "padding-bottom: 1rem;"
-			}
+			"foot": false
 		}, {
 			"path": "/",
 			"component": "main",
@@ -191,6 +192,12 @@
 					"title": "邀请好友",
 					"foot": false
 				}, {
+					"path": "invitationRegister",
+					"title": "邀请好友注册",
+					"foot": false,
+					"filter": true,
+					"bg":false
+				},{
 					"path": "master",
 					"title": "我的理财师",
 					"foot": false
@@ -211,7 +218,11 @@
 					"path": "customer_detail",
 					"title": "客户详情",
 					"foot": false
-				}, {
+				},{
+					"path": "userAssets",
+					"title": "资产列表",
+					"foot": false
+				},{
 					"path": "customer_potential",
 					"title": "潜在客户",
 					"foot": false
@@ -221,8 +232,14 @@
 					"foot": false
 				}, {
 					"path": "seting",
-					"title": "个人设置",
-					"foot": false
+					"title": "设置",
+					"foot": false,
+					"bg":false
+				}, {
+					"path": "account",
+					"title": "账户安全",
+					"foot": false,
+					"bg":false
 				}
 			]
 		}, {
@@ -285,7 +302,7 @@
 					"redirect": "index"
 				}, {
 					"path": "joinFinlManager",
-					"title": "我要加盟理财师",
+					"title": "加盟理财师",
 					"back": {
 						"background": "#fff"
 					},
@@ -451,7 +468,10 @@
 					"title": "充值",
 					"foot": {
 						"type": "main",
-						"style": "background:#f1f1f9"
+						"style": {
+							"background":"#fff",
+							"padding":"0 0 2.4rem"
+						}
 					}
 				}, {
 					"path": "withdraw",
@@ -460,12 +480,14 @@
 						"type": "main",
 						"style": {
 							"background":"#fff",
-							"padding":"0 0 1.4rem"
+							"padding":"0 0 2.4rem"
 						}
 					}
 				}, {
 					"path": "autoInvest",
-					"title": "自动投标"
+					"title": "自动投标",
+					"foot":false,
+					"bg":false
 				}, {
 					"path": "riskTest",
 					"title": "风险评测",
@@ -491,10 +513,13 @@
 					"bg":false
 				}, {
 					"path": "changeBank",
-					"title": "我的银行卡",
+					"title": "银行卡",
 					"foot": {
 						"type": "main",
-						"style": "background:#f1f1f9"
+						"style": {
+							"background":"#fff",
+							"padding":"0 0 2.4rem"
+						}
 					}
 				}, {
 					"path": "assertList",

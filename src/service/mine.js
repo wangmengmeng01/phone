@@ -171,4 +171,38 @@ export const updateUserForM = async (params) => {
     params,
   });
 }
+/**
+ * 邀约记录
+ */
+export const getUserManagerPromiseInviteList = async (params) => {
+  return await $http({
+    method: 'get',
+    api: api.getUserManagerPromiseInviteList,
+    params,
+  });
+}
 
+
+/**
+ * 邀请好友记录
+ */
+export const getInviteRecordList = async (params) => {
+  return await $http({
+    method: 'get',
+    api: api.getInviteRecordList,
+    params,
+  });
+}
+
+
+
+/**
+ * 邀请好友注册
+ */
+export const registerForFriend = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.registerForFriend,
+    params,
+  });
+}

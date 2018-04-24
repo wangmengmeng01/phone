@@ -2,7 +2,7 @@
 	<div class="InfoRegister">
 		<div class="InfoRegister-div f28">
 			<span>展业目标</span>
-			<span style="float: right;">张三</span>
+			<span style="float: right;">{{realName|nameDesensitization}}</span>
 		</div>
 		<p class="InfoRegister-p"></p>
 		<div class="InfoRegister-div f28 borderB">
@@ -13,7 +13,6 @@
 				<span v-show="recommendDate!=null || recommendDate!=''">{{recommendDate}}</span>
 				<span v-show="recommendDate==''">请选择</span>
 			</p>
-
 		</div>
 		<div class="InfoRegister-div f28">
 			<span>推荐地点</span>
@@ -96,12 +95,10 @@
 					},
 				],
 				selectProduct: 0, // 比如想要默认选中为 Three 那么就把他设置为C
-				productList: [{
-					productName: "",
-					productNo: ""
-				}],
+				productList: [],
 				amount: 0 || '',
 				remark: "",
+				realName:this.$route.query.realName,
 			}
 		},
 		computed: {},

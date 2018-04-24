@@ -2,7 +2,7 @@
 	<div class="higHqualityAssets">
 
 		<div v-for="(i,index) in list" class="hha-div" v-show="totalPage>0">
-			<p class="hha-div-title f32 color-font ffl">{{i.borrowName}}</p>
+			<p class="hha-div-title f32 color-font ffl">{{i.borrowName}}{{i.borrowNo}}</p>
 			<p class="f32 hha-div-p1 ffl">
 				<span class="ffl">{{i.annualizedRate|tofixed2}}%</span>
 				<span class="ffl">{{i.contractAmount|formatNum}}</span>

@@ -1,30 +1,7 @@
 <template>
   <div class="withdraw pageCenter">
-    <!--<div class="top">
-      <img src="../../assets/common/contacts.png">
-      <div class="topRight">
-        <div class="TRTop"><span></span><em>快捷支付</em></div>
-        <p></p>
-      </div>
-    </div>
-    <div class="rechargeLimit">预计到账时间T+1工作日，节假日顺延</div>
-    <div class="withdrawTips">该时间为平台预估时间，具体以实际到账时间为准</div>
-    <div class="center">
-      <div class="centerTop">提现金额</div>
-      <div class="centerC"><span>¥</span><input type="text">
-        <div class="wall">全提</div>
-      </div>
-      <div class="centerB"><span>账户余额</span><em>{{cardMes.availableAmount|formatNum}}元</em></div>
-      <div class="centerB"><span>可提现余额</span><em>元</em></div>
-    </div>
-    <div class="bottom">
-      <div class="bottomB"><span>手续费</span><em>元</em></div>
-      <div class="bottomB"><span>实际到账</span><em>元</em></div>
-    </div>
-    <p class="rechargeBtn">下一步</p>-->
-    
     <div class="withdraw-bank">
-    		<p class="f28 p1"> <img class="logo" src="../../assets/wealth/logo.png"/> <span>{{cardMes.bankName}}</span> <img class="img1" src="../../assets/wealth/kjzf.png"/></p>
+    		<p class="f28 p1"> <img class="logo" :src="require(`../../assets/wealth/whiteLogo/${bankNo}.png`)" /> <span>{{cardMes.bankName}}</span> <img class="img1" src="../../assets/wealth/kjzf.png"/></p>
     		<p class="f48 p2 center">{{cardMes.bankCardNo|hideBankNum}}</p>
     </div>
     <p class="withdraw-tips f28">预计到账时间<i>T+1</i>工作日，节假日顺延<br />(该时间为平台预估时间，具体以实际到账时间为准)</p>
@@ -68,12 +45,13 @@
     name: 'withdraw',
     data() {
       return {
+      	bankNo:100,
         cardMes: {}, //银行卡信息
         accountMes: {}, //账户金额
-        accountMoney: 0, //可提现金额
+        accountMoney: 0||0.0, //可提现金额
         withdrawMoney: '', //提现金额
         withdrawBol: false, //是否全选
-        userCashFeeMoney: 0, //提现手续费
+        userCashFeeMoney: 0 || 0.0, //提现手续费
         actualccountMoney: 0, //实际到账回调地址
         retUrl: location.origin + location.pathname, //返回地址
         formItem: '',
@@ -81,7 +59,6 @@
       }
     },
     created() {
-  
       if (this.$route.query.isfromhuifu) {
         // 开始清楚成功页面的缓存
         this.RESET('succ_page');
@@ -99,6 +76,7 @@
       const retUrl = this.retUrl = location + '?isfromhuifu=1';
       selectBeforeRecharge().then(res => {
         this.cardMes = res;
+        this.bankNo=parseInt( this.cardMes.bankNo);
       });
   
       accountAcmountInfo().then(res => {

@@ -31,11 +31,11 @@
 				</div>
 			</div>
 			<!--阅读协议-->
-			<p class="checkAgreementImg">
+			<!--<p class="checkAgreementImg">
 				<img @click="checked=!checked" :src="require(`@/assets/common/check_${checked?'succ':'none'}.png`)" /> 我已阅读并同意 《卓信理财师加盟协议》
-			</p>
+			</p>-->
 			<!--立刻购买-->
-			<div class="productDetailBottom" @click="join" :class="[(checked && showFalse && showFalse2)?'':'disable']">
+			<div class="productDetailBottom" @click="join" :class="[(showFalse && showFalse2)?'':'disable']">
 				申请加盟
 			</div>
 		</div>
@@ -65,14 +65,14 @@
 
 			<p class="submissionMes f28">
 				<span class="color_font-99">当前状态</span>
-				<span class="color_font-36">审核中</span>
+				<span class="color_font-36">审核成功</span>
 			</p>
 			<p class="submissionMes f28">
 				<span class="color_font-99">提交时间</span>
 				<span class="color_font-36">{{jionMes.createdTime}}</span>
 			</p>
 			<p class="submissionMes f28">
-				<span class="color_font-99">完成时间</span>
+				<span class="color_font-99">审核时间</span>
 				<span class="color_font-36">{{jionMes.updatedTime}}</span>
 			</p>
 		</div>
@@ -99,7 +99,7 @@
 
 			<p class="submissionMes f28">
 				<span class="color_font-99">当前状态</span>
-				<span class="color_font-36">审核通过</span>
+				<span class="color_font-36">审核失败</span>
 			</p>
 			<p class="submissionMes f28">
 				<span class="color_font-99">审核时间</span>

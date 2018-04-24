@@ -3,9 +3,11 @@
     <ul class="nav flex f32">
       <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}({{i.size}})</li>
     </ul>
-    <div class="coupon p4" :class="[!res.length?'none':'']"  >
-      <Coupon v-for="(i,index) in res" :data="i" :key="index"class="coupon_list" checked="true"  @checkedCb="checkedCb(i,index)" ref="coupon" />
-      <div v-if="!res.length" class="nothing f32 color_font"><img src="../../assets/common/nothing_coupon.png" alt=""><p>暂无{{nav[act].name}}券</p></div>
+    <div class="coupon p4" :class="[!res.length?'none':'']">
+      <Coupon  v-for="(i,index) in res" :data="i" :key="index"class="coupon_list" checked="true"  @checkedCb="checkedCb(i,index)" ref="coupon" />
+      <div v-if="!res.length" class="nothing f32 color_font"><img style="margin: 4.8rem 2.74rem .6rem;padding: 0; width:1.42rem; height: .98rem; background-size: 100% 100%;" src="../../assets/main/mine/zwjl.png" alt="">
+      		<p>暂无{{nav[act].name}}券</p>
+      </div>
     </div>
     <!--<button class="btn" @click="submit">选取</button>-->
   </div>

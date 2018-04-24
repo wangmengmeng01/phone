@@ -1,8 +1,8 @@
 <template>
 	<div class="extension">
-		<p class="f28 borderB" @click="$go('InfoRegisterList')">展业登记 记录 <img src="../../assets/common/arrow-right.png" /></p>
-		<p class="f28 borderB" @click="$go('user_promise')">邀约投资 记录 <img src="../../assets/common/arrow-right.png" /></p>
-		<p class="f28 borderB" @click="$go('give_record')">赠送礼物 记录 <img src="../../assets/common/arrow-right.png" /></p>
+		<p class="f28 borderB" @click="$go('InfoRegisterList',{rollType:1})">展业登记 记录 <img src="../../assets/common/arrow-right.png" /></p>
+		<p class="f28 borderB" @click="$go('user_promise',{rollType:1})">邀约投资 记录 <img src="../../assets/common/arrow-right.png" /></p>
+		<p class="f28 borderB" @click="$go('give_record',{rollType:1})">赠送礼物 记录 <img src="../../assets/common/arrow-right.png" /></p>
 	</div>
 </template>
 

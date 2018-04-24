@@ -30,22 +30,28 @@
         <div class="wealthCName" >{{i.name}}</div>
       </li>
     </ul>-->
-  
+  	<img @click="$go('/mine/seting')" class="settingImg" src="../../assets/wealth/setting.png"/>
   	<div class="wealth-top sonDiv f28">
   		<img src="../../assets/main/mine/lcs.png"/>
-  		<span>赵毅明  185****6666</span>
+  		<span>{{item.userName | nameDesensitization}}  {{item.mobile | desensitization}}</span>
   	</div>
   	<div class="wealth-center sonDiv">
-  		<p class="zzc"><span class="f24 color_font-99">总资产(元)</span> <img src="../../assets/wealth/openEye.png"/></p>
-  		<p class="total color_font-36 f56">{{home.totalAmount|formatNum}}</p>
+  		<p class="zzc"><span class="f24 color_font-99">总资产(元)</span>
+  			<img v-if="showBol"  @click="showBol=!showBol"  src="../../assets/wealth/openEye.png"/>
+  			<img v-else  @click="showBol=!showBol" src="../../assets/wealth/closeEye.png"/>
+  		</p>
+  		<p v-if="showBol" class="total color_font-36 f56">{{home.totalAmount|formatNum}}</p>
+  		<p v-else class="total color_font-36 f56">--.--</p>
   		<div class="wealth-center-div borderB">
   			<p class="p1">
   				<span class="f24 span1 color_font-99">累计收益(元) <img src="../../assets/common/arrow-right.png"/></span>
-  				<span class="f40 span2">{{home.sumAmount|formatNum}}</span>
+  				<span v-if="showBol" class="f40 span2">{{home.sumAmount|formatNum}}</span>
+  				<span v-else class="f40 span2">--.--</span>
   			</p>
   			<p class="p2">
   				<span class="f24 span1 color_font-99">昨日收益(元) <img src="../../assets/common/arrow-right.png"/></span>
-  				<span class="f40 span2">{{home.yesterdayAmount|formatNum}}</span>
+  				<span v-if="showBol" class="f40 span2">{{home.yesterdayAmount|formatNum}}</span>
+  				<span v-else class="f40 span2">--.--</span>
   			</p>
   		</div>
   		
@@ -71,26 +77,23 @@
   			<span>交易记录</span>
   		</p>
   	</div>
-  	
-  
   	<div class="wealth-list f30 color_font-36 sonDiv">
   		<p class="borderB " @click="$go('/coupon/main',{rollType:1})"> 
   			<img class="img1" src="../../assets/wealth/icon-coupon.png"/>
   			<span>优惠券</span>
   			<img class="img2" src="../../assets/common/arrow-right.png"/>
   		</p>
-  		<p class="borderB ">
+  		<p class="borderB " @click="goBankCard()">
   			<img class="img1" src="../../assets/wealth/icon-bank.png"/>
   			<span>银行卡</span>
   			<img  class="img2" src="../../assets/common/arrow-right.png"/>
   		</p>
-  		<p>
+  		<p @click="$go('/wealth/riskTest')">
   			<img class="img1" src="../../assets/wealth/icon-risk.png"/>
   			<span>风险评估</span>
   			<img  class="img2" src="../../assets/common/arrow-right.png"/>
   		</p>
   	</div>
-  	
   	<div class="wealth-tips sonDiv f26">
   		开通自动授权投标功能，才能进行投资<span>立即开通</span> <img src="../../assets/wealth/icon-close.png"/>
   	</div>
@@ -103,7 +106,8 @@
     wealthIndex,
     invesProperty,
     getUserStatus,
-    userActivate
+    userActivate,
+    searchUserInfo
   } from '@/service'
    import axios from 'axios'
    export default {
@@ -112,58 +116,7 @@
 
 		return {
 			totalAmount: 0,
-			menu: [{
-					icon: 'wtradeP',
-					name: '改交易密码',
-					url: '/wealth/tranderPassword'
-				},
-//				{
-//					icon: 'wEarn',
-//					name: '收益明细',
-//					url: ''
-//				},
-				{
-					icon: "wcontinue",
-					name: '我的续投',
-					url: 'wealth/continueInvest'
-				},
-				{
-					icon: 'wchangeBank',
-					name: '我的银行卡',
-					url: 'wealth/changeBank'
-				},
-				{
-					icon: 'wtradeRecord',
-					name: '交易记录',
-					url: 'wealth/tradeRecord'
-				},
-				{
-					icon: 'wmyConpun',
-					name: '我的优惠',
-					url: '/coupon'
-				},
-				{
-					icon: 'wautoin',
-					name: '自动投标',
-					url: 'wealth/autoInvest'
-				},
-				{
-					icon: 'wrisktest',
-					name: '风险测评',
-					url: 'wealth/riskTest'
-				},
-				{
-					icon: 'wmyPoint',
-					name: '我的积分',
-					url: ''
-				},
-				
-				{
-					icon: 'wmyPoint',
-					name: '我的积分',
-					url: ''
-				}
-			],
+			menu: [],
 			home: "",
 			invesProperty: {
 				data: {
@@ -177,6 +130,8 @@
 				"openStatus": true
 			},
 			statusInfo: '',
+			showBol:false,
+			item:'',
 
 		}
 	},
@@ -228,6 +183,10 @@
 				this.totalAmount = res.totalAmount;
 				console.log(this.invesProperty.res)
 			});
+			
+			searchUserInfo().then(r => {
+					this.item = r;
+				})
 		},
 		gowithdraw() {
 			if(this.getUserS.openStatus == true) {
@@ -285,11 +244,28 @@
 				this.$go('/reg_bank')
 			}
 		},
+		goBankCard() {
+			if(this.getUserS.openStatus == true) {
+				this.TouserActivate('/wealth/changeBank');
+			} else {
+				this.$go('/reg_bank')
+			}
+		},
+		
 	},
 	watch: {}
 }</script>
 
 <style lang="scss" scoped>
+.settingImg{
+	position: fixed;
+	z-index: 100;
+	right: .3rem;
+	top: .22rem;
+	width: .44rem;
+	height: .44rem;
+	background-size: 100% 100%;
+}
 	.wealth{
 		padding-bottom: 1.0rem;
 		&-top{

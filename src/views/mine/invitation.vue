@@ -4,11 +4,11 @@
 		<div class="invitation-num f28">
 			<div class="boderR">
 				<p class="color_font-99">已注册好友</p>
-				<p class="color_font-36">10人</p>
+				<p class="color_font-36">{{item.registerCount}}人</p>
 			</div>
 			<div>
 				<p class="color_font-99">已投标好友</p>
-				<p class="color_font-36">2人</p>
+				<p class="color_font-36">{{item.investCount}}人</p>
 			</div>
 		</div>
 		<div class="list f28">
@@ -17,20 +17,14 @@
 				<span>注册日期</span>
 				<span>是否投标</span>
 			</p>
-			<!--<div class="list-list">
-				<p class="list-list-p">
-					<span>手机号码</span>
-					<span>注册日期</span>
-					<span>是否投标</span>
+			<div class="list-list" v-if="list.length">
+				<p class="list-list-p" v-for="(i,index) in list">
+					<span>{{i.mobile}}</span>
+					<span>{{i.registerDate}}</span>
+					<span>{{i.isInvest==1?'是':'否'}}</span>
 				</p>
-				<p class="list-list-p">
-					<span>手机号码</span>
-					<span>注册日期</span>
-					<span>是否投标</span>
-				</p>
-			</div>-->
-
-			<p class="list-none f28 center">暂无好友</p>
+			</div>
+			<p v-else class="list-none f28 center">暂无好友</p>
 		</div>
 
 		<button class="btn">立即邀请好友</button>
@@ -38,13 +32,34 @@
 </template>
 
 <script>
+	 import {
+    getInviteRecordList,
+  } from '@/service'
+	
 	export default {
 		name: 'invitation',
 		data() {
-			return {}
+			return {
+				
+				pageIndex:1,
+				item:{},
+				list:[],
+			}
 		},
 		computed: {},
-		created() {},
+		created() {
+			
+			
+			getInviteRecordList({
+				pageIndex:this.pageIndex
+			}).then(res => {
+				
+				this.item=res;
+				
+				this.list=this.list.concat(res.list);
+	        });
+			
+		},
 		mounted() {},
 		components: {},
 		methods: {},

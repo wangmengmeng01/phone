@@ -137,4 +137,15 @@ export default {
   updateManagerUserForM:'user/filter/updateManagerUserForM',//添加理财师
   
   updateUserForM:'user/filter/updateUserForM',//添加客户
+  
+  getCustomer:'/home/filter/getCustomer',//查询客户
+ 
+  promiseInvite:'promise/filter/promiseInvite',//发起邀约
+  
+  getUserManagerPromiseInviteList:'promise/filter/getUserManagerPromiseInviteList',//邀约记录
+  
+  getInviteRecordList:'home/filter/getInviteRecordList',//邀请好友记录
+  
+  registerForFriend:'user/registerForFriend',//邀请好友注册
+  
 }
