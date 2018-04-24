@@ -5,8 +5,8 @@
 		
 		<div class="invitationRegister-div">
 			
-			<div class="invitationRegister-div-input">
-				
+			<div class="invitationRegister-div-input borderB">
+				<input type="" name="" id="" value="" />
 			</div>
 			
 			
@@ -57,15 +57,16 @@
 		&-div{
 			float: left;
 			margin: 0.2rem  .3rem  .4rem;
-			padding: .2rem 0;
-			width: 6.9rem;
-			height: 5.46rem;
+			padding: .1rem  0.2rem;
+			width: 6.1rem;
+			height: 5.26rem;
 			background: #FFFFFF;
 			box-shadow: 0 0 6px 0 rgba(0,0,0,0.06);
 			border-radius: 8px;
 			
 			&-input{
-				
+				width: 6.1rem;
+				height: 1.0rem;
 			}
 		}
 		.btn {

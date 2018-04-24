@@ -159,7 +159,7 @@
 					},
 					{
 						icon: 'invitation',
-						name: '邀请记录',
+						name: '邀请好友',
 						url: 'invitation'
 					}
 				],
