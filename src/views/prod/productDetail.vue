@@ -152,9 +152,6 @@
 					content: riskTips
 				})
 			},
-			pp() {
-
-			},
 			getStatus() {
 				getUserStatus(this.itemStatus).then(res => {
 					//@click=""
