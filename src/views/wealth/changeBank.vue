@@ -41,7 +41,7 @@
 		    		<input type="tel" class="changeBank-div-s4 f28 input" oninput="if( ! /^-?\d+\.?\d{0,2}$/.test(this.value)){ var s = this.value;this.value=s.substring(0,s.length-1);}" maxlength="6" v-model="rebindSms" placeholder="请输入短信验证码">
 		   		<span class="changeBank-div-s5 f28" @click="sendMess" :class="click_code?'disableBtn':''">{{codeText}}</span>
 		     </p>
-			<button class="btn changeBank-btn"  :class="[rebindSms.length==6?'':'dis']"@click="submit">下一步</button>
+			<button class="btn changeBank-btn"  :class="[rebindSms.length==6?'':'dis']"@click="submit">换绑卡</button>
 		</div>
 
 	</div>

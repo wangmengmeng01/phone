@@ -6,7 +6,7 @@
 		</div>
 		<div class="promise-list" v-show="promiseInviteList!=''">
 			<div class="promise-div" v-for="(i,index) in promiseInviteList">
-				<div class="promise-div-join" @click="$go('/prod/buyBid',{bidNo:i.bidNo,promiseInviteId:i.promiseInviteId,backTitle:'确认履约',inviteAmount:i.inviteAmount})" :class="checkBol?((i.isSoldOut && i.isNotFunds)?'':'opacity') : 'unClick'">
+				<div class="promise-div-join" @click="buyBid(i)" :class="checkBol?((i.isSoldOut && i.isNotFunds)?'':'opacity') : 'unClick'">
 					<p class="f28">{{i.productName}}</p>
 					<p>{{i.annualizedRate}}<i>%</i></p>
 					<p class="f28">
@@ -41,7 +41,8 @@
 
 <script>
 	import {
-		getPromiseInviteList
+		getPromiseInviteList,
+		getUserStatus
 	} from '@/service'
 	export default {
 
@@ -96,15 +97,97 @@
 			getPromiseInviteList() {
 				getPromiseInviteList(this.promiseItem).then(res => {
 					this.promiseList = res;
-					this.promiseInviteList =this.promiseInviteList.concat(res.promiseInviteList);
+					this.promiseInviteList = this.promiseInviteList.concat(res.promiseInviteList);
 					if(this.checkBol) {
 						this.total = Math.ceil(res.waitPromiseCount / 10);
-//						console.log(res.waitPromiseCount);
+						//						console.log(res.waitPromiseCount);
 					} else {
 						this.total = Math.ceil(res.alreadyPromiseCount / 10);
 					}
 
 				});
+			},
+			buyBid(item) {
+
+				const i = item;
+
+				getUserStatus().then(res => {
+
+					if(res.code == "100") {
+						const info = res.result;
+
+						if(info.openAccountStatus == "1") {
+							//未开户
+							this.$go('/reg_bank');
+						} else if(info.openAccountStatus == "4") {
+							//激活
+
+							userActivate({
+								retUrl: location.origin + location.pathname
+							}).then(res => {
+								axios({
+									method: 'post',
+									url: location.origin + new URL(res.serviceUrl).pathname,
+									data: res.inMap,
+									transformRequest: [function(data) {
+										let ret = '';
+										for(let it in data) {
+											ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+										}
+										return ret.slice(0, ret.length - 1)
+									}],
+								}).then(r => {
+									if(r.status === 200) {
+										if(r.data) {
+											document.body.innerHTML = r.data;
+											setTimeout(() => {
+												document.form.submit()
+											}, 0)
+										}
+									}
+								})
+							})
+
+						} else {
+							//电子签约
+							if(info.autoBuyBidGrantFlag == "1") {
+
+								//复投
+								if(info.autoBuyBidFlag == "1") {
+
+									//风险测评
+
+									if(info.riskRatingFlag == "1") {
+
+										this.$go('/prod/buyBid', {
+											bidNo: i.bidNo,
+											promiseInviteId: i.promiseInviteId,
+											backTitle: '确认履约',
+											inviteAmount: i.inviteAmount
+										});
+
+									} else {
+										this.$go('/wealth/riskTest');
+									}
+
+								} else {
+									this.$go('/wealth/autoInvest');
+								}
+
+							} else {
+								this.$go('/wealth/autoInvest');
+							}
+
+						}
+
+					} else if(res.code == "1210" || res.code == "1000") {
+						this.$go('/login');
+					} else {
+						this.$toask(res.message);
+					}
+
+				});
+
 			}
 		},
 		watch: {}

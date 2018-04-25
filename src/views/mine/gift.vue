@@ -55,7 +55,9 @@
 		},
 		computed: {},
 		created() {
-			this.mgGift();
+			if(this.$route.query.rollType) {
+						this.mgGift();
+			}
 		},
 		mounted() {
 			window.scroll(0, 0);
@@ -115,7 +117,7 @@
 				}).then(res => {
 					this.giftList.unreceivedCount -= 1;
 					this.giftList.receivedCount += 1;
-					this.giftList.couponList.splice(index, 1);
+					this.couponList.splice(index, 1);
 				});
 			},
 

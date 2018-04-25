@@ -27,9 +27,15 @@ export function hideBankNum(val) {
  * @param val
  */
 export function nameDesensitization(str) {
-  str = String(str);
-  let ruten = str.substring(1);
-  return str.replace(ruten, '**');
+	
+	if(str=='undefined'){
+		 return "";
+	}else{
+		str = String(str);
+	  let ruten = str.substring(1);
+	  return str.replace(ruten, '**');
+	}
+  
 }
 
 

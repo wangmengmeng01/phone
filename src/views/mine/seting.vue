@@ -46,7 +46,7 @@
 		</div>
 		<div class="seting-div sonDiv maTop">
 			<span>版本号</span>
-			<span class="color_font-99">V2.0.0</span>
+			<span class="color_font-99">V1.0.3</span>
 		</div>
 		<div class="seting-tips sonDiv">
 			<p class="p1 f32 center">客服电话

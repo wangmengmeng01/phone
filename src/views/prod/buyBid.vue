@@ -241,8 +241,7 @@
 		},
 		created() {
 			console.log(this.$route.query.promiseInviteId);
-			if(this.$route.query.promiseInviteId == undefined || this.$route.query.promiseInviteId == null || this.$route.query.promiseInviteId == "") {
-			}else{
+			if(this.$route.query.promiseInviteId == undefined || this.$route.query.promiseInviteId == null || this.$route.query.promiseInviteId == "") {} else {
 				this.buyItem.promiseInviteId = this.$route.query.promiseInviteId;
 				this.isPromiseBol = !this.isPromiseBol;
 			}
@@ -259,9 +258,9 @@
 				} else {
 					this.autoRenewBol = false;
 				}
-//				this.buyItem.couponRate = this.$route.query.couponRate;
+				//				this.buyItem.couponRate = this.$route.query.couponRate;
 				this.buyItem.receiveNos = this.$route.query.receiveNo;
-//				this.buyItem.couponNo = this.$route.query.couponNo;
+				//				this.buyItem.couponNo = this.$route.query.couponNo;
 				//获取选择的卡券
 
 				console.log(this.coupon.data.length);
@@ -295,12 +294,12 @@
 				};
 				this.rate = res.annualizedRate + res.appendRate;
 				this.buyItem.investAmount = res.investAmount;
-				
+
 				//从卡券页面 返回来
 				if(this.$route.query.linkType == "0") {
 					if(this.coupon.params.investAmount) {
 						this.inputBlur(1);
-					}else{
+					} else {
 						this.inputBlur(0);
 					}
 				} else {
@@ -313,7 +312,7 @@
 					this.inviteBol = false;
 					this.CouponList();
 					this.inputBlur(1);
-				}else{
+				} else {
 					this.inputBlur(0);
 				}
 
@@ -403,8 +402,8 @@
 						yes: "立即充值",
 						no: '知道了'
 					}).then(function(b) {
-						if(b){
-						window.location.href = window.location.origin + '/wealth/recharge';
+						if(b) {
+							window.location.href = window.location.origin + '/wealth/recharge';
 						}
 
 					});

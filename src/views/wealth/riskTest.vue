@@ -124,6 +124,7 @@
           i++;
           params[`answer${i}`] = i + t
         });
+//              let params = {client:'4',userToken:'246ce6a39e76403aa83d0d3e43fe499d'};
         // 调用结果接口
         userReskEvaluation(params).then(r => {
           const {

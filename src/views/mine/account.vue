@@ -34,7 +34,7 @@
 		<div class="account-div sonDiv">
 			<span>姓名</span>
 			<span v-if="!statusBol" @click="$go('/reg_bank')" class="color_font-99">未认证<img src="../../assets/common/arrow-right.png"/></span>
-			<span v-else class="color_font-99">{{cardMes.realName}}<img src="../../assets/common/arrow-right.png"/></span>
+			<span v-else class="color_font-99">{{cardMes.realName|nameDesensitization}}<img src="../../assets/common/arrow-right.png"/></span>
 
 		</div>
 
@@ -47,7 +47,7 @@
 		<div class="account-div sonDiv">
 			<span>银行预留手机</span>
 			<span v-if="!statusBol" @click="$go('/reg_bank')" class="color_font-99">未绑定<img src="../../assets/common/arrow-right.png"/></span>
-			<span v-else class="color_font-99" >{{cardMes.mobile}}<img src="../../assets/common/arrow-right.png"/></span>
+			<span v-else class="color_font-99" >{{cardMes.mobile|desensitization}}<img src="../../assets/common/arrow-right.png"/></span>
 
 		</div>
 		<div class="account-div sonDiv maTop borderB">

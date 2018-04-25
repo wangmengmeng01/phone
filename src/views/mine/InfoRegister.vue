@@ -2,7 +2,7 @@
 	<div class="InfoRegister">
 		<div class="InfoRegister-div f28">
 			<span>展业目标</span>
-			<span style="float: right;"><i style="font-style: inherit;" v-show="realName != undefined">{{realName|nameDesensitization}}</i>{{mobile|desensitization}}</span>
+			<span style="float: right;"><i style="font-style: inherit;">{{realName|nameDesensitization}}</i>{{mobile|desensitization}}</span>
 		</div>
 		<p class="InfoRegister-p"></p>
 		<div class="InfoRegister-div f28 borderB">
@@ -107,8 +107,8 @@
 		},
 		computed: {},
 		created() {
+			
 			getProductList().then(res => {
-				console.log(res);
 				this.productList = this.productList.concat(res.productList);
 			});
 

@@ -22,7 +22,7 @@
 		</div>
 		<!--礼物-->
 		<div class="mine-gift">
-			<p class="mine-title f36 color_font-36" >我的礼物<i>待领取(<em>{{giftList.unreceivedCount}}</em>)</i> <span v-show="giftList.couponList!=''" @click="$go('/mine/gift',{rollType:1})" class="f28 color_font-99">更多</span></p>
+			<p class="mine-title f36 color_font-36">我的礼物<i>待领取(<em>{{giftList.unreceivedCount}}</em>)</i> <span v-show="giftList.couponList!=''" @click="$go('/mine/gift',{rollType:1})" class="f28 color_font-99">更多</span></p>
 			<div class="mine-gift-list" v-if="giftList.couponList!=''">
 				<div v-for="(i,index) in giftList.couponList" class="mine-gift-list-card">
 					<div>
@@ -36,58 +36,60 @@
 				<img src="../../assets/main/mine/zw.png" />
 				<p v-if="haveMangeBol" @click="$go('/mine/addUser',{backTitle:'添加理财师',isManage:0})" class="f28">求礼物</p>
 				<p v-else class="concatP f28">
-					<a  :href="`tel:${manageMes.mobile}`">求礼物</a>
+					<a :href="`tel:${manageMes.mobile}`">求礼物</a>
 				</p>
 			</div>
 		</div>
 		<!--承诺-->
 		<div class="mine-gift">
 			<p class="mine-title f36 color_font-36">履约承诺<i>待履约(<em>{{promiseList.waitPromiseCount}}</em>)</i><span v-show="promiseList.waitPromiseCount" @click="$go('/mine/my_promise',{rollType:1})" class="f28 color_font-99">更多</span></p>
-
 			<div class="swiper-container">
+				<!--swiper-slide-next-->
 				<div class="swiper-wrapper">
-					<div class="swiper-slide" style="background-color: #FFFFFF;" v-for="(a,index)  in  promiseInviteList">
+					<div class="swiper-slide" v-for=" (i,index) in promiseInviteList" v-show="index<=2">
 						<div class="mine-join">
-							<div class="mine-join-div" @click="$go('/prod/buyBid',{bidNo:a.bidNo,promiseInviteId:a.promiseInviteId,backTitle:'确认履约',inviteAmount:a.inviteAmount})">
-								<p class="f28">{{a.productName}}</p>
-								<p>{{a.annualizedRate}}<i>%</i></p>
+							<div class="mine-join-div" @click="buyBid(i)">
+								<p class="f28">{{i.productName}}</p>
+								<p>{{i.annualizedRate}}<i>%</i></p>
 								<p class="f28">
 									<span class="mine-join-div-span1">履约金额(元)</span>
-									<span class="mine-join-div-span2">{{a.inviteAmount|formatNum}}</span>
+									<span class="mine-join-div-span2">{{i.inviteAmount|formatNum}}</span>
 								</p>
 								<p class="f28">
 									<span class="mine-join-div-span1">预计收益(元)</span>
-									<span class="mine-join-div-span2">{{a.interest}}</span>
+									<span class="mine-join-div-span2">{{i.interest}}</span>
 								</p>
 							</div>
 							<p class="mine-join-p f24">
-								<span class="color_font-99">邀约时间&nbsp;&nbsp;{{a.createdTime}}</span>
-								<span><a  :href="`tel:${a.mobile}`"></a> <img src="../../assets/main/mine/xdh.png"/>联系理财师 </span>
+								<span class="color_font-99">邀约时间&nbsp;&nbsp;{{i.createdTime}}</span>
+								<span><a  :href="`tel:${i.mobile}`"></a> <img src="../../assets/main/mine/xdh.png"/>联系理财师 </span>
 							</p>
 						</div>
 					</div>
-
 				</div>
 				<div class="swiper-pagination gg" style="background-color: #FFFFFF;"></div>
 				<!--<div class="swiper-button-next"></div>
-   	       			<div class="swiper-button-prev"></div>-->
+   	       		<div class="swiper-button-prev"></div>-->
 			</div>
-
 			<div class="mine-gift-none" v-show="!promiseInviteList.length">
 				<img src="../../assets/main/mine/zw.png" />
-				<p  v-if="haveMangeBol" @click="$go('/mine/addUser',{backTitle:'添加理财师',isManage:0})" class="f28">联系理财师</p>
+				<p v-if="haveMangeBol" @click="$go('/mine/addUser',{backTitle:'添加理财师',isManage:0})" class="f28">联系理财师</p>
 				<p v-else class="concatP f28">
-					<a  :href="`tel:${manageMes.mobile}`" >联系理财师</a>
+					<a :href="`tel:${manageMes.mobile}`">联系理财师</a>
 				</p>
 			</div>
 		</div>
 		<div class="mine-list">
-			<p v-for="(j,index) in menu" :class="index<menu.length-1?'borderB':''"  @click="$go(j.icon==='join' ? (nextBol?j.url:'/reg_bank') : `/mine/${j.url}`,{userCode:userCode,inviteId:inviteId})">
+			<p v-for="(j,index) in menu" class="borderB" @click="$go(j.icon==='join' ? (nextBol?j.url:'/reg_bank') : `/mine/${j.url}`)">
 				<span class="f28 color_font-36">{{j.name}}</span>
 				<img src="../../assets/common/arrow-right.png" />
 			</p>
+			<p @click="invitateFriend">
+				<span class="f28 color_font-36">邀请好友</span>
+				<img src="../../assets/common/arrow-right.png" />
+			</p>
 		</div>
-	
+
 		<!--<div class="head flex" @click="$go('/mine/qrcode')">
       <img :src="item.pic || head" alt="" class="head_icon">
       <div class="msg">
@@ -134,9 +136,9 @@
 			return {
 				item: {},
 				menu: [],
-				haveMangeBol:true,
-				manageMes:{},
-				nextBol:false,
+				haveMangeBol: true,
+				manageMes: {},
+				nextBol: false,
 				isManage: false, //区别理财师，客户
 				giftList: [], //我的礼物
 				promiseItem: {
@@ -145,8 +147,8 @@
 				}, //履约参数
 				promiseList: {}, //履约数据
 				promiseInviteList: [], //履约列表
-				userCode:'',
-				inviteId:'',
+				userCode: '',
+				inviteId: '',
 				menu_normal: [{
 						icon: 'mine',
 						name: '我的理财师',
@@ -155,12 +157,8 @@
 						icon: 'join',
 						name: '加盟成为理财师',
 						url: '/home/joinFinlManager'
-					},
-					{
-						icon: 'invitation',
-						name: '邀请好友',
-						url: 'invitation'
 					}
+
 				],
 				menu_manage: [{
 						icon: 'mine',
@@ -175,16 +173,9 @@
 						icon: 'customer',
 						name: '推广记录',
 						url: 'extension'
-					},
-					{
-						icon: 'customer',
-						name: '邀请好友',
-						url: 'invitation'
 					}
 				],
-				list1:{},
-				list2:{},
-				list3:{},
+				statusItem: {},
 			}
 		},
 		created() {
@@ -192,33 +183,32 @@
 			this.mgGift();
 			this.getPromiseInviteList();
 			searchMyManagerUserInfo().then(r => {
-	       	 	this.manageMes = r;
-	       	 	this.haveMangeBol=!this.haveMangeBol;
-	        });
-	        inviteFriend({
-	        		channel:1
-	        }).then(r => {
-	       	 	this.inviteId = r.inviteId;
-	        });
-	        
-	        
-	        	getUserStatus().then(res => {
-	      		
-	      		if(res.code == "100"){
-	      				  const info = res.result;
-				          if(info.openAccountStatus=="3"){
-					         this.nextBol=true;
-					        }else{
-					          this.nextBol=false;
-					        }
-	      			
-	      		} else if (res.code == "1210" || res.code == "1000") {
-						this.$go('/login');
+				this.manageMes = r;
+				this.haveMangeBol = !this.haveMangeBol;
+			});
+			inviteFriend({
+				channel: 1
+			}).then(r => {
+				this.inviteId = r.inviteId;
+			});
+
+			getUserStatus().then(res => {
+
+				if(res.code == "100") {
+					const info = res.result;
+					if(info.openAccountStatus == "3") {
+						this.nextBol = true;
 					} else {
-						this.$toask(res.message);
+						this.nextBol = false;
 					}
-	        
-	      });
+					this.statusItem = res.result;
+				} else if(res.code == "1210" || res.code == "1000") {
+					this.$go('/login');
+				} else {
+					this.$toask(res.message);
+				}
+
+			});
 		},
 		mounted() {
 
@@ -249,14 +239,17 @@
 			getPromiseInviteList() {
 				getPromiseInviteList(this.promiseItem).then(res => {
 					this.promiseList = res;
-					this.promiseInviteList = res.promiseInviteList.slice(0, 3);
+					this.promiseInviteList = this.promiseInviteList.concat(res.promiseInviteList.slice(0, 3));
 				});
+			},
+			invitateFriend() {
+				window.location.href = window.location.origin + '/mine/invitation?userCode=' + this.userCode + '&inviteId=' + this.inviteId + '';
 			},
 			init() {
 				searchUserInfo().then(r => {
 					this.item = r;
-					this.userCode=r.userCode;
-					
+					this.userCode = r.userCode;
+
 					this.menu = r.flag === 1 ? this.menu_manage : this.menu_normal;
 					this.isManage = r.flag === 1 ? true : false;
 					this.set_user_info(r);
@@ -284,6 +277,75 @@
 					this.giftList.couponList.splice(index, 1);
 				});
 			},
+			buyBid(item) {
+				const i = item;
+				const info = this.statusItem;
+
+				if(info.openAccountStatus == "1") {
+					//未开户
+					this.$go('/reg_bank');
+				} else if(info.openAccountStatus == "4") {
+					//激活
+
+					userActivate({
+						retUrl: location.origin + location.pathname
+					}).then(res => {
+						axios({
+							method: 'post',
+							url: location.origin + new URL(res.serviceUrl).pathname,
+							data: res.inMap,
+							transformRequest: [function(data) {
+								let ret = '';
+								for(let it in data) {
+									ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+								}
+								return ret.slice(0, ret.length - 1)
+							}],
+						}).then(r => {
+							if(r.status === 200) {
+								if(r.data) {
+									document.body.innerHTML = r.data;
+									setTimeout(() => {
+										document.form.submit()
+									}, 0)
+								}
+							}
+						})
+					})
+
+				} else {
+					//电子签约
+					if(info.autoBuyBidGrantFlag == "1") {
+
+						//复投
+						if(info.autoBuyBidFlag == "1") {
+
+							//风险测评
+
+							if(info.riskRatingFlag == "1") {
+
+								this.$go('/prod/buyBid', {
+									bidNo: i.bidNo,
+									promiseInviteId: i.promiseInviteId,
+									backTitle: '确认履约',
+									inviteAmount: i.inviteAmount
+								});
+
+							} else {
+								this.$go('/wealth/riskTest');
+							}
+
+						} else {
+							this.$go('/wealth/autoInvest');
+						}
+
+					} else {
+						this.$go('/wealth/autoInvest');
+					}
+
+				}
+
+			}
 			//			deleat(i){
 			//				 
 			//			}
@@ -296,15 +358,6 @@
 <style lang="scss" scoped>
 	.gg {
 		bottom: 0;
-	}
-	
-	.swiper-container {
-		width: 7.5rem;
-		overflow: hidden;
-	}
-	
-	.swiper-wrapper1 {
-		width: 22.5rem;
 	}
 	
 	.mine {
@@ -474,7 +527,7 @@
 					box-sizing: border-box;
 					border-radius: .56rem;
 				}
-				.concatP{
+				.concatP {
 					float: right;
 					margin: .48rem 0;
 					width: 1.88rem;
@@ -485,7 +538,7 @@
 					color: #208AFF;
 					box-sizing: border-box;
 					border-radius: .56rem;
-					a{
+					a {
 						text-decoration: none;
 						color: #208AFF;
 					}

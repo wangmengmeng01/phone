@@ -17,14 +17,14 @@
 
 		<div class="invite-mes f28 borderB" @click="linkto()">
 			<span>邀约客户</span>
-			<span v-if="name==''&& phone==''" class="span1 color_font-99" >点击选择邀约客户</span>
+			<span v-if="name==''&& phone==''" class="span1 color_font-99">点击选择邀约客户</span>
 			<span v-else class="span1">{{name|nameDesensitization}}&nbsp;&nbsp;{{phone|desensitization}}</span>
 			<!--<span></span>-->
 			<img src="../../assets/common/arrow-right.png" />
 		</div>
 		<div class="invite-mes f28 borderB">
 			<span>推荐金额</span>
-			<input type="tel" v-model.number="item.inviteAmount" maxlength="10" oninput="if( ! /^-?\d+\.?\d{0,2}$/.test(this.value)){ var s = this.value;this.value=s.substring(0,s.length-1);}" :placeholder="`${detail.investMinAmount}元起，${detail.investAscendingAmount}元递增`"/>
+			<input type="tel" v-model.number="item.inviteAmount" maxlength="10" oninput="if( ! /^-?\d+\.?\d{0,2}$/.test(this.value)){ var s = this.value;this.value=s.substring(0,s.length-1);}" :placeholder="`${detail.investMinAmount}元起，${detail.investAscendingAmount}元递增`" />
 		</div>
 		<div class="invite-mes f28 borderB">
 			<span>推荐描述</span>
@@ -32,7 +32,7 @@
 		</div>
 		<p class="invite-mes-p f28 color_font-99">20字以内</p>
 
-		<button class="btn invite-btn" :class="name && phone && item.inviteAmount?'':'dis'"  @click="sumit" >发起邀约</button>
+		<button class="btn invite-btn" :class="name && phone && item.inviteAmount?'':'dis'" @click="sumit">发起邀约</button>
 	</div>
 </template>
 
@@ -41,7 +41,7 @@
 		promiseInvite,
 		searchProductBidsDetail
 	} from '@/service'
-	
+
 	import {
 		mapActions,
 		mapMutations
@@ -59,39 +59,39 @@
 					productNo: '',
 					bidNo: '',
 					bidName: '',
-					remork:  '',
+					remork: '',
 				},
 				detail: '',
 				bidItem: {
 					bidNo: this.$route.query.bidNo,
 				},
-				 name:'',
-        			 phone:'',
+				name: '',
+				phone: '',
 			}
 		},
 		created() {
-				this.RESET('succ_page');
-				const {
+			this.RESET('succ_page');
+			const {
 				data,
 				name,
-         		phone,
-         		userCode,
+				phone,
+				userCode,
 			} = this.$route.query;
 			// 如果有的话重新赋值
 			if(data) {
 				this.item = JSON.parse(decodeURIComponent(data));
 				this.item.beUserCode = userCode;
-				this.name= name;
-				this.phone=phone;
-//				this.tipsBol=!this.tipsBol;
-				
+				this.name = name;
+				this.phone = phone;
+				//				this.tipsBol=!this.tipsBol;
+
 			}
 			searchProductBidsDetail(this.bidItem).then(res => {
 				this.detail = res;
-				this.item.productName=res.productName;
-				this.item.productNo=res.productNo;
-				this.item.bidNo=res.bidNo;
-				this.item.bidName=res.bidName;
+				this.item.productName = res.productName;
+				this.item.productNo = res.productNo;
+				this.item.bidNo = res.bidNo;
+				this.item.bidName = res.bidName;
 			});
 		},
 		methods: {
@@ -107,14 +107,35 @@
 					data: encodeURIComponent(JSON.stringify(this.item))
 				})
 			},
-			
-			sumit(){
+
+			sumit() {
+
+				if(parseFloat(this.item.inviteAmount) < parseFloat(this.detail.investMinAmount)) {
+					this.$toask("推荐金额小于最低起投金额");
+					return;
+				};
+
+				if(parseFloat(this.item.inviteAmount) > parseFloat(this.detail.investMaxAmount)) {
+					this.$toask("推荐金额大于单笔上限");
+					return;
+				};
+
+				if(parseFloat(this.item.inviteAmount) > parseFloat(this.detail.amountWait)) {
+					this.$toask("推荐金额大于标的剩余额度");
+					return;
+				};
+
+				if(parseFloat(this.item.inviteAmount) % parseFloat(this.detail.investAscendingAmount) != 0) {
+					this.$toask("推荐金额应为" + this.detail.investAscendingAmount + "的整数倍");
+					return;
+				};
+
 				promiseInvite(this.item).then(res => {
-					
-					if(res.code=="100"){
+
+					if(res.code == "100") {
 						let params = {
 							"title": "恭喜，邀约成功",
-							'sub_title': "您已成功邀约了客户"+this.name+" ",
+							'sub_title': "您已成功邀约了客户" + this.name + " ",
 							"btn_text": "继续邀约",
 							"backurl": "/product",
 							"sub_btn_text": "查看我的邀约",
@@ -123,7 +144,7 @@
 						this.SET_SUCC_PAGE(params);
 						this.$go('/static/succ');
 					}
-					
+
 				});
 			}
 
@@ -201,7 +222,7 @@
 				font-size: .28rem;
 				text-align: left;
 			}
-			.span1{
+			.span1 {
 				width: 5.18rem;
 				font-size: .28rem;
 				text-align: left;

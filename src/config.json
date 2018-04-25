@@ -91,11 +91,11 @@
 			"foot": {
 				"type": "main",
 				"style": {
-							"background":"#f6f5f5",
-							"padding":"0 0 2.4rem"
-						}
+					"background": "#f6f5f5",
+					"padding": "0 0 2.4rem"
+				}
 			},
-			"bg":false
+			"bg": false
 		}, {
 			"path": "changeBank2",
 			"title": "绑定新银行卡",
@@ -134,7 +134,7 @@
 					"foot": {
 						"style": "padding-bottom: 1.5rem;background-color: #f6f5f5"
 					},
-					"bg":false
+					"bg": false
 				}, {
 					"path": "found",
 					"title": "发现",
@@ -183,7 +183,7 @@
 					"path": "extension",
 					"title": "推广记录",
 					"foot": false
-				},{
+				}, {
 					"path": "addUser",
 					"title": "添加",
 					"foot": false
@@ -200,8 +200,11 @@
 					"title": "邀请好友注册",
 					"foot": false,
 					"filter": true,
-					"bg":false
-				},{
+					"bg": false,
+					"back": {
+						"icon": false
+					}
+				}, {
 					"path": "master",
 					"title": "我的理财师",
 					"foot": false
@@ -222,11 +225,11 @@
 					"path": "customer_detail",
 					"title": "客户详情",
 					"foot": false
-				},{
+				}, {
 					"path": "userAssets",
 					"title": "资产列表",
 					"foot": false
-				},{
+				}, {
 					"path": "customer_potential",
 					"title": "潜在客户",
 					"foot": false
@@ -238,12 +241,12 @@
 					"path": "seting",
 					"title": "设置",
 					"foot": false,
-					"bg":false
+					"bg": false
 				}, {
 					"path": "account",
 					"title": "账户安全",
 					"foot": false,
-					"bg":false
+					"bg": false
 				}
 			]
 		}, {
@@ -473,8 +476,8 @@
 					"foot": {
 						"type": "main",
 						"style": {
-							"background":"#fff",
-							"padding":"0 0 2.4rem"
+							"background": "#fff",
+							"padding": "0 0 2.4rem"
 						}
 					}
 				}, {
@@ -483,15 +486,15 @@
 					"foot": {
 						"type": "main",
 						"style": {
-							"background":"#fff",
-							"padding":"0 0 2.4rem"
+							"background": "#fff",
+							"padding": "0 0 2.4rem"
 						}
 					}
 				}, {
 					"path": "autoInvest",
 					"title": "自动投标",
-					"foot":false,
-					"bg":false
+					"foot": false,
+					"bg": false
 				}, {
 					"path": "riskTest",
 					"title": "风险评测",
@@ -514,15 +517,15 @@
 					"path": "tradeRecord",
 					"title": "交易记录",
 					"foot": false,
-					"bg":false
+					"bg": false
 				}, {
 					"path": "changeBank",
 					"title": "银行卡",
 					"foot": {
 						"type": "main",
 						"style": {
-							"background":"#fff",
-							"padding":"0 0 2.4rem"
+							"background": "#fff",
+							"padding": "0 0 2.4rem"
 						}
 					}
 				}, {
@@ -537,7 +540,7 @@
 					"path": "claims",
 					"title": "现持债权",
 					"foot": false,
-					"bg":false
+					"bg": false
 				}
 			]
 		}, {

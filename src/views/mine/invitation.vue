@@ -27,38 +27,42 @@
 			<p v-else class="list-none f28 center">暂无好友</p>
 		</div>
 
-		<button class="btn">立即邀请好友</button>
+		<button class="btn" @click="showBol=!showBol">立即邀请好友</button>
+
+		<p class="share" v-show="showBol" @click="showBol=!showBol">
+			<img src="../../assets/main/mine/share@2.png" />
+		</p>
 	</div>
 </template>
 
 <script>
-	 import {
-    getInviteRecordList,
-  } from '@/service'
-	
+	import {
+		getInviteRecordList,
+	} from '@/service'
+
 	export default {
 		name: 'invitation',
 		data() {
 			return {
-				
-				pageIndex:1,
-				item:{},
-				list:[],
+
+				pageIndex: 1,
+				item: {},
+				list: [],
+				showBol: false,
 			}
 		},
 		computed: {},
 		created() {
-			
-			
+
 			getInviteRecordList({
-				pageIndex:this.pageIndex
+				pageIndex: this.pageIndex
 			}).then(res => {
-				
-				this.item=res;
-				
-				this.list=this.list.concat(res.list);
-	        });
-			
+
+				this.item = res;
+
+				this.list = this.list.concat(res.list);
+			});
+
 		},
 		mounted() {},
 		components: {},
@@ -68,6 +72,24 @@
 </script>
 
 <style lang="scss" scoped>
+	.share {
+		position: fixed;
+		z-index: 1000000;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.2);
+		/*background-color: red;*/
+		top: -.88rem;
+		display: flex;
+		justify-content: flex-end;
+		img {
+			margin-top: .88rem;
+			width: 5.78rem;
+			height: 3.58rem;
+			background-size: 100% 100%;
+		}
+	}
+	
 	.invitation {
 		margin: 0 auto;
 		padding: 0;

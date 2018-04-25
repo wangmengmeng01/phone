@@ -19,7 +19,7 @@
 				<!--<p class="pdtProgressMes">剩余可投<i>{{detail.amountWait| formatNum}}元</i></p>-->
 			</div>
 			<div class="productDetailMes">
-			    <p>募集金额(元) {{detail.contractAmount| formatNum}}</p>
+				<p>募集金额(元) {{detail.contractAmount| formatNum}}</p>
 				<p>剩余可投(元) {{detail.amountWait| formatNum}}</p>
 			</div>
 		</div>
@@ -27,7 +27,7 @@
 			<img class="pdtBugMesImg1" src="../../assets/main/prod/ld.png" />
 			<span> 已有{{detail.countPeople}}人购买> </span>
 		</div>
-	
+
 		<!--交易规则-->
 		<!--<div class="productDetailCenter boderB">
 			<div class="pdcTime">
@@ -50,15 +50,15 @@
 				</p>
 			</div>
 		</div>-->
-		
+
 		<div class="productDetailCenter boderB productDetailTips">
 			<p><span>出借规则</span>{{detail.investMinAmount|formatNum}}元起，并以{{detail.investAscendingAmount|formatNum}}的整数倍递增</p>
 			<p><span>出借上限</span>{{detail.investMaxAmount|formatNum}}元</p>
 			<p><span>起息日期</span>{{detail.interestStartDate}}</p>
 			<p><span>到期日期</span>{{detail.interestEndDate}}</p>
 			<p><span>还款方式</span>一次性还款</p>
-		</div>	
-	
+		</div>
+
 		<!--返佣规则-->
 		<div class="productDetailCenter boderB">
 			<div class="pdcIntroduce">
@@ -75,23 +75,23 @@
 			</div>
 		</div>
 		<div class="productDetailCenter">
-		<!--<p class="productDetailCenterP boderB">项目详情 <img src="../../assets/main/home/nextIcon.png"/></p>-->
-		<p class="productDetailCenterP boderB" @click="loanAgreement">出借协议<img src="../../assets/main/home/nextIcon.png"/></p>
-		<!--<p class="productDetailCenterP boderB">常见问题<img src="../../assets/main/home/nextIcon.png"/></p>-->
-		<p class="productDetailCenterP boderB" @click="riskTips">风险提示<img src="../../assets/main/home/nextIcon.png"/></p>
+			<!--<p class="productDetailCenterP boderB">项目详情 <img src="../../assets/main/home/nextIcon.png"/></p>-->
+			<p class="productDetailCenterP boderB" @click="loanAgreement">出借协议<img src="../../assets/main/home/nextIcon.png" /></p>
+			<!--<p class="productDetailCenterP boderB">常见问题<img src="../../assets/main/home/nextIcon.png"/></p>-->
+			<p class="productDetailCenterP boderB" @click="riskTips">风险提示<img src="../../assets/main/home/nextIcon.png" /></p>
 		</div>
 		<div class="tips f24 color_font-99">
 			——出借有风险，选择需谨慎——
 		</div>
 		<!--立刻购买-->
-		<div v-if="statusBol" class="productDetailBottom" >
-				<span class="span" @click="$go('/prod/calculation',{bidNo:detail.bidNo})">  
+		<div v-if="statusBol" class="productDetailBottom">
+			<span class="span" @click="$go('/prod/calculation',{bidNo:detail.bidNo})">  
 					<img src="../../assets/main/prod/calculation.png"/>
 				</span>
-				<span class="yy f32"  v-show="userInfo.flag==1"   @click="$go('/prod/invite',{bidNo:item.bidNo})">邀约</span>
-			    <p @click="getStatus">立即购买</p>
+			<span class="yy f32" v-show="userInfo.managerFlag==1" @click="$go('/prod/invite',{bidNo:item.bidNo})">邀约</span>
+			<p @click="getStatus">立即购买</p>
 		</div>
-		<div v-else class="productDetailBottom disable" style="pointer-events: none;">已售罄</div>
+		<div v-else class="productDetailBottom disable" @click.prevent="pp()">已售罄</div>
 	</div>
 </template>
 
@@ -103,8 +103,8 @@
 		getUserStatus,
 		userActivate
 	} from '@/service'
-	 import axios from 'axios'
-	 import {
+	import axios from 'axios'
+	import {
 		mapGetters
 	} from 'vuex'
 	export default {
@@ -117,27 +117,27 @@
 				itemStatus: {},
 				detail: {},
 				profitPlanArr: ['', '等额本息', '等额本金', '按期付息，到期还本', '一次性还款', '其他'],
-				statusBol:true,
-				userInfo:{},
+				statusBol: true,
+				userInfo: {},
 			}
 		},
 		computed: {
 			...mapGetters([
-				'user_info'
+				'user'
 			])
 		},
 		created() {
-			if(this.$route.query.status){
-				if(this.$route.query.status>4){
-					this.statusBol=false;
+			if(this.$route.query.status) {
+				if(this.$route.query.status > 4) {
+					this.statusBol = false;
 				}
 			}
 			searchProductBidsDetail(this.item).then(res => {
 				this.detail = res;
 			});
-			
-			this.userInfo = this.user_info;
-			
+
+			this.userInfo = this.user;
+
 		},
 		methods: {
 			loanAgreement() {
@@ -152,20 +152,22 @@
 					content: riskTips
 				})
 			},
-			
+			pp() {
+
+			},
 			getStatus() {
 				getUserStatus(this.itemStatus).then(res => {
 					//@click=""
 					console.log(res);
 					const info = res.result;
-					if (res.code == "100") {
-	
-						if (info.openAccountStatus == "1") {
+					if(res.code == "100") {
+
+						if(info.openAccountStatus == "1") {
 							//未开户
 							this.$go('/reg_bank');
-						} else if (info.openAccountStatus == "4") {
+						} else if(info.openAccountStatus == "4") {
 							//激活
-	
+
 							userActivate({
 								retUrl: location.origin + location.pathname
 							}).then(res => {
@@ -175,14 +177,14 @@
 									data: res.inMap,
 									transformRequest: [function(data) {
 										let ret = '';
-										for (let it in data) {
+										for(let it in data) {
 											ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
 										}
 										return ret.slice(0, ret.length - 1)
 									}],
 								}).then(r => {
-									if (r.status === 200) {
-										if (r.data) {
+									if(r.status === 200) {
+										if(r.data) {
 											document.body.innerHTML = r.data;
 											setTimeout(() => {
 												document.form.submit()
@@ -191,17 +193,17 @@
 									}
 								})
 							})
-	
+
 						} else {
 							//电子签约
-							if (info.autoBuyBidGrantFlag == "1") {
-	
+							if(info.autoBuyBidGrantFlag == "1") {
+
 								//复投
-								if (info.autoBuyBidFlag == "1") {
-	
+								if(info.autoBuyBidFlag == "1") {
+
 									//风险测评
-	
-									if (info.riskRatingFlag == "1") {
+
+									if(info.riskRatingFlag == "1") {
 										this.$go('/prod/buyBid', {
 											bidNo: this.$route.query.bidNo,
 											backTitle: '确认购买'
@@ -209,30 +211,30 @@
 									} else {
 										this.$go('/wealth/riskTest');
 									}
-	
+
 								} else {
 									this.$go('/wealth/autoInvest');
 								}
-	
+
 							} else {
 								this.$go('/wealth/autoInvest');
 							}
-	
+
 						}
-	
-					} else if (res.code == "1210" || res.code == "1000") {
+
+					} else if(res.code == "1210" || res.code == "1000") {
 						this.$go('/login');
 					} else {
 						this.$toask(res.message);
 					}
 				})
-	
+
 			}
 		}
 	}
 </script>
 
-<style lang="scss"  scoped>
+<style lang="scss" scoped>
 	.productDetailTop {
 		margin: 0 auto;
 		padding: 0;
@@ -254,13 +256,12 @@
 		font-size: 0.24rem;
 	}
 	
-	
 	.pdtMessage {
 		float: left;
 		width: 6.7rem;
 		height: 0.32rem;
 		overflow: hidden;
-		margin-bottom:0.6rem;
+		margin-bottom: 0.6rem;
 		font-size: 0.24rem;
 		line-height: .32rem;
 	}
@@ -279,8 +280,8 @@
 		width: 2.5rem;
 		height: 0.32rem;
 		overflow: hidden;
-		border-left:1px solid #FFFFFF ;
-		border-right:1px solid #FFFFFF ;
+		border-left: 1px solid #FFFFFF;
+		border-right: 1px solid #FFFFFF;
 		box-sizing: border-box;
 	}
 	
@@ -292,7 +293,6 @@
 		overflow: hidden;
 	}
 	
-
 	.pdtProgress {
 		float: left;
 		margin: 0 0.35rem;
@@ -317,9 +317,10 @@
 		bottom: 0.24rem;
 		width: 3.0rem;
 		height: 2px;
-		background: #FFFFFF ;
+		background: #FFFFFF;
 	}
-	.pdtSpan{
+	
+	.pdtSpan {
 		position: absolute;
 		z-index: 3;
 		bottom: 0.21rem;
@@ -327,7 +328,8 @@
 		height: 6px;
 		background: #FFFFFF;
 	}
-	.pdtRate1{
+	
+	.pdtRate1 {
 		position: absolute;
 		z-index: 3;
 		top: 0;
@@ -335,6 +337,7 @@
 		color: #FFFFFF;
 		font-size: 0.24rem;
 	}
+	
 	.pdtRate {
 		float: left;
 		width: 6.7rem;
@@ -349,27 +352,28 @@
 		font-size: 0.76rem;
 		line-height: 0.76rem;
 		font-size: .72rem;
-		
 	}
-	.productDetailMes{
-	    margin: 0 0.35rem;
-	    width: 6.0rem;
-	    height: 0.24rem;
-	    font-size: .24rem;
-	    line-height: .24rem;
-	    color: #FFFFFF;
-	    overflow: hidden;
-	    margin-bottom: .4rem;
+	
+	.productDetailMes {
+		margin: 0 0.35rem;
+		width: 6.0rem;
+		height: 0.24rem;
+		font-size: .24rem;
+		line-height: .24rem;
+		color: #FFFFFF;
+		overflow: hidden;
+		margin-bottom: .4rem;
 	}
-	.productDetailMes p:nth-child(1){
+	
+	.productDetailMes p:nth-child(1) {
 		float: left;
 		text-align: left;
 	}
-	.productDetailMes p:nth-child(2){
+	
+	.productDetailMes p:nth-child(2) {
 		float: right;
 		text-align: right;
 	}
-	
 	
 	.pdtBugMes {
 		margin: 0 auto;
@@ -416,7 +420,6 @@
 		color: #FFFFFF;
 		overflow: hidden;
 	}
-	
 	
 	.pdcTitle>span:nth-child(1) {
 		float: left;
@@ -465,7 +468,7 @@
 	
 	.pdcTimeProgress {
 		float: left;
-		margin:0 0.7rem;
+		margin: 0 0.7rem;
 		height: 0.44rem;
 		width: 5.5rem;
 		overflow: hidden;
@@ -479,7 +482,6 @@
 		border: 2px solid #1E76FD;
 		box-sizing: border-box;
 		margin: 0.12rem 0;
-		
 	}
 	
 	.pdcTimeProgress>span:nth-child(2),
@@ -541,25 +543,29 @@
 		width: 1.4rem;
 	}
 	
-.boderB{
-	border-bottom: 1px solid  #ececec;
-}
-.productDetailTips{
-	padding: .21rem .3rem .62rem;
-	width: 6.9rem;
-}
-.productDetailTips p{
-	width: 6.9rem;
-	height: .28rem;
-	font-size: .28rem;
-	line-height: .28rem;
-	color: #666666;
-	margin-top: .4rem;
-}	
-.productDetailTips p>span{
-	margin-right: .64rem;
-	color: #999999;
-}
+	.boderB {
+		border-bottom: 1px solid #ececec;
+	}
+	
+	.productDetailTips {
+		padding: .21rem .3rem .62rem;
+		width: 6.9rem;
+	}
+	
+	.productDetailTips p {
+		width: 6.9rem;
+		height: .28rem;
+		font-size: .28rem;
+		line-height: .28rem;
+		color: #666666;
+		margin-top: .4rem;
+	}
+	
+	.productDetailTips p>span {
+		margin-right: .64rem;
+		color: #999999;
+	}
+	
 	.pdcFyWord {
 		float: left;
 		margin: 0.7rem 0.66rem 0.24rem;
@@ -622,18 +628,21 @@
 		color: #666666;
 		font-size: 0.28rem;
 		display: flex;
-		justify-content:space-around;
+		justify-content: space-around;
 	}
-	.pdcIntroduce p{
+	
+	.pdcIntroduce p {
 		text-align: center;
 	}
-	.pdcIntroduce img{
-		margin:  .39rem 0 .26rem;
+	
+	.pdcIntroduce img {
+		margin: .39rem 0 .26rem;
 		width: .76rem;
 		height: .76rem;
 		background-size: 100% 100%;
 	}
-	.pdcIntroduce span{
+	
+	.pdcIntroduce span {
 		float: left;
 		width: 100%;
 		height: .28rem;
@@ -642,22 +651,23 @@
 		color: #666666;
 		text-align: center;
 	}
-.productDetailCenterP{
-	height: 1.1rem;
-	width: 6.9rem;
-	line-height: 1.1rem;
-	color: #666666;
-	font-size: .28rem;
-	overflow: hidden;
-}	
-.productDetailCenterP img{
-	margin-top: .47rem;
-	float: right;
-	width: .14rem;
-	height: .24rem;
-	background-size: 100% 100%;
-}	
 	
+	.productDetailCenterP {
+		height: 1.1rem;
+		width: 6.9rem;
+		line-height: 1.1rem;
+		color: #666666;
+		font-size: .28rem;
+		overflow: hidden;
+	}
+	
+	.productDetailCenterP img {
+		margin-top: .47rem;
+		float: right;
+		width: .14rem;
+		height: .24rem;
+		background-size: 100% 100%;
+	}
 	
 	.productDetailBottom {
 		margin: 0 auto;
@@ -675,21 +685,21 @@
 		text-align: center;
 		background-color: #208AFF;
 		color: #FFFFFF;
-		box-shadow: 0 -1px 3px 0 ;
-		.span{
+		box-shadow: 0 -1px 3px 0;
+		.span {
 			float: left;
 			width: 1.4rem;
 			height: 1.0rem;
 			background-color: #FFFFFF;
-			box-shadow: 0 -1px 3px 0 rgba(32,138,255,0.10);
-			img{
+			box-shadow: 0 -1px 3px 0 rgba(32, 138, 255, 0.10);
+			img {
 				margin-top: .28rem;
-				width:.4rem;
+				width: .4rem;
 				height: .48rem;
 				background-size: 100% 100%;
 			}
 		}
-		.yy{
+		.yy {
 			float: left;
 			width: 2.06rem;
 			height: 1.0rem;
@@ -697,8 +707,8 @@
 			background: #69B0FF;
 		}
 	}
+	
 	.disable {
 		background: #e1e1e1;
-		pointer-events: none;
 	}
 </style>
