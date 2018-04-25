@@ -42,7 +42,8 @@
 <script>
 	import {
 		getPromiseInviteList,
-		getUserStatus
+		getUserStatus,
+		userActivate
 	} from '@/service'
 	 import axios from 'axios'
 	export default {

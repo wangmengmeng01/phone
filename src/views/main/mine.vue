@@ -128,7 +128,8 @@
 		getPromiseInviteList,
 		searchMyManagerUserInfo,
 		getUserStatus,
-		inviteFriend
+		inviteFriend,
+		userActivate
 	} from '@/service'
 	 import axios from 'axios'
 	export default {
