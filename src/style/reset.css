@@ -196,8 +196,38 @@ h6 {
 html,
 body,
 #app {
-  background: #f1f1f9;
+  /*background: #FFFFFF;*/
   height: 100%;
+  font-family: Arial, "Microsoft YaHei", "微软雅黑", sans-serif;
+}
+.ff{
+	background-color: #FFFFFF;
+}
+.gg{
+	background-color: #f6f5f5;
+}
+.borderB{
+	border-bottom: 1px solid #E5E5E5;
+}
+.tips{
+	padding: .5rem .3rem 1.5rem;
+	text-align: center;
+}
+.pageCenter{
+	margin: 0 auto;
+	padding: 0;
+	width: 7.5rem;
+	overflow: hidden;
+}
+.sonDiv{
+	float: left;
+	padding: 0 .3rem;
+	width: 6.9rem;
+}
+.sonDiv2{
+	float: left;
+	margin: 0 .3rem;
+	width: 6.9rem;
 }
 
 @media only screen and (device-width: 375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) {
@@ -218,4 +248,9 @@ body,
     .tab {
         padding-bottom:.5rem;
     }
+    
+    .tips{
+	padding: .5rem .3rem 2.0rem;
+	text-align: center;
+	}
 }

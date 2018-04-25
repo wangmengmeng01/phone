@@ -201,7 +201,7 @@
               "title": "恭喜您注册成功",
               "btn_text": "立即开通银行存管账户",
               "backurl": "/reg_bank",
-              "sub_btn_text": "暂无",
+              "sub_btn_text": "暂不",
               "sub_backurl": "/"
             };
             // 跳转成功页面

@@ -28,7 +28,7 @@ router.beforeEach((to, from, next) => {
   }
 
   // 设置title
-  document.title = to.meta.title || "理财师";
+  document.title = "理财师";
   if (!!store.state.user.userToken) {
     native.loading('hide'); // 隐藏loading
     //如果有就直接到首页咯
@@ -41,7 +41,13 @@ router.beforeEach((to, from, next) => {
     } else {
       //不然就跳转到登录；
       native.loading('hide'); // 隐藏loading
-      next("/login");
+      const  pathname=location.pathname;
+      if(location.pathname=='/mine/invitation'){
+      	const search=location.search;
+      	 next("/mine/invitationRegister"+search+"");
+      }else{
+      	  next("/login");
+      }
       //    next();
     }
   }

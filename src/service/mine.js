@@ -24,8 +24,6 @@ export const searchPotentialCustomers = async (params) => {
   });
 }
 
-
-
 /**
  * 赠送优惠
  */
@@ -37,6 +35,16 @@ export const saveGiveCoupon = async (params) => {
   });
 }
 
+/**
+ * 赠送记录
+ */
+export const searchCouponSendList = async (params) => {
+  return await $http({
+    method: 'get',
+    api: api.searchCouponSendList,
+    params,
+  });
+}
 
 /**
  * 获取已有客户
@@ -86,6 +94,16 @@ export const searchUserInfo = async (params) => {
   });
 }
 
+/**
+ * 展业登记
+ */
+export const showBusinessRecord = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.showBusinessRecord,
+    params,
+  });
+}
 
 
 /**
@@ -102,6 +120,18 @@ export const searchMyManagerUserInfo = async (params) => {
     params,
     options: {
       filter_msg:false
+<<<<<<< HEAD
+    }
+  });
+}
+/**
+ * 获取token
+ */
+export const getZwToken = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.getZwToken,
+=======
     }
   });
 }
@@ -139,10 +169,36 @@ export const updateManagerUserForM = async (params) => {
   return await $http({
     method: 'post',
     api: api.updateManagerUserForM,
+>>>>>>> test
     params,
   });
 }
 
+<<<<<<< HEAD
+
+/**
+ * 发送短信
+ */
+export const sendMessage = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.sendMessage,
+    params,
+    options: {
+      filter_code: false,
+      filter_msg: false
+    }
+  });
+}
+
+/**
+ * 添加理财师
+ */
+export const updateManagerUserForM = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.updateManagerUserForM,
+=======
 /**
  * 添加客户
  */
@@ -153,5 +209,62 @@ export const updateUserForM = async (params) => {
     params,
   });
 }
+/**
+ * 邀约记录
+ */
+export const getUserManagerPromiseInviteList = async (params) => {
+  return await $http({
+    method: 'get',
+    api: api.getUserManagerPromiseInviteList,
+>>>>>>> test
+    params,
+  });
+}
+
+<<<<<<< HEAD
+/**
+ * 添加客户
+ */
+export const updateUserForM = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.updateUserForM,
+=======
+
+/**
+ * 邀请好友记录
+ */
+export const getInviteRecordList = async (params) => {
+  return await $http({
+    method: 'get',
+    api: api.getInviteRecordList,
+>>>>>>> test
+    params,
+  });
+}
 
 
+<<<<<<< HEAD
+=======
+
+/**
+ * 邀请好友注册
+ */
+export const registerForFriend = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.registerForFriend,
+    params,
+  });
+}
+/**
+ * 邀请好友注册ID
+ */
+export const inviteFriend = async (params) => {
+  return await $http({
+    method: 'post',
+    api: api.inviteFriend,
+    params,
+  });
+}
+>>>>>>> test

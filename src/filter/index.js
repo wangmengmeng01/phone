@@ -6,8 +6,8 @@
  */
 export function desensitization(val) {
   let str = String(val);
-  let ruten = str.substring(3, 8);
-  return str.replace(ruten, '*****');
+  let ruten = str.substring(3, 7);
+  return str.replace(ruten, '****');
 }
 
 /**
@@ -22,14 +22,26 @@ export function hideBankNum(val) {
   return str.replace(ruten, '*****');
 }
 
+export function hideBankNum2(val) {
+  let str = String(val);
+  let ruten =str.substr(str.length-4);
+  return ruten;
+}
+
 /**
  * 名字脱敏
  * @param val
  */
 export function nameDesensitization(str) {
-  str = String(str);
-  let ruten = str.substring(1);
-  return str.replace(ruten, '**');
+	
+	if(str=='undefined'){
+		 return "";
+	}else{
+		str = String(str);
+	  let ruten = str.substring(1);
+	  return str.replace(ruten, '**');
+	}
+  
 }
 
 
@@ -89,6 +101,44 @@ export function formatNum(value) {
       }
       count++;
     }
+    str = newStr; //自动补小数点后两位
+    return str;
+  } else {
+    for (var i = str.indexOf(".") - 1; i >= 0; i--) {
+      if (count % 3 == 0 && count != 0) {
+        newStr = str.charAt(i) + "," + newStr;
+      } else {
+        newStr = str.charAt(i) + newStr; //逐个字符相接起来
+      }
+      count++;
+    }
+    str = newStr + (str + "00").substr((str + "00").indexOf("."), 3);
+    return str;
+  }
+
+}
+
+
+export function formatNum2(value) {
+  var str;
+  if (value == null || value == undefined || value == "") {
+    str = "0";
+  } else {
+    str = value.toString();
+  }
+
+  var newStr = "";
+  var count = 0;
+
+  if (str.indexOf(".") == -1) {
+    for (var i = str.length - 1; i >= 0; i--) {
+      if (count % 3 == 0 && count != 0) {
+        newStr = str.charAt(i) + "," + newStr;
+      } else {
+        newStr = str.charAt(i) + newStr;
+      }
+      count++;
+    }
     str = newStr + ".00"; //自动补小数点后两位
     return str;
   } else {
@@ -105,6 +155,9 @@ export function formatNum(value) {
   }
 
 }
+
+
+
 export function Totime(val) {
 
   switch (parseInt(val)) {
@@ -115,7 +168,7 @@ export function Totime(val) {
       return "周";
       break;
     case 3:
-      return "月";
+      return "个月";
       break;
     default:
       return "年";

@@ -2,6 +2,8 @@ export default {
 
   login: 'user/login', // 登录
 
+  isRegister: 'user/isRegister',//是否注册
+
   register: 'user/register', // 注册
 
   forgetPassWord: 'user/forgetPassWord', // 忘记密码
@@ -120,11 +122,39 @@ export default {
 
   serchDebtHoldedRecord: 'debt/filter/serchDebtHoldedRecord', //持有债券列表
   
+<<<<<<< HEAD
   getZwToken:'user/getZwToken',//获取卓信token
+=======
+  invesPropertyCustomer:'account/filter/invesPropertyCustomer',//理财师客户资产
+  
+  getProductList:'product/getProductList',//推荐产品列表
+  
+  showBusinessRecord:'home/filter/showBusinessRecord',//展业登记
+  
+  searchCouponSendList:'coupon/filter/searchCouponSendList',//赠送记录
+  
+   getZwToken:'user/getZwToken',//获取卓信token
+>>>>>>> test
   
   sendMessage:'user/filter/sendMessage',//发送短信
   
   updateManagerUserForM:'user/filter/updateManagerUserForM',//添加理财师
   
   updateUserForM:'user/filter/updateUserForM',//添加客户
+<<<<<<< HEAD
+=======
+  
+  getCustomer:'/home/filter/getCustomer',//查询客户
+ 
+  promiseInvite:'promise/filter/promiseInvite',//发起邀约
+  
+  getUserManagerPromiseInviteList:'promise/filter/getUserManagerPromiseInviteList',//邀约记录
+  
+  getInviteRecordList:'home/filter/getInviteRecordList',//邀请好友记录
+  
+  registerForFriend:'user/registerForFriend',//邀请好友注册
+  
+  inviteFriend:'user/filter/inviteFriend',//邀请id
+  
+>>>>>>> test
 }

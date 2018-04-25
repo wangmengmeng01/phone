@@ -1,16 +1,17 @@
 <template>
-  <div class="coupon_choose">
+  <div class="coupon_choose" @click="submit">
     <ul class="nav flex f32">
       <li v-for="(i,index) in nav" @click="choose(i,index)" :class="[index===act?'act color_main':'color_font-s']">{{i.name}}({{i.size}})</li>
     </ul>
     <div class="coupon p4" :class="[!res.length?'none':'']">
-      <Coupon v-for="(i,index) in res" :data="i" :key="index" class="coupon_list" checked="true" @checkedCb="checkedCb(i,index)" ref="coupon" />
-      <div v-if="!res.length" class="nothing f32 color_font"><img src="../../assets/common/nothing_coupon.png" alt=""><p>暂无{{nav[act].name}}券</p></div>
+      <Coupon  v-for="(i,index) in res" :data="i" :key="index"class="coupon_list" checked="true"  @checkedCb="checkedCb(i,index)" ref="coupon" />
+      <div v-if="!res.length" class="nothing f32 color_font"><img style="margin: 4.8rem 2.74rem .6rem;padding: 0; width:1.42rem; height: .98rem; background-size: 100% 100%;" src="../../assets/main/mine/zwjl.png" alt="">
+      		<p>暂无{{nav[act].name}}券</p>
+      </div>
     </div>
-    <button class="btn" @click="submit">选取</button>
+    <!--<button class="btn" @click="submit">选取</button>-->
   </div>
 </template>
-
 <script>
   import Coupon from '@/components/coupon/coupon'
   import {
@@ -71,6 +72,7 @@
       this.SET_COUPON({
         data: []
       });
+      this.res=[];
       this.init(this.nav[0]);
     },
     methods: {
@@ -116,16 +118,16 @@
           return
         }
         // 判断需不需要删除
-        if (this.isDel(current)) return;
+//      if (this.isDel(current)) return;
         // 直接获取最后一个元素做对比
-        let end = this.couponlist[this.couponlist.length - 1];
+//      let end = this.couponlist[this.couponlist.length - 1];
         // 类型相同做同类对比
-        if (current.type === end.type) {
-          this.logic(current, end, index, 'isSameOverlap', '此券不允许同类叠加');
-          return
-        }
+//      if (current.type === end.type) {
+//        this.logic(current, end, index, 'isSameOverlap', '此券不允许同类叠加');
+//        return
+//      }
         // 做异类对比
-        this.logic(current, end, index, 'isDifferentOverlap', '此券不允许异类叠加');
+//      this.logic(current, end, index, 'isDifferentOverlap', '此券不允许异类叠加');
       },
       /**
        * 判断是否删除元素,
@@ -180,20 +182,20 @@
         // 选取优惠接口编辑
         const couponList = this.couponlist.map(t => {
           let {
-            couponNo,
-            type,
-            profitRate,
-            isSameOverlap,
-            isDifferentOverlap,
+//          couponNo,
+//          type,
+//          profitRate,
+//          isSameOverlap,
+//          isDifferentOverlap,
             receiveNo
           } = t;
           return {
-            couponNo,
-            couponRate: profitRate,
-            isSameOverlap,
-            isDifferentOverlap,
-            receiveNo,
-            couponType: type
+//          couponNo,
+//          couponRate: profitRate,
+//          isSameOverlap,
+//          isDifferentOverlap,
+            receiveNo
+//          couponType: type
           };
         });
         // 不知道为什么用封装的不行，传参有问题，只能拿出来单独传了，参数还需要url编码下
@@ -232,9 +234,12 @@
   .coupon_choose
     height: 100%
     padding-bottom: 1.08rem
+    border-top: 1px solid rgba(0,0,0,0.03)
+    background-color: #F6F5F5
     .nav
       padding: .2rem
       margin: .4rem .6rem
+      display: none
       li
         padding-bottom: .2rem
         &.act
@@ -242,22 +247,28 @@
         text-align: center
         flex: 1
     .coupon
+      margin: auto 
+      padding: 0 .32rem
+      width: 7.5rem
+      text-align: center
+      background-color: #F6F5F5
       &.none
         padding: 0
         margin: 0
-      margin: auto .2rem
-      border-radius: .2rem
-      padding-top: .6rem
+      margin: auto 
+      padding-top: .4rem
       padding-bottom: 1.3rem
-      background: #fff
+      background: #F6F5F5
       .coupon_list
         margin-bottom: .4rem
     .btn
       position: fixed
-      bottom: 0
+      z-index: 200
+      top: -0.88rem
       left: 0
       right: 0
       font-size: .36rem
       margin-top: 1rem
       border-radius: 0
+      opacity: 0
 </style>

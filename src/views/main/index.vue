@@ -35,21 +35,28 @@
           name: 'main-home'
         }, {
           url: 'product',
-          title: '产品',
+          title: '投资',
           name: 'main-product'
         }, {
-          url: 'wealth',
-          title: '财富',
-          name: 'main-wealth'
-        }, {
-          url: 'found',
-          title: '发现',
-          name: 'main-found'
-        }, {
           url: 'mine',
-          title: '我的',
+          title: '人脉',
           name: 'main-mine'
-        }]
+        }, {
+          url: 'wealth',
+          title: '我的',
+          name: 'main-wealth'
+        }
+//      {
+//        url: 'found',
+//        title: '发现',
+//        name: 'main-found'
+//      }, {
+//        url: 'mine',
+//        title: '我的',
+//        name: 'main-mine'
+//      }
+        
+        ]
       }
     },
     computed: {
@@ -110,10 +117,10 @@
           align-items: center
           justify-content: center
           img
-            width: .52rem
+            width: .48rem
           span
             margin-top: .07rem
             font-size: .2rem
           &.act
-            color: #00a8ef
+            color: #208AFF 
 </style>

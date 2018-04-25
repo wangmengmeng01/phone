@@ -9,6 +9,10 @@ export const noviceExclusive = async (params) => {
     method: 'get',
     api: api.noviceExclusive,
     params,
+    options: {
+      filter_code: false,
+      filter_msg: false
+    },
   });
 }
 

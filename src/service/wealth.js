@@ -39,6 +39,17 @@ export const invesProperty = async (params) => {
   });
 };
 
+// 理财师客户资产
+export const invesPropertyCustomer = async (params) => {
+  return await $http({
+    method: 'get',
+    api: api.invesPropertyCustomer,
+    params,
+  });
+};
+
+
+
 // 风险评测
 export const userReskEvaluation = async (params) => {
   return await $http({

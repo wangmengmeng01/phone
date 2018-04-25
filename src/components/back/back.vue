@@ -32,7 +32,9 @@
           this.$go('/');
           return
         }
-        this.$router.go(-1)
+        
+        this.$router.go(-1);
+//      location.reload();
       }
     },
   }
@@ -50,6 +52,7 @@
     right: 0
     background: transparent
     color: #181818
+    border-bottom: 1px solid rgba(0,0,0,0.03)
     .tip
       padding-left: .1rem
     &-icon
@@ -60,7 +63,7 @@
       -webkit-flex: 1
     &.main
       color: #fff
-      background: rgb(50,153,209)
+      background: #0C80FE
     &.normal
       background: #fff
 </style>

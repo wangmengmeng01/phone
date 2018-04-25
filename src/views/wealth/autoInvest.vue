@@ -1,9 +1,10 @@
 <template>
-  <div class="autoInvestWrap">
-    <div class="autoInvest">
+  <div class="autoInvestWrap pageCenter">
+  	
+    <!--<div class="autoInvest">
       <div class="offOn">
         <div class="OOFont">自动投标</div>
-        <div class="OOWrap" @click="openTenderPlan" :class="[!auroBol?'disable':'']">
+        <div class="OOWrap">
           <div v-if="auroBol" class="OOButton">关</div>
           <div v-else class="OOButton1">开</div>
         </div>
@@ -11,11 +12,34 @@
       <div class="autoIC">授权存管方开启自动复投</div>
       <div class="autoIB"><img src="../../assets/wealth/tips.png" alt=""> <span>在您投资计划标之前，请务必先开启此功能</span></div>
     </div>
+    
+    
     <div class="autoIIllustrate">
       <p>授权复投流程</p>
       <div class="AIITips"><img src="../../assets/wealth/Triangle.png">放心：自动委托</div>
       <div class="AIITips"><img src="../../assets/wealth/Triangle.png">安心：资金不站岗</div>
       <div class="AIITips"><img src="../../assets/wealth/Triangle.png">省心：设置灵活</div>
+    </div>-->
+    <div class="autoInvestWrap-top">
+    		<p class="f30  p1 borderB">
+    		<span>自动投标</span>
+    		<span v-if="auroBol"  @click="openTenderPlan">去开启</span>
+    		
+    		<span v-else  class="disable" >已开启</span>
+    		</p>
+    		<p class="p2 f28">
+    			<span class="color_font-99">授权存管方开启自动投标</span>
+    			<span class="color_font-36">在您投资计划标之前，请务必先开启此功能</span>
+    		</p>
+    </div>
+    
+    <div class="autoInvestWrap-bottom">
+    		<p class="autoInvestWrap-bottom-p1 f28 color_font-36 borderB">为什么要开启自动投标？</p>
+    		<p class="autoInvestWrap-bottom-p2 f28 color_font-99">
+    			<span>1.放心：自动委托</span>
+    			<span>2.安心：资金不站岗 </span>
+    			<span>3.省心：设置灵活</span>
+    		</p>
     </div>
   </div>
 </template>
@@ -125,8 +149,8 @@
         		       			this.auroBol = false;
         		       			 this.RESET('succ_page');
         						 this.SET_SUCC_PAGE({
-        		             		"title": "已授权存管方开启自动投标",
-        							'sub_title': "您现在可以进行计划标的投资了",
+        		             		"title": "开启成功",
+        							'sub_title': "您已成功开启自动投标功能",
         							"btn_text": "立即投资",
         							"backurl": "/product",
         							"sub_btn_text": "暂不",
@@ -231,82 +255,65 @@
   }
 </script>
 
-<style lang="stylus" scoped>
-  .autoInvest
-    height:2.94rem;
-    background:rgba(255,255,255,1);
-    margin-top 0.4rem
-    padding-top 0.5rem
-  .offOn
-    display flex
-    justify-content space-between
-    padding 0 0.36rem
-    .OOFont
-      color #181818
-      font-size 0.36rem
-  .disable
-  	pointer-events: none;
-  .OOWrap
-    width:1rem;
-    height:0.52rem;
-    background:rgba(240,240,248,1);
-    border-radius: 0.32rem ;
-    position relative
-    .OOButton
-      width:0.6rem;
-      height:0.52rem;
-      background:rgba(141,141,148,1);
-      border-radius: 0.32rem;
-      line-height 0.52rem
-      color #ffffff
-      font-size 0.28rem
-      text-align center
-      position absolute
-      left 0
-     .OOButton1
-      width:0.6rem;
-      height:0.52rem;
-      background:#3299D1;
-      border-radius: 0.32rem;
-      line-height 0.52rem
-      color #ffffff
-      font-size 0.28rem
-      text-align center
-      position absolute
-      right 0
-    .on
-      background #3299D1
-  .autoIC
-    color #8D8D94
-    font-size 0.28rem
-    padding 0.6rem 0 0 0.6rem
-  .autoIB
-    color #181818
-    font-size 0.24rem
-    padding 0.16rem 0 0 0.6rem
-    line-height 0.48rem
-    img
-      width 0.44rem
-      height 0.44rem
-      position relative
-      top 0.12rem
-    span
-      display inline-block
-      margin-left 0.2rem
-  .autoIIllustrate
-    height:3.54rem;
-    background:rgba(255,255,255,1);
-    margin-top 0.4rem
-    p
-      color #181818
-      font-size 0.36rem
-      padding 0.5rem 0 0.4rem 0.36rem
-    .AIITips
-      color #8D8D94
-      font-size 0.24rem
-      padding 0.18rem 0 0 0.6rem
-      img
-        width 0.2rem
-        height 0.2rem
-        padding-right 0.11rem
+<style lang="scss" scoped>
+  .autoInvestWrap{
+  	.disable{
+  		pointer-events: none;
+  	}
+	&-top{
+		background: #FFFFFF;
+		.p1{	
+			margin: 0 .3rem;
+			width: 6.9rem;
+			height: 1.0rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			color: #363636;
+			font-size: .3rem;
+			span:nth-child(2){
+				color: #208AFF ;
+			}
+		}
+		.p2{
+			margin: 0 .3rem;
+			width: 6.9rem;
+			overflow: hidden;
+			span:nth-child(1){
+				float: left;
+				display: block;
+				margin: .36rem 0 .32rem;
+				line-height: .28rem;
+			}
+			span:nth-child(2){
+				float: left;
+				display: block;
+				margin-bottom: .30rem;
+				line-height: .28rem;
+			}
+		}
+	}
+	&-bottom{
+		margin-top: .16rem;
+		background: #FFFFFF;
+		overflow: hidden;
+		&-p1{
+			float: left;
+			margin: 0 .3rem;
+			width: 6.9rem;
+			height: 1.0rem;
+			line-height: 1.0rem;
+		}
+		&-p2{
+			float: left;
+			margin: .30rem 0.3rem .44rem;
+			width: 6.9rem;
+			span{
+				display: block;
+				line-height: .44rem;
+			}
+		}
+	}
+  }
+ 
 </style>

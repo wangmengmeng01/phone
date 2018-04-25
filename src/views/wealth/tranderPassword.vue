@@ -3,15 +3,15 @@
 	
 	
 	
-		<p class="f36 fl p1">温馨提示</p>
+		<p class="f32 fl p1 color_font-36">温馨提示</p>
 	
-		<p class="f36 fl">如欲修改交易密码，请您在投资或提现时在存管方页面进行如下操作</p>
+		<p class="f28 fl" style="color: #666666;">如欲修改交易密码，请您在投资或提现时在存管方页面进行如下操作</p>
 	
-		<p class="f36 fl p2">示例图：</p>
+		<p class="f24 fl p2 color_font-36">示例图：</p>
 	
 		<img class="img" src="../../assets/wealth/jjmm.png" />
 	
-		<p class="f36 p3">点击“忘记交易密码”</p>
+		<p class="f24 p3">点击“忘记交易密码”</p>
 	
 	</div>
 </template>

@@ -1,21 +1,25 @@
 <template>
 	<div class="jionList">
+
 		<div class="joinListDiv" v-show="list.length">
-			<div v-for="(i,index) in list" class="joinCxt" :class="[i>0?'boderTop':'']">
+			<p class="joinCxtTitle boderTop">
+				<span>投资人</span>
+				<span>投资时间</span>
+				<span>投资金额(元)</span>
+			</p>
+			<div class="joinCxt boderTop" v-for="(i,index) in list">
+				<p>{{i.mobile|desensitization}}</p>
 				<p>
-					<span class="jionName">{{i.userName|desensitization}}</span>
-					<span class="joinTime">{{i.createTime}}</span>
+					<span>{{i.createTime.split(" ")[0]}}</span>
+					<span>{{i.createTime.split(" ")[1]}}</span>
 				</p>
 				<p>{{i.investAmount|formatNum}}</p>
 			</div>
-	
 		</div>
-	
-		<div class="joinListDiv1" v-show="!list.length" style="background-color: #f1f1f9;">
+		<div class="joinListDiv1" v-show="!list.length">
 			<img src="../../assets/main/prod/norecord.png" />
 			<p class="noRecord">暂无记录</p>
 		</div>
-	
 	</div>
 </template>
 
@@ -25,7 +29,7 @@
 	} from '@/service'
 	export default {
 		name: 'jionList',
-	
+
 		data() {
 			return {
 				item: {
@@ -35,8 +39,6 @@
 				},
 				list: [], //交易记录
 				totalPage: 0, //总页数
-	
-	
 			}
 		},
 		created() {
@@ -45,31 +47,28 @@
 		mounted() {
 			window.scroll(0, 0);
 			document.body.onscroll = () => {
-	
-				if ((document.documentElement.scrollTop || document.body.scrollTop) >= document.body.scrollHeight - document.documentElement.clientHeight) {
-	
+
+				if((document.documentElement.scrollTop || document.body.scrollTop) >= document.body.scrollHeight - document.documentElement.clientHeight) {
+
 					this.item.pageIndex++;
-					if (this.item.pageIndex > this.totalPage) {
+					if(this.item.pageIndex > this.totalPage) {
 						return;
 					}
-					this.init();
-	
+					if(this.$route.query.rollType) {
+						this.init();
+					}
 				}
 			}
-	
 		},
 		methods: {
-	
 			init() {
 				searchBidsInvestList(this.item).then(res => {
-					console.log("交易记录");
-					console.log(res);
 					this.list = this.list.concat(res.bidsInvestList);
 					this.totalPage = Math.ceil(res.total / 10);
-	
+
 				});
 			}
-	
+
 		}
 	}
 </script>
@@ -83,13 +82,13 @@
 		margin: 0 auto;
 		width: 7.5rem;
 		overflow: hidden;
+		/*border-top: 1px solid rgba(0, 0, 0, 0.03);*/
 	}
 	
 	.joinListDiv {
 		float: left;
-		margin-top: 0.4rem;
-		padding: 0 0.4rem;
-		width: 6.7rem;
+		padding: 0 0.3rem;
+		width: 6.9rem;
 		background-color: #FFFFFF;
 		overflow: hidden;
 	}
@@ -98,6 +97,7 @@
 		float: left;
 		width: 7.5rem;
 		overflow: hidden;
+		background-color: #FFFFFF;
 	}
 	
 	.joinListDiv1>img {
@@ -115,48 +115,52 @@
 	
 	.joinCxt {
 		float: left;
-		width: 6.7rem;
-		height: 1.18rem;
+		width: 6.9rem;
+		height: 1.44rem;
+		line-height: 1.44rem;
 		overflow: hidden;
+		display: flex;
+		justify-content: space-between;
+		color: #363636;
 	}
 	
-	.joinCxt>p:nth-child(1) {
+	.joinCxt p {
+		width: 1.6rem;
+		font-size: .28rem;
+		text-align: center;
+	}
+	
+	.joinCxt p>span:nth-child(1) {
 		float: left;
-		width: 3.7rem;
-		height: 1.18rem;
-		overflow: hidden;
+		margin: .42rem 0 .06rem;
+		line-height: .24rem;
+		color: #999999;
+		width: 1.6rem;
 	}
 	
-	.jionName {
+	.joinCxt p>span:nth-child(2) {
 		float: left;
-		width: 3.7rem;
-		margin: 0.22rem 0 0.08rem 0;
-		font-size: 0.28rem;
-		text-align: left;
-		color: #181818;
-		line-height: 0.4rem;
+		margin: .06rem 0 .42rem;
+		line-height: .24rem;
+		color: #999999;
+		width: 1.6rem;
 	}
 	
-	.joinTime {
-		float: left;
-		width: 3.7rem;
-		line-height: .28rem;
-		font-size: 0.2rem;
-		text-align: left;
+	.joinCxtTitle {
+		width: 6.9rem;
+		display: flex;
+		justify-content: space-between;
 	}
 	
-	.joinCxt>p:nth-child(2) {
-		float: right;
-		margin: 0.44rem 0;
-		word-break: 3.0rem;
-		height: 0.4rem;
-		font-size: 0.28rem;
-		text-align: right;
-		line-height: 0.4rem;
+	.joinCxtTitle span {
+		width: 1.6rem;
+		font-size: .28rem;
+		line-height: .9rem;
+		color: #666666;
+		text-align: center;
 	}
 	
 	.boderTop {
-		border-top: 2px solid #CDCED3;
-		margin-bottom: 1.0rem;
+		border-bottom: 1px solid #E5E5E5;
 	}
 </style>
