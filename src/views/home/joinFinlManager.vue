@@ -221,7 +221,6 @@
 								this.joinBol5 = !this.joinBol5;
 								this.jionMes = res.result;
 								this.joinTime = res.result.createDate;
-								console.log(this.joinTime);
 							} else if(res.code == "1000") {
 								this.$go('/login');
 							} else {

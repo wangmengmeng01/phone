@@ -100,7 +100,6 @@
 				getUserStatus().then(res => {
 					const info = res.result;
 					this.statusInfo = res.result;
-//					console.log(info);
 					switch(parseInt(info.openAccountStatus)) {
 						case 1:
 							this.statusBol = false;

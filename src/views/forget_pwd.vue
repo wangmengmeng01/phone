@@ -93,7 +93,7 @@
           return
         }
         
-        console.log(this.$route.query.view);
+//      console.log(this.$route.query.view);
         const params = {
           mobile: this.item.mobile,
           imageCode: this.item.imageCode,

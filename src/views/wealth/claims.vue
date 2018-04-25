@@ -51,7 +51,7 @@
 
 		<div v-else class="claims-none">
 			<img src="../../assets/main/mine/zwjl.png" />
-			<p class="f28">暂无记录</p>
+			<p class="f28">暂无匹配，请耐心等待...</p>
 		</div>
 
 	</div>

@@ -96,7 +96,6 @@
 				this.act = index;
 				this.pageIndex = 1; // 切换菜单重置pageIndex
 				this.init(i);
-				console.log(this.act);
 			},
 		},
 		watch: {}

@@ -99,8 +99,6 @@
 					
 					this.res = this.res.concat(res.couponList);
 					
-					console.log(this.res);
-					
 					if(item.type == 1) {
 						this.total = Math.ceil(res.raiseCount / 10);
 					} else if(item.type == 3) {
@@ -120,7 +118,6 @@
 				if(this.act === index) return;
 				this.act = index;
 				this.init(i);
-				console.log(index);
 				this.num = index;
 			},
 			checkedCb(data, index) {

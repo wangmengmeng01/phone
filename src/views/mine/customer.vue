@@ -158,7 +158,6 @@
 					}).then(r => {
 						this.list = this.list.concat(r.customerList);
 						this.total = r.total;
-						console.log(this.list);
 						
 					});
 				}

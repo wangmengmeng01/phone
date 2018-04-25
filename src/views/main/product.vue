@@ -46,7 +46,6 @@
 		created() {
 			productSearchBidsList(this.item).then(res => {
 				this.productList = res.productList;
-				console.log(this.productList);
 			});
 
 		},

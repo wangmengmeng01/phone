@@ -126,7 +126,6 @@
 					resultType: this.resultType,
 					remark: this.remark,
 				}).then(res => {
-					console.log(res);
 					
 					if(res==null||res==''){
 						this.$go('/mine');

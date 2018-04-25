@@ -1,7 +1,7 @@
 <template>
 	<div class="mine">
 
-		<div class="mine-top">
+		<div class="mine-top" @click="$go('/mine/qrcode')">
 			<div class="mine-top-user">
 				<img v-if="!isManage" src="../../assets/main/mine/userImg.png" />
 				<img v-else src="../../assets/main/mine/lcs.png" />
@@ -10,7 +10,7 @@
 					<span>{{item.mobile | desensitization}}</span>
 				</p>
 			</div>
-			<div class="mine-top-ewm" @click="$go('/mine/qrcode')">
+			<div class="mine-top-ewm" >
 				<img class="mine-top-ewm-img1" src="../../assets/main/mine/ewm.png" />
 				<img class="mine-top-ewm-img2" src="../../assets/main/mine/rightArrow@2x.png" />
 			</div>

@@ -78,7 +78,6 @@
 					type: 1
 				}).then(res => {
 					this.itemSms.token = res.token;
-					console.log(this.itemSms.token);
 					this.sendMess();
 				})
 			},

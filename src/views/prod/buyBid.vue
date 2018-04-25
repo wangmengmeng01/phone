@@ -68,7 +68,7 @@
 		</div>
 		<div class="buyBid-p1 borderBottom" @click="choose">
 			<span>我的优惠</span>
-			<span v-if="counpBol">{{counpNum}}张可用 <img src="../../assets/common/arrow-right.png"/></span>
+			<span v-if="counpBol" :class="">{{counpNum}}张可用 <img src="../../assets/common/arrow-right.png"/></span>
 			<span v-else>已选用1张<img src="../../assets/common/arrow-right.png"/></span>
 		</div>
 		<div class="buyBid-auto borderBottom">
@@ -240,7 +240,7 @@
 
 		},
 		created() {
-			console.log(this.$route.query.promiseInviteId);
+//			console.log(this.$route.query.promiseInviteId);
 			if(this.$route.query.promiseInviteId == undefined || this.$route.query.promiseInviteId == null || this.$route.query.promiseInviteId == "") {} else {
 				this.buyItem.promiseInviteId = this.$route.query.promiseInviteId;
 				this.isPromiseBol = !this.isPromiseBol;
@@ -263,7 +263,7 @@
 				//				this.buyItem.couponNo = this.$route.query.couponNo;
 				//获取选择的卡券
 
-				console.log(this.coupon.data.length);
+//				console.log(this.coupon.data.length);
 
 				if(this.coupon.data.length) {
 					this.counpBol = false;
@@ -282,7 +282,7 @@
 			}
 
 			doConfirmBuyPage(this.item).then(res => {
-				console.log(res);
+//				console.log(res);
 				this.detail = res;
 				this.investMoney = res.investMinAmount;
 				this.itemProd = {
@@ -319,7 +319,7 @@
 			});
 
 			accountAcmountInfo().then(res => {
-				console.log(res);
+//				console.log(res);
 				this.accountBalance = res;
 			});
 
@@ -355,7 +355,7 @@
 			},
 			add() {
 				this.investMoney += parseInt(this.detail.investAscendingAmount);
-				console.log(typeof(this.investMoney));
+//				console.log(typeof(this.investMoney));
 				if(this.$route.query.linkType == "0") {
 					this.inputBlur(1);
 				} else {

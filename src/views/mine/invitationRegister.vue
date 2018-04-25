@@ -151,7 +151,6 @@
 			 */
 			changeImgCode() {
 				getValidateImage().then(r => {
-					console.log(r);
 					this.imageCode = r;
 				});
 				this.item.imageCode = "";

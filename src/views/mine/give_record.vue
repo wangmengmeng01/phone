@@ -94,7 +94,6 @@
 
 					if(this.checkBol) {
 						this.total = Math.ceil(res.unreceivedCount / 10);
-						console.log(res.unreceivedCount);
 					} else {
 						this.total = Math.ceil(res.receivedCount / 10);
 

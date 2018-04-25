@@ -102,7 +102,7 @@
 			getStatus() {
 				getUserStatus(this.itemStatus).then(res => {
 					//@click=""
-					console.log(res);
+//					console.log(res);
 					const info = res.result;
 					if(res.code == "100") {
 

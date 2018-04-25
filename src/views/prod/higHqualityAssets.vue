@@ -63,7 +63,7 @@
 		methods: {
 			init() {
 				standardAndPlanList(this.item).then(res => {
-					console.log(res);
+//					console.log(res);
 					this.list = this.list.concat(res.list);
 					this.totalPage = Math.ceil(res.allCount / 10);
 				});

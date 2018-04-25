@@ -1,6 +1,6 @@
 <template>
 	<div class="invitation">
-		<img class="banner" src="../../assets/main/mine/banner@2x.png" />
+		<img class="banner" src="../../assets/main/mine/banneryqhy@2x.png" />
 		<div class="invitation-num f28">
 			<div class="boderR">
 				<p class="color_font-99">已注册好友</p>
