@@ -10,7 +10,7 @@
         <img src="../assets/common/del.png" alt="" class="del" @click="item.mobile=''">
       </div>
     </div>
-    <button class="btn" :class="item.mobile.length>0?'':'dis'" @click="submit">
+    <button class="btn" style="height: 1.0rem;" :class="item.mobile.length>0?'':'dis'" @click="submit">
 	    	<span v-show="nextBol">{{text}}</span>
 	    	<span v-show="!nextBol"><img class="loadImg" src="../assets/common/load.png"/></span>
     </button>

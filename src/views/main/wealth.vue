@@ -41,12 +41,12 @@
 				<img v-if="showBol" @click="showBol=!showBol" src="../../assets/wealth/openEye.png" />
 				<img v-else @click="showBol=!showBol" src="../../assets/wealth/closeEye.png" />
 			</p>
-			<p v-if="showBol" class="total color_font-36 f56">{{home.totalAmount|formatNum2}}</p>
+			<p v-if="showBol" class="total color_font-36 f56">{{home.amountTotal|formatNum2}}</p>
 			<p v-else class="total color_font-36 f56">--.--</p>
 			<div class="wealth-center-div borderB">
 				<p class="p1">
 					<span class="f24 span1 color_font-99">累计收益(元)<!-- <img src="../../assets/common/arrow-right.png"/>--></span>
-					<span v-if="showBol" class="f40 span2">{{home.sumAmount|formatNum2}}</span>
+					<span v-if="showBol" class="f40 span2">{{home.profitAll|formatNum2}}</span>
 					<span v-else class="f40 span2">--.--</span>
 				</p>
 				<!--<p class="p2">
@@ -105,7 +105,7 @@
 
 <script>
 	import {
-		wealthIndex,
+		accountAcmountInfo,
 		invesProperty,
 		getUserStatus,
 		userActivate,
@@ -160,11 +160,11 @@
 				}
 
 			},
-			tips() {
-				this.$toask("总金额=可用金额+我的合计资产额");
-			},
+//			tips() {
+//				this.$toask("总金额=可用金额+我的合计资产额");
+//			},
 			init() {
-				wealthIndex().then(res => {
+				accountAcmountInfo().then(res => {
 					this.home = res;
 				});
 				getUserStatus().then(res => {
@@ -174,15 +174,8 @@
 						case 1:
 							this.getUserS.openStatus = false;
 							break;
-
 					}
-
 				});
-				invesProperty(this.invesProperty.data).then(res => {
-					this.invesProperty.res = res.dataList.slice(0, 2);
-					this.totalAmount = res.totalAmount;
-				});
-
 				searchUserInfo().then(r => {
 					this.item = r;
 				})
