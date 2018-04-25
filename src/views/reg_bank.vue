@@ -220,7 +220,7 @@
 				};
 				sendSmsCode(params).then(r => {
 					this.item.smsSeq = r.smsSeq;
-					this.item.smsSeq = 'AAAAAAAA';
+//					this.item.smsSeq = 'AAAAAAAA';
 					// 倒计时
 					this.countdown()
 				})
