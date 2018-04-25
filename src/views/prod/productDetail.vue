@@ -8,7 +8,7 @@
 			<div class="pdtMessage">
 				<p>{{detail.periodLength}}{{detail.periodUnit|Totime}}期限</p>
 				<p>{{detail.investMinAmount|formatNum}}元起投</p>
-				<p v-if="detail.lockPeriod=='9999'">不可转让</p>
+				<p v-if="detail.lockPeriod>=9999">不可转让</p>
 				<p v-else>{{detail.lockPeriod}}天后可转让</p>
 			</div>
 			<div class="pdtProgress">
