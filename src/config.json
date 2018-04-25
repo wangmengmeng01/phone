@@ -398,7 +398,8 @@
 					"filter": true,
 					"back": false,
 					"foot": {
-						"style": "background-color: #fff;margin-top: -3rem"
+						"style": "background-color: #fff;margin-top: -3rem",
+						"type": "main"
 					}
 				}, {
 					"path": "fail",
