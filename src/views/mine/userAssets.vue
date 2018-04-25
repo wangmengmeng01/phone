@@ -7,7 +7,7 @@
 				<p class="f28 userAssets-list-detail-p">{{i.borrowName}} <span class="f28 userAssets-list-detail-p-span" :class="i.cashStatus==4?'dis':' '">{{i.cashStatus==4?'已到期':'持有中'}}</span></p>
 				<div class="userAssets-list-detail-div">
 					<p><span class="f36">{{i.initCashAmount|formatNum}}</span><span class="f24">投资金额(元)</span></p>
-					<p><span class="f24"><i class="f36">{{i.interestEndDate}}</i></span><span class="f24">到期日期</span></p>
+					<p><span class="f24"><i class="f32">{{i.interestEndDate}}</i></span><span class="f24">到期日期</span></p>
 					<p><span class="f36">+{{i.holdAmount|tofixed2}}</span><span class="f24">持有收益(元)</span></p>
 				</div>
 			</div>

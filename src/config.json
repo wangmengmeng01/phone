@@ -223,7 +223,7 @@
 					"bg": false
 				}, {
 					"path": "customer_detail",
-					"title": "客户详情",
+					"title": "已有客户详情",
 					"foot": false
 				}, {
 					"path": "userAssets",
@@ -259,7 +259,7 @@
 					"foot": false
 				}, {
 					"path": "main",
-					"title": "我的优惠",
+					"title": "优惠券",
 					"foot": false
 				}, {
 					"path": "choose",
@@ -504,11 +504,9 @@
 					"path": "productDetail",
 					"title": "产品详情",
 					"back": {
-						"background": "main"
+						"background": "#fff"
 					},
-					"foot": {
-						"style": "margin-bottom: 1.1rem"
-					}
+					"foot":false
 				}, {
 					"path": "continueInvest",
 					"title": "我的续投",

@@ -149,8 +149,8 @@
         		       			this.auroBol = false;
         		       			 this.RESET('succ_page');
         						 this.SET_SUCC_PAGE({
-        		             		"title": "已授权存管方开启自动投标",
-        							'sub_title': "您现在可以进行计划标的投资了",
+        		             		"title": "开启成功",
+        							'sub_title': "您已成功开启自动投标功能",
         							"btn_text": "立即投资",
         							"backurl": "/product",
         							"sub_btn_text": "暂不",

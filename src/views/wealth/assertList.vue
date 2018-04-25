@@ -43,7 +43,7 @@
       <p class="noRecord">暂无记录</p>
     </div>-->
 		<div class="wealthMyAssert-list sonDiv2" v-if="invesProperty.res.length">
-			<div v-for="(i) in invesProperty.res" class="wealthMyAssert-list-div borderB" @click="$go('/wealth/productDetail',{bidNo:i.borrowNo,backTitle:'资产详情',cashNo:i.cashNo,bidType:i.borrowType})">
+			<div v-for="(i) in invesProperty.res" class="wealthMyAssert-list-div borderB" @click="$go('/wealth/productDetail',{bidNo:i.borrowNo,backTitle:i.borrowNo,cashNo:i.cashNo,bidType:i.borrowType})">
 				<div class="div1">
 					<span class="f28">{{i.borrowName}} </span>
 					<span class="f24" :class="i.cashStatus=='4'?'':'dis'">{{i.cashStatus=='4'?'已到期':'持有中'}}</span>

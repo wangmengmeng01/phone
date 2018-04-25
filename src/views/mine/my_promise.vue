@@ -44,6 +44,7 @@
 		getPromiseInviteList,
 		getUserStatus
 	} from '@/service'
+	 import axios from 'axios'
 	export default {
 
 		name: 'promise',

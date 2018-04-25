@@ -24,13 +24,13 @@
     
      <div class="recharge-bank">
     		<p class="f28 p1"> <img class="logo" :src="require(`../../assets/wealth/whiteLogo/${bankNo}.png`)"/> <span>{{cardMes.bankName}}</span> <img class="img1" src="../../assets/wealth/kjzf.png"/></p>
-    		<p class="f48 p2 center">{{cardMes.bankCardNo|hideBankNum}}</p>
+    		<p class="f48 p2 center">**** **** **** {{cardMes.bankCardNo|hideBankNum2}}</p>
     </div>
-    <p class="recharge-tips f28">单笔限额{{cardMes.singleTransQuota/10000}}万元，每日限额{{cardMes.cardDailyTransQuota/10000}}万元</p>
+    <p class="recharge-tips f28">单笔限额 <i>{{cardMes.singleTransQuota/10000}}</i>万元，每日限额<i>{{cardMes.cardDailyTransQuota/10000}}</i>万元</p>
     
     <p class="recharge-div borderB f28 color_font-36">
     		<span class="recharge-div-s1">可用余额(元)</span>
-    		<span class="recharge-div-s2">{{cardMes.availableAmount|tofixed2}}</span>
+    		<span class="recharge-div-s2">{{cardMes.availableAmount|formatNum2}}</span>
     </p>
     <p class="recharge-div borderB f28 color_font-36">
     		<span class="recharge-div-s1">充值金额(元)</span>
@@ -136,7 +136,7 @@
             this.num = 60;
             return
           }
-          this.codeText = `发送(${this.num})`;
+          this.codeText = `${this.num}`;
         }, 1000)
       },
   
@@ -169,7 +169,7 @@
         submitUserRecharge(this.rechargeItem).then(res => {
           let params = {
             "title": "恭喜，充值成功",
-            'sub_title': "您的资金已充至存管账户",
+            'sub_title': '您本次充值的金额为<i style="color: #FF5513;font-style: inherit;">'+this.rechargeMoney+'</i>元，</br>已将您的资金提交至存管银行',
             "btn_text": "立即投资",
             "backurl": "/product",
             "sub_btn_text": "去账户中心查看",
@@ -241,7 +241,7 @@
   		color: #666666;
   		i{
   			font-style: inherit;
-  			color: #FB613B;
+  			color: #FF5513;
   		}
   	}
   	&-div{
@@ -258,13 +258,16 @@
   		}
   		&-s2{
   			width: 4.04rem;
+  			text-align: left;
   		}
   		&-s3{
   			width: .56rem;
   			color: #2170FF;
+  			text-align: left;
   		}
   		&-s4{
   			width: 2.70rem;
+  			text-align: left;
   		}
   		&-s5{
   			position: absolute;
@@ -300,6 +303,8 @@
   	}
   	.disableBtn{
   		pointer-events: none;
+  		color: #9b9b9b;
+  		border: 1px solid #9b9b9b;
   	}
   
  }

@@ -113,7 +113,7 @@
 					<p class="f28 customer_detail-list-detail-p">{{i.borrowName}} <span class="f28 customer_detail-list-detail-p-span">持有中</span></p>
 					<div class="customer_detail-list-detail-div">
 						<p><span class="f36">{{i.initCashAmount|formatNum}}</span><span class="f24">投资金额(元)</span></p>
-						<p><span class="f24"><i class="f36">{{i.interestEndDate}}</i></span><span class="f24">到期日期</span></p>
+						<p><span class="f24"><i class="f32">{{i.interestEndDate}}</i></span><span class="f24">到期日期</span></p>
 						<p><span class="f36">+{{i.holdAmount|formatNum}}</span><span class="f24">持有收益(元)</span></p>
 					</div>
 				</div>

@@ -2,13 +2,13 @@
   <div class="withdraw pageCenter">
     <div class="withdraw-bank">
     		<p class="f28 p1"> <img class="logo" :src="require(`../../assets/wealth/whiteLogo/${bankNo}.png`)" /> <span>{{cardMes.bankName}}</span> <img class="img1" src="../../assets/wealth/kjzf.png"/></p>
-    		<p class="f48 p2 center">{{cardMes.bankCardNo|hideBankNum}}</p>
+    		<p class="f48 p2 center">**** **** **** {{cardMes.bankCardNo|hideBankNum2}}</p>
     </div>
     <p class="withdraw-tips f28">预计到账时间<i>T+1</i>工作日，节假日顺延<br />(该时间为平台预估时间，具体以实际到账时间为准)</p>
     
     <p class="withdraw-div borderB f28 color_font-36">
     		<span class="withdraw-div-s1">可提现金额(元)</span>
-    		<span class="withdraw-div-s2">{{accountMes.canWithdrawAmount|formatNum}}</span>
+    		<span class="withdraw-div-s2">{{accountMes.canWithdrawAmount|formatNum2}}</span>
     </p>
     <p class="withdraw-div borderB f28 color_font-36">
     		<span class="withdraw-div-s1">提现金额(元)</span>
@@ -17,11 +17,11 @@
     </p>
      <p class="withdraw-div borderB f28 color_font-36">
     		<span class="withdraw-div-s1">手续费(元)</span>
-    		<span class="withdraw-div-s2">{{userCashFeeMoney|formatNum}}</span>
+    		<span class="withdraw-div-s2">{{userCashFeeMoney|formatNum2}}</span>
     </p>
      <p class="withdraw-div borderB f28 color_font-36">
     		<span class="withdraw-div-s1">实际到账(元)</span>
-    		<span class="withdraw-div-s2">{{actualccountMoney|formatNum}}</span>
+    		<span class="withdraw-div-s2">{{actualccountMoney|formatNum2}}</span>
     </p>
     
     
@@ -63,8 +63,8 @@
         // 开始清楚成功页面的缓存
         this.RESET('succ_page');
         this.SET_SUCC_PAGE({
-          "title": "提现已发起",
-          'sub_title': "系统已收到您所发起的提现，将尽快处理",
+          "title": "提现申请已提交",
+          'sub_title': "已将您的提现申请提交至存管银行",
           "btn_text": "完成",
           "backurl": "/wealth",
           "sub_btn_text": "",
@@ -223,10 +223,10 @@
   			text-align: left;
   		}
   		&-s2{
-  			width: 4.04rem;
+  			width: 4.00rem;
   		}
   		&-s3{
-  			width: .56rem;
+  			width: .60rem;
   			color: #2170FF;
   		}
   		input{
@@ -247,6 +247,7 @@
   	}
   	.dis{
   		background-color: #E5E5E5;
+  		
   	}
   }
 </style>

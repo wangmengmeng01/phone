@@ -9,7 +9,7 @@
 				</div>
 				<div class="div2 f24 color_font-99">
 					<p>{{i.createTime}}</p>
-					<p>可用余额:{{i.availableAmountAfter|formatNum}}元</p>
+					<p>余额:{{i.availableAmountAfter|formatNum}}元</p>
 				</div>
 			</div>
 		</div>

@@ -32,7 +32,8 @@
     </ul>-->
 		<img @click="$go('/mine/seting')" class="settingImg" src="../../assets/wealth/setting.png" />
 		<div class="wealth-top sonDiv f28">
-			<img src="../../assets/main/mine/lcs.png" />
+			<img v-if="item.flag==1" src="../../assets/main/mine/lcs.png" />
+			<img v-else src="../../assets/main/mine/userImg.png" />
 			<span><i style="font-style: inherit;" v-show="item.userName">{{item.userName | nameDesensitization}}</i>  {{item.mobile | desensitization}}</span>
 		</div>
 		<div class="wealth-center sonDiv">
@@ -40,24 +41,24 @@
 				<img v-if="showBol" @click="showBol=!showBol" src="../../assets/wealth/openEye.png" />
 				<img v-else @click="showBol=!showBol" src="../../assets/wealth/closeEye.png" />
 			</p>
-			<p v-if="showBol" class="total color_font-36 f56">{{home.totalAmount|formatNum}}</p>
+			<p v-if="showBol" class="total color_font-36 f56">{{home.totalAmount|formatNum2}}</p>
 			<p v-else class="total color_font-36 f56">--.--</p>
 			<div class="wealth-center-div borderB">
 				<p class="p1">
-					<span class="f24 span1 color_font-99">累计收益(元) <img src="../../assets/common/arrow-right.png"/></span>
-					<span v-if="showBol" class="f40 span2">{{home.sumAmount|formatNum}}</span>
+					<span class="f24 span1 color_font-99">累计收益(元)<!-- <img src="../../assets/common/arrow-right.png"/>--></span>
+					<span v-if="showBol" class="f40 span2">{{home.sumAmount|formatNum2}}</span>
 					<span v-else class="f40 span2">--.--</span>
 				</p>
-				<p class="p2">
+				<!--<p class="p2">
 					<span class="f24 span1 color_font-99">昨日收益(元) <img src="../../assets/common/arrow-right.png"/></span>
 					<span v-if="showBol" class="f40 span2">{{home.yesterdayAmount|formatNum}}</span>
 					<span v-else class="f40 span2">--.--</span>
-				</p>
+				</p>-->
 			</div>
 
 			<div class="wealth-center-next f32">
 				<p class="f28 color_font-99">可用余额(元)</p>
-				<p v-if="showBol" class="f28">{{home.availableAmount|formatNum}}</p>
+				<p v-if="showBol" class="f28">{{home.availableAmount|formatNum2}}</p>
 				<p v-else class="f28">--.--</p>
 				<p @click="gowithdraw()">提现</p>
 				<p @click="goRecharge()">充值</p>
@@ -116,7 +117,7 @@
 		data() {
 
 			return {
-				totalAmount: 0,
+				totalAmount: 0.0,
 				menu: [],
 				home: "",
 				invesProperty: {
@@ -169,7 +170,6 @@
 				getUserStatus().then(res => {
 					const info = res.result;
 					this.statusInfo = res.result;
-					console.log(info);
 					switch(parseInt(info.openAccountStatus)) {
 						case 1:
 							this.getUserS.openStatus = false;
@@ -179,10 +179,8 @@
 
 				});
 				invesProperty(this.invesProperty.data).then(res => {
-					console.log(res)
 					this.invesProperty.res = res.dataList.slice(0, 2);
 					this.totalAmount = res.totalAmount;
-					console.log(this.invesProperty.res)
 				});
 
 				searchUserInfo().then(r => {

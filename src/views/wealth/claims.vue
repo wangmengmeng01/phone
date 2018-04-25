@@ -30,7 +30,7 @@
 
 		<div  v-if="list.length">
 			<div class="claims-list sonDiv"  v-for="(i,index) in list">
-				<p class="title f28 boderB">债权ID{{i.id}}</p>
+				<p class="title f28 borderB">债权ID{{i.id}}</p>
 				<div class="claims-list-div">
 					<p>
 						<span class="f32 color">{{i.currValue|formatNum}}</span>

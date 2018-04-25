@@ -130,6 +130,7 @@
 		getUserStatus,
 		inviteFriend
 	} from '@/service'
+	 import axios from 'axios'
 	export default {
 		name: 'mine',
 		data() {

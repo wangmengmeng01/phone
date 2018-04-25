@@ -61,8 +61,11 @@
 
 <script>
 	import {
-		getUserStatus
+		getUserStatus,
+		userActivate
 	} from '@/service'
+	
+	 import axios from 'axios'
 	export default {
 		name: 'seting',
 		data() {
@@ -92,12 +95,9 @@
 		methods: {
 			autoInvest() {
 				if(this.getUserS.openStatus == true) {
-					this.TouserActivate('/wealth/autoInvest');
-				} else {
-					this.$go('/reg_bank')
-				}
-			},
-			TouserActivate(val) {
+//					this.TouserActivate('/wealth/autoInvest');
+					
+					
 
 				let info = this.statusInfo;
 				if(info.openAccountStatus == "1") {
@@ -133,10 +133,15 @@
 					})
 
 				} else {
-					this.$go(val);
+					this.$go('/wealth/autoInvest');
 				}
 
+			
+				} else {
+					this.$go('/reg_bank')
+				}
 			},
+//			TouserActivate(val) {},
 		},
 		watch: {}
 	}
@@ -173,10 +178,10 @@
 				}
 			}
 			.p2 {
-				margin: .64rem 0 .26rem;
+				/*margin: .64rem 0 .26rem;*/
 			}
 			.p3 {
-				margin: 1.0rem 0 1.4rem;
+				margin: 2.0rem 0 1.4rem;
 			}
 		}
 		.maTop {

@@ -141,6 +141,7 @@
 				.p1 {
 					padding: .3rem 0 0 0;
 					line-height: .32rem;
+					color: #FF5513;
 				}
 				.p2 {
 					img {

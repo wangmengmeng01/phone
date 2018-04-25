@@ -47,7 +47,7 @@
 			</p>
 			<p class="reg_bank-div  f28 color_font-3" :class="tipsBol?'':'borderB'"  @click="linkto">
 				<span class="reg_bank-div-s1">开户银行</span>
-				<input type="text" class="reg_bank-div-s4 f28 input disableBtn" v-model.trim="bankName" name="" id="" maxlength="10"  placeholder="请选择" />
+				<input type="text" class="reg_bank-div-s4 f28 input disableBtn1" v-model.trim="bankName" name="" id="" maxlength="10"  placeholder="请选择开户行" />
 				<span class="reg_bank-div-s6"><img src="../assets/common/arrow-right.png"/></span>
 			</p>
 			<p v-show="tipsBol" class="reg_bank-div-tips f28 color_font-99">招商银行 单笔限额<i>5000元</i>，每日限额<i>50000元</i></p>
@@ -65,7 +65,7 @@
 				<span class="reg_bank-div-s5 f28"  :class="click_code ? 'disableBtn' : ''" @click="sendCode">{{codeText}}</span>
 			</p>
 		</div>
-		<button class="btn reg_bank-btn"   @click="submit" :class="(item.realName && item.idno && item.bankNo && item.bankCardNo && item.mobile && item.smsCode)?'':'dis'">下一步</button>
+		<button class="btn reg_bank-btn"   @click="submit" :class="(item.realName && item.idno && item.bankNo && item.bankCardNo && item.mobile && item.smsCode)?'':'dis'">确定</button>
 	</div>
 </template>
 <script>
@@ -239,7 +239,7 @@
 						this.num = 60;
 						return
 					}
-					this.codeText = `发送(${this.num})`;
+					this.codeText = `${this.num}`;
 				}, 1000)
 			},
 			/**
@@ -422,6 +422,11 @@
 			pointer-events: none;
 		}
 		.disableBtn {
+			pointer-events: none;
+			color: #9b9b9b;
+  			border: 1px solid #9b9b9b;
+		}
+		.disableBtn1 {
 			pointer-events: none;
 		}
 	}

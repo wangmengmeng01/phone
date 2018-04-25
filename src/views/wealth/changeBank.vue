@@ -30,9 +30,13 @@
 		<div class="changeBank pageCenter">
 			<div class="changeBank-bank">
 				<p class="f28 p1"> <img class="logo" :src="require(`../../assets/wealth/whiteLogo/${bankNo}.png`)" /> <span>{{cardMes.bankName}}</span> <img class="img1" src="../../assets/wealth/kjzf.png" /></p>
-				<p class="f48 p2 center">{{cardMes.bankCardNo|hideBankNum}}</p>
+				<p class="f48 p2 center">**** **** **** {{cardMes.bankCardNo|hideBankNum2}}</p>
 			</div>
-			<p class="changeBank-tips f28">温馨提示：大额充值建议网站操作</p>
+			<p class="changeBank-tips f28">
+				<span>温馨提示：</span>
+				<span>1.大额充值建议网站操作</span>
+				<span>2.七天之内进行过换绑卡，提现、充值、投资操作，不能换绑卡</span>
+			</p>
 			
 			<p class="changeBank-phone f36 color_font-36 center">{{cardMes.mobile|desensitization}}</p>
 			
@@ -118,7 +122,7 @@
 						this.num = 60;
 						return
 					}
-					this.codeText = `发送(${this.num})`;
+					this.codeText = `${this.num}`;
 				}, 1000)
 			},
 
@@ -192,6 +196,9 @@
   			font-style: inherit;
   			color: #FB613B;
   		}
+  		span{
+  			display: block;text-align: left;
+  		}
   	}
   	&-phone{
   		margin: 1.2rem  0 .6rem 0;
@@ -252,6 +259,8 @@
   	}
   	.disableBtn{
   		pointer-events: none;
+  		color: #9b9b9b;
+  		border: 1px solid #9b9b9b;
   	}
   
  }
