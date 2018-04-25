@@ -71,7 +71,7 @@
 			<span v-if="counpBol" :class="">{{counpNum}}张可用 <img src="../../assets/common/arrow-right.png"/></span>
 			<span v-else>已选用1张<img src="../../assets/common/arrow-right.png"/></span>
 		</div>
-		<div  v-show="detail.flag==2" class="buyBid-auto borderBottom">
+		<div v-show="detail.flag==2" class="buyBid-auto borderBottom">
 			<div class="buyBid-auto-div">
 				<span class="f28">自动续期</span>
 				<p @click="autoRenewBol=!autoRenewBol">
@@ -240,7 +240,7 @@
 
 		},
 		created() {
-//			console.log(this.$route.query.promiseInviteId);
+			//			console.log(this.$route.query.promiseInviteId);
 			if(this.$route.query.promiseInviteId == undefined || this.$route.query.promiseInviteId == null || this.$route.query.promiseInviteId == "") {} else {
 				this.buyItem.promiseInviteId = this.$route.query.promiseInviteId;
 				this.isPromiseBol = !this.isPromiseBol;
@@ -263,7 +263,7 @@
 				//				this.buyItem.couponNo = this.$route.query.couponNo;
 				//获取选择的卡券
 
-//				console.log(this.coupon.data.length);
+				//				console.log(this.coupon.data.length);
 
 				if(this.coupon.data.length) {
 					this.counpBol = false;
@@ -282,7 +282,7 @@
 			}
 
 			doConfirmBuyPage(this.item).then(res => {
-//				console.log(res);
+				//				console.log(res);
 				this.detail = res;
 				this.investMoney = res.investMinAmount;
 				this.itemProd = {
@@ -293,13 +293,17 @@
 					profitPlan: this.detail.profitPlan,
 				};
 				this.rate = res.annualizedRate + res.appendRate;
-				this.buyItem.investAmount = res.investAmount;
 
 				//从卡券页面 返回来
 				if(this.$route.query.linkType == "0") {
+
+					console.log(this.coupon.params.investAmount);
 					if(this.coupon.params.investAmount) {
+						this.buyItem.investAmount = this.coupon.params.investAmount;
 						this.inputBlur(1);
 					} else {
+						this.buyItem.investAmount = this.investMoney;
+
 						this.inputBlur(0);
 					}
 				} else {
@@ -308,18 +312,21 @@
 					});
 				}
 				if(this.$route.query.inviteAmount) {
+					console.log(this.$route.query.inviteAmount);
 					this.investMoney = parseFloat(this.$route.query.inviteAmount);
 					this.inviteBol = false;
 					this.CouponList();
 					this.inputBlur(1);
 				} else {
+					this.buyItem.investAmount = this.investMoney;
+
 					this.inputBlur(0);
 				}
 
 			});
 
 			accountAcmountInfo().then(res => {
-//				console.log(res);
+				//				console.log(res);
 				this.accountBalance = res;
 			});
 
@@ -355,7 +362,7 @@
 			},
 			add() {
 				this.investMoney += parseInt(this.detail.investAscendingAmount);
-//				console.log(typeof(this.investMoney));
+				//				console.log(typeof(this.investMoney));
 				if(this.$route.query.linkType == "0") {
 					this.inputBlur(1);
 				} else {
