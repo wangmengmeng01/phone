@@ -105,35 +105,23 @@
 			</p>
 		</div>
 
-		<div class="customer_detail-list"> <!-- v-show="AssetsItem.length"-->
-			<p class="customer_detail-list-title f32"  @click="$go('userAssets',{rollType:1,userCode:userCode})">客户资产 <span class="f28 color_font-99">更多</span></p>
-
-			<div class="customer_detail-list-detail borderB" v-for="(i,index) in AssetsItem" v-show="index<=2">
-				<p class="f28 customer_detail-list-detail-p">{{i.borrowName}} <span class="f28 customer_detail-list-detail-p-span">持有中</span></p>
-				<div class="customer_detail-list-detail-div">
-					<p><span class="f36">{{i.initCashAmount|formatNum}}</span><span class="f24">投资金额(元)</span></p>
-					<p><span class="f24"><i class="f36">{{i.interestEndDate}}</i></span><span class="f24">到期日期</span></p>
-					<p><span class="f36">+{{i.holdAmount|formatNum}}</span><span class="f24">持有收益(元)</span></p>
+		<div class="customer_detail-list">
+			<!---->
+			<p class="customer_detail-list-title f32">客户资产 <span v-show="AssetsItem.length" @click="$go('userAssets',{rollType:1,userCode:userCode})" class="f28 color_font-99">更多</span></p>
+			<div v-if="AssetsItem.length">
+				<div class="customer_detail-list-detail borderB" v-for="(i,index) in AssetsItem" v-show="index<=2">
+					<p class="f28 customer_detail-list-detail-p">{{i.borrowName}} <span class="f28 customer_detail-list-detail-p-span">持有中</span></p>
+					<div class="customer_detail-list-detail-div">
+						<p><span class="f36">{{i.initCashAmount|formatNum}}</span><span class="f24">投资金额(元)</span></p>
+						<p><span class="f24"><i class="f36">{{i.interestEndDate}}</i></span><span class="f24">到期日期</span></p>
+						<p><span class="f36">+{{i.holdAmount|formatNum}}</span><span class="f24">持有收益(元)</span></p>
+					</div>
 				</div>
 			</div>
-
-			<!--<div class="customer_detail-list-detail borderB">
-    			<p class="f28 customer_detail-list-detail-p">周周赢20180402-02期 <span class="f28 customer_detail-list-detail-p-span dis">持有中</span></p>
-    			<div class="customer_detail-list-detail-div">
-    				<p><span class="f36">40,000.00</span><span class="f24">投资金额(元)</span></p>
-    				<p><span class="f24"><i class="f36">12</i>天</span><span class="f24">到期天数</span></p>
-    				<p><span class="f36">+60.00</span><span class="f24">持有收益(元)</span></p>
-    			</div>
-    		</div>
-    		<div class="customer_detail-list-detail borderB">
-    			<p class="f28 customer_detail-list-detail-p">周周赢20180402-02期 <span class="f28 customer_detail-list-detail-p-span dis">持有中</span></p>
-    			<div class="customer_detail-list-detail-div">
-    				<p><span class="f36">40,000.00</span><span class="f24">投资金额(元)</span></p>
-    				<p><span class="f24"><i class="f36">12</i>天</span><span class="f24">到期天数</span></p>
-    				<p><span class="f36">+60.00</span><span class="f24">持有收益(元)</span></p>
-    			</div>
-    		</div>
-    		-->
+			<div v-else>
+				<img class="customer_detail-list-img" src="../../assets/main/mine/Groupzwzc@2x.png" />
+				<p class="f28 center" style="color: #666666;margin-bottom: 1.0rem;">暂无资产</p>
+			</div>
 
 		</div>
 
@@ -150,7 +138,7 @@
 		data() {
 			return {
 				item: {},
-				AssetsItem: {},
+				AssetsItem: [],
 				userCode: this.$route.query.userCode,
 			}
 		},
@@ -258,6 +246,12 @@
 		&-list {
 			margin: 0 .3rem;
 			width: 6.9rem;
+			&-img {
+				margin: 1.2rem 2.39rem .4rem;
+				width: 2.12rem;
+				height: 2.14rem;
+				background-size: 100% 100%;
+			}
 			&-title {
 				margin-top: .6rem;
 				line-height: .32rem;

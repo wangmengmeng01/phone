@@ -72,9 +72,9 @@
 			</div>
 		</div>
 		<div class="recommend"   v-show="recomPro.length">
-			<p class="newTitle">为您推荐 <span>更多</span></p>
+			<p class="newTitle">为您推荐 <span @click="$go('/product')">更多</span></p>
 			<div class="recommendDiv bottomBorder"   v-for="(a,index) in hotPro" @click="$go('/prod/productDetail',{bidNo:a.bidNo,backTitle:a.bidName})">
-				<p class="recommendDivTitle">{{a.productName}}</p>
+				<p class="recommendDivTitle">{{a.bidName}}</p>
 				<div class="bidMessage">
 					<div>
 						<p class="bidMesRate"><i>{{a.annualizedRate|tofixed2}}</i>%</p>

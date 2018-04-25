@@ -8,7 +8,7 @@
 			<div class="pdtMessage">
 				<p>{{detail.periodLength}}{{detail.periodUnit|Totime}}期限</p>
 				<p>{{detail.investMinAmount|formatNum}}元起投</p>
-				<p v-if="detail.lockPeriod!='9999'">不可转让</p>
+				<p v-if="detail.lockPeriod=='9999'">不可转让</p>
 				<p v-else>{{detail.lockPeriod}}天后可转让</p>
 			</div>
 			<div class="pdtProgress">
@@ -88,7 +88,7 @@
 				<span class="span" @click="$go('/prod/calculation',{bidNo:detail.bidNo})">  
 					<img src="../../assets/main/prod/calculation.png"/>
 				</span>
-				<span class="yy f32" @click="$go('/prod/invite',{bidNo:item.bidNo})">邀约</span>
+				<span class="yy f32"  v-show="userInfo.flag==1"   @click="$go('/prod/invite',{bidNo:item.bidNo})">邀约</span>
 			    <p @click="getStatus">立即购买</p>
 		</div>
 		<div v-else class="productDetailBottom disable" style="pointer-events: none;">已售罄</div>
@@ -104,6 +104,9 @@
 		userActivate
 	} from '@/service'
 	 import axios from 'axios'
+	 import {
+		mapGetters
+	} from 'vuex'
 	export default {
 		name: 'productDetail',
 		data() {
@@ -115,7 +118,13 @@
 				detail: {},
 				profitPlanArr: ['', '等额本息', '等额本金', '按期付息，到期还本', '一次性还款', '其他'],
 				statusBol:true,
+				userInfo:{},
 			}
+		},
+		computed: {
+			...mapGetters([
+				'user_info'
+			])
 		},
 		created() {
 			if(this.$route.query.status){
@@ -126,6 +135,9 @@
 			searchProductBidsDetail(this.item).then(res => {
 				this.detail = res;
 			});
+			
+			this.userInfo = this.user_info;
+			
 		},
 		methods: {
 			loanAgreement() {
@@ -140,6 +152,7 @@
 					content: riskTips
 				})
 			},
+			
 			getStatus() {
 				getUserStatus(this.itemStatus).then(res => {
 					//@click=""

@@ -6,8 +6,8 @@
  */
 export function desensitization(val) {
   let str = String(val);
-  let ruten = str.substring(3, 8);
-  return str.replace(ruten, '*****');
+  let ruten = str.substring(3, 7);
+  return str.replace(ruten, '****');
 }
 
 /**

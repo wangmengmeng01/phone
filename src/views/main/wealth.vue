@@ -277,7 +277,7 @@
 	}
 	
 	.wealth {
-		padding-bottom: 1.0rem;
+		/*padding-bottom: 1.0rem;*/
 		&-top {
 			float: left;
 			color: #FFF;

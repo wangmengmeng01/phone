@@ -3,7 +3,7 @@
 
 		<div class="mine-top">
 			<div class="mine-top-user">
-				<img v-if="!isManage" src="../../assets/main/mine/tx.png" />
+				<img v-if="!isManage" src="../../assets/main/mine/userImg.png" />
 				<img v-else src="../../assets/main/mine/lcs.png" />
 				<p class="f28 color_font-36 mine-top-user-p1">
 					<span v-show="nextBol">{{item.userName | nameDesensitization}}</span>
@@ -88,9 +88,6 @@
 			</p>
 		</div>
 	
-		<div class="tips f24 color_font-99">
-			——出借有风险，选择需谨慎——
-		</div>
 		<!--<div class="head flex" @click="$go('/mine/qrcode')">
       <img :src="item.pic || head" alt="" class="head_icon">
       <div class="msg">
@@ -315,7 +312,7 @@
 		padding: 0;
 		width: 7.5rem;
 		background-color: #f6f5f5;
-		padding-bottom: 1.4rem;
+		/*padding-bottom: 1.4rem;*/
 		&-title {
 			margin: .4rem .3rem 0;
 			width: 6.9rem;
