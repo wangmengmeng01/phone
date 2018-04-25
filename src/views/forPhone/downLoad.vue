@@ -41,7 +41,7 @@
 					if(isIos()){
 					this.$toask("iOS版本正在上架中");
 					}else{
-						window.location.href="https://zw-web.chinazyjr.com/img/app-debug.apk";
+						window.location.href="https://zw-web.chinazyjr.com/img/app.apk";
 					}
 
 				}
