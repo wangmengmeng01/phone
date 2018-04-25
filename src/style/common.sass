@@ -1,0 +1,190 @@
+@import './reset.css'
+
+
+$color_main: rgb(32,138,255)          // 主色调
+$color_main-dis: rgb(225,225,225)  // 主色调禁用
+$color_border: #CDCED3                // 边框色调
+$color_font: #181818                  // 字体主色调
+$color_font-red: #F84740              // 字体醒目红色
+$color_font-purple: #CA8EFF           // 字体醒目紫色
+$color_font-s: #8D8D94                // 小号字体色调
+$color_font-99: #999999                // 小号字体色调
+$color_font-36: #363636
+
+/**功能公共部分样式**/
+// 颜色
+.color
+  &_main
+    color: $color_main
+    &-dis
+      color: $color_main-dis
+  &_border
+    color: $color_border
+  &_font
+    color: $color_font
+    &-red
+      color: $color_font-red
+    &-purple
+      color: $color_font-purple
+    &-s
+      color: $color_font-s
+    &-99
+      color: $color_font-99
+    &-36
+      color: $color_font-36
+// 边框
+.border
+  &-notend-b:not(:last-child)
+    border-bottom: 1px solid $color_border
+  &-b
+   border-bottom: 1px solid $color_border
+// 字体
+.f12
+  font-size: .12rem
+.f14
+  font-size: .14rem
+.f16
+  font-size: .16rem
+.f20
+  font-size: .2rem
+.f22
+  font-size: .22rem
+.f24
+  font-size: .24rem
+.f26
+  font-size: .26rem
+.f28
+  font-size: .28rem
+.f30
+  font-size: .3rem
+.f32
+  font-size: .32rem
+.f36
+  font-size: .36rem
+.f40
+  font-size: .4rem
+.f44
+  font-size: .44rem
+.f48
+  font-size: .48rem
+.f52
+  font-size: .52rem
+.f56
+  font-size: .56rem
+.f60
+  font-size: .60rem
+
+// 外边框通用样式
+.p4
+  padding: 0 .4rem
+  box-sizing: border-box
+.m4
+  margin: 0 .4rem
+.mt4
+  margin-top: .4rem
+.mb4
+  margin-bottom: .4rem
+.center
+  text-align: center
+.left
+  text-align: left
+  
+//flex通用样式
+.flex
+  display: flex
+  display: -webkit-flex
+  align-items: center
+  -webkit-align-items: center
+  justify-content: space-between
+  -webkit-justify-content: space-between
+  //居中
+  &-center
+    justify-content: center
+    -webkit-justify-content: center
+
+
+.nothing
+  background: #f6f5f5
+  height: 50vh
+  text-align: center
+  img
+    width: 4.08rem
+    padding-bottom: 1rem
+
+
+/**下面是组件公共部分样式**/
+
+//按钮
+.btn
+  width: 100%
+  outline: none
+  border: none
+  border-radius: .08rem
+  display: block
+  background: $color_main
+  font-size: .32rem
+  line-height: .98rem
+  text-align: center
+  color: #fff
+  &.dis
+    pointer-events: none
+    background: $color_main-dis
+
+// 占位图
+.place-img
+  display: inline-block
+  background: url("../assets/common/placeholder.png") no-repeat center center
+  background-size: 100%
+  border-radius: 50%
+  height: 1.48rem
+  width: 1.48rem
+
+// 隐藏滚动条
+::-webkit-scrollbar
+  width: 0px
+  height: 0px
+::-webkit-scrollbar-thumb
+  border-radius: 5px
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2)
+  background: rgba(0, 0, 0, 0.2)
+
+
+//路由切换
+.router-slid-enter-active, .router-slid-leave-active
+  transition: all .2s
+.router-slid-enter, .router-slid-leave-active
+  transform: translate3d(2rem, 0, 0)
+  opacity: 0
+
+
+/**浅入浅出**/
+.fade-enter-active, .fade-leave-active
+  transition: opacity .2s
+.fade-enter, .fade-leave-active
+  opacity: 0
+
+/**从小到大**/
+.smallToBig-enter-active, .smallToBig-leave-active
+  transition: all .2s
+.smallToBig-enter, .smallToBig-leave-active
+  opacity: 0
+  transform: scale(0.5)
+
+
+
+@media only screen and (device-width: 375px) and (device-height:812px) and (-webkit-device-pixel-ratio:3) 
+  body
+    padding-top: constant(safe-area-inset-top);   //为导航栏+状态栏的高度 88px            
+    padding-left: constant(safe-area-inset-left);   //如果未竖屏时为0                
+    padding-right: constant(safe-area-inset-right); //如果未竖屏时为0                
+    padding-bottom: constant(safe-area-inset-bottom);//为底下圆弧的高度 34px  
+
+
+@-webkit-keyframes roll 
+    0%
+       -webkit-transform: rotate(0deg);
+    50%
+       -webkit-transform: rotate(180deg);
+    100%
+       -webkit-transform: rotate(360deg);
+
