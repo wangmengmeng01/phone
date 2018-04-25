@@ -26,6 +26,12 @@
   } from 'vuex'
   export default {
     name: 'succ',
+    	data() {
+			return {
+				userToken:'',
+				submitBol: true,
+			}
+		},
     computed: {
       fail() {
         return this.$route.query.fail
@@ -46,7 +52,11 @@
       })
     },
     created() {
-      document.title = this.succ_page.title
+      document.title = this.succ_page.title;
+      	if(this.$route.query.forNative) {
+			this.userToken = this.$route.query.userToken;
+			this.submitBol = !this.submitBol;
+		}
     },
     methods: {
       ...mapMutations([
@@ -55,7 +65,13 @@
       backurl() {
         const backurl = this.succ_page.backurl;
         this.RESET('succ_page');
-        this.$go(backurl, '', true);
+        if(this.submitBol){
+        		 this.$go(backurl, '', true);
+        }else{
+        		 this.$go(backurl,{client:"4",userToken: this.userToken,forNative:"1"}, true);
+        }
+        
+       
       },
       sub_backurl() {
         const sub_backurl = this.succ_page.sub_backurl;
