@@ -71,7 +71,7 @@
 			<span v-if="counpBol" :class="">{{counpNum}}张可用 <img src="../../assets/common/arrow-right.png"/></span>
 			<span v-else>已选用1张<img src="../../assets/common/arrow-right.png"/></span>
 		</div>
-		<div class="buyBid-auto borderBottom">
+		<div  v-show="detail.flag==2" class="buyBid-auto borderBottom">
 			<div class="buyBid-auto-div">
 				<span class="f28">自动续期</span>
 				<p @click="autoRenewBol=!autoRenewBol">
