@@ -47,7 +47,7 @@
      </p>
     
     
-    <button class="btn recharge-btn" @click="submit" :class="[(rechargeMoney.length && rechargeSms.length==6)?'':'dis' ]">确定</button>
+    <button class="btn recharge-btn" @click="submit" :class="[(rechargeMoney.length && rechargeSms.length==6)?'':'dis' ]">充值</button>
     
     
     

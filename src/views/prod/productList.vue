@@ -10,11 +10,12 @@
 					<div class="bidMessage">
 						<div>
 							<p class="bidMesRate"><i>{{j.annualizedRate}}</i>%<span v-show="j.appendRate>0">+{{j.appendRate}}%</span></p>
-							<p class="bidMesP f24 color_font-99">历史年化收益率</p>
+							<p class="bidMesP f24 color_font-99">历史年化</p>
 						</div>
 						<div>
 							<p class="bidMesTime"><i>{{j.periodLength}}</i> {{j.periodUnit|Totime}}</p>
-							<p class="bidMesP f24 color_font-99">剩余{{j.amountWait}}元</p>
+							<p v-if="j.amountWait>=10000" class="bidMesP f24 color_font-99">剩余{{j.amountWait/10000}}万元</p>
+							<p v-else class="bidMesP f24 color_font-99">剩余{{j.amountWait|formatNum}}元</p>
 						</div>
 					</div>
 				</div>
