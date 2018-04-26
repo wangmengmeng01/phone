@@ -39,7 +39,7 @@
 						type: '3',
 						count: 0
 					}, {
-						name: '折扣券',
+						name: '抵扣券',
 						type: '2',
 						count: 0
 					}

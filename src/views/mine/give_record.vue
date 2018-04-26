@@ -11,7 +11,7 @@
 			</p>
 			<div v-for="(i,index) in list" class="gift-list-div borderB">
 				<p class="f32">
-					<span class="colorFont">{{i.amount}}%</span>
+					<span class="colorFont">{{i.amount}}{{i.couponType==1?'%':'元'}}</span>
 					<span>{{i.typeName}}</span>
 				</p>
 				<p v-if="checkBol" class="f28">
