@@ -15,7 +15,7 @@
 				<img class="mine-top-ewm-img2" src="../../assets/main/mine/rightArrow@2x.png" />
 			</div>
 			<div v-show="isManage" class="mine-top-mes f28 color_font-99">
-				<p class="mine-top-mes-p1">团队经理</p>
+				<p class="mine-top-mes-p1">{{item.position}}</p>
 				<p class="mine-top-mes-p2">{{item.department}}</p>
 			</div>
 
