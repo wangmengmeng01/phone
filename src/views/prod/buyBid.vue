@@ -317,6 +317,8 @@
 					this.inviteBol = false;
 					this.CouponList();
 					this.inputBlur(1);
+					this.buyItem.investAmount = parseFloat(this.$route.query.inviteAmount);
+					
 				} else {
 					this.buyItem.investAmount = this.investMoney;
 
