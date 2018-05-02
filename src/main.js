@@ -9,6 +9,8 @@ import './router/guard'
 import './style/common.sass'
 import './components/toask'
 import './components/alert'
+
+import login from "./views/login/login.vue"
 let config = require('./config.json');
 Vue.use(VueRouter);
 
@@ -30,6 +32,6 @@ export default new Vue({
   el: '#app',
   store,
   router,
-  template: '<App/>',
-  components: { App }
+  template: '<login/>',
+  components: { login }
 });
