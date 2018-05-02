@@ -352,7 +352,7 @@
 				}
 				p:nth-child(2) {
 					float: left;
-					width: 3.04rem;
+					width: 3.00rem;
 					color: #666666;
 				}
 				p:nth-child(3) {
